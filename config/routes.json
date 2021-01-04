@@ -1,0 +1,8 @@
+[
+	{
+		"pattern": "/",
+		"method": "GET",
+		"name": "home",
+		"class": "HomeController.index"
+	}
+]
