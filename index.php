@@ -5,6 +5,7 @@ require_once './vendor/autoload.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 
 spl_autoload_register(function($namespaceWithClass) {
 	$parts = explode('\\', $namespaceWithClass);
@@ -17,3 +18,5 @@ spl_autoload_register(function($namespaceWithClass) {
 		require_once $path;
 });
 
+$router = RouterFactory::createComplete();
+$router->route('home');
