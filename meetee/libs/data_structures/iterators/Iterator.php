@@ -7,11 +7,12 @@ use Meetee\Libs\Data_structures\Collection;
 abstract class Iterator
 {
 	protected Collection $collection;
-	protected int $position;
+	protected int $position = 0;
 
 	public function __construct(Collection $collection)
 	{
 		$this->collection = $collection;
+		$this->position = 0;
 	}
 
 	abstract public function rewind(): void;

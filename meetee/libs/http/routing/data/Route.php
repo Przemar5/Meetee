@@ -22,6 +22,13 @@ class Route
 		$this->name = $name;
 	}
 
+	public function matchByUriAndMethod(string $uri, string $method): bool
+	{
+		$pattern = sprintf("/^%s$/", addcslashes($this->pattern, '/'));
+
+		return preg_match($pattern, $uri) && $this->method === $method;
+	}
+
 	public function getPattern(): string
 	{
 		return $this->pattern;

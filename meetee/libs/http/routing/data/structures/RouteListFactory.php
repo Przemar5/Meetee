@@ -11,14 +11,8 @@ class RouteListFactory
 	public static function createFromJsonConfig(string $path): RouteList
 	{
 		$content = file_get_contents($path);
-
-		try {
-			$routes = Converter::jsonToArray($content);
-			$routes = array_map(fn($single) => self::createRoute($single), $routes);
-		}
-		catch (\Exception $e) {
-			die($e->getMessage());
-		}
+		$routes = Converter::jsonToArray($content);
+		$routes = array_map(fn($single) => self::createRoute($single), $routes);
 
 		return new RouteList($routes);
 	}

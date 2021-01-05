@@ -16,7 +16,7 @@ class RouterGuardProxy extends RouterTemplate
 		$this->route = $router;
 	}
 
-	public function route(string $name): void
+	public function route(): void
 	{
 		$user = User::current();
 

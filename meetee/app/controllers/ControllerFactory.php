@@ -2,18 +2,20 @@
 
 namespace Meetee\App\Controllers;
 
-use Meetee\App\Controllers\Controller;
-use Meetee\Libs\View\BrowserView;
+use Meetee\App\Controllers\ControllerTemplate;
+use Meetee\Libs\View\Factories\ViewFactory;
 
 class ControllerFactory
 {
-	public static function createFromClassName(string $class): Controller
+	public static function createFromClassNameForBrowser(string $class): ControllerTemplate
 	{
-		$class = sprintf("\\Meetee\\App\\Controllers\\%s", $class);
+		$class = sprintf("\Meetee\App\Controllers\%s", $class);
 
 		if (!class_exists($class))
 			throw new \Exception(sprintf("Class '%s' not found.", $class));
 
-		return new $class(new BrowserView());
+		$view = ViewFactory::createDefaultBrowserView();
+
+		return new $class($view);
 	}
 }

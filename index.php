@@ -6,6 +6,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
+use Meetee\Libs\Http\Routing\RouterFacade;
+use Meetee\Libs\Storage\Session;
 
 spl_autoload_register(function($namespaceWithClass) {
 	$parts = explode('\\', $namespaceWithClass);
@@ -18,5 +20,6 @@ spl_autoload_register(function($namespaceWithClass) {
 		require_once $path;
 });
 
-$router = RouterFactory::createComplete();
-$router->route('home');
+
+Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
+RouterFacade::routeToCurrentUri();

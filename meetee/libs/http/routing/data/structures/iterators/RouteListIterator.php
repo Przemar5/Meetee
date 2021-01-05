@@ -10,7 +10,7 @@ class RouteListIterator extends Iterator
 {
 	public function __construct(RouteList $routes)
 	{
-		$this->collection = $routes;
+		parent::__construct($routes);
 	}
 
 	public function getRouteByName(string $name): ?Route
@@ -22,7 +22,16 @@ class RouteListIterator extends Iterator
 
 			if ($route->getName() === $name)
 				return $route;
+
+			$iterator->next();
 		}
+	}
+
+	public function getRouteNameByUriAndMethod(string $uri, string $method): ?string
+	{
+		$route = $this->getRouteByUriAndMethod($uri, $method);
+
+		return ($route) ? $route->getName() : null;
 	}
 
 	public function getRouteByUriAndMethod(string $uri, string $method): ?Route

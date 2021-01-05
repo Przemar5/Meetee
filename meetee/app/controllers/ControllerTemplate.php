@@ -2,13 +2,13 @@
 
 namespace Meetee\App\Controllers;
 
-use Meetee\Libs\View\View;
+use Meetee\Libs\View\ViewTemplate;
 
-abstract class Controller
+abstract class ControllerTemplate
 {
-	protected View $view;
+	protected ViewTemplate $view;
 
-	public function __construct(View $view)
+	public function __construct(ViewTemplate $view)
 	{
 		$this->view = $view;
 	}

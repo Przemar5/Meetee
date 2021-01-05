@@ -4,5 +4,11 @@
 		"method": "GET",
 		"name": "home",
 		"class": "HomeController.index"
+	},
+	{
+		"pattern": "/register",
+		"method": "GET",
+		"name": "register",
+		"class": "Auth\\RegisterController.page"
 	}
 ]

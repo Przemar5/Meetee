@@ -1,13 +1,13 @@
 <?php
 
-namespace Meetee\App\Controllers\HomeController;
+namespace Meetee\App\Controllers;
 
-use Meetee\App\Controllers\Controller;
+use Meetee\App\Controllers\ControllerTemplate;
 
-class HomeController extends Controller
+class HomeController extends ControllerTemplate
 {
 	public function index(): void
 	{
-		echo 'OK';
+		$this->render('pages/home');
 	}
 }

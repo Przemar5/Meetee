@@ -18,7 +18,7 @@ class RouterLoggerProxy extends RouterTemplate
 		$this->logger = LoggerFactory::createRequestLogger();
 	}
 
-	public function route(string $name): void
+	public function route(): void
 	{
 		$this->logRequestData();
 		$this->router->route($name);

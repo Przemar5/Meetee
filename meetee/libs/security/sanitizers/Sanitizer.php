@@ -4,5 +4,5 @@ namespace Meetee\Libs\Security\Sanitizers;
 
 interface Sanitizer
 {
-	public function run(mixed $value): mixed;
+	public static function run(mixed $value): mixed;
 }
