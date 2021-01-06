@@ -4,10 +4,12 @@ require_once './vendor/autoload.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('register_globals', 0);
 
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\Libs\Storage\Session;
 use Meetee\Libs\Database\Factories\DatabaseFactory;
+use Meetee\App\Entities\User;
 
 
 spl_autoload_register(function($namespaceWithClass) {
@@ -23,8 +25,13 @@ spl_autoload_register(function($namespaceWithClass) {
 
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
+Session::set('user', 1);
+echo Session::get('user');
 
 $router = RouterFactory::createComplete();
 // $router->route();
 
-$database = DatabaseFactory::create();
+// $user = User::current();
+// var_dump($user);
+
+// $database = DatabaseFactory::create();

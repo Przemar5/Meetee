@@ -15,12 +15,12 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 
 	private function getPreparedQuery(): void
 	{
-		$this->query = match($this->action) {
-			'SELECT' => $this->prepareSelect(),
-			'INSERT' => $this->prepareInsert(),
-			'UPDATE' => $this->prepareUpdate(),
-			'DELETE' => $this->prepareDelete(),
-		};
+		switch ($this->action) {
+			case 'SELECT': $this->query = $this->prepareSelect(); break;
+			case 'INSERT': $this->query = $this->prepareInsert(); break;
+			case 'UPDATE': $this->query = $this->prepareUpdate(); break;
+			case 'DELETE': $this->query = $this->prepareDelete(); break;
+		}
 	}
 
 	private function prepareSelect(): void

@@ -12,9 +12,15 @@ class User extends Entity
 	private string $username;
 	private string $password;
 
-	public static function current(): ?User
+	public static function current(): ?static
 	{
-		
+		return null;
+		// DatabaseMediator::find();
+	}
+
+	public function hasAccess(): bool
+	{
+		return true;
 	}
 
 	public function login(): void
