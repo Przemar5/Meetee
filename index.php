@@ -25,19 +25,3 @@ Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
 $router = RouterFactory::createComplete();
 $router->route();
-
-// $routes = RouteListFactory::createFromJsonConfig('./config/routes.json');
-
-// $iterator = $routes->getIterator();
-
-// try {
-// 	$route = $iterator->getRouteByUriAndMethod(
-// 		$_SERVER['PATH_INFO'] ?? '/', $_SERVER['REQUEST_METHOD']);
-
-// 	if ($route)
-// 		var_dump($route->getArgsForUri($_SERVER['PATH_INFO'] ?? '/'));
-// 	// $router->route();
-// }
-// catch(\Exception $e) {
-// 	die($e->getMessage());
-// }

@@ -8,11 +8,16 @@ abstract class Table
 {
 	protected string $name;
 
-	abstract function select(int $id): ?Entity;
+	public function __construct(string $name)
+	{
+		$this->name = $name;
+	}
 
-	abstract function create(Entity $entity): void;
+	abstract public function select(int $id): ?Entity;
+
+	abstract public function create(Entity $entity): void;
 	
-	abstract function update(Entity $entity): void;
+	abstract public function update(Entity $entity): void;
 	
-	abstract function delete(Entity $entity): void;
+	abstract public function delete(Entity $entity): void;
 }
