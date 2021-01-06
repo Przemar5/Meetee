@@ -2,14 +2,16 @@
 
 namespace Meetee\Libs\Http;
 
-class RequestDataColector
+class RequestDataCollector
 {
 	public static function getForLogging(): string
 	{
-		$content = sprintf("URI:\t%s\r\n", '');
+		$content = sprintf("DATE:\t%s\r\n", date('Y.m.d H:i:s'));
+		$content .= sprintf("URI:\t%s\r\n", $_SERVER['PATH_INFO'] ?? '/');
 		$content .= sprintf("Method:\t%s\r\n", $_SERVER['REQUEST_METHOD']);
+		$content .= sprintf("REMOTE USER:\t%s\r\n", $_SERVER['REMOTE_ADDR']);
 		$requestData = static::getRequestArrayData($_REQUEST);
-		$content .= sprintf("Request:\r\n%s", $requestData);
+		$content .= sprintf("Request:\r\n%s\n", $requestData);
 
 		return $content;
 	}
@@ -17,13 +19,8 @@ class RequestDataColector
 	private static function getRequestArrayData(mixed $request): string
 	{
 		$data = "";
-
-		foreach ($request as $key => $value) {
-			if (is_array($value))
-				$value = static::getRequestArrayData($value);
-
-			$data .= sprintf("\t%s: %s\r\n", $key, $value);
-		}
+		foreach ($request as $key => $value)
+			$data .= sprintf("\t%s: %s\r\n", $key, print_r($value, true));
 
 		return $data;
 	}

@@ -16,19 +16,20 @@ class RouterTemplate
 		$route = $this->getCurrentRoute();
 
 		if (is_null($route))
-			throw new \Exception(sprintf("Route '%s' is missing.", $name));
-
-		$this->callControllerMethod($route->getClassName());
+			$this->renderNotFoundErrorPage();
+		else
+			$this->callControllerMethod($route->getClassName());
 	}
 
 	protected function getCurrentRoute(): ?Route
 	{
 		$this->throwExceptionIfRequestMethodInvalid();
-		$uri = $this->getSanitizedCurrentUri();
+		$uri = (isset($_SERVER['PATH_INFO'])) 
+			? $this->getSanitizedCurrentUri() : '/';
 		$routes = $this->getRoutes();
 		$iterator = $routes->getIterator();
 
-		return $iterator->getRouteNameByUriAndMethod(
+		return $iterator->getRouteByUriAndMethod(
 			$uri, $_SERVER['REQUEST_METHOD']);
 	}
 
@@ -98,11 +99,11 @@ class RouterTemplate
 
 	protected function renderNoAccessErrorPage(): void
 	{
-		//
+		$this->callControllerMethod('ErrorController.accessRestricted');
 	}
 
 	protected function renderNotFoundErrorPage(): void
 	{
-		//
+		$this->callControllerMethod('ErrorController.notFound');
 	}
 }

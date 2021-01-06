@@ -14,14 +14,14 @@ class RouterLoggerProxy extends RouterTemplate
 
 	public function __construct(RouterTemplate $router)
 	{
-		$this->route = $router;
+		$this->router = $router;
 		$this->logger = LoggerFactory::createRequestLogger();
 	}
 
 	public function route(): void
 	{
 		$this->logRequestData();
-		$this->router->route($name);
+		$this->router->route();
 	}
 
 	private function logRequestData(): void

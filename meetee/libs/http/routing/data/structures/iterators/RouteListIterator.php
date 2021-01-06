@@ -23,8 +23,9 @@ class RouteListIterator extends Iterator
 			if ($route->getName() === $name)
 				return $route;
 
-			$iterator->next();
+			$this->next();
 		}
+		return null;
 	}
 
 	public function getRouteNameByUriAndMethod(string $uri, string $method): ?string
@@ -43,7 +44,10 @@ class RouteListIterator extends Iterator
 
 			if ($route->matchByUriAndMethod($uri, $method))
 				return $route;
+
+			$this->next();
 		}
+		return null;
 	}
 
 	public function rewind(): void

@@ -3,6 +3,7 @@
 namespace Meetee\App\Controllers;
 
 use Meetee\App\Controllers\ControllerTemplate;
+use Meetee\App\Controllers\ErrorController;
 use Meetee\Libs\View\Factories\ViewFactory;
 
 class ControllerFactory
@@ -17,5 +18,12 @@ class ControllerFactory
 		$view = ViewFactory::createDefaultBrowserView();
 
 		return new $class($view);
+	}
+
+	public static function createErrorControllerForBrowser(): ErrorController
+	{
+		$view = ViewFactory::createDefaultBrowserView();
+
+		return new ErrorController($view);
 	}
 }

@@ -21,6 +21,7 @@ class UriSanitizer implements Sanitizer
 			$value = filter_var($value, FILTER_SANITIZE_SPECIAL_CHARS);
 			$endLength = strlen($value);
 		}
+		$value = rtrim($value, '/');
 
 		return $value;
 	}

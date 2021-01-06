@@ -17,6 +17,6 @@ class RouterFactory
 		$logger = LoggerFactory::createRequestLogger();
 		$loggerRouter->setLogger($logger);
 
-		return $router;
+		return $loggerRouter;
 	}
 }

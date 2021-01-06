@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
-use Meetee\Libs\Http\Routing\RouterFacade;
 use Meetee\Libs\Storage\Session;
+
 
 spl_autoload_register(function($namespaceWithClass) {
 	$parts = explode('\\', $namespaceWithClass);
@@ -22,4 +22,22 @@ spl_autoload_register(function($namespaceWithClass) {
 
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
-RouterFacade::routeToCurrentUri();
+
+$router = RouterFactory::createComplete();
+$router->route();
+
+// $routes = RouteListFactory::createFromJsonConfig('./config/routes.json');
+
+// $iterator = $routes->getIterator();
+
+// try {
+// 	$route = $iterator->getRouteByUriAndMethod(
+// 		$_SERVER['PATH_INFO'] ?? '/', $_SERVER['REQUEST_METHOD']);
+
+// 	if ($route)
+// 		var_dump($route->getArgsForUri($_SERVER['PATH_INFO'] ?? '/'));
+// 	// $router->route();
+// }
+// catch(\Exception $e) {
+// 	die($e->getMessage());
+// }

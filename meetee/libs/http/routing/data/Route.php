@@ -24,9 +24,23 @@ class Route
 
 	public function matchByUriAndMethod(string $uri, string $method): bool
 	{
-		$pattern = sprintf("/^%s$/", addcslashes($this->pattern, '/'));
+		$pattern = $this->preparePattern();
 
 		return preg_match($pattern, $uri) && $this->method === $method;
+	}
+
+	protected function preparePattern(): string
+	{
+		return sprintf("/^%s$/", addcslashes($this->pattern, '/'));
+	}
+
+	public function getArgsForUri(string $uri): array
+	{
+		$pattern = $this->preparePattern();
+		$args = [];
+		preg_match($pattern, $uri, $args);
+
+		return array_slice($args, 1);
 	}
 
 	public function getPattern(): string

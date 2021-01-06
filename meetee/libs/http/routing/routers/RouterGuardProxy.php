@@ -4,24 +4,22 @@ namespace Meetee\Libs\Http\Routing\Routers;
 
 use Meetee\Libs\Http\Routing\Routers\RouterTemplate;
 use Meetee\App\Entities\User;
-use Meetee\Libs\Files\Logger;
 
 class RouterGuardProxy extends RouterTemplate
 {
 	private RouterTemplate $router;
-	private Logger $logger;
 
 	public function __construct(RouterTemplate $router)
 	{
-		$this->route = $router;
+		$this->router = $router;
 	}
 
 	public function route(): void
 	{
 		$user = User::current();
 
-		if ($user->hasAccess($name)) {
-			$this->router->route($name);
+		if (is_null($user) || $user->hasAccess()) {
+			$this->router->route();
 		}
 		else {
 			$this->renderNoAccessErrorPage();
