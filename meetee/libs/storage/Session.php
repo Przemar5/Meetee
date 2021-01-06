@@ -14,13 +14,13 @@ class Session implements Storage
 		session_regenerate_id();
 	}
 
-	public static function get(string $name): mixed
+	public static function get(string $name)
 	{
 		if (isset($_SESSION[$name]))
 			return $_SESSION[$name];
 	}
 
-	public static function set(string $name, mixed $value): void
+	public static function set(string $name, $value): void
 	{
 		$_SESSION[$name] = $value;
 	}

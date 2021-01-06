@@ -6,7 +6,7 @@ use Meetee\Libs\Security\Sanitizers\Sanitizer;
 
 class UriSanitizer implements Sanitizer
 {
-	public static function run(mixed $value): mixed
+	public static function run($value)
 	{
 		while (!isset($endLength) || $startLength = strlen($value) != $endLength) {
 			if (!is_string($value))

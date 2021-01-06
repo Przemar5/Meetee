@@ -4,5 +4,5 @@ namespace Meetee\Libs\Security\Validators;
 
 interface Validator
 {
-	public function run(mixed $value): bool;
+	public function run($value): bool;
 }

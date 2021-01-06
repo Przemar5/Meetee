@@ -6,7 +6,7 @@ use Meetee\Libs\Database\Query_builders\QueryBuilderTemplate;
 
 class MySQLQueryBuilder extends QueryBuilderTemplate
 {
-	public function getRusult(): mixed
+	public function getRusult()
 	{
 		$this->throwExceptionIfSomethingMissing();
 

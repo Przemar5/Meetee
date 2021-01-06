@@ -58,7 +58,7 @@ class MySQLDatabase extends DatabaseTemplate
 		$this->offset = $offset;
 	}
 
-	public function getResult(): mixed
+	public function getResult()
 	{
 
 	}

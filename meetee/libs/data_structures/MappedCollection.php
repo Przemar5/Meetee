@@ -6,9 +6,9 @@ use Meetee\Libs\Data_structures\Collection;
 
 interface MappedCollection extends Collection
 {
-	public function set(mixed $key, mixed $value): void;
+	public function set($key, $value): void;
 
-	public function get(mixed $key): mixed;
+	public function get($key);
 
-	public function contains(mixed $key): bool;
+	public function contains($key): bool;
 }

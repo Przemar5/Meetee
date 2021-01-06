@@ -17,7 +17,7 @@ abstract class Iterator
 
 	abstract public function rewind(): void;
 
-	abstract public function current(): mixed;
+	abstract public function current();
 
 	abstract public function next(): void;
 

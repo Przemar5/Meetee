@@ -65,7 +65,7 @@ abstract class QueryBuilderTemplate
 		$this->offset = $offset;
 	}
 
-	abstract public function getResult(): mixed;
+	abstract public function getResult();
 
 	protected function throwExceptionsIfSomethingMissing(): void
 	{

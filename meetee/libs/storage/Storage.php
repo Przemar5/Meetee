@@ -4,9 +4,9 @@ namespace Meetee\Libs\Storage;
 
 interface Storage
 {
-	public static function get(string $name): mixed;
+	public static function get(string $name);
 
-	public static function set(string $name, mixed $value): void;
+	public static function set(string $name, $value): void;
 
 	public static function isset(string $name): bool;
 

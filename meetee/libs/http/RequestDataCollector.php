@@ -16,7 +16,7 @@ class RequestDataCollector
 		return $content;
 	}
 
-	private static function getRequestArrayData(mixed $request): string
+	private static function getRequestArrayData(\$request): string
 	{
 		$data = "";
 		foreach ($request as $key => $value)

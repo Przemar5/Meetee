@@ -55,7 +55,7 @@ class RouteListIterator extends Iterator
 		$this->position = 0;
 	}
 
-	public function current(): mixed
+	public function current()
 	{
 		return $this->collection->getItems()[$this->position];
 	}

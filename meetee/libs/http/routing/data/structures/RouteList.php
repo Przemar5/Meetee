@@ -34,17 +34,17 @@ class RouteList implements MappedCollection
 		return empty($this->items);
 	}
 
-	public function set(mixed $key, mixed $value): void
+	public function set($key, $value): void
 	{
 		$this->items[$key] = $value;
 	}
 
-	public function get(mixed $key): mixed
+	public function get($key)
 	{
 		return $this->items[$key];
 	}
 
-	public function contains(mixed $key): bool
+	public function contains($key): bool
 	{
 		return isset($this->items[$key]);
 	}

@@ -6,7 +6,7 @@ use Meetee\Libs\Security\Validators\Validator;
 
 class RequestMethodValidator implements Validator
 {
-	public function run(mixed $value): bool
+	public function run($value): bool
 	{
 		$methods = ['GET', 'POST'];
 		
