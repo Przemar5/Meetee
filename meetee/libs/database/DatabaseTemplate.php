@@ -31,5 +31,5 @@ abstract class DatabaseTemplate
 		$this->database = new \PDO($dsn, $user, $password);
 	}
 
-	abstract public function select(string $table, array $options)
+	// abstract public function select(string $table, array $options);
 }

@@ -2,15 +2,20 @@
 
 namespace Meetee\Libs\Database\Factories;
 
-use Meetee\Libs\Database\MysqlDatabase;
+use Meetee\Libs\Database\DatabaseTemplate;
+use Meetee\Libs\Database\MySQLDatabase;
+use Meetee\Libs\Converters\Converter;
 
 class DatabaseFactory
 {
-	public static function createMysql(): MysqlDatabase
+	public static function create(): DatabaseTemplate
 	{
-		$details = [
-			'host' => '127.0.0.1',
-			'port' => 3306,
-		]
+		$config = file_get_contents('./config/database.json');
+		$details = Converter::jsonToArray($config);
+
+		switch ($details['driver']) {
+			case 'mysql': 	return new MySQLDatabase($details);
+			default: 		return new MySQLDatabase($details);
+		}
 	}
 }

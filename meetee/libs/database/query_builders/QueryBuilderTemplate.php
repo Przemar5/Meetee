@@ -44,6 +44,7 @@ abstract class QueryBuilderTemplate
 	{
 		$this->action = 'UPDATE';
 		$this->values = $values;
+	}
 
 	public function delete(): void
 	{

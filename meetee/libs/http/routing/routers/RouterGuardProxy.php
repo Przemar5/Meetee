@@ -16,14 +16,14 @@ class RouterGuardProxy extends RouterTemplate
 
 	public function route(): void
 	{
-		$user = User::current();
+		// $user = User::current();
 
-		if (is_null($user) || $user->hasAccess()) {
+		// if (is_null($user) || $user->hasAccess()) {
 			$this->router->route();
-		}
-		else {
-			$this->renderNoAccessErrorPage();
-		}
+		// }
+		// else {
+		// 	$this->renderNoAccessErrorPage();
+		// }
 	}
 
 	public function setLogger(Logger $logger): void

@@ -6,7 +6,7 @@ use Meetee\Libs\Database\Query_builders\QueryBuilderTemplate;
 
 class MySQLQueryBuilder extends QueryBuilderTemplate
 {
-	public function getRusult()
+	public function getResult()
 	{
 		$this->throwExceptionIfSomethingMissing();
 
@@ -23,7 +23,7 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 		};
 	}
 
-	private function prepareSelect(): void;
+	private function prepareSelect(): void
 	{
 		$columns = implode(', ', $this->values);
 		$this->query = sprintf('SELECT %s FROM `%s`', $columns, $this->table);
