@@ -2,12 +2,18 @@
 
 namespace Meetee\App\Entities;
 
-use Meetee\App\Entitites\Entity;
+use Meetee\App\Entities\Entity;
+use Meetee\Libs\Database\Tables\RoleTable;
 
 class Role extends Entity
 {
 	private ?int $id;
 	private string $name;
+
+	public function __construct()
+	{
+		parent::__construct(new RoleTable());
+	}
 
 	public function __toString()
 	{

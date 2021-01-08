@@ -6,15 +6,18 @@ use Meetee\App\Entities\Entity;
 use Meetee\Libs\Http\Routing\Data\Route;
 use Meetee\Libs\Security\AuthenticationFacade;
 use Meetee\Libs\Database\Tables\UserTable;
+use Meetee\App\Entities\Traits\Timestamps;
 use Meetee\App\Entities\Traits\SoftDelete;
 
 class User extends Entity
 {
+	use Timestamps;
+	use SoftDelete;
+
 	private ?int $id = null;
 	private string $username;
 	private string $password;
 	private array $roles;
-	private ?bool $deleted;
 
 	public function __construct()
 	{
@@ -34,11 +37,6 @@ class User extends Entity
 	}
 
 	public function logout(): void
-	{
-		//
-	}
-
-	public function softDelete(): void
 	{
 		//
 	}
@@ -80,7 +78,7 @@ class User extends Entity
 
 	public function delete(): void
 	{
-		$this->deleted = true;
+		// $this->deleted = true;
 	}
 
 	public function getId(): ?int
@@ -98,13 +96,8 @@ class User extends Entity
 		return $this->password;
 	}
 
-	public function getRole(): string
+	public function getRoles(): array
 	{
-		return $this->role;
-	}
-
-	public function isDeleted(): ?bool
-	{
-		return $this->deleted ?? null;
+		return $this->roles;
 	}
 }

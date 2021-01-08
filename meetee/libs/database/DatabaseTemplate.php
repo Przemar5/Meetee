@@ -41,4 +41,8 @@ abstract class DatabaseTemplate
 	}
 
 	abstract public function sendQuery(string $query, ?array $bindings = []): void;
+
+	abstract public function findOne(string $query, ?array $bindings = []);
+
+	abstract public function findMany(string $query, ?array $bindings = []);
 }

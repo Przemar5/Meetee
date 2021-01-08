@@ -4,7 +4,7 @@ namespace Meetee\Libs\Database\Tables;
 
 use Meetee\App\Entities\Entity;
 use Meetee\Libs\Database\Query_builders\QueryBuilderTemplate;
-use Meetee\Libs\Database\Factories\DatabaseFactory;
+use Meetee\Libs\Database\Factories\DatabaseAbstractFactory;
 use Meetee\Libs\Database\DatabaseTemplate;
 
 abstract class Table
@@ -16,7 +16,8 @@ abstract class Table
 	public function __construct(string $name)
 	{
 		$this->name = $name;
-		$this->database = DatabaseFactory::create();
+		$this->database = DatabaseAbstractFactory::createDatabase();
+		$this->queryBuilder = DatabaseAbstractFactory::createQueryBuilder();
 	}
 
 	// abstract public function getData(Entity $entity): array;

@@ -17,6 +17,23 @@ class MySQLDatabase extends DatabaseTemplate
 
 	public function sendQuery(string $query, ?array $bindings = []): void
 	{
-		//
+		$stmt = $this->database->prepare($query);
+		$stmt->execute($bindings);
+	}
+
+	public function findOne(string $query, ?array $bindings = [])
+	{
+		$stmt = $this->database->prepare($query);
+		$stmt->execute($bindings);
+
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
+
+	public function findMany(string $query, ?array $bindings = [])
+	{
+		$stmt = $this->database->prepare($query);
+		$stmt->execute($bindings);
+
+		return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 	}
 }

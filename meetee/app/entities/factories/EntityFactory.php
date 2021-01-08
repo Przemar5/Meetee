@@ -18,8 +18,8 @@ abstract class EntityFactory
 		// return $user;
 	}
 
-	public function createUserFromFetchedData(array $data): User
+	public function createUserFromRawData(array $data): User
 	{
-
+		
 	}
 } 

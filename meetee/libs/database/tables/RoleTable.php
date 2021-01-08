@@ -3,10 +3,10 @@
 namespace Meetee\Libs\Database\Tables;
 
 use Meetee\Libs\Database\Tables\Table;
-use Meetee\App\Entities\User;
+use Meetee\App\Entities\Role;
 use Meetee\Libs\Database\Tables\Pivots\UserRoleTable;
 
-class UserTable extends Table
+class RoleTable extends Table
 {
 	public function __construct()
 	{
@@ -15,26 +15,19 @@ class UserTable extends Table
 
 	public function find(int $id): ?User
 	{
-		$data = $this->getRawDataForUserId($id);
+		$data = $this->getRawDataForRoleId($id);
 		
 		if (is_null($data))
 			return null;
 
-		$user = new User();
-		$user->setId($data['id']);
-		$user->setUsername($data['username']);
-		$user->setPassword($data['password']);
-		$user->setCreatedAt($data['created_at']);
-		$user->setUpdatedAt($data['updated_at']);
-		$user->setDeleted($data['deleted']);
+		$role = new Role();
+		$role->setId($data['id']);
+		$role->setName($data['name']);
 
-		$userRole = new UserRoleTable();
-		$user->setRoles($userRole->getRolesByUserId($id));
-
-		return $user;
+		return $role;
 	}
 
-	private function getRawDataForUserId(int $id)
+	private function getRawDataForRoleId(int $id)
 	{
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
@@ -47,7 +40,7 @@ class UserTable extends Table
 		);
 	}
 
-	public function save(User $user): void
+	public function save(Role $role): void
 	{
 		if (is_null($user->getId()))
 			$this->insert($user);
@@ -55,15 +48,13 @@ class UserTable extends Table
 			$this->update($user);
 	}
 
-	public function insert(User $user): void
+	public function insert(Role $role): void
 	{
-		$data = [];
-		$data['username'] = $user->getUsername();
-		$data['password'] = $user->getPassword();
+		$name = $role->getName();
 
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->insert($data);
+		$this->queryBuilder->insert(['name' => $name]);
 
 		$this->database->sendQuery(
 			$this->queryBuilder->getResult(),
@@ -71,26 +62,18 @@ class UserTable extends Table
 		);
 	}
 
-	public function update(User $user): void
+	public function update(Role $role): void
 	{
-		$values = [];
-		$values['username'] = $user->getUsername();
-		$values['password'] = $user->getPassword();
-
-		if (!is_null($user->isDeleted()))
-			$values['deleted'] = $user->isDeleted();
+		$name = $role->getName();
 
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->update($values);
+		$this->queryBuilder->update(['name' => $name]);
 		$this->queryBuilder->where(['id' => $user->getId()]);
 
 		$this->database->sendQuery(
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()
 		);
-
-		$userRole = new UserRoleTable();
-		$userRole->setRolesForUser($user);
 	}
 }

@@ -9,26 +9,45 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 	public function getResult()
 	{
 		$this->throwExceptionIfSomethingMissing();
+		$this->prepareQuery();
 
-		return $this->getPreparedQuery();
+		return $this->query;
 	}
 
-	private function getPreparedQuery(): void
+	private function prepareQuery(): void
 	{
 		switch ($this->action) {
-			case 'SELECT': $this->query = $this->prepareSelect(); break;
-			case 'INSERT': $this->query = $this->prepareInsert(); break;
-			case 'UPDATE': $this->query = $this->prepareUpdate(); break;
-			case 'DELETE': $this->query = $this->prepareDelete(); break;
+			case 'SELECT': $this->prepareSelect(); break;
+			case 'INSERT': $this->prepareInsert(); break;
+			case 'INSERT MANY': $this->prepareInsertMultiple(); break;
+			case 'UPDATE': $this->prepareUpdate(); break;
+			case 'DELETE': $this->prepareDelete(); break;
 		}
 	}
 
 	private function prepareSelect(): void
 	{
-		$columns = implode(', ', $this->values);
+		$columns = implode(', ', $this->columns);
 		$this->query = sprintf('SELECT %s FROM `%s`', $columns, $this->table);
-
+		$this->appendJoinPartIfExist();
 		$this->appendOptionalParts();
+	}
+
+	private function appendJoinPartIfExist(): void
+	{
+		if (is_null($this->joinType))
+			return;
+
+		if (is_null($this->joinTable))
+			return;
+
+		if (is_null($this->joinOn))
+			return;
+
+		$joinOn = implode(', ', $this->joinOn);
+
+		$this->query .= sprintf(" %s JOIN %s ON %s", 
+			$this->joinType, $this->joinTable, $joinOn);
 	}
 
 	private function appendOptionalParts(): void
@@ -66,19 +85,35 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 	private function prepareInsert(): void
 	{
 		$columns = array_keys($this->values);
-		$toBind = array_map(fn($c) => ":c", $columns);
+		$toBind = array_map(fn($c) => ":$c", $columns);
+		$columns = implode(', ', $columns);
+		$toBind = implode(', ', $toBind);
 
-		$this->query = sprintf(
-			'INSERT INTO %s (%s) VALUES (%s)', $this->table, $columns, $toBind);
+		$this->query = sprintf('INSERT INTO %s (%s) VALUES (%s)', 
+			$this->table, $columns, $toBind);
+	}
+
+	private function prepareInsertMultiple(): void
+	{
+		$columns = array_keys($this->values[0]);
+		$toBind = [];
+		foreach ($i = 0; $i < count($this->values); $i++) {
+			$otherToBind = array_map(fn($c) => ":$c_$i", $columns);
+			$toBind = array_merge($toBind, $otherToBind);
+		}
+
+		$this->query = sprintf('INSERT INTO %s (%s) VALUES %s', 
+			$this->table, $columns, $toBind);
 	}
 
 	public function getBindings(): array
 	{
-		$keys = array_keys($this->values);
+		$keys = array_keys($this->values ?? []);
 		$keys = array_map(fn($k) => ":$k", $keys);
-		$values = array_values($this->values);
+		$values = array_values($this->values ?? []);
+		$bindings = array_combine($keys, $values);
 
-		return array_combine($keys, $values);
+		return array_merge($bindings, $this->additionalBindings ?? []);
 	}
 
 	private function prepareUpdate(): void
