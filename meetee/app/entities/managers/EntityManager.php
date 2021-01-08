@@ -2,19 +2,27 @@
 
 namespace Meetee\App\Entities\Managers;
 
-use Meetee\Libs\Database\Database;
+use Meetee\Libs\Database\DatabaseMediator;
 
-abstract class EntityManager
+class EntityManager
 {
-	protected Database $database;
+	private self $instance;
 
-	abstract public function select(string $table, array $props): void;
+	private function __construct()
+	{
+		//
+	}
 
-	abstract public function create(Entity $entity): void;
+	public static function getInstance(): self
+	{
+		if (!$this->instance) 
+			$this->instance = new self();
 
-	abstract public function update(Entity $entity): void;
+		return $this->instance;
+	}
 
-	abstract public function softDelete(Entity $entity): void;
-
-	abstract public function delete(Entity $entity): void;
+	public function save(Entity $entity): void
+	{
+		
+	}
 }

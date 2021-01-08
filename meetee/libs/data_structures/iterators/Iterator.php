@@ -15,6 +15,8 @@ abstract class Iterator
 		$this->position = 0;
 	}
 
+	// abstract public function find();
+
 	abstract public function rewind(): void;
 
 	abstract public function current();

@@ -3,7 +3,9 @@
 namespace Meetee\App\Entities;
 
 use Meetee\App\Entities\Entity;
-use Meetee\Libs\Database\DatabaseMediator;
+use Meetee\Libs\Http\Routing\Data\Route;
+use Meetee\Libs\Security\AuthenticationFacade;
+// use Meetee\Libs\Database\DatabaseMediator;
 
 class User extends Entity
 {
@@ -11,16 +13,13 @@ class User extends Entity
 	private ?int $id = null;
 	private string $username;
 	private string $password;
+	private array $roles;
 
-	public static function current(): ?static
+	public function hasAccess(Route $route): bool
 	{
-		return null;
-		// DatabaseMediator::find();
-	}
+		$common = array_intersect($route->getAccess(), $this->roles);
 
-	public function hasAccess(): bool
-	{
-		return true;
+		return !empty($common);
 	}
 
 	public function login(): void
@@ -58,6 +57,26 @@ class User extends Entity
 		$this->password = $password;
 	}
 
+	public function setRoles(array $roles): void
+	{
+		$this->roles = $roles;
+	}
+
+	public function addRole(string $role): void
+	{
+		$this->roles[] = $role;
+	}
+
+	public function removeRole(string $role): void
+	{
+		$this->roles = array_filter(fn($r) => $r != $role, $this->roles);
+	}
+
+	public function hasRole(string $role): bool
+	{
+		return in_array($role, $this->roles);
+	}
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -71,5 +90,10 @@ class User extends Entity
 	public function getPassword(): string
 	{
 		return $this->password;
+	}
+
+	public function getRole(): string
+	{
+		return $this->role;
 	}
 }

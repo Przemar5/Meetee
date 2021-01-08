@@ -2,54 +2,22 @@
 
 namespace Meetee\Libs\Http\Routing\Routers;
 
-use Meetee\Libs\Http\Routing\Data\Structures\RouteListFactory;
 use Meetee\Libs\Http\Routing\Data\Structures\RouteList;
+use Meetee\Libs\Http\Routing\Data\Structures\RouteListFactory;
 use Meetee\Libs\Http\Routing\Data\Route;
-use Meetee\Libs\Security\Sanitizers\UriSanitizer;
-use Meetee\Libs\Security\Validators\RequestMethodValidator;
+use Meetee\Libs\Http\Routing\Data\RouteFactory;
 use Meetee\App\Controllers\ControllerFactory;
 
 class RouterTemplate
 {
 	public function route(): void
 	{
-		$route = $this->getCurrentRoute();
+		$route = RouteFactory::getCurrentRouteOrThrowException();
 
 		if (is_null($route))
 			$this->renderNotFoundErrorPage();
 		else
 			$this->callControllerMethod($route->getClassName());
-	}
-
-	protected function getCurrentRoute(): ?Route
-	{
-		$this->throwExceptionIfRequestMethodInvalid();
-		$uri = (isset($_SERVER['PATH_INFO'])) 
-			? $this->getSanitizedCurrentUri() : '/';
-		$routes = $this->getRoutes();
-		$iterator = $routes->getIterator();
-
-		return $iterator->getRouteByUriAndMethod(
-			$uri, $_SERVER['REQUEST_METHOD']);
-	}
-
-	protected function isRequestMethodValid(): bool
-	{
-		$validator = new RequestMethodValidator();
-
-		return $validator->run($_SERVER['REQUEST_METHOD']);
-	}
-
-	protected function throwExceptionIfRequestMethodInvalid(): void
-	{
-		if (!$this->isRequestMethodValid())
-			throw new \Exception(sprintf("Request method '%s' is not supported.", 
-					$_SERVER['REQUEST_METHOD']));
-	}
-
-	protected function getSanitizedCurrentUri(): string
-	{
-		return UriSanitizer::run($_SERVER['PATH_INFO']);
 	}
 
 	protected function getRouteByName(string $name): Route

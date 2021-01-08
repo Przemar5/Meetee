@@ -2,11 +2,26 @@
 
 namespace Meetee\Libs\Data_structures;
 
-interface Collection
+use Meetee\Libs\Data_structures\Iterators\Iterator;
+
+abstract class Collection
 {
-	public function getItems(): array;
+	protected array $items;
 
-	public function count(): int;
+	public function __construct(array $items)
+	{
+		$this->items = $items;
+	}
 
-	public function empty(): bool;
+	abstract public function getIterator(): Iterator;
+
+	abstract public function getItems(): array;
+
+	abstract public function count(): int;
+
+	abstract public function empty(): bool;
+
+	abstract public function push($element): void;
+
+	abstract public function pop();
 }

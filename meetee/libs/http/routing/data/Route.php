@@ -8,18 +8,21 @@ class Route
 	private string $method;
 	private string $className;
 	private ?string $name;
+	private array $access;
 
 	public function __construct(
 		string $pattern,
 		string $method,
 		string $className,
-		?string $name
+		?string $name,
+		?array $access = []
 	)
 	{
 		$this->pattern = $pattern;
 		$this->method = $method;
 		$this->className = $className;
 		$this->name = $name;
+		$this->access = $access;
 	}
 
 	public function matchByUriAndMethod(string $uri, string $method): bool
@@ -61,5 +64,10 @@ class Route
 	public function getName(): ?string
 	{
 		return $this->name;
+	}
+	
+	public function getAccess(): array
+	{
+		return $this->access;
 	}
 }

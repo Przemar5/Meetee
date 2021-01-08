@@ -3,7 +3,8 @@
 namespace Meetee\Libs\Http\Routing\Routers;
 
 use Meetee\Libs\Http\Routing\Routers\RouterTemplate;
-use Meetee\App\Entities\User;
+use Meetee\Libs\Http\Routing\Data\RouteFactory;
+use Meetee\Libs\Security\AuthFacade;
 
 class RouterGuardProxy extends RouterTemplate
 {
@@ -16,9 +17,10 @@ class RouterGuardProxy extends RouterTemplate
 
 	public function route(): void
 	{
-		$user = User::current();
+		$user = AuthFacade::getUser();
+		$route = RouteFactory::getCurrentRouteOrThrowException();
 
-		if (!is_null($user) && $user->hasAccess()) {
+		if (!is_null($user) && $user->hasAccess($route)) {
 			$this->router->route();
 		}
 		else {

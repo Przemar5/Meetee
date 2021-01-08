@@ -4,10 +4,11 @@ namespace Meetee\Libs\Http\Routing\Data\Structures;
 
 use Meetee\Libs\Data_structures\MappedCollection;
 use Meetee\Libs\Http\Routing\Data\Structures\Iterators\RouteListIterator;
+use Meetee\Libs\Http\Data\Route;
 
-class RouteList implements MappedCollection
+class RouteList extends MappedCollection
 {
-	private array $items;
+	protected array $items;
 
 	public function __construct(array $items)
 	{
@@ -47,5 +48,15 @@ class RouteList implements MappedCollection
 	public function contains($key): bool
 	{
 		return isset($this->items[$key]);
+	}
+
+	public function push($route): void
+	{
+		$this->items[] = $route;
+	}
+
+	public function pop()
+	{
+		return array_pop($this->items);
 	}
 }

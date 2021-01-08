@@ -25,11 +25,9 @@ spl_autoload_register(function($namespaceWithClass) {
 
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
-Session::set('user', 1);
-echo Session::get('user');
 
 $router = RouterFactory::createComplete();
-// $router->route();
+$router->route();
 
 // $user = User::current();
 // var_dump($user);

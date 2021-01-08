@@ -32,7 +32,8 @@ class RouteListFactory
 			$data['pattern'], 
 			$data['method'], 
 			$data['class'], 
-			$data['name'] ?? null
+			$data['name'] ?? null,
+			$data['access'] ?? []
 		);
 	}
 }
