@@ -26,8 +26,13 @@ spl_autoload_register(function($namespaceWithClass) {
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
-$router = RouterFactory::createComplete();
-$router->route();
+// $router = RouterFactory::createComplete();
+// $router->route();
+
+$user = new Meetee\App\Entities\User();
+$user->setUsername('test');
+$user->setPassword('test');
+$user->save();
 
 // $user = User::current();
 // var_dump($user);

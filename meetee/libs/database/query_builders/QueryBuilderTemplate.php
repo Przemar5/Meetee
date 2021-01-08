@@ -66,6 +66,8 @@ abstract class QueryBuilderTemplate
 		$this->offset = $offset;
 	}
 
+	abstract public function getBindings(): array;
+
 	abstract public function getResult();
 
 	protected function throwExceptionsIfSomethingMissing(): void

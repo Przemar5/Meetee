@@ -14,8 +14,8 @@ class DatabaseFactory
 		$details = Converter::jsonToArray($config);
 
 		switch ($details['driver']) {
-			case 'mysql': 	return new MySQLDatabase($details);
-			default: 		return new MySQLDatabase($details);
+			case 'mysql': 	return MySQLDatabase::getInstance($details);
+			default: 		return MySQLDatabase::getInstance($details);
 		}
 	}
 }

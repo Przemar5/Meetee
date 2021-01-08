@@ -4,9 +4,15 @@ namespace Meetee\App\Entities\Traits;
 
 trait SoftDelete
 {
-	protected \DateTime $deletedAt;
+	protected bool $deletedAt;
 
-	public function setDeletedAt(): void;
+	public function setDeletedAt(): void
+	{
+		$this->deletedAt = true;
+	}
 
-	public function getDeletedAt(): \DateTime;
+	public function getDeletedAt(): ?bool
+	{
+		return $this->deletedAt;
+	}
 }

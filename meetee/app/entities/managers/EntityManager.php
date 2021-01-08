@@ -3,6 +3,7 @@
 namespace Meetee\App\Entities\Managers;
 
 use Meetee\Libs\Database\DatabaseMediator;
+use Meetee\App\Entities\User;
 
 class EntityManager
 {
@@ -21,8 +22,9 @@ class EntityManager
 		return $this->instance;
 	}
 
-	public function save(Entity $entity): void
-	{
-		
-	}
+	// public function save(Entity $entity): void
+	// {
+	// 	if ($entity instanceof User::class)
+			
+	// }
 }

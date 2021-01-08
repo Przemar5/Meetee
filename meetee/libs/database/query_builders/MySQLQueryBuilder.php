@@ -72,7 +72,7 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 			'INSERT INTO %s (%s) VALUES (%s)', $this->table, $columns, $toBind);
 	}
 
-	public function getValuesToBind(): array
+	public function getBindings(): array
 	{
 		$keys = array_keys($this->values);
 		$keys = array_map(fn($k) => ":$k", $keys);

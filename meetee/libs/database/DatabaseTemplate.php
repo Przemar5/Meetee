@@ -8,16 +8,13 @@ abstract class DatabaseTemplate
 {
 	protected \PDO $database;
 	protected QueryBuilderTemplate $queryBuilder;
+	protected static DatabaseTemplate $instance;
 
-	public function __construct(
-		QueryBuilderTemplate $queryBuilder,
-		array $connectionDetails = []
-	)
+	protected function __construct(array $connectionDetails = [])
 	{
 		$getDetailOrThrowException = fn($value, $msg) => 
 			$connectionDetails[$value] ?? throw new \Exception($msg);
 
-		$this->queryBuilder = $queryBuilder;
 		$dsn = sprintf('%s:host=%s;port=%s;dbname=%s;',
 			$getDetailOrThrowException('driver', 'Database driver is not specified'),
 			$getDetailOrThrowException('host', 'Database host is not specified'),
@@ -31,5 +28,17 @@ abstract class DatabaseTemplate
 		$this->database = new \PDO($dsn, $user, $password);
 	}
 
-	// abstract public function select(string $table, array $options);
+	public static function getInstance(?array $details = null): static
+	{
+		if (!isset(static::$instance)) {
+			if (is_null($details))
+				throw new \Exception('Details array is missing.');
+
+			static::$instance = new static($details);
+		}
+
+		return static::$instance;
+	}
+
+	abstract public function sendQuery(string $query, ?array $bindings = []): void;
 }

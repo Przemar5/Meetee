@@ -2,21 +2,23 @@
 
 namespace Meetee\App\Entities;
 
-use Meetee\App\Entities\Managers\EntityManager;
+use Meetee\Libs\Database\Tables\Table;
 
-abstract class Entity implements SplSubject
+abstract class Entity
 {
-	protected ?EntityManager $manager;
+	protected array $tableColumns = [];
+	protected Table $table;
 
-	public function setManager(EntityManager $manager): void
+	public function __construct(Table $table)
 	{
-		$this->manager = $manager;
+		$this->table = $table;
 	}
 
-	public save(): void
+	public function save(): void
 	{
-		$this->manager->save($this);
+		$this->table->save($this);
 	}
+
 	// abstract public static function find(int $id): static;
 
 	// abstract public function save(): void;

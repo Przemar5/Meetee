@@ -5,15 +5,21 @@ namespace Meetee\App\Entities;
 use Meetee\App\Entities\Entity;
 use Meetee\Libs\Http\Routing\Data\Route;
 use Meetee\Libs\Security\AuthenticationFacade;
-// use Meetee\Libs\Database\DatabaseMediator;
+use Meetee\Libs\Database\Tables\UserTable;
+use Meetee\App\Entities\Traits\SoftDelete;
 
 class User extends Entity
 {
-	private string $table = 'users';
 	private ?int $id = null;
 	private string $username;
 	private string $password;
 	private array $roles;
+	private ?bool $deleted;
+
+	public function __construct()
+	{
+		parent::__construct(new UserTable());
+	}
 
 	public function hasAccess(Route $route): bool
 	{
@@ -33,11 +39,6 @@ class User extends Entity
 	}
 
 	public function softDelete(): void
-	{
-		//
-	}
-
-	public function delete(): void
 	{
 		//
 	}
@@ -77,6 +78,11 @@ class User extends Entity
 		return in_array($role, $this->roles);
 	}
 
+	public function delete(): void
+	{
+		$this->deleted = true;
+	}
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -95,5 +101,10 @@ class User extends Entity
 	public function getRole(): string
 	{
 		return $this->role;
+	}
+
+	public function isDeleted(): ?bool
+	{
+		return $this->deleted ?? null;
 	}
 }
