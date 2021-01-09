@@ -20,5 +20,7 @@ abstract class Table
 		$this->queryBuilder = DatabaseAbstractFactory::createQueryBuilder();
 	}
 
-	// abstract public function getData(Entity $entity): array;
+	abstract public function find(int $id): ?Entity;
+
+	// abstract public function save(Entity $entity): void;
 }

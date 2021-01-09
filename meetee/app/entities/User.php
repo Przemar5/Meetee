@@ -14,14 +14,25 @@ class User extends Entity
 	use Timestamps;
 	use SoftDelete;
 
-	private ?int $id = null;
-	private string $username;
-	private string $password;
-	private array $roles;
+	protected ?int $id = null;
+	protected string $login;
+	protected string $name;
+	protected string $surname;
+	protected string $email;
+	protected \DateTime $birth;
+	protected string $password;
+	protected array $roles;
 
 	public function __construct()
 	{
 		parent::__construct(new UserTable());
+	}
+
+	public static function findByLogin(string $login): ?self
+	{
+		$user = new self();
+
+		return $user->table->findByLogin($login);
 	}
 
 	public function hasAccess(Route $route): bool
@@ -31,24 +42,35 @@ class User extends Entity
 		return !empty($common);
 	}
 
-	public function login(): void
-	{
-		//
-	}
-
-	public function logout(): void
-	{
-		//
-	}
-
 	public function setId(int $id): void
 	{
-		$this->id = $id;
+		if (is_null($this->id))
+			$this->id = $id;
 	}
 
-	public function setUsername(string $username): void
+	public function setLogin(string $login): void
 	{
-		$this->username = $username;
+		$this->login = $login;
+	}
+
+	public function setEmail(string $email): void
+	{
+		$this->email = $email;
+	}
+
+	public function setName(string $name): void
+	{
+		$this->name = $name;
+	}
+
+	public function setSurname(string $surname): void
+	{
+		$this->surname = $surname;
+	}
+
+	public function setBirth(\DateTime $birth): void
+	{
+		$this->birth = $birth;
 	}
 
 	public function setPassword(string $password): void
@@ -58,17 +80,18 @@ class User extends Entity
 
 	public function setRoles(array $roles): void
 	{
-		$this->roles = $roles;
+		$this->roles = array_unique($roles);
 	}
 
-	public function addRole(string $role): void
+	public function addRole(Role $role): void
 	{
-		$this->roles[] = $role;
+		if (!in_array($role, $this->roles))
+			$this->roles[] = $role;
 	}
 
-	public function removeRole(string $role): void
+	public function removeRole($role): void
 	{
-		$this->roles = array_filter(fn($r) => $r != $role, $this->roles);
+		$this->roles = array_filter($this->roles, fn($r) => $r != $role);
 	}
 
 	public function hasRole(string $role): bool
@@ -86,9 +109,29 @@ class User extends Entity
 		return $this->id;
 	}
 
-	public function getUsername(): string
+	public function getLogin(): string
 	{
-		return $this->username;
+		return $this->login;
+	}
+
+	public function getEmail(): string
+	{
+		return $this->email;
+	}
+
+	public function getName(): string
+	{
+		return $this->name;
+	}
+
+	public function getSurname(): string
+	{
+		return $this->surname;
+	}
+
+	public function getBirth(): \DateTime
+	{
+		return $this->birth;
 	}
 
 	public function getPassword(): string

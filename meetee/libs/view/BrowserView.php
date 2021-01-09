@@ -11,7 +11,7 @@ class BrowserView extends ViewTemplate
 		$file = $this->getTemplatePathIfValid($path);
 		$layout = $this->getTemplatePathIfValid($this->layout);
 		extract($args);
-		
+
 		require_once $file;
 		require_once $layout;
 	}

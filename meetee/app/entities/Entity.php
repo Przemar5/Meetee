@@ -14,6 +14,13 @@ abstract class Entity
 		$this->table = $table;
 	}
 
+	public static function find(int $id): ?User
+	{
+		$entity = new static();
+
+		return $entity->table->find($id);
+	}
+
 	public function save(): void
 	{
 		$this->table->save($this);

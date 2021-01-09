@@ -2,12 +2,21 @@
 
 namespace Meetee\Libs\Database\Tables\Pivots;
 
-use Meetee\Libs\Database\Tables\Table;
+use Meetee\App\Entities\Entity;
+use Meetee\Libs\Database\Query_builders\QueryBuilderTemplate;
+use Meetee\Libs\Database\Factories\DatabaseAbstractFactory;
+use Meetee\Libs\Database\DatabaseTemplate;
 
-abstract class Pivot extends Table
+abstract class Pivot
 {
+	public QueryBuilderTemplate $queryBuilder;
+	protected string $name;
+	protected DatabaseTemplate $database;
+
 	public function __construct(string $name)
 	{
-		parent::__construct($name);
+		$this->name = $name;
+		$this->database = DatabaseAbstractFactory::createDatabase();
+		$this->queryBuilder = DatabaseAbstractFactory::createQueryBuilder();
 	}
 }

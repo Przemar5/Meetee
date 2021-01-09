@@ -12,5 +12,12 @@
 		"name": "register",
 		"class": "Auth\\RegisterController.page",
 		"access": ["GUEST"]
+	},
+	{
+		"pattern": "/register",
+		"method": "POST",
+		"name": "register_process",
+		"class": "Auth\\RegisterController.process",
+		"access": ["GUEST"]
 	}
 ]

@@ -20,7 +20,7 @@ class RouterGuardProxy extends RouterTemplate
 		$user = AuthFacade::getUser();
 		$route = RouteFactory::getCurrentRouteOrThrowException();
 
-		if (!is_null($user) && $user->hasAccess($route)) {
+		if (!is_null($route) && !is_null($user) && $user->hasAccess($route)) {
 			$this->router->route();
 		}
 		else {

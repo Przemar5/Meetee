@@ -53,6 +53,7 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 	private function appendOptionalParts(): void
 	{
 		$this->appendWherePartIfExists();
+		$this->appendWhereNullPartIfExists();
 		$this->appendLimitPartIfExists();
 		$this->appendOffsetPartIfExists();
 	}
@@ -62,8 +63,31 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 		if (is_null($this->conditions))
 			return;
 
-		$conditions = implode(' AND ', $this->conditions);
+		$conditions = [];
+		$this->additionalBindings = [];
+		
+		foreach ($this->conditions as $key => $value) {
+			$conditions[] = sprintf('%s = :%s', $key, $key);
+			$this->additionalBindings[":$key"] = $value;
+		}
+
+		$conditions = implode(' AND ', $conditions);
 		$this->query .= ' WHERE ' . $conditions;
+	}
+
+	private function appendWhereNullPartIfExists(): void
+	{
+		if (is_null($this->whereNull))
+			return;
+
+		if (!empty($this->conditions))
+			$this->query .= ' AND';
+
+		$mapFunc = fn($c) => sprintf('%s IS NULL', $c);
+		$conditions = array_map($mapFunc, $this->whereNull);
+		$conditions = implode(' AND ', $conditions);
+
+		$this->query .= ' ' . $conditions;
 	}
 
 	private function appendLimitPartIfExists(): void
@@ -96,11 +120,22 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 	private function prepareInsertMultiple(): void
 	{
 		$columns = array_keys($this->values[0]);
+		$this->additionalBindings = [];
 		$toBind = [];
-		foreach ($i = 0; $i < count($this->values); $i++) {
-			$otherToBind = array_map(fn($c) => ":$c_$i", $columns);
-			$toBind = array_merge($toBind, $otherToBind);
+
+		for ($i = 0; $i < count($this->values); $i++) {
+			$additional = array_fill(0, count($columns), $i);
+			$otherToBind = array_map(
+				fn($c, $i) => sprintf(":%s_%s", $c, $i), $columns, $additional);
+			$toBind[] = '(' . implode(', ', $otherToBind) . ')';
+			
+			$this->additionalBindings = array_merge(
+				$this->additionalBindings,
+				array_combine($otherToBind, array_values($this->values[$i]))
+			);
 		}
+		$columns = implode(', ', $columns);
+		$toBind = implode(', ', $toBind);
 
 		$this->query = sprintf('INSERT INTO %s (%s) VALUES %s', 
 			$this->table, $columns, $toBind);
@@ -133,10 +168,6 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 
 	private function prepareDelete(): void
 	{
-		if (!empty($this->conditions))
-			throw new \Exception(
-				'Conditions are missing. Cannot delete all records.');
-
 		$this->query = sprintf('DELETE FROM %s', $this->table);
 		$this->appendOptionalParts();
 	}

@@ -12,23 +12,38 @@ abstract class DatabaseTemplate
 
 	protected function __construct(array $connectionDetails = [])
 	{
-		$getDetailOrThrowException = fn($value, $msg) => 
-			$connectionDetails[$value] ?? throw new \Exception($msg);
-
 		$dsn = sprintf('%s:host=%s;port=%s;dbname=%s;',
-			$getDetailOrThrowException('driver', 'Database driver is not specified'),
-			$getDetailOrThrowException('host', 'Database host is not specified'),
-			$getDetailOrThrowException('port', 'Database port is not specified'),
-			$getDetailOrThrowException('dbname', 'Database name is not specified')
+			$this->getDetailOrThrowException(
+				$connectionDetails,'driver', 'Database driver is not specified'),
+			$this->getDetailOrThrowException(
+				$connectionDetails,'host', 'Database host is not specified'),
+			$this->getDetailOrThrowException(
+				$connectionDetails,'port', 'Database port is not specified'),
+			$this->getDetailOrThrowException(
+				$connectionDetails,'dbname', 'Database name is not specified')
 		);
 
-		$user = $getDetailOrThrowException('user', 'Username is missing');
-		$password = $getDetailOrThrowException('password', 'Password is missing');
+		$user = $this->getDetailOrThrowException(
+			$connectionDetails, 'user', 'Username is missing');
+		$password = $this->getDetailOrThrowException(
+			$connectionDetails, 'password', 'Password is missing');
 
 		$this->database = new \PDO($dsn, $user, $password);
 	}
 
-	public static function getInstance(?array $details = null): static
+	protected function getDetailOrThrowException(
+		array $connectionDetails = [], 
+		string $detail, 
+		string $msg
+	): string
+	{
+		if (!isset($connectionDetails[$detail]))
+			throw new \Exception($msg);
+		
+		return $connectionDetails[$detail];
+	}
+
+	public static function getInstance(?array $details = null): self
 	{
 		if (!isset(static::$instance)) {
 			if (is_null($details))
@@ -40,7 +55,7 @@ abstract class DatabaseTemplate
 		return static::$instance;
 	}
 
-	abstract public function sendQuery(string $query, ?array $bindings = []): void;
+	abstract public function sendQuery(string $query, ?array $bindings = []);
 
 	abstract public function findOne(string $query, ?array $bindings = []);
 

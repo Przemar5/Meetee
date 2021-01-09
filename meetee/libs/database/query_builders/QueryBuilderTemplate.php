@@ -13,6 +13,7 @@ abstract class QueryBuilderTemplate
 	protected ?string $joinType = null;
 	protected ?array $joinOn = null;
 	protected ?array $conditions = null;
+	protected ?array $whereNull = null;
 	protected ?int $limit = null;
 	protected ?int $offset = null;
 	protected ?array $additionalBindings = null;
@@ -28,6 +29,7 @@ abstract class QueryBuilderTemplate
 		$this->joinType = null;
 		$this->joinOn = null;
 		$this->conditions = null;
+		$this->whereNull = null;
 		$this->limit = null;
 		$this->offset = null;
 		$this->additionalBindings = null;
@@ -83,6 +85,11 @@ abstract class QueryBuilderTemplate
 		$this->conditions = $conditions;
 	}
 
+	public function whereNull(array $whereNull): void
+	{
+		$this->whereNull = $whereNull;
+	}
+
 	public function limit(int $limit): void
 	{
 		$this->limit = $limit;
@@ -101,6 +108,11 @@ abstract class QueryBuilderTemplate
 	abstract public function getBindings(): array;
 
 	abstract public function getResult();
+
+	public function getAdditionalBindings(): ?array
+	{
+		return $this->additionalBindings;
+	}
 
 	protected function throwExceptionIfSomethingMissing(): void
 	{

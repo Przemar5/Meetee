@@ -10,7 +10,10 @@ use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\Libs\Storage\Session;
 use Meetee\Libs\Database\Factories\DatabaseFactory;
 use Meetee\App\Entities\User;
+use Meetee\App\Entities\Role;
 use Meetee\Libs\Database\Tables\UserTable;
+use Meetee\Libs\Database\Tables\RoleTable;
+use Meetee\Libs\Security\AuthFacade;
 
 
 spl_autoload_register(function($namespaceWithClass) {
@@ -27,24 +30,8 @@ spl_autoload_register(function($namespaceWithClass) {
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
-// $router = RouterFactory::createComplete();
-// $router->route();
+$user = AuthFacade::getUser();
+// $user = User::find(1222);
 
-// $user = new Meetee\App\Entities\User();
-// $user->setUsername('test');
-// $user->setPassword('test');
-// $user->save();
-
-$userTable = new UserTable();
-$user = $userTable->find(2);
-
-echo $user->getUsername().PHP_EOL;
-
-var_dump($user->getRoles());
-
-var_dump($user);
-
-// $user = User::current();
-// var_dump($user);
-
-// $database = DatabaseFactory::create();
+$router = RouterFactory::createComplete();
+$router->route();

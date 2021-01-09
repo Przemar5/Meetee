@@ -27,14 +27,33 @@ class Route
 
 	public function matchByUriAndMethod(string $uri, string $method): bool
 	{
-		$pattern = $this->preparePattern();
+		$pattern = $this->getUriPatternRegex();
 
 		return preg_match($pattern, $uri) && $this->method === $method;
 	}
 
-	protected function preparePattern(): string
+	protected function getUriPatternRegex(): string
 	{
-		return sprintf("/^%s$/", addcslashes($this->pattern, '/'));
+		$uri = preg_replace(['/(\{[^\:]*\:)/', '/(\})/'], '', $this->pattern);
+
+		return sprintf("/^%s$/", addcslashes($uri, '/'));
+	}
+
+	protected function getUriPatternRegexPartByName(string $name): ?string
+	{
+		$found = [];
+		preg_match(sprintf('/\{%s\:([^\}]*)\}/', $name), $this->pattern, $found);
+
+		return $found[0] ?? null;
+	}
+
+	protected function getPatternWithInsertedArgs(?array $args = []): string
+	{
+		$parts = array_keys($args);
+		$values = array_values($args);
+		$toReplace = array_map(fn($p) => '/(\{'.$p.'\:\([^\)]*\)\})/', $parts);
+
+		return preg_replace($toReplace, $values, $this->pattern);
 	}
 
 	public function getArgsForUri(string $uri): array
@@ -44,6 +63,22 @@ class Route
 		preg_match($pattern, $uri, $args);
 
 		return array_slice($args, 1);
+	}
+
+	public function getPreparedUri(?array $args = []): string
+	{
+		$extracted = [];
+		preg_match_all('/(?:\{)(\w+)(?:\:[^\}]*\})/', $this->pattern, $extracted);
+		[$patterns, $keys] = $extracted;
+
+		foreach ($keys as $key)
+			if (!isset($args[$key]))
+				throw new \Exception(
+					sprintf("route URI argument '%s' is missing.", $key));
+
+		$values = array_map(fn($k) => $args[$k], $keys);
+
+		return str_replace($patterns, $values, $this->pattern);
 	}
 
 	public function getPattern(): string

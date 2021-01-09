@@ -54,27 +54,38 @@ class UserRoleTable extends Pivot
 	{
 		$roles = $user->getRoles();
 		$roleIds = array_map(fn($r) => $r->getId(), $roles);
-		$roleIds = array_filter(fn($id) => !is_null($id), $roleIds);
-		$userId = $$user->getId();
+		$roleIds = array_filter($roleIds, fn($id) => !is_null($id));
+		$userId = $user->getId();
 		
 		if (empty($roleIds) || is_null($userId))
 			return;
 
-
+		$this->removeRolesForUser($user);
+		$this->addRolesForUser($user);
 	}
 
 	private function addRolesForUser(User $user): void
 	{
-		$this->queryBuilder->in($this->table);
-		$this->queryBuilder->insert();
-		$this->queryBuilder->in($this->table);
-		$this->queryBuilder->in($this->table);
+		$roles = $user->getRoles();
+		$data = array_map(fn($r) => [
+			'user_id' => $user->getId(), 
+			'role_id' => $r->getId(),
+		], $roles);
 
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->insertMultiple($data);
+		
+		$this->database->sendQuery(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getAdditionalBindings()
+		);
 	}
 
-	private function removePreviousRolesForUserId(int $id): void
+	private function removeRolesForUser(User $user): void
 	{
-		$this->queryBuilder->in($this->table);
+		$id = $user->getId();
+
+		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->delete();
 		$this->queryBuilder->where(['user_id' => $id]);
 		

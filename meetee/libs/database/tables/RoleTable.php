@@ -13,7 +13,7 @@ class RoleTable extends Table
 		parent::__construct('users');
 	}
 
-	public function find(int $id): ?User
+	public function find(int $id): ?Role
 	{
 		$data = $this->getRawDataForRoleId($id);
 		

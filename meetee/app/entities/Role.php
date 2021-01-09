@@ -20,6 +20,33 @@ class Role extends Entity
 		return $this->name;
 	}
 
+	public static function getGuestRole(): self
+	{
+		$role = new self();
+		$role->setId(1);
+		$role->setName('GUEST');
+
+		return $role;
+	}
+
+	public static function getUserRole(): self
+	{
+		$role = new self();
+		$role->setId(2);
+		$role->setName('USER');
+
+		return $role;
+	}
+
+	public static function getAdminRole(): self
+	{
+		$role = new self();
+		$role->setId(3);
+		$role->setName('ADMIN');
+
+		return $role;
+	}
+
 	public function setId(int $id): void
 	{
 		$this->id = $id;

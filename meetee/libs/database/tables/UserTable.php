@@ -17,19 +17,10 @@ class UserTable extends Table
 	{
 		$data = $this->getRawDataForUserId($id);
 		
-		if (is_null($data))
+		if (!$data)
 			return null;
 
-		$user = new User();
-		$user->setId($data['id']);
-		$user->setUsername($data['username']);
-		$user->setPassword($data['password']);
-		$user->setCreatedAt($data['created_at']);
-		$user->setUpdatedAt($data['updated_at']);
-		$user->setDeleted($data['deleted']);
-
-		$userRole = new UserRoleTable();
-		$user->setRoles($userRole->getRolesByUserId($id));
+		$user = $this->insertDataIntoUser($data);
 
 		return $user;
 	}
@@ -40,6 +31,52 @@ class UserTable extends Table
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
 		$this->queryBuilder->where(['id' => $id]);
+		$this->queryBuilder->whereNull(['deleted']);
+
+		return $this->database->findOne(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
+
+	private function insertDataIntoUser($data): User
+	{
+		$user = new User();
+		$user->setId($data['id']);
+		$user->setLogin($data['login']);
+		$user->setEmail($data['email']);
+		$user->setName($data['name']);
+		$user->setSurname($data['surname']);
+		$user->setPassword($data['password']);
+		$user->setCreatedAt($data['created_at']);
+		$user->setUpdatedAt($data['updated_at']);
+		$user->setDeleted($data['deleted']);
+
+		$userRole = new UserRoleTable();
+		$user->setRoles($userRole->getRolesByUserId($data['id']));
+
+		return $user;
+	}
+
+	public function findByLogin(string $login): ?User
+	{
+		$data = $this->getDataByLogin($login);
+
+		if (!$data)
+			return null;
+
+		$user = $this->insertDataIntoUser($data);
+
+		return $user;
+	}
+
+	private function getDataByLogin(string $login)
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->where(['login' => $login]);
+		$this->queryBuilder->limit(1);
 
 		return $this->database->findOne(
 			$this->queryBuilder->getResult(),
@@ -69,6 +106,11 @@ class UserTable extends Table
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()
 		);
+
+		$user->setId($this->database->lastInsertId());
+
+		$userRole = new UserRoleTable();
+		$userRole->setRolesForUser($user);
 	}
 
 	public function update(User $user): void

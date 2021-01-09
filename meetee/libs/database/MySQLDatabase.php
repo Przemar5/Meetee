@@ -10,7 +10,7 @@ class MySQLDatabase extends DatabaseTemplate
 	protected function __construct(array $connectionDetails = [])
 	{
 		$connectionDetails['driver'] = 'mysql';
-		$connectionDetails['port'] ??= 3306;
+		$connectionDetails['port'] = $connectionDetails['port'] ?? 3306;
 
 		parent::__construct($connectionDetails);
 	}
@@ -35,5 +35,10 @@ class MySQLDatabase extends DatabaseTemplate
 		$stmt->execute($bindings);
 
 		return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+	public function lastInsertId(): ?int
+	{
+		return $this->database->lastInsertId();
 	}
 }

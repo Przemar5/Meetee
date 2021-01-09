@@ -19,4 +19,12 @@ class RouteFactory
 		return $iterator->getRouteByUriAndMethod(
 			$uri, $_SERVER['REQUEST_METHOD']);
 	}
+
+	public static function getRouteByName(string $name): ?Route
+	{
+		$routes = RouteListFactory::createFromJsonConfig('./config/routes.json');
+		$iterator = $routes->getIterator();
+
+		return $iterator->getRouteByName($name);
+	}
 }
