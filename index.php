@@ -31,7 +31,6 @@ spl_autoload_register(function($namespaceWithClass) {
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
 $user = AuthFacade::getUser();
-// $user = User::find(1222);
 
 // $user = new User();
 // $user->setLogin('Henio');

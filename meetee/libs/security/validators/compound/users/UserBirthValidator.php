@@ -5,7 +5,7 @@ namespace Meetee\Libs\Security\Validators\Compound\Users;
 use Meetee\Libs\Security\Validators\Compound\CompoundValidator;
 use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
 
-abstract class UserBirthValidator extends CompoundValidator
+class UserBirthValidator extends CompoundValidator
 {
 	public function __construct()
 	{
@@ -19,5 +19,6 @@ abstract class UserBirthValidator extends CompoundValidator
 		// 	'Name may contain only alpha characters.');
 
 		// parent::__construct($validators);
+		parent::__construct([]);
 	}
 }

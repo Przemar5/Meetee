@@ -4,7 +4,7 @@ namespace Meetee\Libs\Security\Validators;
 
 use Meetee\Libs\Security\Validators\Validator;
 
-class MaxValidator extends Validator
+class MaxLengthValidator extends Validator
 {
 	private int $maximum;
 

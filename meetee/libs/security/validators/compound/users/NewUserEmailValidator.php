@@ -5,10 +5,12 @@ namespace Meetee\Libs\Security\Validators\Compound\Users;
 use Meetee\Libs\Security\Validators\Compound\CompoundValidator;
 use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
 
-abstract class NewUserEmailValidator extends CompoundValidator
+class NewUserEmailValidator extends CompoundValidator
 {
 	public function __construct()
 	{
+		$validators[] = ValidatorFactory::createNotEmptyValidator(
+			'Email is required.');
 		$validators[] = ValidatorFactory::createStringValidator('');
 		$validators[] = ValidatorFactory::createMinLengthValidator(
 			8, 'Email must be 8 characters minimum.');

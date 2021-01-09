@@ -25,18 +25,26 @@ class UserTable extends Table
 		if (!$data)
 			return null;
 
-		$user = $this->insertDataIntoUser($data);
+		$user = $this->fetchUser($data);
 
 		return $user;
 	}
 
+	public function findManyWhere(array $conditions)
+	{
+		$data = $this->getRawDataForManyUsersWhere($conditions);
+		
+		if (!$data)
+			return null;
+
+		$users = $this->fetchManyUsers($data);
+
+		return $users;
+	}
+
 	private function getRawDataForUserWhere(array $conditions)
 	{
-		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->select(['*']);
-		$this->queryBuilder->where($conditions);
-		$this->queryBuilder->whereNull(['deleted']);
+		$this->prepareSelectWhere($conditions);
 		$this->queryBuilder->limit(1);
 
 		return $this->database->findOne(
@@ -45,7 +53,26 @@ class UserTable extends Table
 		);
 	}
 
-	private function insertDataIntoUser($data): User
+	private function getRawDataForManyUsersWhere(array $conditions)
+	{
+		$this->prepareSelectWhere($conditions);
+
+		return $this->database->findMany(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
+
+	private function prepareSelectWhere(array $conditions): void
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->where($conditions);
+		$this->queryBuilder->whereNull(['deleted']);
+	}
+
+	private function fetchUser($data): User
 	{
 		$user = new User();
 		$user->setId($data['id']);
@@ -53,16 +80,21 @@ class UserTable extends Table
 		$user->setEmail($data['email']);
 		$user->setName($data['name']);
 		$user->setSurname($data['surname']);
-		$user->setBirth($data['birth']);
+		$user->setBirth(new \DateTime($data['birth']));
 		$user->setPassword($data['password']);
 		$user->setCreatedAt($data['created_at']);
 		$user->setUpdatedAt($data['updated_at']);
 		$user->setDeleted($data['deleted']);
 
 		$userRole = new UserRoleTable();
-		$user->setRoles($userRole->getRolesByUserId($data['id']));
+		$user->setRoles($userRole->findRolesForUserId($data['id']));
 
 		return $user;
+	}
+
+	private function fetchManyUsers($data)
+	{
+		return array_map(fn($d) => $this->fetchUser($d), $data);
 	}
 
 	public function findByLogin(string $login): ?User

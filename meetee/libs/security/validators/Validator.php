@@ -6,5 +6,5 @@ abstract class Validator
 {
 	public string $errorMsg;
 
-	public function run($value): bool;
+	abstract public function run($value): bool;
 }

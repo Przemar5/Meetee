@@ -15,11 +15,64 @@ class RoleTable extends Table
 
 	public function find(int $id): ?Role
 	{
-		$data = $this->getRawDataForRoleId($id);
+		return $this->findOneWhere(['id' => $id]);
+	}
+
+	public function findOneWhere(array $conditions): ?Role
+	{
+		$data = $this->getRawDataForRoleWhere($conditions);
 		
-		if (is_null($data))
+		if (!$data)
 			return null;
 
+		$role = $this->fetchRole($data);
+
+		return $role;
+	}
+
+	public function findManyWhere(array $conditions)
+	{
+		$data = $this->getRawDataForManyRolesWhere($conditions);
+		
+		if (!$data)
+			return null;
+
+		$roles = $this->fetchManyRoles($data);
+
+		return $roles;
+	}
+
+	private function getRawDataForRoleWhere(array $conditions)
+	{
+		$this->prepareSelectWhere($conditions);
+		$this->queryBuilder->limit(1);
+
+		return $this->database->findOne(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
+
+	private function getRawDataForManyRolesWhere(array $conditions)
+	{
+		$this->prepareSelectWhere($conditions);
+
+		return $this->database->findMany(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
+
+	private function prepareSelectWhere(array $conditions): void
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->where($conditions);
+	}
+
+	private function fetchRole($data): Role
+	{
 		$role = new Role();
 		$role->setId($data['id']);
 		$role->setName($data['name']);
@@ -27,17 +80,9 @@ class RoleTable extends Table
 		return $role;
 	}
 
-	private function getRawDataForRoleId(int $id)
+	private function fetchManyRoles($data)
 	{
-		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->select(['*']);
-		$this->queryBuilder->where(['id' => $id]);
-
-		return $this->database->findOne(
-			$this->queryBuilder->getResult(),
-			$this->queryBuilder->getBindings()
-		);
+		return array_map(fn($d) => $this->fetchRole($d), $data);
 	}
 
 	public function save(Role $role): void

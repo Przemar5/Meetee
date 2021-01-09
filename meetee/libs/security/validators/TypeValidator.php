@@ -8,7 +8,7 @@ class TypeValidator extends Validator
 {
 	private string $type;
 
-	public function setPattern(string $type): void
+	public function setType(string $type): void
 	{
 		$this->type = $type;
 	}

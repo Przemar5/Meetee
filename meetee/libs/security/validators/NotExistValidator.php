@@ -3,6 +3,7 @@
 namespace Meetee\Libs\Security\Validators;
 
 use Meetee\Libs\Security\Validators\Validator;
+use Meetee\Libs\Database\Tables\TableFactory;
 
 class NotExistValidator extends Validator
 {
@@ -33,6 +34,6 @@ class NotExistValidator extends Validator
 			throw new \Exception(
 				sprintf("Cannot access table '%s'.", $this->table));
 
-		return (bool) $table->findOneBy([$this->column => $value]);
+		return (bool) $table->findOneWhere([$this->column => $value]);
 	}
 }

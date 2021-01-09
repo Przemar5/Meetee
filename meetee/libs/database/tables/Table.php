@@ -24,5 +24,7 @@ abstract class Table
 
 	abstract public function findOneWhere(array $conditions): ?Entity;
 
+	abstract public function findManyWhere(array $conditions);
+
 	// abstract public function save(Entity $entity): void;
 }

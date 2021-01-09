@@ -5,10 +5,12 @@ namespace Meetee\Libs\Security\Validators\Compound\Users;
 use Meetee\Libs\Security\Validators\Compound\CompoundValidator;
 use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
 
-abstract class NewUserLoginValidator extends CompoundValidator
+class NewUserLoginValidator extends CompoundValidator
 {
 	public function __construct()
 	{
+		$validators[] = ValidatorFactory::createNotEmptyValidator(
+			'Login is required.');
 		$validators[] = ValidatorFactory::createStringValidator('');
 		$validators[] = ValidatorFactory::createMinLengthValidator(
 			3, 'Login must be 3 characters minimum.');
@@ -16,9 +18,10 @@ abstract class NewUserLoginValidator extends CompoundValidator
 			60, 'Login must be equal or shorter than 60 characters long.');
 		$validators[] = ValidatorFactory::createPatternValidator(
 			'/^[\w\d]+$/', 
-			'Login may contain only alphanumeric characters, hyphens and @.');
+			'Login may contain only alphanumeric characters and hyphens.');
 		$validators[] = ValidatorFactory::createNotExistValidator(
-			'users', 'login', 'Login already is in use. Please try another.');
+			'users', 'login', 
+			'Login already is in use. Please choose another one.');
 
 		parent::__construct($validators);
 	}

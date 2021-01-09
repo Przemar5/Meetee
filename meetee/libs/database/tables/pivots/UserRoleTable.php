@@ -13,7 +13,7 @@ class UserRoleTable extends Pivot
 		parent::__construct('user_role');
 	}
 
-	public function getRolesByUserId(int $id): ?array
+	public function findRolesForUserId(int $id): ?array
 	{
 		$this->queryBuilder->reset();
 		$this->queryBuilder->select(['roles.*']);

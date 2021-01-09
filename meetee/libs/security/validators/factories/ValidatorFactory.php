@@ -2,6 +2,7 @@
 
 namespace Meetee\Libs\Security\Validators\Factories;
 
+use Meetee\Libs\Security\Validators\NotEmptyValidator;
 use Meetee\Libs\Security\Validators\TypeValidator;
 use Meetee\Libs\Security\Validators\MinValidator;
 use Meetee\Libs\Security\Validators\MaxValidator;
@@ -13,18 +14,28 @@ use Meetee\Libs\Security\Validators\EmailValidator;
 
 class ValidatorFactory
 {
+	public static function createNotEmptyValidator(
+		string $errorMsg = ''
+	): NotEmptyValidator
+	{
+		$validator = new NotEmptyValidator();
+		$validator->errorMsg = $errorMsg;
+
+		return $validator;
+	}
+
 	public static function createStringValidator(
 		string $errorMsg = ''
 	): TypeValidator
 	{
-		return $this->createTypeValidator('integer', $errorMsg);
+		return static::createTypeValidator('string', $errorMsg);
 	}
 
 	public static function createIntValidator(
 		string $errorMsg = ''
 	): TypeValidator
 	{
-		return $this->createTypeValidator('integer', $errorMsg);
+		return static::createTypeValidator('integer', $errorMsg);
 	}
 
 	public static function createTypeValidator(
@@ -94,7 +105,7 @@ class ValidatorFactory
 	{
 		$validator = new PatternValidator();
 		$validator->errorMsg = $errorMsg;
-		$validator->setPattern($max);
+		$validator->setPattern($pattern);
 
 		return $validator;
 	}

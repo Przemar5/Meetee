@@ -15,6 +15,8 @@ abstract class CompoundValidator extends Validator
 
 	public function run($value): bool
 	{
+		$this->error = null;
+
 		foreach ($this->validators as $validator) {
 			if (!$validator->run($value)) {
 				$this->errorMsg = $validator->errorMsg;
