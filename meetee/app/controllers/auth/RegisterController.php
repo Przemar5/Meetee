@@ -6,7 +6,7 @@ use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Security\Validators\Compound\Forms\RegistrationFormValidator;
 
-use Meetee\Libs\Security\Validators\Compound\Users\NewUserLoginValidator;
+use Meetee\Libs\Security\Validators\EmailValidator;
 use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
 // use Meetee\Libs\Http\Routing\RoutingFacade;
 
@@ -14,12 +14,13 @@ class RegisterController extends ControllerTemplate
 {
 	public function page(): void
 	{
-		$validator = new NewUserLoginValidator('users', 'login', 'Error');
+		$validator = new EmailValidator();
+
 		echo $validator->run('login');
-		echo $validator->errorMsg;
+		// echo $validator->errorMsg ?? null;
 		die;
 
-		// $this->render('auth/register');
+		$this->render('auth/register');
 	}
 
 	public function process(): void
@@ -41,7 +42,7 @@ class RegisterController extends ControllerTemplate
 		$validator = new RegistrationFormValidator();
 		$validator->run($data);
 
-		// var_dump($validator->getErrors());
+		var_dump($validator->getErrors());
 	}
 
 	private function getRequestData()

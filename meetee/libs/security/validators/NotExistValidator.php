@@ -34,6 +34,8 @@ class NotExistValidator extends Validator
 			throw new \Exception(
 				sprintf("Cannot access table '%s'.", $this->table));
 
-		return (bool) $table->findOneWhere([$this->column => $value]);
+		$user = $table->findOneWhere([$this->column => $value]);
+
+		return ($user) ? false : true;
 	}
 }
