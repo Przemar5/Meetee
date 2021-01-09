@@ -4,7 +4,7 @@ namespace Meetee\Libs\Security\Validators;
 
 use Meetee\Libs\Security\Validators\Validator;
 
-class UriValidator implements Validator
+class UriValidator extends Validator
 {
 	public function run($value): bool
 	{

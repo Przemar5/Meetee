@@ -4,7 +4,7 @@ namespace Meetee\Libs\Security\Validators;
 
 use Meetee\Libs\Security\Validators\Validator;
 
-class RequestMethodValidator implements Validator
+class RequestMethodValidator extends Validator
 {
 	public function run($value): bool
 	{

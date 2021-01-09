@@ -22,5 +22,7 @@ abstract class Table
 
 	abstract public function find(int $id): ?Entity;
 
+	abstract public function findOneWhere(array $conditions): ?Entity;
+
 	// abstract public function save(Entity $entity): void;
 }

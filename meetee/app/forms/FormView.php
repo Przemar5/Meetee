@@ -4,5 +4,5 @@ namespace Meetee\App\Forms;
 
 abstract class FormView
 {
-	abstract public function render(?array $args = []): void;
+	abstract public function get(?array $args = []): string;
 }

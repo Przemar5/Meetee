@@ -21,6 +21,13 @@ abstract class Entity
 		return $entity->table->find($id);
 	}
 
+	public static function findOneWhere(array $conditions): ?User
+	{
+		$entity = new static();
+
+		return $entity->table->findOneWhere($conditions);
+	}
+
 	public function save(): void
 	{
 		$this->table->save($this);

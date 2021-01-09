@@ -15,7 +15,12 @@ class UserTable extends Table
 
 	public function find(int $id): ?User
 	{
-		$data = $this->getRawDataForUserId($id);
+		return $this->findOneWhere(['id' => $id]);
+	}
+
+	public function findOneWhere(array $conditions): ?User
+	{
+		$data = $this->getRawDataForUserWhere($conditions);
 		
 		if (!$data)
 			return null;
@@ -25,13 +30,14 @@ class UserTable extends Table
 		return $user;
 	}
 
-	private function getRawDataForUserId(int $id)
+	private function getRawDataForUserWhere(array $conditions)
 	{
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
-		$this->queryBuilder->where(['id' => $id]);
+		$this->queryBuilder->where($conditions);
 		$this->queryBuilder->whereNull(['deleted']);
+		$this->queryBuilder->limit(1);
 
 		return $this->database->findOne(
 			$this->queryBuilder->getResult(),
@@ -61,28 +67,7 @@ class UserTable extends Table
 
 	public function findByLogin(string $login): ?User
 	{
-		$data = $this->getDataByLogin($login);
-
-		if (!$data)
-			return null;
-
-		$user = $this->insertDataIntoUser($data);
-
-		return $user;
-	}
-
-	private function getDataByLogin(string $login)
-	{
-		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->select(['*']);
-		$this->queryBuilder->where(['login' => $login]);
-		$this->queryBuilder->limit(1);
-
-		return $this->database->findOne(
-			$this->queryBuilder->getResult(),
-			$this->queryBuilder->getBindings()
-		);
+		return $this->findOneWhere(['login' => $login]);
 	}
 
 	public function save(User $user): void
