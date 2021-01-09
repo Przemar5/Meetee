@@ -21,7 +21,7 @@ class User extends Entity
 	protected string $email;
 	protected \DateTime $birth;
 	protected string $password;
-	protected array $roles;
+	protected array $roles = [];
 
 	public function __construct()
 	{
@@ -141,6 +141,6 @@ class User extends Entity
 
 	public function getRoles(): array
 	{
-		return $this->roles;
+		return $this->roles ?? [];
 	}
 }

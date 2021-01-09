@@ -47,6 +47,7 @@ class UserTable extends Table
 		$user->setEmail($data['email']);
 		$user->setName($data['name']);
 		$user->setSurname($data['surname']);
+		$user->setBirth($data['birth']);
 		$user->setPassword($data['password']);
 		$user->setCreatedAt($data['created_at']);
 		$user->setUpdatedAt($data['updated_at']);
@@ -94,9 +95,7 @@ class UserTable extends Table
 
 	public function insert(User $user): void
 	{
-		$data = [];
-		$data['username'] = $user->getUsername();
-		$data['password'] = $user->getPassword();
+		$data = $this->userToRawData($user);
 
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
@@ -113,11 +112,22 @@ class UserTable extends Table
 		$userRole->setRolesForUser($user);
 	}
 
+	private function userToRawData(User $user): array
+	{
+		$data = [];
+		$data['login'] = $user->getLogin();
+		$data['name'] = $user->getName();
+		$data['surname'] = $user->getSurname();
+		$data['email'] = $user->getEmail();
+		$data['birth'] = $user->getBirth()->format('Y-m-d H:i:s');
+		$data['password'] = $user->getPassword();
+
+		return $data;
+	}
+
 	public function update(User $user): void
 	{
-		$values = [];
-		$values['username'] = $user->getUsername();
-		$values['password'] = $user->getPassword();
+		$values = $this->userToRawData($user);
 
 		if (!is_null($user->isDeleted()))
 			$values['deleted'] = $user->isDeleted();

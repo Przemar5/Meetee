@@ -16,8 +16,7 @@ class RegisterController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			$this->validateUsername();
-			$this->validatePassword();
+			$this->validateData();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -27,36 +26,40 @@ class RegisterController extends ControllerTemplate
 
 	private function validateData(): bool
 	{
-		return $this->validateUsername() &&
+		return $this->validateLogin() &&
 			$this->validatePassword();
 	}
 
-	private function validateUsername(): bool
+	private function validateLogin(): bool
 	{
-		$username = trim($_POST['username']) ?? null;
+		$login = trim($_POST['login']) ?? null;
 
-		if (!is_string($username))
-			throw new \Excpeiton('Username must be a string.');
-
-		$username = trim($username);
-
-		if (strlen($username) < 3)
-			throw new \Exception(
-				'Username must be at least 3 characters long.');
+		try {
+			
+		}
 		
-		if (strlen($username) > 60)
-			throw new \Exception(
-				'Username must be not longer 60 than characters long.');
+		if (!is_string($login))
+			throw new \Excpeiton('Login must be a string.');
 
-		if (!preg_match('/^[\w\d\-]+$/', $username))
-			throw new \Exception(
-				'Username may contain only letters, numbers and hyphens.');
+		$login = trim($login);
 
-		$user = User::findByUsername($username);
+		if (strlen($login) < 3)
+			throw new \Exception(
+				'Login must be at least 3 characters long.');
+		
+		if (strlen($login) > 60)
+			throw new \Exception(
+				'Login must be not longer 60 than characters long.');
+
+		if (!preg_match('/^[\w\d\-]+$/', $login))
+			throw new \Exception(
+				'Login may contain only letters, numbers and hyphens.');
+
+		$user = User::findByLogin($login);
 		
 		if ($user)
 			throw new \Exception(
-				'User already exists. Please try another username.');
+				'Login already exists. Please try another login.');
 
 		return true;
 	}

@@ -33,5 +33,15 @@ Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 $user = AuthFacade::getUser();
 // $user = User::find(1222);
 
+// $user = new User();
+// $user->setLogin('Henio');
+// $user->setName('Heniek');
+// $user->setSurname('Kujdupa');
+// $user->setEmail('h.dupa@mail.com');
+// $user->setBirth(new \DateTime());
+// $user->setPassword('qwerty');
+// $user->addRole(Role::getUserRole());
+// $user->save();
+
 $router = RouterFactory::createComplete();
 $router->route();
