@@ -3,13 +3,12 @@
 namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
-use Meetee\App\Entities\User;
-use Meetee\Libs\Security\Validators\Compound\Forms\RegistrationFormValidator;
-use Meetee\Libs\Security\AuthFacade;
 use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\Utils\TokenHandler;
+use Meetee\App\Forms\RegistrationForm;
 
-// use Meetee\Libs\Security\Validators\Compound\Users\NewUserEmailValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\UserPasswordValidator;
+
 // use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
 // use Meetee\Libs\Http\Routing\RoutingFacade;
 
@@ -17,6 +16,9 @@ class RegisterController extends ControllerTemplate
 {
 	public function page(): void
 	{
+		$validator = new UserPasswordValidator();
+		$validator->run('password');
+
 		$token = TokenFactory::generate('csrf_registration_token');
 
 		$this->render('auth/register', [
@@ -27,40 +29,18 @@ class RegisterController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			$token = TokenFactory::getFromRequest('csrf_registration_token');
+			$form = new RegistrationForm();
 
-			if (TokenHandler::validateAndRemove($token)) {
-				// TokenHandler::getFromRequest();
-				echo 'GREAT!';
-			}
-			$token->delete();
+			if (!TokenHandler::validate('csrf_registration_token'))
+				$this->page();
 
-			// if (!$this->validateData())
-			// 	$this->page();
-			// else
-			// 	die('GOOD');
+			if (!$form->validate())
+				var_dump($form->getErrors());
+
+
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
-	}
-
-	private function validateData()
-	{
-		$data = $this->getRequestData();
-		$validator = new RegistrationFormValidator();
-		$validator->run($data);
-	}
-
-	private function getRequestData()
-	{
-		return [
-			'login' => $_POST['login'],
-			'email' => $_POST['email'],
-			'name' => $_POST['name'],
-			'surname' => $_POST['surname'],
-			'birth' => $_POST['birth'],
-			'password' => $_POST['password'],
-		];
 	}
 }

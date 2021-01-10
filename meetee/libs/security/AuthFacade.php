@@ -21,6 +21,13 @@ class AuthFacade
 		return User::find($id) ?? new NullUser();
 	}
 
+	public static function getUserId(): int
+	{
+		$user = self::getUser();
+
+		return $user->getId() ?? 0;
+	} 
+
 	// public static function generateCsrfToken(): Token
 	// {
 	// 	$user = self::getUser();

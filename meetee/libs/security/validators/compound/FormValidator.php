@@ -12,7 +12,7 @@ abstract class FormValidator
 		$this->validators = $validators;
 	}
 
-	public function run($values): bool
+	public function run(array $values): bool
 	{
 		$this->errors = [];
 

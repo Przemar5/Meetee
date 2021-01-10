@@ -4,6 +4,7 @@ namespace Meetee\Libs\Security\Validators\Factories;
 
 use Meetee\Libs\Security\Validators\NotEmptyValidator;
 use Meetee\Libs\Security\Validators\TypeValidator;
+use Meetee\Libs\Security\Validators\NotTypeValidator;
 use Meetee\Libs\Security\Validators\MinValidator;
 use Meetee\Libs\Security\Validators\MaxValidator;
 use Meetee\Libs\Security\Validators\MinLengthValidator;
@@ -15,7 +16,7 @@ use Meetee\Libs\Security\Validators\EmailValidator;
 class ValidatorFactory
 {
 	public static function createNotEmptyValidator(
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): NotEmptyValidator
 	{
 		$validator = new NotEmptyValidator();
@@ -25,14 +26,14 @@ class ValidatorFactory
 	}
 
 	public static function createStringValidator(
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): TypeValidator
 	{
 		return static::createTypeValidator('string', $errorMsg);
 	}
 
 	public static function createIntValidator(
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): TypeValidator
 	{
 		return static::createTypeValidator('integer', $errorMsg);
@@ -40,7 +41,7 @@ class ValidatorFactory
 
 	public static function createTypeValidator(
 		string $type,
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): TypeValidator
 	{
 		$validator = new TypeValidator();
@@ -50,9 +51,21 @@ class ValidatorFactory
 		return $validator;
 	}
 
+	public static function createNotTypeValidator(
+		string $type,
+		?string $errorMsg = ''
+	): NotTypeValidator
+	{
+		$validator = new NotTypeValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setType($type);
+
+		return $validator;
+	}
+
 	public static function createMinValidator(
 		int $min, 
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): MinValidator
 	{
 		$validator = new MinValidator();
@@ -64,7 +77,7 @@ class ValidatorFactory
 
 	public static function createMaxValidator(
 		int $max,
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): MaxValidator
 	{
 		$validator = new MaxValidator();
@@ -76,7 +89,7 @@ class ValidatorFactory
 
 	public static function createMinLengthValidator(
 		int $min, 
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): MinLengthValidator
 	{
 		$validator = new MinLengthValidator();
@@ -88,7 +101,7 @@ class ValidatorFactory
 
 	public static function createMaxLengthValidator(
 		int $max,
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): MaxLengthValidator
 	{
 		$validator = new MaxLengthValidator();
@@ -100,7 +113,7 @@ class ValidatorFactory
 
 	public static function createPatternValidator(
 		string $pattern,
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): PatternValidator
 	{
 		$validator = new PatternValidator();
@@ -113,7 +126,7 @@ class ValidatorFactory
 	public static function createNotExistValidator(
 		string $table,
 		string $column,
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): NotExistValidator
 	{
 		$validator = new NotExistValidator();
@@ -125,7 +138,7 @@ class ValidatorFactory
 	}
 
 	public static function createEmailValidator(
-		string $errorMsg = ''
+		?string $errorMsg = ''
 	): EmailValidator
 	{
 		$validator = new EmailValidator();
