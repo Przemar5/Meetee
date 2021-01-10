@@ -11,8 +11,7 @@ class TokenValueValidator extends CompoundValidator
 	{
 		$validators[] = ValidatorFactory::createNotEmptyValidator();
 		$validators[] = ValidatorFactory::createStringValidator();
-		$validators[] = ValidatorFactory::createMinLengthValidator(64);
-		$validators[] = ValidatorFactory::createMaxLengthValidator(64);
+		$validators[] = ValidatorFactory::createExactLengthValidator(64);
 		$validators[] = ValidatorFactory::createPatternValidator(
 			'/^[A-Za-z0-9]+$/');
 

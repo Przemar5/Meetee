@@ -7,7 +7,7 @@ use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\Utils\TokenHandler;
 use Meetee\App\Forms\RegistrationForm;
 
-use Meetee\Libs\Security\Validators\Compound\Users\UserPasswordValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\UserBirthValidator;
 
 // use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
 // use Meetee\Libs\Http\Routing\RoutingFacade;
@@ -26,6 +26,16 @@ class RegisterController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
+			$birth = $_POST['birth'];
+			$validator = new UserBirthValidator();
+			echo strlen($birth);
+
+			if (!$validator->run($birth))
+				var_dump($validator->errorMsg);
+			else
+				die('Great!');
+			die;
+
 			$form = new RegistrationForm();
 
 			if (!TokenHandler::validate('csrf_registration_token'))

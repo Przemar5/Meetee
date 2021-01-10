@@ -9,9 +9,11 @@ class UserBirthValidator extends CompoundValidator
 {
 	public function __construct()
 	{
-		// $validators[] = ValidatorFactory::createStringValidator('');
-		// $validators[] = ValidatorFactory::createMinLengthValidator(
-		// 	2, 'Surname must be 2 characters minimum.');
+		$validators[] = ValidatorFactory::createIsSetValidator();
+		$validators[] = ValidatorFactory::createStringValidator();
+		$validators[] = ValidatorFactory::createExactLengthValidator(10);
+		$validators[] = ValidatorFactory::createPatternValidator(
+			'^[]$');
 		// $validators[] = ValidatorFactory::createMaxLengthValidator(
 		// 	70, 'Surname must be equal or shorter than 70 characters long.');
 		// $validators[] = ValidatorFactory::createPatternValidator(

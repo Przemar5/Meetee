@@ -10,6 +10,7 @@ use Meetee\Libs\Security\Validators\MinValidator;
 use Meetee\Libs\Security\Validators\MaxValidator;
 use Meetee\Libs\Security\Validators\MinLengthValidator;
 use Meetee\Libs\Security\Validators\MaxLengthValidator;
+use Meetee\Libs\Security\Validators\ExactLengthValidator;
 use Meetee\Libs\Security\Validators\PatternValidator;
 use Meetee\Libs\Security\Validators\NotExistValidator;
 use Meetee\Libs\Security\Validators\EmailValidator;
@@ -119,6 +120,18 @@ class ValidatorFactory
 		$validator = new MaxLengthValidator();
 		$validator->errorMsg = $errorMsg;
 		$validator->setMaximum($max);
+
+		return $validator;
+	}
+
+	public static function createExactLengthValidator(
+		int $expected,
+		?string $errorMsg = ''
+	): MaxLengthValidator
+	{
+		$validator = new ExactLengthValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setExpected($expected);
 
 		return $validator;
 	}
