@@ -5,22 +5,23 @@ namespace Meetee\App\Controllers\Auth;
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Security\Validators\Compound\Forms\RegistrationFormValidator;
+use Meetee\Libs\Security\AuthFacade;
 
-use Meetee\Libs\Security\Validators\EmailValidator;
-use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
+// use Meetee\Libs\Security\Validators\Compound\Users\NewUserEmailValidator;
+// use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
 // use Meetee\Libs\Http\Routing\RoutingFacade;
 
 class RegisterController extends ControllerTemplate
 {
 	public function page(): void
 	{
-		$validator = new EmailValidator();
+		$token = AuthFacade::generateCsrfToken();
 
-		echo $validator->run('login');
-		// echo $validator->errorMsg ?? null;
-		die;
+		var_dump($token);die;
 
-		$this->render('auth/register');
+		$this->render('auth/register', [
+			// 'csrf_token' => Token::generate('csrf_token'),
+		]);
 	}
 
 	public function process(): void

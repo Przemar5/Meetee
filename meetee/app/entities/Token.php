@@ -4,28 +4,70 @@ namespace Meetee\App\Entities;
 
 use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\User;
+use Meetee\Libs\Utils\RandomStringGenerator;
 
 class Token extends Entity
 {
-	private string $table;
-	private ?int $id;
-	private string $name;
-	private string $value;
-	private User $user;
+	protected string $table;
+	protected ?int $id;
+	protected string $name;
+	protected string $value;
+	protected int $userId;
 
-	public function setId(int $id): void;
+	public function __construct()
+	{
+		parent::__construct('tokens');
+	}
 
-	public function setName(string $name): void;
+	public static function generate(string $name): self
+	{
+		$user = AuthFacade::getUser();
+		$token = new static();
+		$token->setName($name);
+		$token->setValue(RandomStringGenerator::generateHex(64));
+		$token->setUserId();
 
-	public function setValue(string $value): void;
+		return $token;
+	}
 
-	public function setUser(User $user): void;
+	public function setId(int $id): void
+	{
+		if (!isset($this->id))
+			$this->id = $id;
+	}
 
-	public function getId(): ?int;
+	public function setName(string $name): void
+	{
+		$this->name = $name;
+	}
 
-	public function getName(): string;
+	public function setValue(string $value): void
+	{
+		$this->value = $value;
+	}
 
-	public function getValue(): string;
+	public function setUserId(int $id): void
+	{
+		$this->userId = $id;
+	}
 
-	public function getUser(): User;
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
+
+	public function getName(): string
+	{
+		return $this->name;
+	}
+
+	public function getValue(): string
+	{
+		return $this->value;
+	}
+
+	public function getUserId(): int
+	{
+		return $this->userId;
+	}
 }

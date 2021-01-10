@@ -2,14 +2,14 @@
 
 namespace Meetee\App\Entities;
 
-use Meetee\Libs\Database\Tables\Table;
+use Meetee\Libs\Database\Tables\TableTemplate;
 
 abstract class Entity
 {
 	protected array $tableColumns = [];
-	protected Table $table;
+	protected TableTemplate $table;
 
-	public function __construct(Table $table)
+	public function __construct(TableTemplate $table)
 	{
 		$this->table = $table;
 	}
