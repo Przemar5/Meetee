@@ -9,7 +9,7 @@ use Meetee\Libs\Utils\RandomStringGenerator;
 
 class Token extends Entity
 {
-	protected ?int $id;
+	protected ?int $id = null;
 	protected string $name;
 	protected string $value;
 	protected int $userId;
@@ -31,9 +31,9 @@ class Token extends Entity
 		return $token;
 	}
 
-	public function isValid(): bool
+	public function delete(): void
 	{
-		return $this->table->exists();
+		$this->table->delete($this);
 	}
 
 	public function setId(int $id): void
@@ -57,9 +57,19 @@ class Token extends Entity
 		$this->userId = $id;
 	}
 
-	public function setExpires(\DateTime $expires): void
+	public function setExpiry($expires): void
 	{
-		$this->expires = $expires;
+		if (is_string($expires)) {
+			$this->expires = new \DateTime($expires);
+		}
+		elseif ($expires instanceof \DateTime) {
+			$this->expires = $expires;
+		}
+		else {
+			throw new \Exception(sprintf(
+				"Expiry date must be a string or a DateTime object, '%s' given.", 
+				gettype($expires)));
+		}
 	}
 
 	public function getId(): ?int
@@ -82,8 +92,13 @@ class Token extends Entity
 		return $this->userId;
 	}
 
-	public function getExpires(): \DateTime
+	public function getExpiry(): \DateTime
 	{
 		return $this->expires;
+	}
+
+	public function getExpiryString(): string
+	{
+		return $this->expires->format('Y-m-d H:i:s');
 	}
 }

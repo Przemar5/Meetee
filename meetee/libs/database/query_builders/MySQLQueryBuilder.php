@@ -66,12 +66,13 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 			return;
 
 		$conditions = [];
-		$this->additionalBindings = [];
-		
+
 		foreach ($this->conditions as $key => $value) {
 			$conditions[] = sprintf('%s = :%s', $key, $key);
 			$this->additionalBindings[":$key"] = $value;
 		}
+
+		// var_dump($this->conditions);
 
 		$conditions = implode(' AND ', $conditions);
 		$this->query .= ' WHERE ' . $conditions;
@@ -169,12 +170,13 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 
 	public function getBindings(): array
 	{
-		$keys = array_keys($this->values ?? []);
+		$allToBind = array_merge($this->values, $this->conditions);
+		$keys = array_keys($allToBind);
 		$keys = array_map(fn($k) => ":$k", $keys);
-		$values = array_values($this->values ?? []);
+		$values = array_values($allToBind);
 		$bindings = array_combine($keys, $values);
 
-		return array_merge($bindings, $this->additionalBindings ?? []);
+		return array_merge($bindings, $this->additionalBindings);
 	}
 
 	private function prepareUpdate(): void

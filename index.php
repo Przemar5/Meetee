@@ -27,8 +27,15 @@ spl_autoload_register(function($namespaceWithClass) {
 		require_once $path;
 });
 
+function dd($data) {
+	echo "<pre>";
+	var_dump($data);
+	die;
+}
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
+
+// echo "<pre>";
 
 try {
 	$user = AuthFacade::getUser();
@@ -39,3 +46,17 @@ try {
 catch (\Exception $e) {
 	die($e);
 }
+
+// $user = new User();
+// $user = User::find(4);
+// $user->setId(4);
+// $user->setLogin('Alan');
+// $user->setEmail('panolo@mail.com');
+// $user->setName('Alan');
+// $user->setSurname('Goody');
+// $user->setBirth(new \DateTime());
+// $user->setPassword('password');
+// $user->addRole(Role::getUserRole());
+// $user->removeRole(Role::getAdminRole());
+// $user->save();
+// dd($user);

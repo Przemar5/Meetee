@@ -8,18 +8,18 @@ abstract class QueryBuilderTemplate
 	protected ?string $table = null;
 	protected ?string $action = null;
 	protected ?array $columns = null;
-	protected ?array $values = null;
+	protected array $values = [];
 	protected ?string $joinTable = null;
 	protected ?string $joinType = null;
 	protected ?array $joinOn = null;
-	protected ?array $conditions = null;
+	protected array $conditions = [];
 	protected ?array $whereNull = null;
 	protected ?array $whereStrings = null;
 	protected ?array $orderBy = null;
 	protected bool $orderDesc = false;
 	protected ?int $limit = null;
 	protected ?int $offset = null;
-	protected ?array $additionalBindings = null;
+	protected array $additionalBindings = [];
 
 	public function reset(): void
 	{
@@ -27,18 +27,18 @@ abstract class QueryBuilderTemplate
 		$this->table = null;
 		$this->action = null;
 		$this->columns = null;
-		$this->values = null;
+		$this->values = [];
 		$this->joinTable = null;
 		$this->joinType = null;
 		$this->joinOn = null;
-		$this->conditions = null;
+		$this->conditions = [];
 		$this->whereNull = null;
 		$this->whereStrings = null;
 		$this->orderBy = null;
 		$this->orderDesc = false;
 		$this->limit = null;
 		$this->offset = null;
-		$this->additionalBindings = null;
+		$this->additionalBindings = [];
 	}
 
 	public function in(string $table): void

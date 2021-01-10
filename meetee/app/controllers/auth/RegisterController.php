@@ -6,6 +6,8 @@ use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Security\Validators\Compound\Forms\RegistrationFormValidator;
 use Meetee\Libs\Security\AuthFacade;
+use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Utils\TokenHandler;
 
 // use Meetee\Libs\Security\Validators\Compound\Users\NewUserEmailValidator;
 // use Meetee\Libs\Security\Validators\Factories\ValidatorFactory;
@@ -15,7 +17,7 @@ class RegisterController extends ControllerTemplate
 {
 	public function page(): void
 	{
-		$token = AuthFacade::generateCsrfToken();
+		$token = TokenFactory::generate('csrf_registration_token');
 
 		$this->render('auth/register', [
 			'token' => $token,
@@ -25,10 +27,18 @@ class RegisterController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			if (!$this->validateData())
-				$this->page();
-			else
-				die('GOOD');
+			$token = TokenFactory::getFromRequest('csrf_registration_token');
+
+			if (TokenHandler::validateAndRemove($token)) {
+				// TokenHandler::getFromRequest();
+				echo 'GREAT!';
+			}
+			$token->delete();
+
+			// if (!$this->validateData())
+			// 	$this->page();
+			// else
+			// 	die('GOOD');
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());

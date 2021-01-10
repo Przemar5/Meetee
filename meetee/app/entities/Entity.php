@@ -6,7 +6,6 @@ use Meetee\Libs\Database\Tables\TableTemplate;
 
 abstract class Entity
 {
-	protected array $tableColumns = [];
 	protected TableTemplate $table;
 
 	public function __construct(TableTemplate $table)

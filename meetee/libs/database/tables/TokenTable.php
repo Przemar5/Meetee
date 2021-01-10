@@ -10,13 +10,13 @@ class TokenTable extends TableTemplate
 {
 	public function __construct()
 	{
-		parent::__construct('users', false);
+		parent::__construct('tokens', false);
 	}
 
-	protected function exists(Token $token): bool
+	public function getValidWithoutId(Token $token): ?Token
 	{
 		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->table);
+		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
 		$this->queryBuilder->where([
 			'name' => $token->getName(),
@@ -28,12 +28,15 @@ class TokenTable extends TableTemplate
 		$this->queryBuilder->orderDesc();
 		$this->queryBuilder->limit(1);
 
-		$token = $this->database->findOne(
+		$data = $this->database->findOne(
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()
 		);
 
-		return !empty($token);
+		if ($data)
+			return $this->fetchEntity($data);
+
+		return null;
 	}
 
 	protected function fetchEntity($data): Token
@@ -43,7 +46,7 @@ class TokenTable extends TableTemplate
 		$token->setName($data['name']);
 		$token->setValue($data['value']);
 		$token->setUserId($data['user_id']);
-		$token->setExpires($data['expires']);
+		$token->setExpiry($data['expires']);
 
 		return $token;
 	}
@@ -55,7 +58,8 @@ class TokenTable extends TableTemplate
 		$data = [];
 		$data['name'] = $token->getName();
 		$data['value'] = $token->getValue();
-		$data['user_id'] = $user->getId() ?? 0;
+		$data['user_id'] = $token->getUserId() ?? 0;
+		$data['expires'] = $token->getExpiryString();
 
 		return $data;
 	}
@@ -63,10 +67,13 @@ class TokenTable extends TableTemplate
 	public function delete(Token $token): void
 	{
 		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->table);
+		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->delete();
 		$this->queryBuilder->where(['id' => $token->getId()]);
 
-		$this->sendQuery();
+		$this->database->sendQuery(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
 	}
 }
