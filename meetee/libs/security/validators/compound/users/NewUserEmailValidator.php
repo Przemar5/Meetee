@@ -11,7 +11,7 @@ class NewUserEmailValidator extends CompoundValidator
 	{
 		$validators[] = ValidatorFactory::createNotEmptyValidator(
 			'Email is required.');
-		$validators[] = ValidatorFactory::createStringValidator('');
+		$validators[] = ValidatorFactory::createStringValidator();
 		$validators[] = ValidatorFactory::createMinLengthValidator(
 			8, 'Email must be 8 characters minimum.');
 		$validators[] = ValidatorFactory::createMaxLengthValidator(

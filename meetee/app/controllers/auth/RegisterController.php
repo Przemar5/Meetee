@@ -16,9 +16,6 @@ class RegisterController extends ControllerTemplate
 {
 	public function page(): void
 	{
-		$validator = new UserPasswordValidator();
-		$validator->run('password');
-
 		$token = TokenFactory::generate('csrf_registration_token');
 
 		$this->render('auth/register', [

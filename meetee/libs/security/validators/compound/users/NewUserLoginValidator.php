@@ -11,7 +11,7 @@ class NewUserLoginValidator extends CompoundValidator
 	{
 		$validators[] = ValidatorFactory::createNotEmptyValidator(
 			'Login is required.');
-		$validators[] = ValidatorFactory::createStringValidator('');
+		$validators[] = ValidatorFactory::createStringValidator();
 		$validators[] = ValidatorFactory::createMinLengthValidator(
 			3, 'Login must be 3 characters minimum.');
 		$validators[] = ValidatorFactory::createMaxLengthValidator(

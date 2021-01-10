@@ -34,6 +34,11 @@
 		<input type="password" name="password">
 	</label>
 
+	<label>
+		Retype password
+		<input type="password" name="repeat_password">
+	</label>
+
 	<button type="submit">Register</button>
 </form>
 <?php $this->endSection(); ?>

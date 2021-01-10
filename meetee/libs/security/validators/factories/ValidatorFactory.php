@@ -2,6 +2,7 @@
 
 namespace Meetee\Libs\Security\Validators\Factories;
 
+use Meetee\Libs\Security\Validators\IsSetValidator;
 use Meetee\Libs\Security\Validators\NotEmptyValidator;
 use Meetee\Libs\Security\Validators\TypeValidator;
 use Meetee\Libs\Security\Validators\NotTypeValidator;
@@ -12,9 +13,20 @@ use Meetee\Libs\Security\Validators\MaxLengthValidator;
 use Meetee\Libs\Security\Validators\PatternValidator;
 use Meetee\Libs\Security\Validators\NotExistValidator;
 use Meetee\Libs\Security\Validators\EmailValidator;
+use Meetee\Libs\Security\Validators\BothMatchValidator;
 
 class ValidatorFactory
 {
+	public static function createIsSetValidator(
+		?string $errorMsg = ''
+	): IsSetValidator
+	{
+		$validator = new IsSetValidator();
+		$validator->errorMsg = $errorMsg;
+
+		return $validator;
+	}
+
 	public static function createNotEmptyValidator(
 		?string $errorMsg = ''
 	): NotEmptyValidator
@@ -143,6 +155,18 @@ class ValidatorFactory
 	{
 		$validator = new EmailValidator();
 		$validator->errorMsg = $errorMsg;
+
+		return $validator;
+	}
+
+	public static function createBothMatchValidator(
+		$expected,
+		?string $errorMsg = ''
+	): EmailValidator
+	{
+		$validator = new BothMatchValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setExpected($expected);
 
 		return $validator;
 	}
