@@ -27,8 +27,15 @@ class AuthFacade
 		$token->setName('csrf_token');
 		$token->setValue(RandomStringGenerator::generate(64));
 		$token->setUserId($user->getId() ?? 0);
-		$token->setExpires(new \DataTime('+2 hour'));
+		$token->setExpires(new \DateTime('+2 hour'));
+		$token->save();
 
 		return $token;
+	}
+
+	public static function checkCsrfToken(Token $token): bool
+	{
+		Token::generateFromRequest();
+		return $token->isValid($token);
 	}
 }

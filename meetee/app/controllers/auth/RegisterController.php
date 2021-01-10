@@ -17,10 +17,8 @@ class RegisterController extends ControllerTemplate
 	{
 		$token = AuthFacade::generateCsrfToken();
 
-		var_dump($token);die;
-
 		$this->render('auth/register', [
-			// 'csrf_token' => Token::generate('csrf_token'),
+			'token' => $token,
 		]);
 	}
 
@@ -42,8 +40,6 @@ class RegisterController extends ControllerTemplate
 		$data = $this->getRequestData();
 		$validator = new RegistrationFormValidator();
 		$validator->run($data);
-
-		var_dump($validator->getErrors());
 	}
 
 	private function getRequestData()

@@ -4,19 +4,20 @@ namespace Meetee\App\Entities;
 
 use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\User;
+use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Utils\RandomStringGenerator;
 
 class Token extends Entity
 {
-	protected string $table;
 	protected ?int $id;
 	protected string $name;
 	protected string $value;
 	protected int $userId;
+	protected \DateTime $expires;
 
 	public function __construct()
 	{
-		parent::__construct('tokens');
+		parent::__construct(new TokenTable());
 	}
 
 	public static function generate(string $name): self
@@ -28,6 +29,11 @@ class Token extends Entity
 		$token->setUserId();
 
 		return $token;
+	}
+
+	public function isValid(): bool
+	{
+		return $this->table->exists();
 	}
 
 	public function setId(int $id): void
@@ -51,6 +57,11 @@ class Token extends Entity
 		$this->userId = $id;
 	}
 
+	public function setExpires(\DateTime $expires): void
+	{
+		$this->expires = $expires;
+	}
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -69,5 +80,10 @@ class Token extends Entity
 	public function getUserId(): int
 	{
 		return $this->userId;
+	}
+
+	public function getExpires(): \DateTime
+	{
+		return $this->expires;
 	}
 }

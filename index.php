@@ -30,7 +30,12 @@ spl_autoload_register(function($namespaceWithClass) {
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
-$user = AuthFacade::getUser();
+try {
+	$user = AuthFacade::getUser();
 
-$router = RouterFactory::createComplete();
-$router->route();
+	$router = RouterFactory::createComplete();
+	$router->route();
+}
+catch (\Exception $e) {
+	die($e);
+}

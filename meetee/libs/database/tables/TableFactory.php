@@ -5,6 +5,7 @@ namespace Meetee\Libs\Database\Tables;
 use Meetee\Libs\Database\Tables\TableTemplate;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\RoleTable;
+use Meetee\Libs\Database\Tables\TokenTable;
 
 class TableFactory
 {

@@ -5,7 +5,6 @@ namespace Meetee\Libs\Database\Tables;
 use Meetee\Libs\Database\Tables\TableTemplate;
 use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\Token;
-use Meetee\Libs\Database\Tables\Pivots\UserRoleTable;
 
 class TokenTable extends TableTemplate
 {
@@ -14,7 +13,30 @@ class TokenTable extends TableTemplate
 		parent::__construct('users', false);
 	}
 
-	private function fetchEntity($data): Token
+	protected function exists(Token $token): bool
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->table);
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->where([
+			'name' => $token->getName(),
+			'value' => $token->getValue(),
+			'user_id' => $token->getUserId(),
+		]);
+		$this->queryBuilder->whereStrings(['expires >= NOW()']);
+		$this->queryBuilder->orderBy(['id']);
+		$this->queryBuilder->orderDesc();
+		$this->queryBuilder->limit(1);
+
+		$token = $this->database->findOne(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+
+		return !empty($token);
+	}
+
+	protected function fetchEntity($data): Token
 	{
 		$token = new Token();
 		$token->setId($data['id']);
@@ -28,6 +50,8 @@ class TokenTable extends TableTemplate
 
 	protected function getEntityData(Entity $token): array
 	{
+		$this->entityIsOfClassOrThrowException($token, Token::class);
+
 		$data = [];
 		$data['name'] = $token->getName();
 		$data['value'] = $token->getValue();

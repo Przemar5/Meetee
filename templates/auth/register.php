@@ -2,6 +2,8 @@
 <form method="POST">
 	<h2>Registration</h2>
 
+	<input type="hidden" name="csrf_token" value="<?= $token->getValue(); ?>">
+
 	<label>
 		Login
 		<input type="text" name="login">

@@ -54,6 +54,8 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 	{
 		$this->appendWherePartIfExists();
 		$this->appendWhereNullPartIfExists();
+		$this->appendWhereStringsPartIfExists();
+		$this->appendOrderByPartIfExists();
 		$this->appendLimitPartIfExists();
 		$this->appendOffsetPartIfExists();
 	}
@@ -81,13 +83,37 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 			return;
 
 		if (!empty($this->conditions))
-			$this->query .= ' AND';
+			$this->query .= ' AND ';
 
 		$mapFunc = fn($c) => sprintf('%s IS NULL', $c);
 		$conditions = array_map($mapFunc, $this->whereNull);
 		$conditions = implode(' AND ', $conditions);
 
-		$this->query .= ' ' . $conditions;
+		$this->query .= $conditions;
+	}
+
+	private function appendWhereStringsPartIfExists(): void
+	{
+		if (is_null($this->whereStrings))
+			return;
+
+		if (!empty($this->conditions) || !empty($this->whereNull))
+			$this->query .= ' AND ';
+
+		$conditions = implode(' AND ', $this->whereStrings);
+
+		$this->query .= $conditions;
+	}
+
+	private function appendOrderByPartIfExists(): void
+	{
+		if (is_null($this->orderBy))
+			return;
+
+		$orderBy = implode(', ', $this->orderBy);
+		$direction = ($this->orderDesc) ? 'DESC' : 'ASC';
+
+		$this->query .= sprintf(' ORDER BY %s %s', $orderBy, $direction);
 	}
 
 	private function appendLimitPartIfExists(): void

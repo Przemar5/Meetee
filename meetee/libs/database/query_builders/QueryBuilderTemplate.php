@@ -14,6 +14,9 @@ abstract class QueryBuilderTemplate
 	protected ?array $joinOn = null;
 	protected ?array $conditions = null;
 	protected ?array $whereNull = null;
+	protected ?array $whereStrings = null;
+	protected ?array $orderBy = null;
+	protected bool $orderDesc = false;
 	protected ?int $limit = null;
 	protected ?int $offset = null;
 	protected ?array $additionalBindings = null;
@@ -30,6 +33,9 @@ abstract class QueryBuilderTemplate
 		$this->joinOn = null;
 		$this->conditions = null;
 		$this->whereNull = null;
+		$this->whereStrings = null;
+		$this->orderBy = null;
+		$this->orderDesc = false;
 		$this->limit = null;
 		$this->offset = null;
 		$this->additionalBindings = null;
@@ -88,6 +94,21 @@ abstract class QueryBuilderTemplate
 	public function whereNull(array $whereNull): void
 	{
 		$this->whereNull = $whereNull;
+	}
+
+	public function whereStrings(array $whereStrings): void
+	{
+		$this->whereStrings = $whereStrings;
+	}
+
+	public function orderBy(array $columns): void
+	{
+		$this->orderBy = $columns;
+	}
+
+	public function orderDesc(): void
+	{
+		$this->orderDesc = true;
 	}
 
 	public function limit(int $limit): void

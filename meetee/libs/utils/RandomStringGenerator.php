@@ -5,17 +5,17 @@ namespace Meetee\Libs\Utils;
 class RandomStringGenerator
 {
 	public static function generate(
-		int $length = 32, 
-		string $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+		?int $length = 32, 
+		?string $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 	): string
 	{
 		if ($length < 0)
 			throw new \Exception('Length must be positive.');
 
 		$pieces = [];
-		$max = mb_strlen($keyspace, '8bit') - 1;
+		$max = mb_strlen($chars, '8bit') - 1;
 		for ($i = 0; $i < $length; ++$i)
-			$pieces[] = $keyspace[random_int(0, $max)];
+			$pieces[] = $chars[random_int(0, $max)];
 		
 		return implode('', $pieces);
 	}
