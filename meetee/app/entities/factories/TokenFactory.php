@@ -8,14 +8,17 @@ use Meetee\Libs\Utils\RandomStringGenerator;
 
 class TokenFactory
 {
-	public static function generate(string $name): Token
+	public static function generate(
+		string $name, 
+		?string $delay = '+2 hours'
+	): Token
 	{
 		$user = AuthFacade::getUser();
 		$token = new Token();
 		$token->setName($name);
 		$token->setValue(RandomStringGenerator::generate(64));
 		$token->setUserId($user->getId() ?? 0);
-		$token->setExpiry(new \DateTime('+2 hour'));
+		$token->setExpiry(new \DateTime($delay));
 		$token->save();
 
 		return $token;

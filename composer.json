@@ -6,7 +6,9 @@
             "email": "przemekkrogulski94@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "phpmailer/phpmailer": "^6.2"
+    },
     "autoload": {
     	"psr-4": {
     		"Meetee\\": "meetee"

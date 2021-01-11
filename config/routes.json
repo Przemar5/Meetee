@@ -33,5 +33,19 @@
 		"name": "login_process",
 		"class": "Auth\\LoginController.process",
 		"access": ["GUEST"]
+	},
+	{
+		"pattern": "/forgot-password",
+		"method": "GET",
+		"name": "forgot_password",
+		"class": "Auth\\ForgotPasswordController.page",
+		"access": ["GUEST"]
+	},
+	{
+		"pattern": "/forgot-password",
+		"method": "POST",
+		"name": "forgot_password_process",
+		"class": "Auth\\ForgotPasswordController.process",
+		"access": ["GUEST"]
 	}
 ]

@@ -5,15 +5,16 @@ namespace Meetee\App\Controllers\Auth;
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\Utils\TokenHandler;
-use Meetee\App\Forms\LoginForm;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
-use Meetee\Libs\Security\Hash;
-use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Http\Routing\RoutingFacade;
+use Meetee\Libs\Security\AuthFacade;
+use Meetee\Libs\Security\Validators\Compound\Users\UserEmailValidator;
+use Meetee\App\Emails\Controllers\EmailController;
+use Meetee\App\Emails\EmailFacade;
 
-class LoginController extends ControllerTemplate
+class ForgotPasswordController extends ControllerTemplate
 {
 	private ?User $user = null;
 
@@ -23,10 +24,13 @@ class LoginController extends ControllerTemplate
 			$router = RouterFactory::createComplete();
 			$router->redirectTo('home');
 		}
-		
-		$token = TokenFactory::generate('csrf_login_token');
 
-		$this->render('auth/login', [
+		if (isset($_POST['email']) && is_string($_POST['email']))
+			$_POST['email'] = trim($_POST['email']);
+		
+		$token = TokenFactory::generate('reset_password_token');
+
+		$this->render('auth/forgot_password', [
 			'token' => $token,
 			'errors' => $errors,
 		]);
@@ -35,10 +39,9 @@ class LoginController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			$this->trimValues();
 			$this->returnToPageIfTokenInvalid();
-			$this->returnToPageWithErrorsIfFormDataInvalid();
-			$this->loginUser();
+			$this->returnToPageWithErrorsIfEmailInvalid();
+			$this->sendResetPasswordEmail();
 
 			$router = RouterFactory::createComplete();
 			$router->redirectTo('login');
@@ -50,43 +53,41 @@ class LoginController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(): void
 	{
-		if (!TokenHandler::validate('csrf_login_token')) {
+		if (!TokenHandler::validate('reset_password_token')) {
 			$this->page();
 			die;
 		}
 	}
 
-	private function returnToPageWithErrorsIfFormDataInvalid(): void
+	private function returnToPageWithErrorsIfEmailInvalid(): void
 	{
-		$form = new LoginForm();
+		if (!is_string($_POST['email'])) {
+			$this->page();
+			die;
+		}
 
-		if (!$form->validate())
+		$email = $_POST['email'] = trim($_POST['email']);
+		$validator = new UserEmailValidator();
+		
+		if (!$validator->run($email))
 			$this->returnPageWithError();
 
 		$userTable = new UserTable();
-		
-		if (!$this->user = $userTable->findOneWhere(['email' => $_POST['email']]))
-			$this->returnPageWithError();
+		$this->user = $userTable->findOneWhere(['email' => $email]);
 
-		if (!Hash::verify($_POST['password'], $this->user->getPassword()))
+		if (!$this->user)
 			$this->returnPageWithError();
 	}
 
 	private function returnPageWithError(): void
 	{
-		$this->page(['general' => 'Invalid credentials. Please try again.']);
+		$this->page(['general' => 
+			'Given email does not exist in database.']);
 		die;
 	}
 
-	private function trimValues(): void
+	public function sendResetPasswordEmail(): void
 	{
-		foreach ($_POST as $key => $value)
-			if (is_string($value))
-				$_POST[$key] = trim($value);
-	}
-
-	public function loginUser(): void
-	{
-		AuthFacade::login($this->user);
+		EmailFacade::sendResetPasswordEmail($this->user);
 	}
 }

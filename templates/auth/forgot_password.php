@@ -9,23 +9,13 @@
 		<input type="text" name="email" value="<?= $_POST['email'] ?? ''; ?>">
 	</label>
 
-	<label>
-		Password
-		<input type="password" name="password">
-	</label>
-
 	<?php $this->renderError('general'); ?>
 
-	<button type="submit">Login</button>
+	<button type="submit">Send Recovery Mail</button>
 
 	<p>
 		Don't have an account?
 		<a href="<?php $this->renderRouteUri('register'); ?>">Register</a>!
-	</p>
-
-	<p>
-		Forgot Your password?
-		<a href="<?php $this->renderRouteUri('forgot_password'); ?>">Click here</a>!
 	</p>
 </form>
 <?php $this->endSection(); ?>

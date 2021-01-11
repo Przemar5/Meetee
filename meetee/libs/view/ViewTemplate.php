@@ -12,6 +12,13 @@ abstract class ViewTemplate
 
 	abstract public function render(string $path, ?array $args = []): void;
 
+	public function getRendered(string $path, ?array $args = []): string
+	{
+		ob_start();
+		$this->render($path, $args);
+		return ob_get_clean();
+	}
+
 	protected function startSection(string $name): void
 	{
 		$this->currentSection = $name;
