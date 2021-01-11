@@ -24,6 +24,7 @@ class UserTable extends TableTemplate
 		$user->setSurname($data['surname']);
 		$user->setBirth(new \DateTime($data['birth']));
 		$user->setPassword($data['password']);
+		$user->setVerified($data['verified']);
 		$user->setCreatedAt($data['created_at']);
 		$user->setUpdatedAt($data['updated_at']);
 		$user->setDeleted($data['deleted']);
@@ -50,6 +51,7 @@ class UserTable extends TableTemplate
 		$data['email'] = $user->getEmail();
 		$data['birth'] = $user->getBirth()->format('Y-m-d H:i:s');
 		$data['password'] = $user->getPassword();
+		$data['verified'] = $user->isVerified();
 
 		return $data;
 	}
@@ -58,5 +60,12 @@ class UserTable extends TableTemplate
 	{
 		$userRole = new UserRoleTable();
 		$userRole->setRolesForUser($user);
+	}
+
+	public function findOneVerifiedWhere(array $conditions): array
+	{
+		$conditions['verified'] = 'TRUE';
+
+		return $this->findOneWhere($conditions);
 	}
 }

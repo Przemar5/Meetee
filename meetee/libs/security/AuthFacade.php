@@ -25,7 +25,7 @@ class AuthFacade
 	{
 		$user = self::getUser();
 
-		return $user->getId() ?? 0;
+		return $user->getId();
 	} 
 
 	public static function checkToken(Token $token): bool

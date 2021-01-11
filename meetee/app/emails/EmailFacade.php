@@ -12,8 +12,8 @@ class EmailFacade
 {
 	public static function sendResetPasswordEmail(User $user): void
 	{
-		$token = TokenFactory::generate('reset_password_email_token');
-		$route = RoutingFacade::getRouteUriByName('forgot_password_process');
+		$token = TokenFactory::generateResetPasswordEmailToken($user);
+		$route = RoutingFacade::getLinkTo('forgot_password_process');
 		$email = ViewFactory::createHtmlEmailView();
 		$template = $email->getRendered('emails/reset_password_email', [
 			'token' => $token,
@@ -23,6 +23,25 @@ class EmailFacade
 		$data = [
 			'receivers' => [$user],
 			'subject' => 'Forgotten password',
+			'template' => $template,
+		];
+		$controller = new EmailController();
+		$controller->send($data);
+	}
+
+	public static function sendRegistrationConfirmEmail(User $user): void
+	{
+		$token = TokenFactory::generate('registration_confirm_email_token', $user);
+		$route = RoutingFacade::getLinkTo('registration_confirm_process');
+		$email = ViewFactory::createHtmlEmailView();
+		$template = $email->getRendered('emails/registration_confirm_email', [
+			'token' => $token,
+			'receiver' => $user,
+			'route' => $route,
+		]);
+		$data = [
+			'receivers' => [$user],
+			'subject' => 'Registration confirmation',
 			'template' => $template,
 		];
 		$controller = new EmailController();

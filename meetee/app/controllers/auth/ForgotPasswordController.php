@@ -28,7 +28,7 @@ class ForgotPasswordController extends ControllerTemplate
 		if (isset($_POST['email']) && is_string($_POST['email']))
 			$_POST['email'] = trim($_POST['email']);
 		
-		$token = TokenFactory::generate('reset_password_token');
+		$token = TokenFactory::generate('forgot_password_token');
 
 		$this->render('auth/forgot_password', [
 			'token' => $token,
@@ -39,9 +39,9 @@ class ForgotPasswordController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			$this->returnToPageIfTokenInvalid();
+			$this->returnToPageIfTokenInvalid('forgot_password_token');
 			$this->returnToPageWithErrorsIfEmailInvalid();
-			$this->sendResetPasswordEmail();
+			EmailFacade::sendResetPasswordEmail($this->user);
 
 			$router = RouterFactory::createComplete();
 			$router->redirectTo('login');
@@ -51,9 +51,12 @@ class ForgotPasswordController extends ControllerTemplate
 		}
 	}
 
-	private function returnToPageIfTokenInvalid(): void
+	private function returnToPageIfTokenInvalid(
+		string $name, 
+		?User $user = null
+	): void
 	{
-		if (!TokenHandler::validate('reset_password_token')) {
+		if (!TokenHandler::validate($name, $user)) {
 			$this->page();
 			die;
 		}
@@ -81,13 +84,20 @@ class ForgotPasswordController extends ControllerTemplate
 
 	private function returnPageWithError(): void
 	{
-		$this->page(['general' => 
+		$this->page(['general' =>  
 			'Given email does not exist in database.']);
 		die;
 	}
 
-	public function sendResetPasswordEmail(): void
+	public function verify(): void
 	{
-		EmailFacade::sendResetPasswordEmail($this->user);
+		try {
+			$this->returnToPageIfTokenInvalid('forgot_password_email_token');
+			// $token = TokenFactory::getFromRequestForUser(
+				// 'forgot_password_email_token', $this->user);
+		}
+		catch (\Exception $e) {
+			die($e->getMessage());
+		}
 	}
 }

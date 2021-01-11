@@ -9,6 +9,7 @@ use Meetee\App\Forms\RegistrationForm;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\Libs\Security\Hash;
+use Meetee\App\Emails\EmailFacade;
 
 class RegistrationController extends ControllerTemplate
 {
@@ -26,9 +27,10 @@ class RegistrationController extends ControllerTemplate
 	{
 		try {
 			$this->trimValues();
-			$this->returnToPageIfTokenInvalid();
+			$this->returnToPageIfTokenInvalid('csrf_registration_token');
 			$this->returnToPageWithErrorsIfFormDataInvalid();
-			$this->registerUser();
+			$user = $this->registerAndGetUser();
+			EmailFacade::sendRegistrationConfirmEmail($user);
 
 			$router = RouterFactory::createComplete();
 			$router->redirectTo('login');
@@ -38,9 +40,9 @@ class RegistrationController extends ControllerTemplate
 		}
 	}
 
-	private function returnToPageIfTokenInvalid(): void
+	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenHandler::validate('csrf_registration_token')) {
+		if (!TokenHandler::validate($name)) {
 			$this->page();
 			die;
 		}
@@ -63,7 +65,7 @@ class RegistrationController extends ControllerTemplate
 				$_POST[$key] = trim($value);
 	}
 
-	private function registerUser(): void
+	private function registerAndGetUser(): User
 	{
 		$user = new User();
 		$user->setLogin($_POST['login']);
@@ -73,5 +75,23 @@ class RegistrationController extends ControllerTemplate
 		$user->setBirth($_POST['birth']);
 		$user->setPassword(Hash::create($_POST['password']));
 		$user->save();
+
+		return $user;
+	}
+
+	public function confirm(): void
+	{
+		try {
+			$userId = TokenHandler::getTokenUserId();
+			$this->returnToPageIfTokenInvalid('registration_confirm_email_token');
+			$user = User::find($userId);
+			EmailFacade::sendRegistrationConfirmEmail($user);
+
+			$router = RouterFactory::createComplete();
+			$router->redirectTo('login');
+		}
+		catch (\Exception $e) {
+			die($e->getMessage());
+		}
 	}
 }

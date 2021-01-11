@@ -21,6 +21,13 @@
 		"access": ["GUEST"]
 	},
 	{
+		"pattern": "/register/verify",
+		"method": "POST",
+		"name": "register_confirm",
+		"class": "Auth\\RegistrationController.confirm",
+		"access": ["GUEST"]
+	},
+	{
 		"pattern": "/login",
 		"method": "GET",
 		"name": "login",
@@ -46,6 +53,20 @@
 		"method": "POST",
 		"name": "forgot_password_process",
 		"class": "Auth\\ForgotPasswordController.process",
+		"access": ["GUEST"]
+	},
+	{
+		"pattern": "/reset-password/verify",
+		"method": "POST",
+		"name": "forgot_password_verify",
+		"class": "Auth\\ForgotPasswordController.verify",
+		"access": ["GUEST"]
+	},
+	{
+		"pattern": "/reset-password",
+		"method": "GET",
+		"name": "reset_password",
+		"class": "Auth\\ResetPasswordController.page",
 		"access": ["GUEST"]
 	}
 ]

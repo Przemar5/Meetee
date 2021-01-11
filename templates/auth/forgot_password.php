@@ -1,6 +1,6 @@
 <?php $this->startSection('body'); ?>
 <form method="POST">
-	<h2>Login</h2>
+	<h2>Forgotten Password Recovery</h2>
 
 	<input type="hidden" name="<?= $token->getName(); ?>" value="<?= $token->getValue(); ?>">
 

@@ -21,6 +21,7 @@ class User extends Entity
 	protected string $email;
 	protected \DateTime $birth;
 	protected string $password;
+	protected bool $verified = false;
 	protected array $roles = [];
 
 	public function __construct()
@@ -91,6 +92,11 @@ class User extends Entity
 		$this->password = $password;
 	}
 
+	public function setVerified(bool $verified): void
+	{
+		$this->verified = $verified;
+	}
+
 	public function setRoles(array $roles): void
 	{
 		$this->roles = array_unique($roles);
@@ -150,6 +156,11 @@ class User extends Entity
 	public function getPassword(): string
 	{
 		return $this->password;
+	}
+
+	public function isVerified(): bool
+	{
+		return $this->verified;
 	}
 
 	public function getRoles(): array

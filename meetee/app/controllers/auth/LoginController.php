@@ -38,7 +38,7 @@ class LoginController extends ControllerTemplate
 			$this->trimValues();
 			$this->returnToPageIfTokenInvalid();
 			$this->returnToPageWithErrorsIfFormDataInvalid();
-			$this->loginUser();
+			AuthFacade::login($this->user);
 
 			$router = RouterFactory::createComplete();
 			$router->redirectTo('login');
@@ -83,10 +83,5 @@ class LoginController extends ControllerTemplate
 		foreach ($_POST as $key => $value)
 			if (is_string($value))
 				$_POST[$key] = trim($value);
-	}
-
-	public function loginUser(): void
-	{
-		AuthFacade::login($this->user);
 	}
 }

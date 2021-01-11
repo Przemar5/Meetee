@@ -10,25 +10,41 @@ use Meetee\Libs\Security\AuthFacade;
 
 class TokenHandler
 {
-	public static function validate(string $name): bool
+	public function getTokenUserId(): int
 	{
-		if (!self::validateInitiallyFromRequest($name))
+		TokenFactory::getFromRequest()
+	}
+
+	public static function validate(
+		string $name, 
+		?User $user = null, 
+		?string $method = 'POST'
+	): bool
+	{
+		if (!self::validateInitiallyFromRequest($name, $user, $method))
 			return false;
 
-		if (!self::validateWithDatabaseAndDelete($name))
+		if (!self::validateWithDatabaseAndDelete($name, $user))
 			return false;
 
 		return true;
 	}
 
-	private static function validateInitiallyFromRequest(string $name, string $method = 'POST'): bool
+	public static function validateInitiallyFromRequest(
+		string $name, 
+		?User $user = null,
+		?string $method = 'POST' 
+	): bool
 	{
+		if (is_null($user))
+			$user = AuthFacade::getUser();
+
 		$method = self::getGlobalByMethod($method);
 		$validator = new TokenValidator();
 		$values = [
 			'name' => $name,
 			'value' => $method[$name],
-			'user_id' => AuthFacade::getUserId(),
+			'user_id' => $user->getId(),
 		];
 
 		return $validator->run($values);
@@ -43,9 +59,15 @@ class TokenHandler
 		}
 	}
 
-	private static function validateWithDatabaseAndDelete(string $name): bool
+	public static function validateWithDatabaseAndDelete(
+		string $name, 
+		?User $user = null
+	): bool
 	{
-		$token = TokenFactory::getFromRequest($name);
+		if (is_null($user))
+			$user = AuthFacade::getUser();
+
+		$token = TokenFactory::getFromRequest($name, $user);
 
 		if (is_null($token))
 			return false;

@@ -10,5 +10,6 @@ class NullUser extends User
 	{
 		parent::__construct();
 		$this->roles = [Role::getGuestRole()];
+		$this->id = 0;
 	}
 }
