@@ -10,7 +10,7 @@ use Meetee\App\Entities\User;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\Libs\Security\Hash;
 
-class RegisterController extends ControllerTemplate
+class RegistrationController extends ControllerTemplate
 {
 	public function page(?array $errors = []): void
 	{

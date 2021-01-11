@@ -3,20 +3,19 @@
 namespace Meetee\App\Forms;
 
 use Meetee\App\Forms\FormTemplate;
-use Meetee\Libs\Security\Validators\Compound\Forms\RegistrationFormValidator;
+use Meetee\Libs\Security\Validators\Compound\Forms\LoginFormValidator;
 use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
 
-class RegistrationForm extends FormTemplate
+class LoginForm extends FormTemplate
 {
 	public function __construct()
 	{
 		$requestKeys = [
-			'POST' => ['login', 'email', 'name', 'surname', 
-				'birth', 'password', 'repeat_password'],
+			'POST' => ['email', 'password'],
 		];
 
 		parent::__construct(
-			new RegistrationFormValidator(),
+			new LoginFormValidator(),
 			new TokenValidator(),
 			$requestKeys
 		);

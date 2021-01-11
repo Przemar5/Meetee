@@ -10,14 +10,14 @@
 		"pattern": "/register",
 		"method": "GET",
 		"name": "register",
-		"class": "Auth\\RegisterController.page",
+		"class": "Auth\\RegistrationController.page",
 		"access": ["GUEST"]
 	},
 	{
 		"pattern": "/register",
 		"method": "POST",
 		"name": "register_process",
-		"class": "Auth\\RegisterController.process",
+		"class": "Auth\\RegistrationController.process",
 		"access": ["GUEST"]
 	},
 	{
@@ -25,6 +25,13 @@
 		"method": "GET",
 		"name": "login",
 		"class": "Auth\\LoginController.page",
+		"access": ["GUEST"]
+	},
+	{
+		"pattern": "/login",
+		"method": "POST",
+		"name": "login_process",
+		"class": "Auth\\LoginController.process",
 		"access": ["GUEST"]
 	}
 ]

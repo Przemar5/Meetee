@@ -9,7 +9,6 @@ use Meetee\Libs\Security\Validators\Compound\Users\UserNameValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserSurnameValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserBirthValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserPasswordValidator;
-use Meetee\Libs\Security\Validators\Compound\Users\UserRePasswordValidator;
 
 class RegistrationFormValidator extends FormValidator
 {

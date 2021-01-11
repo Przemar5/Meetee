@@ -28,21 +28,25 @@ class AuthFacade
 		return $user->getId() ?? 0;
 	} 
 
-	// public static function generateCsrfToken(): Token
-	// {
-	// 	$user = self::getUser();
-	// 	$token = new Token();
-	// 	$token->setName('csrf_token');
-	// 	$token->setValue(RandomStringGenerator::generate(64));
-	// 	$token->setUserId($user->getId() ?? 0);
-	// 	$token->setExpires(new \DateTime('+2 hour'));
-	// 	$token->save();
-
-	// 	return $token;
-	// }
-
 	public static function checkToken(Token $token): bool
 	{
 		return $token->isValid();
+	}
+
+	public static function login(User $user): void
+	{
+		Session::set('user_id', $user->getId());
+
+		echo Session::get('user_id');
+	}
+
+	public static function getLoggedUser(): ?User
+	{
+		$id = Session::get('user_id');
+
+		if (!preg_match('/^[1-9][0-9]*$/', $id))
+			return null;
+
+		return User::find($id);
 	}
 }
