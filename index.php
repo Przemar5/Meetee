@@ -33,6 +33,8 @@ function dd($data) {
 	die;
 }
 
+define('BASE_URI', 'http://localhost/files/projects/SocialNetwork/');
+
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
 // echo "<pre>";

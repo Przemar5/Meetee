@@ -8,7 +8,7 @@ class ExactLengthValidator extends Validator
 {
 	private int $expected;
 
-	public function setMinimum(int $expected): void
+	public function setExpected(int $expected): void
 	{
 		$this->expected = $expected;
 	}

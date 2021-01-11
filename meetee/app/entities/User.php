@@ -74,9 +74,16 @@ class User extends Entity
 		$this->surname = $surname;
 	}
 
-	public function setBirth(\DateTime $birth): void
+	public function setBirth($birth): void
 	{
-		$this->birth = $birth;
+		if (is_string($birth))
+			$this->birth = new \DateTime($birth);
+		elseif ($birth instanceof \DateTime)
+			$this->birth = $birth;
+		else
+			throw new \Exception(sprintf(
+				"Birth date must be type string or DateTime object, '%s' given.",
+				gettype($birth)));
 	}
 
 	public function setPassword(string $password): void

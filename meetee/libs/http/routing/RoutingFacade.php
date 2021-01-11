@@ -28,4 +28,9 @@ class RoutingFacade
 
 		return $route->getMethod();
 	}
+
+	public static function redirectTo(string $route): void
+	{
+		
+	}
 }

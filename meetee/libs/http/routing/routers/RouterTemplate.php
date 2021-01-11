@@ -6,6 +6,7 @@ use Meetee\Libs\Http\Routing\Data\Structures\RouteList;
 use Meetee\Libs\Http\Routing\Data\Structures\RouteListFactory;
 use Meetee\Libs\Http\Routing\Data\Route;
 use Meetee\Libs\Http\Routing\Data\RouteFactory;
+use Meetee\Libs\Http\Routing\RoutingFacade;
 use Meetee\App\Controllers\ControllerFactory;
 
 class RouterTemplate
@@ -50,6 +51,27 @@ class RouterTemplate
 		else {
 			$this->renderRedirectionTags($route);
 		}
+		die;
+	}
+
+	public function redirectTo(
+		string $routeName, 
+		?array $args = [], 
+		?array $headers = []
+	): void
+	{
+		$uri = RoutingFacade::getRouteUriByName($routeName, $args);
+		$method = RoutingFacade::getRouteMethodByName($routeName);
+
+		if (strcasecmp($method, 'POST') === 0 || 
+			!strcasecmp($method, $_SERVER['REQUEST_METHOD']) === 0)
+			throw new \Exception(sprintf(
+				"Route has different request method than '%s'.", 
+				$_SERVER['REQUEST_METHOD']));
+
+		$uri = BASE_URI . ltrim($uri, '/');
+
+		$this->redirect($uri, $headers);
 	}
 
 	protected function sendHeaders(array $headers): void

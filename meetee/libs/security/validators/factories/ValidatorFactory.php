@@ -11,6 +11,8 @@ use Meetee\Libs\Security\Validators\MaxValidator;
 use Meetee\Libs\Security\Validators\MinLengthValidator;
 use Meetee\Libs\Security\Validators\MaxLengthValidator;
 use Meetee\Libs\Security\Validators\ExactLengthValidator;
+use Meetee\Libs\Security\Validators\DateBeforeValidator;
+use Meetee\Libs\Security\Validators\DateAfterValidator;
 use Meetee\Libs\Security\Validators\PatternValidator;
 use Meetee\Libs\Security\Validators\NotExistValidator;
 use Meetee\Libs\Security\Validators\EmailValidator;
@@ -127,11 +129,35 @@ class ValidatorFactory
 	public static function createExactLengthValidator(
 		int $expected,
 		?string $errorMsg = ''
-	): MaxLengthValidator
+	): ExactLengthValidator
 	{
 		$validator = new ExactLengthValidator();
 		$validator->errorMsg = $errorMsg;
 		$validator->setExpected($expected);
+
+		return $validator;
+	}
+
+	public static function createDateBeforeValidator(
+		string $upperBound,
+		?string $errorMsg = ''
+	): DateBeforeValidator
+	{
+		$validator = new DateBeforeValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setUpperBound(new \DateTime($upperBound));
+
+		return $validator;
+	}
+
+	public static function createDateAfterValidator(
+		string $lowerBound,
+		?string $errorMsg = ''
+	): DateAfterValidator
+	{
+		$validator = new DateAfterValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setLowerBound(new \DateTime($lowerBound));
 
 		return $validator;
 	}

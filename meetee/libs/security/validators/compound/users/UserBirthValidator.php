@@ -13,14 +13,13 @@ class UserBirthValidator extends CompoundValidator
 		$validators[] = ValidatorFactory::createStringValidator();
 		$validators[] = ValidatorFactory::createExactLengthValidator(10);
 		$validators[] = ValidatorFactory::createPatternValidator(
-			'^[]$');
-		// $validators[] = ValidatorFactory::createMaxLengthValidator(
-		// 	70, 'Surname must be equal or shorter than 70 characters long.');
-		// $validators[] = ValidatorFactory::createPatternValidator(
-		// 	'/^[\w^\_\-\d]+$/u', 
-		// 	'Name may contain only alpha characters.');
-
-		// parent::__construct($validators);
-		parent::__construct([]);
+			'/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|(3[0-1]))$/', 
+			'Invalid format. Please try again.');
+		$validators[] = ValidatorFactory::createDateAfterValidator(
+			'-100 years', 'You are too old.');
+		$validators[] = ValidatorFactory::createDateBeforeValidator(
+			'-5 years', 'You are too young.');
+		
+		parent::__construct($validators);
 	}
 }
