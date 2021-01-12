@@ -32,7 +32,7 @@ class TokenTable extends TableTemplate
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
 		$this->queryBuilder->limit(1);
-
+		
 		$data = $this->database->findOne(
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()
@@ -71,11 +71,12 @@ class TokenTable extends TableTemplate
 
 	public function delete(Token $token): void
 	{
+		// dd('ok');
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->delete();
 		$this->queryBuilder->where(['id' => $token->getId()]);
-
+		// dd($this->queryBuilder->getResult());
 		$this->database->sendQuery(
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()
@@ -85,7 +86,7 @@ class TokenTable extends TableTemplate
 	public function popValidByToken(Token $token): ?Token
 	{
 		$token = $this->getValidByToken($token);
-		
+
 		if (!is_null($token))
 			return null;
 
@@ -98,11 +99,12 @@ class TokenTable extends TableTemplate
 	{
 		$token = $this->getValidWhere($conditions);
 
-		if (!is_null($token))
+		if (is_null($token))
 			return null;
 		
+		$copy = $token;
 		$this->delete($token);
-
-		return $token;
+		
+		return $copy;
 	}
 }

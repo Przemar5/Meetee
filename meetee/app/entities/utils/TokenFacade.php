@@ -12,6 +12,7 @@ class TokenFacade
 	{
 		$token = TokenFactory::getFromRequest($name);
 
+
 		if (!static::validate($token))
 			return null;
 
@@ -22,7 +23,7 @@ class TokenFacade
 		if (!$ignoreUserId)
 			$data['user_id'] = $token->getUserId();
 
-		return $token->pop();
+		// return $token->pop();
 	}
 
 	public static function validate(

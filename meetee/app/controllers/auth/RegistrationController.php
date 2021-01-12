@@ -26,10 +26,11 @@ class RegistrationController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			$this->trimValues();
-			$this->returnToPageIfTokenInvalid('csrf_registration_token');
-			$this->returnToPageWithErrorsIfFormDataInvalid();
-			$user = $this->registerAndGetUser();
+			// $this->trimValues();
+			// $this->returnToPageIfTokenInvalid('csrf_registration_token');
+			// $this->returnToPageWithErrorsIfFormDataInvalid();
+			// $user = $this->registerAndGetUser();
+			$user = $this->registerAndGetMockUser();
 			EmailFacade::sendRegistrationConfirmEmail($user);
 
 			$this->redirect('login');
@@ -84,19 +85,33 @@ class RegistrationController extends ControllerTemplate
 		return $user;
 	}
 
+	private function registerAndGetMockUser(): User
+	{
+		$user = new User();
+		$user->setLogin('test');
+		$user->setEmail('1234567890localhost@gmail.com');
+		$user->setName('test');
+		$user->setSurname('test');
+		$user->setBirth(new \DateTime());
+		$user->setPassword(Hash::create('test'));
+		$user->save();
+
+		return $user;
+	}
+
 	public function verify(): void
 	{
 		try {
 			$token = TokenFactory::popIfRequestValid(
-				'registration_confirm_email_token');
+				'registration_confirm_email_token', true);
 
-			// if (!$token)
-			// 	$this->redirect('registration');
+			if (!$token)
+				$this->redirect('registration');
 
 			$user = User::find($token->getUserId());
 
-			// if (!$user)
-			// 	$this->redirect('registration');
+			if (!$user)
+				$this->redirect('registration');
 
 			$this->verifyUser($user);
 			$this->redirect('login');

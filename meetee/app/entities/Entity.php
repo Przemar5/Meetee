@@ -37,6 +37,7 @@ abstract class Entity
 	public function save(): void
 	{
 		$this->table->save($this);
+		$this->id = $this->table->lastInsertId();
 	}
 
 	// abstract public static function find(int $id): static;

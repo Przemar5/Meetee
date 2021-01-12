@@ -39,11 +39,13 @@ class EmailFacade
 			'receiver' => $user,
 			'route' => $route,
 		]);
+
 		$data = [
 			'receivers' => [$user],
 			'subject' => 'Registration confirmation',
 			'template' => $template,
 		];
+
 		$controller = new EmailController();
 		$controller->send($data);
 	}

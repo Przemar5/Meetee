@@ -29,12 +29,6 @@ class User extends Entity
 		parent::__construct(new UserTable());
 	}
 
-	public function save(): void
-	{
-		$this->updatedAt = new \DateTime();
-		$this->table->save($this);
-	}
-
 	public static function findByLogin(string $login): ?self
 	{
 		$user = new self();

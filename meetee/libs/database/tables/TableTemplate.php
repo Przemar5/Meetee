@@ -151,4 +151,9 @@ abstract class TableTemplate
 			throw new \Exception(sprintf(
 				"Entity must be instance of class '%s'", $class));
 	}
+
+	public function lastInsertId(): int
+	{
+		return $this->database->lastInsertId();
+	}
 }
