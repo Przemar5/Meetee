@@ -20,15 +20,9 @@ class Token extends Entity
 		parent::__construct(new TokenTable());
 	}
 
-	public static function generate(string $name): self
+	public function pop(): ?Token
 	{
-		$user = AuthFacade::getUser();
-		$token = new static();
-		$token->setName($name);
-		$token->setValue(RandomStringGenerator::generateHex(64));
-		$token->setUserId();
-
-		return $token;
+		return $this->table->popValidByToken($this);
 	}
 
 	public function delete(): void

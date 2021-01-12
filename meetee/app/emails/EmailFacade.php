@@ -32,7 +32,7 @@ class EmailFacade
 	public static function sendRegistrationConfirmEmail(User $user): void
 	{
 		$token = TokenFactory::generate('registration_confirm_email_token', $user);
-		$route = RoutingFacade::getLinkTo('registration_confirm_process');
+		$route = RoutingFacade::getLinkTo('registration_verify');
 		$email = ViewFactory::createHtmlEmailView();
 		$template = $email->getRendered('emails/registration_confirm_email', [
 			'token' => $token,

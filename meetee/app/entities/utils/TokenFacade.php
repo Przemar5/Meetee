@@ -1,50 +1,53 @@
 <?php
 
 namespace Meetee\App\Entities\Utils;
+
+use Meetee\App\Entities\Token;
+use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
 use Meetee\App\Entities\Factories\TokenFactory;
-use Meetee\App\Entities\Utils\TokenHandler;
 
-class TokeFacade
+class TokenFacade
 {
-	public static function validateAndGetUser(
-		string $name, 
-		?User $user = null
-	): ?User
-	{
-		if (is_null($user))
-			$user = AuthFacade::getUser();
-
-		$token = TokenFactory::getFromRequest($name, $user);
-
-		if (is_null($token))
-			return null;
-
-		if (!TokenHandler::validateInitiallyFromRequest())
-			return null;
-		
-		$token = Token::findOneWhere([
-			'name' => $name,
-			'value' => $token->getValue(),
-		]);
-
-		if (is_null($token))
-			return null;
-		
-		$token->delete();
-
-		return true;
-	}
-
-	public static function getTokenIfValid(string $name): ?Token
+	public static function getIfRequestValid(string $name, bool $ignoreUserId): ?Token
 	{
 		$token = TokenFactory::getFromRequest($name);
-		$token->completeIfValid();
 
-		if (empty($token->getId()))
+		if (!static::validate($token))
 			return null;
 
-		$token->getName();
+		$data = [];
+		$data['name'] = $token->getName();
+		$data['value'] = $token->getValue();
 
-		$token->
+		if (!$ignoreUserId)
+			$data['user_id'] = $token->getUserId();
+
+		return $token->pop();
+	}
+
+	public static function validate(
+		string $name, 
+		?string $method = 'POST'
+	): bool
+	{
+		$token = TokenFactory::getFromRequest($name);
+		$method = self::getGlobalByMethod($method);
+		$validator = new TokenValidator();
+		$values = [
+			'name' => $token->getName(),
+			'value' => $token->getValue(),
+			'user_id' => $token->getUserId(),
+		];
+
+		return $validator->run($values);
+	}
+
+	private static function getGlobalByMethod(string $method): array
+	{
+		switch ($method) {
+			case 'GET': 	return $_GET;
+			case 'POST': 	return $_POST;
+			default: 		return $_GET;
+		}
 	}
 }

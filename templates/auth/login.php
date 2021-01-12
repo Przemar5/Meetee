@@ -20,7 +20,7 @@
 
 	<p>
 		Don't have an account?
-		<a href="<?php $this->renderRouteUri('register'); ?>">Register</a>!
+		<a href="<?php $this->renderRouteUri('registration'); ?>">Register</a>!
 	</p>
 
 	<p>

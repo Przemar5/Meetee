@@ -3,8 +3,10 @@
 namespace Meetee\App\Entities\Factories;
 
 use Meetee\App\Entities\Token;
+use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Security\AuthFacade;
+use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
 use Meetee\Libs\Utils\RandomStringGenerator;
 
 class TokenFactory
@@ -46,33 +48,32 @@ class TokenFactory
 		}
 	}
 
-	public static function getFromDatabaseByName(
+	public static function popIfRequestValid(
 		string $name, 
-		?User $user = null
+		bool $ignoreUserId = false
 	): ?Token
 	{
 		$token = static::getFromRequest($name);
-		
-		if (is_null($token))
-			return null;
-
-		$token = static::getFromDatabase($token->getName(), $token->getValue());
-		
-		if (is_null($token))
-			return null;
-
-		
-	}
-
-	public static function getFromDatabase(
-		string $name,
-		string $value
-	): ?Token
-	{
-		return Token::findOneWhere([
-			'name' => $name,
-			'value' => $value,
+		$validator = new TokenValidator();
+		$valid = $validator->run([
+			'name' => $token->getName(),
+			'value' => $token->getValue(),
+			'user_id' => $token->getUserId(),
 		]);
+
+		if (!$valid)
+			return null;
+
+		$data = [];
+		$data['name'] = $token->getName();
+		$data['value'] = $token->getValue();
+
+		if (!$ignoreUserId)
+			$data['user_id'] = $token->getUserId();
+
+		$tokenTable = new TokenTable();
+
+		return $tokenTable->popValidWhere($data);
 	}
 
 	public static function generateResetPasswordEmailToken(User $user): ?Token

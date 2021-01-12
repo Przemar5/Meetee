@@ -4,7 +4,7 @@ namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
-use Meetee\App\Entities\Utils\TokenHandler;
+use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Forms\RegistrationForm;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
@@ -32,17 +32,22 @@ class RegistrationController extends ControllerTemplate
 			$user = $this->registerAndGetUser();
 			EmailFacade::sendRegistrationConfirmEmail($user);
 
-			$router = RouterFactory::createComplete();
-			$router->redirectTo('login');
+			$this->redirect('login');
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
+	private function redirect(string $route): void
+	{
+		$router = RouterFactory::createComplete();
+		$router->redirectTo($route);
+	}
+
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenHandler::validate($name)) {
+		if (!TokenFacade::validate($name)) {
 			$this->page();
 			die;
 		}
@@ -79,19 +84,31 @@ class RegistrationController extends ControllerTemplate
 		return $user;
 	}
 
-	public function confirm(): void
+	public function verify(): void
 	{
 		try {
-			$userId = TokenHandler::getTokenUserId();
-			$this->returnToPageIfTokenInvalid('registration_confirm_email_token');
-			$user = User::find($userId);
-			EmailFacade::sendRegistrationConfirmEmail($user);
+			$token = TokenFactory::popIfRequestValid(
+				'registration_confirm_email_token');
 
-			$router = RouterFactory::createComplete();
-			$router->redirectTo('login');
+			// if (!$token)
+			// 	$this->redirect('registration');
+
+			$user = User::find($token->getUserId());
+
+			// if (!$user)
+			// 	$this->redirect('registration');
+
+			$this->verifyUser($user);
+			$this->redirect('login');
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
+	}
+
+	private function verifyUser(User $user): void
+	{
+		$user->setVerified(true);
+		$user->save();
 	}
 }

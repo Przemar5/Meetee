@@ -9,23 +9,23 @@
 	{
 		"pattern": "/register",
 		"method": "GET",
-		"name": "register",
+		"name": "registration",
 		"class": "Auth\\RegistrationController.page",
 		"access": ["GUEST"]
 	},
 	{
 		"pattern": "/register",
 		"method": "POST",
-		"name": "register_process",
+		"name": "registration_process",
 		"class": "Auth\\RegistrationController.process",
 		"access": ["GUEST"]
 	},
 	{
 		"pattern": "/register/verify",
 		"method": "POST",
-		"name": "register_confirm",
-		"class": "Auth\\RegistrationController.confirm",
-		"access": ["GUEST"]
+		"name": "registration_verify",
+		"class": "Auth\\RegistrationController.verify",
+		"access": ["GUEST", "USER"]
 	},
 	{
 		"pattern": "/login",

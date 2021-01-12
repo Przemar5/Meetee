@@ -13,16 +13,21 @@ class TokenTable extends TableTemplate
 		parent::__construct('tokens', false);
 	}
 
-	public function getValidWithoutId(Token $token): ?Token
+	public function getValidByToken(Token $token): ?Token
 	{
-		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->select(['*']);
-		$this->queryBuilder->where([
+		return $this->getValidWhere([
 			'name' => $token->getName(),
 			'value' => $token->getValue(),
 			'user_id' => $token->getUserId(),
 		]);
+	}
+
+	public function getValidWhere(array $conditions): ?Token
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->where($conditions);
 		$this->queryBuilder->whereStrings(['expires >= NOW()']);
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
@@ -75,5 +80,29 @@ class TokenTable extends TableTemplate
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()
 		);
+	}
+
+	public function popValidByToken(Token $token): ?Token
+	{
+		$token = $this->getValidByToken($token);
+		
+		if (!is_null($token))
+			return null;
+
+		$this->delete($token);
+
+		return $token;
+	}
+
+	public function popValidWhere(array $conditions): ?Token
+	{
+		$token = $this->getValidWhere($conditions);
+
+		if (!is_null($token))
+			return null;
+		
+		$this->delete($token);
+
+		return $token;
 	}
 }
