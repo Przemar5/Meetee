@@ -16,6 +16,7 @@ use Meetee\App\Emails\EmailFacade;
 
 class ForgotPasswordController extends ControllerTemplate
 {
+	private static string $tokenName = 'forgot_password_token';
 	private ?User $user = null;
 
 	public function page(?array $errors = []): void
@@ -28,7 +29,7 @@ class ForgotPasswordController extends ControllerTemplate
 		if (isset($_POST['email']) && is_string($_POST['email']))
 			$_POST['email'] = trim($_POST['email']);
 		
-		$token = TokenFactory::generate('forgot_password_token');
+		$token = TokenFactory::generate(self::$tokenName);
 
 		$this->render('auth/forgot_password', [
 			'token' => $token,
@@ -39,7 +40,7 @@ class ForgotPasswordController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			$this->returnToPageIfTokenInvalid('forgot_password_token');
+			$this->returnToPageIfTokenInvalid(self::$tokenName);
 			$this->returnToPageWithErrorsIfEmailInvalid();
 			EmailFacade::sendResetPasswordEmail($this->user);
 

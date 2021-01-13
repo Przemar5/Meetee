@@ -15,6 +15,7 @@ use Meetee\Libs\Http\Routing\RoutingFacade;
 
 class LoginController extends ControllerTemplate
 {
+	private static string $tokenName = 'csrf_login_token';
 	private ?User $user = null;
 
 	public function page(?array $errors = []): void
@@ -24,7 +25,7 @@ class LoginController extends ControllerTemplate
 			$router->redirectTo('home');
 		}
 		
-		$token = TokenFactory::generate('csrf_login_token');
+		$token = TokenFactory::generate(self::$tokenName);
 
 		$this->render('auth/login', [
 			'token' => $token,
@@ -36,7 +37,7 @@ class LoginController extends ControllerTemplate
 	{
 		try {
 			$this->trimValues();
-			$this->returnToPageIfTokenInvalid('csrf_login_token');
+			$this->returnToPageIfTokenInvalid(self::$tokenName);
 			$this->returnToPageWithErrorsIfFormDataInvalid();
 			
 			$this->successfulLoginEvent();

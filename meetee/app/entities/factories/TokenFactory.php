@@ -35,17 +35,18 @@ class TokenFactory
 		?User $user = null
 	): ?Token
 	{
-		if ($_POST[$name]) {
-			if (is_null($user))
-				$user = AuthFacade::getUser();
-			
-			$token = new Token();
-			$token->name = $name;
-			$token->value = $_POST[$name];
-			$token->userId = $user->getId() ?? 0;
+		if (!isset($_POST[$name]))
+			return null;
 
-			return $token;
-		}
+		if (is_null($user))
+			$user = AuthFacade::getUser();
+		
+		$token = new Token();
+		$token->name = $name;
+		$token->value = $_POST[$name];
+		$token->userId = $user->getId() ?? 0;
+
+		return $token;
 	}
 
 	public static function popIfRequestValid(

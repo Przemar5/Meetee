@@ -13533,3 +13533,539 @@ Request:
 	password: Password1!
 	repeat_password: Password1!
 
+DATE:	2021.01.13 02:07:07
+URI:	/register
+Method:	GET
+REMOTE USER:	127.0.0.1
+Request:
+
+DATE:	2021.01.13 02:07:28
+URI:	/register
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:19:01
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:19:01
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: MKQXFvyQTeBR6UTB1PIA6LDEiyGVzhRUmXt4HJD8SPs5cCfGEN2y6lt143VbVop0
+	login: Przdemek
+	email: 12342567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:19:07
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:19:08
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: vMnTS2hxDOkXWW3YxoOaFr8peZko7x5VFnhBBHCEV3hSGH7wm3gr8x5bkEp3TbpN
+	login: Przdemek
+	email: 12342567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:19:12
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:19:12
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: GMFHLnREcHlLSTkD4QSzR12jVnEF2NT1KJuaz0oRswI1zNxinbcXF8FoRHIPRhzI
+	login: Przdemek
+	email: 12342567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:19:39
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:19:39
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: lUl4YW5tXEzB2Ip0f9zb9ixeTQqZg522wyAomAvmYM7QW3hEJK1zKjORUlk6fNka
+	login: Przemekq
+	email: 1234567890localhostq@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:21:53
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:21:53
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: j4L0yOEEhxQEDQiEFyao0sWk6tvyAirNuKzL4QiJiFOFDubSkXoyd1GUF3PXjLSu
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:21:56
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:21:56
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: 9qFNiT11eK7m5amcimoTMgPAsjjqtqslqu1fuvlgI0smE31mja3zCEeFQxWUyioC
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:24:04
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:24:16
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:24:24
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:24:24
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: iExcN2ltNsvxgQVn2yUf9boZrBNsMbh01QPteUXfVD5u8yVzoi2E0gPdmeIkNDlb
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:25:30
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:25:30
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: X45DpVR9eYDo7TEkcBn9My5FoJNiV4jD2hLYu2fHmLg4g6J98dysuWBoiAsvO6Og
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:25:51
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:25:51
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: j2iFdlDqGvjt4BgJYWOWWRXZvFOKJPXz645n3hwWd6chwUP1MfcPDac8YmoAXmhY
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:26:15
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:26:15
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: b96WBnDn8ivffcXRhyUJtNI57vkuBuYzvYC1CURhHPRKvhyJwTLVZGA0gdmwQoD5
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:26:26
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:26:27
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: CT8TAgka8qk2Cj5054SUFi7Mae4lX1pAiMcu0I7C8WfX06HmTN2KKOSBYScLl2dq
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:26:27
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:26:27
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: izAL3eq9OaVYADu3qmPWKnUS3Q3ww5k8lc3e64TkmHLSjWjjsn8Q9mpfv61FKVDw
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:26:50
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:26:50
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: K2MNQCXiELSti6SD5ieqyBLWh7W8Mf4jUHWp50vfDkBRS89p2kFCZBUqgFfTz3sS
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:26:54
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:26:54
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: aM6ASJf7UhKTvVlqlV2ZaVUnggaKFPffybUaSrPsZrMBGKnFiIJRtdHHpM6F5mIx
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:27:02
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:27:02
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: ihfkAXgD3HhGi2mVGBapE6pF4ulscIW3yO18dtIefTM6ILuVnONLRTo4pyd7cJhG
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:27:11
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:27:11
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: wkdlCqY8DzvxRYy2YWbsUMPMNVWvjI7QsrjRz2vHfDO9hisirrjkODSCEHfWvSHb
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:27:34
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:27:34
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: vaJwU29ysyjojZD2v3CC80VNJO4Py46QgOm4kkNdAaKKCgPweh657Tpswuk8uD9M
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:27:42
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:27:42
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: nJFIsMuk1qt1dyNQOdGSoaki6JCbEqZi0R1VxcGQmhKbqwb5zq6zcOqG6hY3Mw3z
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:27:48
+URI:	/test
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:27:48
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: uWKUe2O0atIeNoSCzatBMkBHk7pNjLMWKnxgIGLy1pMYmdYkI9SAtWR1rsrC2sxy
+	login: Przemek
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: XXXX
+	birth: 1990-10-10
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:28:16
+URI:	/register
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 02:28:18
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: hvvQUCA7RY8CdzOqr1CL9O8m0AOkxuqu1nYsdHDXknkwhyLt8iBPOnkpPviWJ8Sb
+	login: 
+	email: 
+	name: 
+	surname: 
+	birth: 
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:28:30
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: hvvQUCA7RY8CdzOqr1CL9O8m0AOkxuqu1nYsdHDXknkwhyLt8iBPOnkpPviWJ8Sb
+	login: 
+	email: 
+	name: 
+	surname: 
+	birth: 
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:28:46
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: hvvQUCA7RY8CdzOqr1CL9O8m0AOkxuqu1nYsdHDXknkwhyLt8iBPOnkpPviWJ8Sb
+	login: 
+	email: 
+	name: 
+	surname: 
+	birth: 
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:29:30
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: hvvQUCA7RY8CdzOqr1CL9O8m0AOkxuqu1nYsdHDXknkwhyLt8iBPOnkpPviWJ8Sb
+	login: 
+	email: 
+	name: 
+	surname: 
+	birth: 
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:29:34
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: hvvQUCA7RY8CdzOqr1CL9O8m0AOkxuqu1nYsdHDXknkwhyLt8iBPOnkpPviWJ8Sb
+	login: 
+	email: 
+	name: 
+	surname: 
+	birth: 
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:30:03
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: hvvQUCA7RY8CdzOqr1CL9O8m0AOkxuqu1nYsdHDXknkwhyLt8iBPOnkpPviWJ8Sb
+	login: 
+	email: 
+	name: 
+	surname: 
+	birth: 
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:30:05
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: sJiiXVKYxz6pzJB9FVuU9Gk2oaA4fyqmO8VwpXJBppfUqPEIlvyNiNRWuwFsfXVD
+	login: 
+	email: 
+	name: 
+	surname: 
+	birth: 
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:30:16
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: N2z0roBOtffeexixBZUbKvHBoftjWt5V8GPrbfjucssX7yMVg0DeK10rdPo2VKPf
+	login: localhost
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: xxxx
+	birth: 2003-08-31
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 02:31:33
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: Q5DbsiGkx1DTL2VDwjYx9DUl7kDDC6tHGVdBImiyr5O39vUZtyzJJwxZ6tdxNTXw
+	login: localhost
+	email: 1234567890localhost@gmail.com
+	name: Przemek
+	surname: xxxx
+	birth: 2003-08-31
+	password: Password1!
+	repeat_password: Password1!
+

@@ -1,5 +1,12 @@
 [
 	{
+		"pattern": "/test",
+		"method": "GET",
+		"name": "test",
+		"class": "TestController.page",
+		"access": ["GUEST"]
+	},
+	{
 		"pattern": "/",
 		"method": "GET",
 		"name": "home",
@@ -31,14 +38,14 @@
 		"pattern": "/register/resend",
 		"method": "GET",
 		"name": "registration_resend_page",
-		"class": "Auth\\RegistrationController.resendEmailPage",
+		"class": "Auth\\ResendRegistrationEmailController.page",
 		"access": ["GUEST", "USER"]
 	},
 	{
 		"pattern": "/register/resend",
 		"method": "POST",
 		"name": "registration_resend_process",
-		"class": "Auth\\RegistrationController.resendEmailProcess",
+		"class": "Auth\\ResendRegistrationEmailController.process",
 		"access": ["GUEST", "USER"]
 	},
 	{

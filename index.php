@@ -71,29 +71,8 @@ catch (\Exception $e) {
 
 // // 	],
 // // ];
-// $name = 'csrf_registration_token';
-// $url = 'http://localhost/files/projects/SocialNetwork/register';
-// $token = TokenFactory::generate($name);
 
-// $ch = curl_init($url);
-// curl_setopt($ch, CURLOPT_POST, 1);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-// 	$name => $token->value,
-// 	'login' => 'Przemek',
-// 	'email' => '1234567890localhost@gmail.com',
-// 	'name' => 'Przemek',
-// 	'surname' => 'XXXX',
-// 	'birth' => '1990-10-10',
-// 	'password' => 'Password1!',
-// 	'repeat_password' => 'Password1!',
-// ]));
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// $response = curl_exec($ch);
-// curl_close($ch);
 
-// $database = \Meetee\Libs\Database\Factories\DatabaseAbstractFactory::createDatabase();
-
-// echo $database->findOne('select count(*) from users');
 
 // echo $response;
 
