@@ -8,7 +8,15 @@ use PHPMailer\PHPMailer\Exception;
 
 class EmailAdapter
 {
-	public array $receivers; 
+	public string $host;
+	public string $username;
+	public string $password;
+	public string $encryption;
+	public string $from;
+	public string $fromName;
+	public string $replyTo;
+	public string $replyName;
+	public array $receivers;
 	public string $subject;
 	public array $headers = [];
 	protected ?string $template = null;
@@ -31,13 +39,13 @@ class EmailAdapter
 			$mail->isSMTP();
 			$mail->SMTPDebug = 1;
 			$mail->SMTPAuth = true;
-			$mail->Host = 'smtp.gmail.com';
+			$mail->Host = $this->host;
 			$mail->Subject = $this->subject;
-			$mail->Username = 'meetyea.app@gmail.com';
-			$mail->Password = '1qaz@WSX#EDC';
-			$mail->SMTPSecure = 'tls';
-			$mail->setFrom('meetyea.app@gmail.com', 'Meetyea');
-			$mail->addReplyTo('meetyea.app@gmail.com', 'Meetyea');
+			$mail->Username = $this->username;
+			$mail->Password = $this->password;
+			$mail->SMTPSecure = $this->encryption;
+			$mail->setFrom($this->from, $this->fromName);
+			$mail->addReplyTo($this->replyTo, $this->replyName);
 	
 			foreach ($this->receivers as $user)
 				$mail->addAddress($user->email, $user->login);

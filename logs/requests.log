@@ -17999,3 +17999,159 @@ Method:	GET
 REMOTE USER:	::1
 Request:
 
+DATE:	2021.01.13 22:03:43
+URI:	/logout
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:03:43
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:03:47
+URI:	/reset-password
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:03:53
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:03:57
+URI:	/forgot-password
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:04:00
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: hFDPAPKQUcpV1k3PM50zHD4jT12PYWAbj8NHGjJIm7OqNlOuKIqSi1jj2aHeGYZB
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:04:18
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: hFDPAPKQUcpV1k3PM50zHD4jT12PYWAbj8NHGjJIm7OqNlOuKIqSi1jj2aHeGYZB
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:04:21
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: b2tI2kgJ18MlFdtFiC3m5BRmQghgGtTsXwTnTHIDdj5YbOcG9lAnm86Cjua0UtTD
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:04:31
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: b2tI2kgJ18MlFdtFiC3m5BRmQghgGtTsXwTnTHIDdj5YbOcG9lAnm86Cjua0UtTD
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:04:35
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: JZc2Xnim0OU8PxY5bIf5P0rGkZFsqafIwk6yClzKe9l4M3O7n4dyFKrLmcQb1jh1
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:04:52
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: JZc2Xnim0OU8PxY5bIf5P0rGkZFsqafIwk6yClzKe9l4M3O7n4dyFKrLmcQb1jh1
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:05:24
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: JZc2Xnim0OU8PxY5bIf5P0rGkZFsqafIwk6yClzKe9l4M3O7n4dyFKrLmcQb1jh1
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:05:25
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: 7G7Yrsuz9lTlWJH0ZLDnW2SJsCDa0VcZO3OzapB2XZCdkFCTYJbIW1dmuP6wFY5h
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:05:59
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: 7G7Yrsuz9lTlWJH0ZLDnW2SJsCDa0VcZO3OzapB2XZCdkFCTYJbIW1dmuP6wFY5h
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:06:02
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: x1bCPx01SVO25qdBoyONHqC2bFDThgHwpqQyG6gNulncvpStWlQ3W7hdWV3fHAkL
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 22:06:21
+URI:	/forgot-password/verify
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_email_token: sRf2znXKNaYMDZ6TRr92wnU6qkFheLjGhSn56Z4puPh9ftKIXBo7AIHTQvXDA6sc
+
+DATE:	2021.01.13 22:06:21
+URI:	/reset-password
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:06:27
+URI:	/reset-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_reset_password_token: dI0rw27VuihPyem79q5yxMyZpNtepeg0EXqgdz8ziUpeCJCaC2utb2DMoG9WnNN1
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 22:06:27
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:06:45
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:09:43
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 22:10:07
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+

@@ -75,7 +75,7 @@ class ResetPasswordController extends ControllerTemplate
 	private function successfulRequestValidationEvent(): void
 	{
 		$this->updateUserPassword();
-		Notification::addSuccess('Your password was update successfully!');
+		Notification::addSuccess('Your password was updated successfully!');
 		$this->redirect('main');
 	}
 
