@@ -46,8 +46,6 @@ Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 // echo "<pre>";
 
 try {
-	$user = AuthFacade::getUser();
-
 	$router = RouterFactory::createComplete();
 	$router->route();
 }

@@ -60,7 +60,6 @@ class TokenFactory
 		$valid = $validator->run([
 			'name' => $token->name,
 			'value' => $token->value,
-			'user_id' => $userId,
 		]);
 
 		if (!$valid)
@@ -92,7 +91,6 @@ class TokenFactory
 		$valid = $validator->run([
 			'name' => $token->name,
 			'value' => $token->value,
-			'user_id' => $token->userId ?? 0,
 		]);
 
 		if (!$valid)

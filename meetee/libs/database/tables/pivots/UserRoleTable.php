@@ -56,10 +56,11 @@ class UserRoleTable extends Pivot
 		$roles = $user->getRoles();
 		$roleIds = array_map(fn($r) => $r->getId(), $roles);
 		$roleIds = array_filter($roleIds, fn($id) => !is_null($id));
-		$userId = $user->getId();
 
-		if (empty($roleIds) || is_null($userId))
+		if (empty($user->getId()))
 			return;
+
+		$userId = $user->getId();
 
 		$this->removeRolesForUser($user);
 		$this->addRolesForUser($user);

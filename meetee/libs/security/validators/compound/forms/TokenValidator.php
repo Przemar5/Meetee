@@ -14,7 +14,6 @@ class TokenValidator extends FormValidator
 		$validators = [
 			'name' => new TokenNameValidator(),
 			'value' => new TokenValueValidator(),
-			'user_id' => new TokenUserIdValidator(),
 		];
 
 		parent::__construct($validators);

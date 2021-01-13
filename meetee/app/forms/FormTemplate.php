@@ -30,9 +30,6 @@ abstract class FormTemplate
 		$data = $this->getRequestData();
 		$this->isValid = $this->validator->run($data);
 
-		if (!$this->isValid)
-			$this->errors = $this->validator->getErrors();
-
 		return $this->isValid;
 	}
 
@@ -66,6 +63,6 @@ abstract class FormTemplate
 
 	public function getErrors(): array
 	{
-		return $this->errors;
+		return $this->validator->getErrors();
 	}
 }

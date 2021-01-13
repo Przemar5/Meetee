@@ -77,7 +77,7 @@
 		"access": ["GUEST"]
 	},
 	{
-		"pattern": "/reset-password/verify",
+		"pattern": "/forgot-password/verify",
 		"method": "POST",
 		"name": "forgot_password_verify",
 		"class": "Auth\\ForgotPasswordController.verify",
@@ -86,8 +86,22 @@
 	{
 		"pattern": "/reset-password",
 		"method": "GET",
-		"name": "reset_password",
+		"name": "reset_password_page",
 		"class": "Auth\\ResetPasswordController.page",
-		"access": ["GUEST"]
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/reset-password",
+		"method": "POST",
+		"name": "reset_password_process",
+		"class": "Auth\\ResetPasswordController.process",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/main",
+		"method": "GET",
+		"name": "main_page",
+		"class": "MainController.page",
+		"access": ["VERIFIED"]
 	}
 ]

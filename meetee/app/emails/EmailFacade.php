@@ -10,23 +10,6 @@ use Meetee\App\Emails\EmailAdapter;
 
 class EmailFacade
 {
-	public static function sendResetPasswordEmail(
-		string $tokenName,
-		User $user
-	): void
-	{
-		$view = ViewFactory::createHtmlEmailView();
-		$email = new EmailAdapter($view);
-		$email->subject = 'Forgotten password';
-		$email->receivers = [$user];
-		$email->parseTemplate('emails/reset_password_email', [
-			'receiver' => $user,
-			'token' => TokenFactory::generate($tokenName, $user),
-			'route' => RoutingFacade::getLinkTo('forgot_password_process'),
-		]);
-		$email->send();
-	}
-
 	public static function sendRegistrationConfirmEmail(
 		string $tokenName,
 		User $user
@@ -40,6 +23,23 @@ class EmailFacade
 			'receiver' => $user,
 			'token' => TokenFactory::generate($tokenName, $user),
 			'route' => RoutingFacade::getLinkTo('registration_verify'),
+		]);
+		$email->send();
+	}
+
+	public static function sendForgotPasswordEmail(
+		string $tokenName,
+		User $user
+	): void
+	{
+		$view = ViewFactory::createHtmlEmailView();
+		$email = new EmailAdapter($view);
+		$email->subject = 'Forgotten password';
+		$email->receivers = [$user];
+		$email->parseTemplate('emails/reset_password_email', [
+			'receiver' => $user,
+			'token' => TokenFactory::generate($tokenName, $user),
+			'route' => RoutingFacade::getLinkTo('forgot_password_verify'),
 		]);
 		$email->send();
 	}

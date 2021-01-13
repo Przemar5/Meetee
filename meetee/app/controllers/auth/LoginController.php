@@ -45,7 +45,7 @@ class LoginController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFacade::validate($name)) {
+		if (!TokenFactory::popIfRequestValidByNameAndUser($name)) {
 			$this->page();
 			die;
 		}
@@ -58,18 +58,18 @@ class LoginController extends ControllerTemplate
 		if (!$form->validate())
 			$this->returnPageWithError('Invalid credentials. Please try again.');
 
-		$userTable = new UserTable();
-		$this->user = $userTable->findOneWhere([
+		$table = new UserTable();
+		$this->user = $table->findOneBy([
 			'email' => $_POST['email'],
 		]);
 		
 		if (!$this->user)
 			$this->returnPageWithError('Invalid credentials. Please try again.');
 
-		if (!Hash::verify($_POST['password'], $this->user->getPassword()))
+		if (!Hash::verify($_POST['password'], $this->user->password))
 			$this->returnPageWithError('Invalid credentials. Please try again.');
 
-		if (!$this->user->isverified())
+		if (!$this->user->verified)
 			$this->returnPageWithError(
 				$this->getResendVerificationEmailMessage());
 	}

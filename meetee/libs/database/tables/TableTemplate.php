@@ -126,6 +126,7 @@ abstract class TableTemplate
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()
 		);
+		$entity->setId($this->database->lastInsertId());
 
 		$this->updatePivots($entity);
 	}

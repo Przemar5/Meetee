@@ -14,14 +14,14 @@ class AuthFacade
 {
 	public static function getUser(): User
 	{
-		$id = Session::get('Bs7Kf05jenMIft42Aj8');
+		$id = Session::get('user_id');
 
 		if (!preg_match('/^[1-9][0-9]*$/', $id))
 			return new NullUser();
 
 		$table = new UserTable();
 
-		return $userTable->find($id) ?? new NullUser();
+		return $table->find($id) ?? new NullUser();
 	}
 
 	public static function getUserId(): int
