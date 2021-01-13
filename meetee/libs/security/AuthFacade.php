@@ -57,4 +57,11 @@ class AuthFacade
 
 		return $userTable->find($id);
 	}
+
+	public static function isGranted(string $role): bool
+	{
+		$user = self::getUser();
+
+		return $user->hasRole($role);
+	}
 }

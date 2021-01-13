@@ -5,6 +5,7 @@ namespace Meetee\Libs\View;
 use Meetee\Libs\View\ViewTemplate;
 use Meetee\Libs\Http\Routing\RoutingFacade;
 use Meetee\Libs\View\Utils\Notification;
+use Meetee\Libs\Security\AuthFacade;
 
 class BrowserView extends ViewTemplate
 {
@@ -50,5 +51,10 @@ class BrowserView extends ViewTemplate
 
 		if ($msg)
 			printf('<small>%s</small>', $msg);
+	}
+
+	private function isGranted(string $role): bool
+	{
+		return AuthFacade::isGranted($role);
 	}
 }
