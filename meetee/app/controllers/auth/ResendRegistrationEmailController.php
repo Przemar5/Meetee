@@ -53,7 +53,7 @@ class ResendRegistrationEmailController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFactory::popIfRequestValid($name)) {
+		if (!TokenFactory::popIfRequestValidByNameAndUser($name)) {
 			$this->page();
 			die;
 		}
@@ -83,7 +83,8 @@ class ResendRegistrationEmailController extends ControllerTemplate
 
 	private function successfulRegistrationResendRequestValidationEvent(): void
 	{
-		EmailFacade::sendRegistrationConfirmEmail($this->user);
+		EmailFacade::sendRegistrationConfirmEmail(
+			'registration_confirm_email_token', $this->user);
 		Notification::addSuccess('Check Your mailbox for an activation email!');
 		$this->redirect('login_page');
 	}

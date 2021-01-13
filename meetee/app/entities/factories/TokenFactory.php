@@ -31,23 +31,51 @@ class TokenFactory
 	}
 
 	public static function getFromRequest(
-		string $name, 
-		?User $user = null
+		string $name
 	): ?Token
 	{
 		if (!isset($_POST[$name]))
 			return null;
-
-		if (is_null($user))
-			$user = AuthFacade::getUser();
 		
 		$token = new Token();
 		$token->name = $name;
 		$token->value = $_POST[$name];
 
-		$token->userId = $user->getId() ?? 0;
-
 		return $token;
+	}
+
+	public static function popIfRequestValidByNameAndUser(
+		string $name,
+		?User $user = null
+	): ?Token
+	{
+		$token = static::getFromRequest($name);
+
+		if (!$token)
+			return null;
+
+		$userId = (!is_null($user) && !empty($user->getId())) ? $user->getId() : 0;
+
+		$validator = new TokenValidator();
+		$valid = $validator->run([
+			'name' => $token->name,
+			'value' => $token->value,
+			'user_id' => $userId,
+		]);
+
+		if (!$valid)
+			return null;
+
+		$data = [];
+		$data['name'] = $token->name;
+		$data['value'] = $token->value;
+		
+		if ($user)
+			$data['user_id'] = $userId;
+
+		$tokenTable = new TokenTable();
+
+		return $tokenTable->popValidBy($data);
 	}
 
 	public static function popIfRequestValid(

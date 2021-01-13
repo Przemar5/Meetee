@@ -28,6 +28,8 @@ abstract class UserFactory
 
 	public static function getByEmail(string $email): ?User
 	{
-		return User::findOneWhere(['email' => $email]);
+		$table = new UserTable();
+
+		return $table->findOneBy(['email' => $email]);
 	}
 } 

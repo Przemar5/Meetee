@@ -49,7 +49,7 @@ class RegistrationController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFactory::popIfRequestValid($name)) {
+		if (!TokenFactory::popIfRequestValidByNameAndUser($name)) {
 			$this->page();
 			die;
 		}
@@ -86,7 +86,8 @@ class RegistrationController extends ControllerTemplate
 	{
 		try {
 			// $token = TokenFactory::popRegistrationConfirmEmailTokenIfRequestValid();
-			$token = TokenFactory::popIfRequestValid('registration_confirm_email_token', true);
+			$token = TokenFactory::popIfRequestValidByNameAndUser(
+				'registration_confirm_email_token');
 
 			if (!$token)
 				$this->redirect('registration_page');

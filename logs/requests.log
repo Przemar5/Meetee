@@ -15746,3 +15746,139 @@ Method:	GET
 REMOTE USER:	::1
 Request:
 
+DATE:	2021.01.13 16:20:36
+URI:	/register
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:20:50
+URI:	/register
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:21:10
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_token: EcI7jc39kiIW95VqYS8zEug4PsALSgRS0Af7wKVP3BUeLdq80ByY3cOvgPrC6zQt
+	login: test
+	email: 1234567890localhost@gmail.com
+	name: dasd
+	surname: dasdas
+	birth: 2014-11-27
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.13 16:22:25
+URI:	/register/verify
+Method:	POST
+REMOTE USER:	::1
+Request:
+	registration_confirm_email_token: UzMWDXKZy9zOTn6HciLN3iq3QG2fTMNbm61LDj41UF81uPWqruwuF34jSKTFg7sI
+
+DATE:	2021.01.13 16:22:26
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:24:53
+URI:	/register/resend
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:24:54
+URI:	/register/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:25:01
+URI:	/register/resend
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_resend_token: qZfSlfQikWTEbfjUrC0eWsBbPVos5eQTrnXseKLcjyuepZRPvDW3cTQxCVstwsCW
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 16:25:17
+URI:	/register/resend
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_resend_token: qZfSlfQikWTEbfjUrC0eWsBbPVos5eQTrnXseKLcjyuepZRPvDW3cTQxCVstwsCW
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 16:25:17
+URI:	/register/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:25:19
+URI:	/register/resend
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_resend_token: h4Yc9jDq6OsJxRQOXVTkuq1RaDvg7HJt5DfoFYFU45IPkV63tvFZZO5yICWrXjJ7
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 16:25:50
+URI:	/register/resend
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_resend_token: h4Yc9jDq6OsJxRQOXVTkuq1RaDvg7HJt5DfoFYFU45IPkV63tvFZZO5yICWrXjJ7
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 16:25:50
+URI:	/register/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:25:52
+URI:	/register/resend
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_resend_token: Oeu0rIUpw4Jha0TkfrpTccLte7HrUi9ycsZwfYXKaMwMfCURClPyXofWm8rUgzcC
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 16:29:22
+URI:	/register/resend
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:29:22
+URI:	/register/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.13 16:29:44
+URI:	/register/resend
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_registration_resend_token: wCTiRLtQCrhB4YKZNTFvvKZMq1vJgUE03cK3OgqaNjXeMN4JWZCPLxor3m49JM2M
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.13 16:30:06
+URI:	/register/verify
+Method:	POST
+REMOTE USER:	::1
+Request:
+	registration_confirm_email_token: mZCavQbCjeJUAUCaVqgKoQdc6WFfTvuk9brbaKzWJ4W2Gxgubh9pxT1mvnf4MoBX
+
+DATE:	2021.01.13 16:30:06
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+

@@ -21,11 +21,6 @@ class LoginController extends ControllerTemplate
 
 	public function page(): void
 	{
-		if (AuthFacade::getLoggedUser()) {
-			$router = RouterFactory::createComplete();
-			$router->redirectTo('home');
-		}
-		
 		$token = TokenFactory::generate(self::$tokenName);
 
 		$this->render('auth/login', [
