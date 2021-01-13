@@ -4,7 +4,7 @@ namespace Meetee\App\Entities\Traits;
 
 trait SoftDelete
 {
-	protected ?int $deleted = null;
+	public ?bool $deleted = null;
 
 	public function setDeleted(?int $deleted): void
 	{

@@ -4,6 +4,7 @@ namespace Meetee\Libs\View;
 
 use Meetee\Libs\View\ViewTemplate;
 use Meetee\Libs\Http\Routing\RoutingFacade;
+use Meetee\Libs\View\Utils\Notification;
 
 class BrowserView extends ViewTemplate
 {
@@ -22,12 +23,25 @@ class BrowserView extends ViewTemplate
 
 	private function renderError(string $name): void
 	{
-		if (isset($this->args['errors'][$name]))
+		if (isset($this->args['errors']) && isset($this->args['errors'][$name]))
 			printf('<small>%s</small>', $this->args['errors'][$name]);
 	}
 
 	private function renderRouteUri(string $route): void
 	{
 		echo RoutingFacade::getLinkTo($route) ?? '';
+	}
+
+	private function escape(string $value): string
+	{
+		return addslashe($value);
+	}
+
+	private function success(): void
+	{
+		$msg = Notification::popSuccess();
+
+		if ($msg)
+			printf('<small>%s</small>', $msg);
 	}
 }

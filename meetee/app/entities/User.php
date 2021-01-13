@@ -8,6 +8,7 @@ use Meetee\Libs\Security\AuthenticationFacade;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\App\Entities\Traits\Timestamps;
 use Meetee\App\Entities\Traits\SoftDelete;
+use Meetee\App\Entities\Factories\RoleFactory;
 
 class User extends Entity
 {
@@ -15,25 +16,18 @@ class User extends Entity
 	use SoftDelete;
 
 	protected ?int $id = null;
-	protected string $login;
-	protected string $name;
-	protected string $surname;
-	protected string $email;
+	public string $login;
+	public string $name;
+	public string $surname;
+	public string $email;
+	public string $password;
+	public bool $verified = false;
 	protected \DateTime $birth;
-	protected string $password;
-	protected bool $verified = false;
 	protected array $roles = [];
 
 	public function __construct()
 	{
 		parent::__construct(new UserTable());
-	}
-
-	public static function findByLogin(string $login): ?self
-	{
-		$user = new self();
-
-		return $user->table->findByLogin($login);
 	}
 
 	public function hasAccess(Route $route): bool
@@ -43,30 +37,17 @@ class User extends Entity
 		return !empty($common);
 	}
 
+	public function verify(): void
+	{
+		$this->setVerified(true);
+		$this->addRole(RoleFactory::createVerifiedRole());
+		$this->save();
+	}
+
 	public function setId(int $id): void
 	{
 		if (is_null($this->id))
 			$this->id = $id;
-	}
-
-	public function setLogin(string $login): void
-	{
-		$this->login = $login;
-	}
-
-	public function setEmail(string $email): void
-	{
-		$this->email = $email;
-	}
-
-	public function setName(string $name): void
-	{
-		$this->name = $name;
-	}
-
-	public function setSurname(string $surname): void
-	{
-		$this->surname = $surname;
 	}
 
 	public function setBirth($birth): void
@@ -79,16 +60,6 @@ class User extends Entity
 			throw new \Exception(sprintf(
 				"Birth date must be type string or DateTime object, '%s' given.",
 				gettype($birth)));
-	}
-
-	public function setPassword(string $password): void
-	{
-		$this->password = $password;
-	}
-
-	public function setVerified(bool $verified): void
-	{
-		$this->verified = $verified;
 	}
 
 	public function setRoles(array $roles): void
@@ -122,39 +93,9 @@ class User extends Entity
 		return $this->id;
 	}
 
-	public function getLogin(): string
-	{
-		return $this->login;
-	}
-
-	public function getEmail(): string
-	{
-		return $this->email;
-	}
-
-	public function getName(): string
-	{
-		return $this->name;
-	}
-
-	public function getSurname(): string
-	{
-		return $this->surname;
-	}
-
 	public function getBirth(): \DateTime
 	{
 		return $this->birth;
-	}
-
-	public function getPassword(): string
-	{
-		return $this->password;
-	}
-
-	public function isVerified(): bool
-	{
-		return $this->verified;
 	}
 
 	public function getRoles(): array

@@ -11,15 +11,7 @@ class Tag extends Entity
 	use Timestamps;
 	use SoftDelete;
 
-	private string $table;
-	private ?int $id;
-	private string $name;
-
-	public function setId(int $id): void;
-
-	public function setName(string $name): void;
-
-	public function getId(): ?int;
-
-	public function getName(): string;
+	public string $table;
+	public ?int $id;
+	public string $name;
 }

@@ -8,6 +8,7 @@ use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\NullUser;
 use Meetee\Libs\Storage\Session;
 use Meetee\Libs\Utils\RandomStringGenerator;
+use Meetee\Libs\Database\Tables\UserTable;
 
 class AuthFacade
 {
@@ -18,7 +19,9 @@ class AuthFacade
 		if (!preg_match('/^[1-9][0-9]*$/', $id))
 			return new NullUser();
 
-		return User::find($id) ?? new NullUser();
+		$table = new UserTable();
+
+		return $userTable->find($id) ?? new NullUser();
 	}
 
 	public static function getUserId(): int
@@ -36,8 +39,11 @@ class AuthFacade
 	public static function login(User $user): void
 	{
 		Session::set('user_id', $user->getId());
+	}
 
-		echo Session::get('user_id');
+	public static function logout(): void
+	{
+		Session::unset('user_id');
 	}
 
 	public static function getLoggedUser(): ?User
@@ -47,6 +53,8 @@ class AuthFacade
 		if (!preg_match('/^[1-9][0-9]*$/', $id))
 			return null;
 
-		return User::find($id);
+		$userTable = new UserTable();
+
+		return $userTable->find($id);
 	}
 }

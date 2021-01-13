@@ -1,12 +1,12 @@
 <?php $this->startSection('body'); ?>
 <div>
-	<h2>Hello <?= $receiver->getLogin(); ?>!</h2>
+	<h2>Hello <?= $receiver->login; ?>!</h2>
 
 	<p>Here is a link for activating Your account.</p>
 
 	<form action="<?= $route; ?>" method="POST">
 		<p>Click a link below and You're ready to login!</p>
-		<input type="hidden" name="<?= $token->getName(); ?>" value="<?= $token->getValue(); ?>">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<button type="submit">Confirm registration</button>
 	</form>
 

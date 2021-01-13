@@ -42,13 +42,29 @@ class MySQLDatabase extends DatabaseTemplate
 		}
 	}
 
-	public function findOne(string $query, ?array $bindings = [])
+	public function findOne(
+		string $query, 
+		?array $bindings = []
+	)
 	{
 		$this->stmt = $this->database->prepare($query);
 		$this->bind($bindings);
 		$this->stmt->execute();
 
 		return $this->stmt->fetch(\PDO::FETCH_ASSOC);
+	}
+
+	public function findObject(
+		string $query,
+		?array $bindings = [],
+		string $object = null
+	)
+	{
+		$this->stmt = $this->database->prepare($query);
+		$this->bind($bindings);
+		$this->stmt->execute();
+
+		return $this->stmt->fetchObject($object);
 	}
 
 	public function findMany(string $query, ?array $bindings = [])
@@ -67,6 +83,7 @@ class MySQLDatabase extends DatabaseTemplate
 
 	public function debug()
 	{
+		// return $this->stmt-
 		return $this->stmt->debugDumpParams();
 	}
 }

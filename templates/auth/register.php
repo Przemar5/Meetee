@@ -2,7 +2,7 @@
 <form method="POST">
 	<h2>Registration</h2>
 
-	<input type="hidden" name="<?= $token->getName(); ?>" value="<?= $token->getValue(); ?>">
+	<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 
 	<label>
 		Login
@@ -36,20 +36,20 @@
 
 	<label>
 		Password
-		<input type="password" name="password">
+		<input type="password" name="password" value="Password1!">
 		<?php $this->renderError('password'); ?>
 	</label>
 
 	<label>
 		Retype password
-		<input type="password" name="repeat_password">
+		<input type="password" name="repeat_password" value="Password1!">
 	</label>
 
 	<button type="submit">Register</button>
 
 	<p>
 		Already have an account? 
-		<a href="<?php $this->renderRouteUri('login'); ?>">Login</a>!
+		<a href="<?php $this->renderRouteUri('login_page'); ?>">Login</a>!
 	</p>
 </form>
 <?php $this->endSection(); ?>

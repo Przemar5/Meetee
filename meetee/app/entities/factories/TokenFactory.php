@@ -21,10 +21,10 @@ class TokenFactory
 			$user = AuthFacade::getUser();
 		
 		$token = new Token();
-		$token->setName($name);
-		$token->setValue(RandomStringGenerator::generate(64));
-		$token->setUserId($user->getId() ?? 0);
-		$token->setExpiry(new \DateTime($delay));
+		$token->name = $name;
+		$token->value = RandomStringGenerator::generate(64);
+		$token->userId = $user->getId() ?? 0;
+		$token->setExpiry($delay);
 		$token->save();
 
 		return $token;
@@ -40,9 +40,9 @@ class TokenFactory
 				$user = AuthFacade::getUser();
 			
 			$token = new Token();
-			$token->setName($name);
-			$token->setValue($_POST[$name]);
-			$token->setUserId($user->getId() ?? 0);
+			$token->name = $name;
+			$token->value = $_POST[$name];
+			$token->userId = $user->getId() ?? 0;
 
 			return $token;
 		}
@@ -56,24 +56,24 @@ class TokenFactory
 		$token = static::getFromRequest($name);
 		$validator = new TokenValidator();
 		$valid = $validator->run([
-			'name' => $token->getName(),
-			'value' => $token->getValue(),
-			'user_id' => $token->getUserId(),
+			'name' => $token->name,
+			'value' => $token->value,
+			'user_id' => $token->userId,
 		]);
 
 		if (!$valid)
 			return null;
 
 		$data = [];
-		$data['name'] = $token->getName();
-		$data['value'] = $token->getValue();
+		$data['name'] = $token->name;
+		$data['value'] = $token->value;
 
 		if (!$ignoreUserId)
-			$data['user_id'] = $token->getUserId();
+			$data['user_id'] = $token->userId;
 
 		$tokenTable = new TokenTable();
 
-		return $tokenTable->popValidWhere($data);
+		return $tokenTable->popValidBy($data);
 	}
 
 	public static function generateResetPasswordEmailToken(User $user): ?Token
@@ -85,4 +85,19 @@ class TokenFactory
 	{
 		return static::generate('registration_confirm_email_token', $user);
 	}
+
+	public static function generateCsrfRegistrationResendToken(User $user): ?Token
+	{
+		return static::generate('registration_confirm_email_token', $user);
+	}
+
+	public static function popRegistrationConfirmEmailTokenIfRequestValid(): ?Token
+	{
+		return static::popIfRequestValid('registration_confirm_email_token', true);
+	}
+
+	// public static function popRegistrationConfirmEmailTokenIfRequestValid(): ?Token
+	// {
+	// 	return static::popIfRequestValid('registration_confirm_email_token', true);
+	// }
 }

@@ -25,7 +25,7 @@ class EmailController implements Sendable
 			$mail->addReplyTo('meetyea.app@gmail.com', 'Meetyea');
 	
 			foreach ($data['receivers'] as $user)
-				$mail->addAddress($user->getEmail(), $user->getLogin());
+				$mail->addAddress($user->email, $user->login);
 	
 			// $mail->content = '<h1>Test mail using PHPMailer</h1>';
 			$mail->isHTML(true);
@@ -33,11 +33,11 @@ class EmailController implements Sendable
 			$mail->msgHTML($data['template']);
 
 			if ($mail->send()) {
-			    echo 'Message has been sent';
+			    // echo 'Message has been sent';
 			}
 			else {
-			    echo 'Message could not be sent.';
-			    echo 'Mailer Error: ' . $mail->ErrorInfo;
+			    // echo 'Message could not be sent.';
+			    // echo 'Mailer Error: ' . $mail->ErrorInfo;
 			}
 		}
 		catch (\Exception $e) {

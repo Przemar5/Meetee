@@ -2,7 +2,7 @@
 <form method="POST">
 	<h2>Forgotten Password Recovery</h2>
 
-	<input type="hidden" name="<?= $token->getName(); ?>" value="<?= $token->getValue(); ?>">
+	<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 
 	<label>
 		Email
@@ -15,7 +15,7 @@
 
 	<p>
 		Don't have an account?
-		<a href="<?php $this->renderRouteUri('registration'); ?>">Register</a>!
+		<a href="<?php $this->renderRouteUri('registration_page'); ?>">Register</a>!
 	</p>
 </form>
 <?php $this->endSection(); ?>

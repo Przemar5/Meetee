@@ -4,7 +4,7 @@ namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
-use Meetee\App\Entities\Utils\TokenHandler;
+use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Forms\LoginForm;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\UserTable;
@@ -36,21 +36,19 @@ class LoginController extends ControllerTemplate
 	{
 		try {
 			$this->trimValues();
-			$this->returnToPageIfTokenInvalid();
+			$this->returnToPageIfTokenInvalid('csrf_login_token');
 			$this->returnToPageWithErrorsIfFormDataInvalid();
-			AuthFacade::login($this->user);
-
-			$router = RouterFactory::createComplete();
-			$router->redirectTo('login');
+			
+			$this->successfulLoginEvent();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
-	private function returnToPageIfTokenInvalid(): void
+	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenHandler::validate('csrf_login_token')) {
+		if (!TokenFacade::validate($name)) {
 			$this->page();
 			die;
 		}
@@ -61,21 +59,44 @@ class LoginController extends ControllerTemplate
 		$form = new LoginForm();
 
 		if (!$form->validate())
-			$this->returnPageWithError();
+			$this->returnPageWithError('Invalid credentials. Please try again.');
 
 		$userTable = new UserTable();
+		$this->user = $userTable->findOneWhere([
+			'email' => $_POST['email'],
+		]);
 		
-		if (!$this->user = $userTable->findOneWhere(['email' => $_POST['email']]))
-			$this->returnPageWithError();
+		if (!$this->user)
+			$this->returnPageWithError('Invalid credentials. Please try again.');
 
 		if (!Hash::verify($_POST['password'], $this->user->getPassword()))
-			$this->returnPageWithError();
+			$this->returnPageWithError('Invalid credentials. Please try again.');
+
+		if (!$this->user->isverified())
+			$this->returnPageWithError(
+				$this->getResendVerificationEmailMessage());
 	}
 
-	private function returnPageWithError(): void
+	private function returnPageWithError(string $msg): void
 	{
-		$this->page(['general' => 'Invalid credentials. Please try again.']);
+		$this->page(['general' => $msg]);
 		die;
+	}
+
+	private function getResendVerificationEmailMessage(): string
+	{
+		return sprintf('Check Your email for registration confirmation email. ' . 
+				'If it\'s missing, we may <a href="%s">resend</a> it again!', 
+				RoutingFacade::getLinkTo(
+					'registration_resend_page')
+			);
+	}
+
+	private function successfulLoginEvent(): void
+	{
+		AuthFacade::login($this->user);
+		$router = RouterFactory::createComplete();
+		$router->redirectTo('login');
 	}
 
 	private function trimValues(): void

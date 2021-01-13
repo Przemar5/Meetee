@@ -13,9 +13,14 @@ use Meetee\Libs\Storage\Session;
 use Meetee\Libs\Database\Factories\DatabaseFactory;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Role;
+use Meetee\App\Entities\Token;
+use Meetee\App\Entities\Factories\RoleFactory;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\RoleTable;
+use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Security\AuthFacade;
+
+// use Meetee\App\Entities\Factories\TokenFactory;
 
 
 spl_autoload_register(function($namespaceWithClass) {
@@ -51,16 +56,82 @@ catch (\Exception $e) {
 	die($e);
 }
 
+
+// // Get token
+// // $token = TokenFactory::popIfRequestValid($name);
+// // dd($token);
+
+// // Generate and request
+
+
+
+// // $opt = [
+// // 	'http' => [
+// // 		'method' => 'POST',
+
+// // 	],
+// // ];
+// $name = 'csrf_registration_token';
+// $url = 'http://localhost/files/projects/SocialNetwork/register';
+// $token = TokenFactory::generate($name);
+
+// $ch = curl_init($url);
+// curl_setopt($ch, CURLOPT_POST, 1);
+// curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+// 	$name => $token->value,
+// 	'login' => 'Przemek',
+// 	'email' => '1234567890localhost@gmail.com',
+// 	'name' => 'Przemek',
+// 	'surname' => 'XXXX',
+// 	'birth' => '1990-10-10',
+// 	'password' => 'Password1!',
+// 	'repeat_password' => 'Password1!',
+// ]));
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// $response = curl_exec($ch);
+// curl_close($ch);
+
+// $database = \Meetee\Libs\Database\Factories\DatabaseAbstractFactory::createDatabase();
+
+// echo $database->findOne('select count(*) from users');
+
+// echo $response;
+
+// dd($token);
+
+// $token = new Token();
+// $token->name = 'Token';
+// $token->value = 'dctfvghjbceuiofw';
+// $token->userId = 0;
+// $token->setExpiry('+3 hours');
+// $table->save($token);
+// $token->setId($table->lastinsertId());
+// dd($token);
+
+// $token = $table->pop(6);
+// dd($token);
+// dd($token);
+// $table = new UserTable();
+// $user = $table->find(5);
+// $user->
 // $user = new User();
-// $user = User::find(4);
-// $user->setId(4);
-// $user->setLogin('Alan');
-// $user->setEmail('panolo@mail.com');
-// $user->setName('Alan');
-// $user->setSurname('Goody');
+// $user->setId(5);
+// $user->login = 'Alanio';
+// $user->email = 'panolo@mail.com';
+// $user->name = 'Alan';
+// $user->surname = 'Goody';
 // $user->setBirth(new \DateTime());
-// $user->setPassword('password');
-// $user->addRole(Role::getUserRole());
-// $user->removeRole(Role::getAdminRole());
-// $user->save();
+// $user->password = 'password';
+// $user->addRole(RoleFactory::createUserRole());
+// $user->addRole(RoleFactory::createAdminRole());
+// $table->save($user);
 // dd($user);
+// $table->delete();
+// $table->save($user);
+// $user->setId($table->lastInsertId());
+
+// $user->save();
+// $user = $table->find(4);
+// dd($user);
+// $user->setId($table->lastInsertId());
+// dd($token);

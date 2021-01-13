@@ -29,6 +29,8 @@ abstract class DatabaseTemplate
 			$connectionDetails, 'password', 'Password is missing');
 
 		$this->database = new \PDO($dsn, $user, $password);
+		$this->database->setAttribute(
+			\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 	}
 
 	protected function getDetailOrThrowException(
@@ -57,7 +59,16 @@ abstract class DatabaseTemplate
 
 	abstract public function sendQuery(string $query, ?array $bindings = []);
 
-	abstract public function findOne(string $query, ?array $bindings = []);
+	abstract public function findOne(
+		string $query, 
+		?array $bindings = []
+	);
+
+	abstract public function findObject(
+		string $query,
+		?array $bindings = [],
+		?string $object = null
+	);
 
 	abstract public function findMany(string $query, ?array $bindings = []);
 

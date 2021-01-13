@@ -9,7 +9,7 @@
 	{
 		"pattern": "/register",
 		"method": "GET",
-		"name": "registration",
+		"name": "registration_page",
 		"class": "Auth\\RegistrationController.page",
 		"access": ["GUEST"]
 	},
@@ -28,9 +28,23 @@
 		"access": ["GUEST", "USER"]
 	},
 	{
+		"pattern": "/register/resend",
+		"method": "GET",
+		"name": "registration_resend_page",
+		"class": "Auth\\RegistrationController.resendEmailPage",
+		"access": ["GUEST", "USER"]
+	},
+	{
+		"pattern": "/register/resend",
+		"method": "POST",
+		"name": "registration_resend_process",
+		"class": "Auth\\RegistrationController.resendEmailProcess",
+		"access": ["GUEST", "USER"]
+	},
+	{
 		"pattern": "/login",
 		"method": "GET",
-		"name": "login",
+		"name": "login_page",
 		"class": "Auth\\LoginController.page",
 		"access": ["GUEST"]
 	},
@@ -44,7 +58,7 @@
 	{
 		"pattern": "/forgot-password",
 		"method": "GET",
-		"name": "forgot_password",
+		"name": "forgot_password_page",
 		"class": "Auth\\ForgotPasswordController.page",
 		"access": ["GUEST"]
 	},

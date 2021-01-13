@@ -10,25 +10,25 @@ class TokenTable extends TableTemplate
 {
 	public function __construct()
 	{
-		parent::__construct('tokens', false);
+		parent::__construct('tokens', Token::class, false);
 	}
 
 	public function getValidByToken(Token $token): ?Token
 	{
-		return $this->getValidWhere([
-			'name' => $token->getName(),
-			'value' => $token->getValue(),
-			'user_id' => $token->getUserId(),
+		return $this->getValiBy([
+			'name' => $token->name,
+			'value' => $token->value,
+			'user_id' => $token->userId,
 		]);
 	}
 
-	public function getValidWhere(array $conditions): ?Token
+	public function getValidBy(array $conditions): ?Token
 	{
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
 		$this->queryBuilder->where($conditions);
-		$this->queryBuilder->whereStrings(['expires >= NOW()']);
+		$this->queryBuilder->whereStrings(['expiry >= NOW()']);
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
 		$this->queryBuilder->limit(1);
@@ -48,39 +48,25 @@ class TokenTable extends TableTemplate
 	{
 		$token = new Token();
 		$token->setId($data['id']);
-		$token->setName($data['name']);
-		$token->setValue($data['value']);
-		$token->setUserId($data['user_id']);
-		$token->setExpiry($data['expires']);
+		$token->name = $data['name'];
+		$token->value = $data['value'];
+		$token->userId = $data['user_id'];
+		$token->setExpiry($data['expiry']);
 
 		return $token;
 	}
 
 	protected function getEntityData(Entity $token): array
 	{
-		$this->entityIsOfClassOrThrowException($token, Token::class);
+		$this->throwExceptionIfInvalidClass($token, Token::class);
 
 		$data = [];
-		$data['name'] = $token->getName();
-		$data['value'] = $token->getValue();
-		$data['user_id'] = $token->getUserId() ?? 0;
-		$data['expires'] = $token->getExpiryString();
+		$data['name'] = $token->name;
+		$data['value'] = $token->value;
+		$data['user_id'] = $token->userId ?? 0;
+		$data['expiry'] = $token->getExpiryString();
 
 		return $data;
-	}
-
-	public function delete(Token $token): void
-	{
-		// dd('ok');
-		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->delete();
-		$this->queryBuilder->where(['id' => $token->getId()]);
-		// dd($this->queryBuilder->getResult());
-		$this->database->sendQuery(
-			$this->queryBuilder->getResult(),
-			$this->queryBuilder->getBindings()
-		);
 	}
 
 	public function popValidByToken(Token $token): ?Token
@@ -90,20 +76,21 @@ class TokenTable extends TableTemplate
 		if (!is_null($token))
 			return null;
 
-		$this->delete($token);
+		$copy = $token;
+		$this->delete($token->getId());
 
-		return $token;
+		return $copy;
 	}
 
-	public function popValidWhere(array $conditions): ?Token
+	public function popValidBy(array $conditions): ?Token
 	{
-		$token = $this->getValidWhere($conditions);
+		$token = $this->getValidBy($conditions);
 
 		if (is_null($token))
 			return null;
 		
 		$copy = $token;
-		$this->delete($token);
+		$this->delete($token->getId());
 		
 		return $copy;
 	}

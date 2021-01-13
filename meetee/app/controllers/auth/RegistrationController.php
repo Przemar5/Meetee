@@ -4,18 +4,23 @@ namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Factories\UserFactory;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Forms\RegistrationForm;
 use Meetee\App\Entities\User;
+use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
-use Meetee\Libs\Security\Hash;
 use Meetee\App\Emails\EmailFacade;
+use Meetee\Libs\View\Utils\Notification;
+use Meetee\Libs\Security\Validators\Compound\Users\UserEmailValidator;
 
 class RegistrationController extends ControllerTemplate
 {
 	public function page(?array $errors = []): void
 	{
 		$token = TokenFactory::generate('csrf_registration_token');
+		// $tokenTable = new TokenTable();
+		// $tokenTable->popOneWhere();
 
 		$this->render('auth/register', [
 			'token' => $token,
@@ -26,14 +31,11 @@ class RegistrationController extends ControllerTemplate
 	public function process(): void
 	{
 		try {
-			// $this->trimValues();
-			// $this->returnToPageIfTokenInvalid('csrf_registration_token');
-			// $this->returnToPageWithErrorsIfFormDataInvalid();
-			// $user = $this->registerAndGetUser();
-			$user = $this->registerAndGetMockUser();
-			EmailFacade::sendRegistrationConfirmEmail($user);
+			$this->trimValues();
+			$this->returnToPageIfTokenInvalid('csrf_registration_token');
+			$this->returnToPageWithErrorsIfFormDataInvalid();
 
-			$this->redirect('login');
+			$this->successfulRegisterRequestValidationEvent();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -48,7 +50,7 @@ class RegistrationController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFacade::validate($name)) {
+		if (!TokenFactory::popIfRequestValid($name)) {
 			$this->page();
 			die;
 		}
@@ -71,59 +73,103 @@ class RegistrationController extends ControllerTemplate
 				$_POST[$key] = trim($value);
 	}
 
-	private function registerAndGetUser(): User
+	private function successfulRegisterRequestValidationEvent(): void
 	{
-		$user = new User();
-		$user->setLogin($_POST['login']);
-		$user->setEmail($_POST['email']);
-		$user->setName($_POST['name']);
-		$user->setSurname($_POST['surname']);
-		$user->setBirth($_POST['birth']);
-		$user->setPassword(Hash::create($_POST['password']));
-		$user->save();
-
-		return $user;
-	}
-
-	private function registerAndGetMockUser(): User
-	{
-		$user = new User();
-		$user->setLogin('test');
-		$user->setEmail('1234567890localhost@gmail.com');
-		$user->setName('test');
-		$user->setSurname('test');
-		$user->setBirth(new \DateTime());
-		$user->setPassword(Hash::create('test'));
-		$user->save();
-
-		return $user;
+		$user = UserFactory::createAndSaveUserFromPostRequest();
+		EmailFacade::sendRegistrationConfirmEmail($user);
+		Notification::addSuccess('Check Your mailbox for an activation email!');
+		$this->redirect('login_page');
 	}
 
 	public function verify(): void
 	{
 		try {
-			$token = TokenFactory::popIfRequestValid(
-				'registration_confirm_email_token', true);
+			$token = TokenFactory::popRegistrationConfirmEmailTokenIfRequestValid();
 
 			if (!$token)
-				$this->redirect('registration');
+				$this->redirect('registration_page');
 
-			$user = User::find($token->getUserId());
+			$table = new UserTable();
 
-			if (!$user)
-				$this->redirect('registration');
+			if (!$user = $table->find($token->userId))
+				$this->redirect('registration_page');
 
-			$this->verifyUser($user);
-			$this->redirect('login');
+			$this->successfulVerificationRequestValidationEvent($user);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
-	private function verifyUser(User $user): void
+	private function successfulVerificationRequestValidationEvent(
+		User $user
+	): void
 	{
-		$user->setVerified(true);
-		$user->save();
+		$user->verify();
+		Notification::addSuccess(
+			'Your account was activated. Now You can login!');
+		$this->redirect('login_page');
+	}
+
+	public function resendEmailPage(?array $errors = []): void
+	{
+		$token = TokenFactory::generate('csrf_registration_resend_token');
+
+		$this->render('auth/register_resend', [
+			'token' => $token,
+			'errors' => $errors,
+		]);
+	}
+
+	public function resendEmailProcess(): void
+	{
+		try {
+			$this->trimValues();
+			$this->returnToResendEmailPageIfTokenInvalid('csrf_registration_resend_token');
+			$this->returnToResendEmailPageWithErrorsIfFormDataInvalid();
+			$this->returnToResendEmailPageWithErrorsIfEmailNotExist();
+
+			$this->successfulRegistrationResendRequestValidationEvent();
+		}
+		catch (\Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function returnToResendEmailPageIfTokenInvalid(string $name): void
+	{
+		if (!TokenFactory::popIfRequestValid($name)) {
+			$this->resendEmailPage();
+			die;
+		}
+	}
+
+	private function returnToResendEmailPageWithErrorsIfFormDataInvalid(): void
+	{
+		$validator = new UserEmailValidator();
+
+		if (!$validator->run($_POST['email'])) {
+			$this->resendEmailPage([
+				'general' => "Email doesn't exist in our database."]);
+			die;
+		}
+	}
+
+	private function returnToResendEmailPageWithErrorsIfEmailNotExist(): void
+	{
+		$this->user = UserFactory::getByEmail($_POST['email']);
+
+		if (!$this->user) {
+			$this->resendEmailPage([
+				'general' => "Email doesn't exist in our database."]);
+			die;
+		}
+	}
+
+	private function successfulRegistrationResendRequestValidationEvent(): void
+	{
+		EmailFacade::sendRegistrationConfirmEmail($this->user);
+		Notification::addSuccess('Check Your mailbox for an activation email!');
+		$this->redirect('login_page');
 	}
 }

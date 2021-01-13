@@ -3,6 +3,7 @@
 namespace Meetee\Libs\Database\Tables\Pivots;
 
 use Meetee\Libs\Database\Tables\Pivots\Pivot;
+use Meetee\Libs\Database\Tables\TableTemplate;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Role;
 
@@ -45,7 +46,7 @@ class UserRoleTable extends Pivot
 	{
 		$role = new Role();
 		$role->setId($data['id']);
-		$role->setName($data['name']);
+		$role->name = $data['name'];
 
 		return $role;
 	}
@@ -56,7 +57,7 @@ class UserRoleTable extends Pivot
 		$roleIds = array_map(fn($r) => $r->getId(), $roles);
 		$roleIds = array_filter($roleIds, fn($id) => !is_null($id));
 		$userId = $user->getId();
-		
+
 		if (empty($roleIds) || is_null($userId))
 			return;
 

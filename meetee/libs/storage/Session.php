@@ -25,6 +25,16 @@ class Session implements Storage
 		$_SESSION[$name] = $value;
 	}
 
+	public static function pop(string $name)
+	{
+		if (isset($_SESSION[$name])) {
+			$value = $_SESSION[$name];
+			unset($_SESSION[$name]);
+
+			return $value;
+		}
+	}
+
 	public static function isset(string $name): bool
 	{
 		return isset($_SESSION[$name]);

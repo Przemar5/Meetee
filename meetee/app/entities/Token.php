@@ -10,14 +10,20 @@ use Meetee\Libs\Utils\RandomStringGenerator;
 class Token extends Entity
 {
 	protected ?int $id = null;
-	protected string $name;
-	protected string $value;
-	protected int $userId;
-	protected \DateTime $expires;
+	public string $name;
+	public string $value;
+	public int $userId;
+	protected \DateTime $expiry;
 
 	public function __construct()
 	{
 		parent::__construct(new TokenTable());
+	}
+
+	public function setId(int $id): void
+	{
+		if (is_null($this->id))
+			$this->id = $id;
 	}
 
 	public function pop(): ?Token
@@ -30,39 +36,18 @@ class Token extends Entity
 		$this->table->delete($this);
 	}
 
-	public function setId(int $id): void
+	public function setExpiry($expiry): void
 	{
-		if (!isset($this->id))
-			$this->id = $id;
-	}
-
-	public function setName(string $name): void
-	{
-		$this->name = $name;
-	}
-
-	public function setValue(string $value): void
-	{
-		$this->value = $value;
-	}
-
-	public function setUserId(int $id): void
-	{
-		$this->userId = $id;
-	}
-
-	public function setExpiry($expires): void
-	{
-		if (is_string($expires)) {
-			$this->expires = new \DateTime($expires);
+		if (is_string($expiry)) {
+			$this->expiry = new \DateTime($expiry);
 		}
 		elseif ($expires instanceof \DateTime) {
-			$this->expires = $expires;
+			$this->expiry = $expiry;
 		}
 		else {
 			throw new \Exception(sprintf(
 				"Expiry date must be a string or a DateTime object, '%s' given.", 
-				gettype($expires)));
+				gettype($expiry)));
 		}
 	}
 
@@ -71,28 +56,18 @@ class Token extends Entity
 		return $this->id;
 	}
 
-	public function getName(): string
-	{
-		return $this->name;
-	}
-
-	public function getValue(): string
-	{
-		return $this->value;
-	}
-
-	public function getUserId(): int
-	{
-		return $this->userId;
-	}
-
 	public function getExpiry(): \DateTime
 	{
-		return $this->expires;
+		return $this->expiry;
 	}
 
 	public function getExpiryString(): string
 	{
-		return $this->expires->format('Y-m-d H:i:s');
+		return $this->expiry->format('Y-m-d H:i:s');
 	}
+
+	// public function isValid(): bool
+	// {
+		
+	// }
 }
