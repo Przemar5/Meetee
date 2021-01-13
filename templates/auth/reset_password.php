@@ -7,7 +7,7 @@
 	<label>
 		New Password
 		<input type="password" name="password" value="Password1!">
-		<?php $this->renderError('password'); ?>
+		<?php $this->error('password'); ?>
 	</label>
 
 	<label>

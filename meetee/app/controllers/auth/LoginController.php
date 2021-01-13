@@ -36,7 +36,7 @@ class LoginController extends ControllerTemplate
 			$this->returnToPageIfTokenInvalid(self::$tokenName);
 			$this->returnToPageWithErrorsIfFormDataInvalid();
 			
-			$this->successfulLoginEvent();
+			$this->successfulRequestValidationEvent();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -90,11 +90,11 @@ class LoginController extends ControllerTemplate
 			);
 	}
 
-	private function successfulLoginEvent(): void
+	private function successfulRequestValidationEvent(): void
 	{
 		AuthFacade::login($this->user);
 		$router = RouterFactory::createComplete();
-		$router->redirectTo('login');
+		$router->redirectTo('main_page');
 	}
 
 	private function trimValues(): void
@@ -102,5 +102,12 @@ class LoginController extends ControllerTemplate
 		foreach ($_POST as $key => $value)
 			if (is_string($value))
 				$_POST[$key] = trim($value);
+	}
+
+	public function logout(): void
+	{
+		AuthFacade::logout();
+		$router = RouterFactory::createComplete();
+		$router->redirectTo('home');
 	}
 }

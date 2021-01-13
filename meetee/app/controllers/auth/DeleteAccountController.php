@@ -15,16 +15,16 @@ use Meetee\Libs\Security\Validators\Compound\Forms\ResetPasswordFormValidator;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Security\Hash;
 
-class ResetPasswordController extends ControllerTemplate
+class DeleteAccountController extends ControllerTemplate
 {
-	private static string $tokenName = 'csrf_reset_password_token';
+	private static string $tokenName = 'csrf_delete_account_token';
 	private array $errors = [];
 
 	public function page(): void
 	{
 		$token = TokenFactory::generate(self::$tokenName);
 
-		$this->render('auth/reset_password', [
+		$this->render('auth/delete_account', [
 			'token' => $token,
 			'errors' => $this->errors,
 		]);
@@ -35,7 +35,6 @@ class ResetPasswordController extends ControllerTemplate
 		try {
 			$this->trimValues();
 			$this->returnToPageIfTokenInvalid(self::$tokenName);
-			$this->returnToPageWithErrorsIfFormDataInvalid();
 
 			$this->successfulRequestValidationEvent();
 		}
@@ -61,28 +60,16 @@ class ResetPasswordController extends ControllerTemplate
 		}
 	}
 
-	private function returnToPageWithErrorsIfFormDataInvalid(): void
-	{
-		$validator = new ResetPasswordFormValidator();
-
-		if (!$validator->run($_POST)) {
-			$this->errors = $validator->getErrors();
-			$this->page();
-			die;
-		}
-	}
-
 	private function successfulRequestValidationEvent(): void
 	{
-		$this->updateUserPassword();
-		Notification::addSuccess('Your password was update successfully!');
-		$this->redirect('main');
+		$this->deleteUser();
+		$this->redirect('home');
 	}
 
-	private function updateUserPassword(): void
+	private function deleteUser(): void
 	{
 		$user = AuthFacade::getUser();
-		$user->password = Hash::make(trim($_POST['password']));
+		$user->deleted = true;
 		$table = new UserTable();
 		$table->save($user);
 	}

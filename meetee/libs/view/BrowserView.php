@@ -21,10 +21,17 @@ class BrowserView extends ViewTemplate
 		require_once $layout;
 	}
 
-	private function renderError(string $name): void
+	private function error(string $name): void
 	{
 		if (isset($this->args['errors']) && isset($this->args['errors'][$name]))
 			printf('<small>%s</small>', $this->args['errors'][$name]);
+	}
+
+	private function allErrors(): void
+	{
+		if (isset($this->args['errors']))
+			foreach($this->args['errors'] as $name => $message)
+				$this->error($name);
 	}
 
 	private function renderRouteUri(string $route): void

@@ -13,6 +13,11 @@ class Notification
 		Session::set('success', $msg);
 	}
 
+	public static function getSuccess(): ?string
+	{
+		return Session::get('success');
+	}
+
 	public static function popSuccess(): ?string
 	{
 		return Session::pop('success');

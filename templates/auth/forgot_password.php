@@ -9,7 +9,7 @@
 		<input type="text" name="email" value="<?= $_POST['email'] ?? ''; ?>">
 	</label>
 
-	<?php $this->renderError('general'); ?>
+	<?php $this->error('general'); ?>
 
 	<button type="submit">Send Recovery Mail</button>
 

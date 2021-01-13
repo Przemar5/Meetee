@@ -6,10 +6,10 @@ use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\Libs\Storage\Session;
 use Meetee\Libs\View\Utils\Notification;
 
-class HomeController extends ControllerTemplate
+class MainController extends ControllerTemplate
 {
-	public function index(): void
+	public function page(): void
 	{
-		$this->render('pages/home');
+		$this->render('pages/main');
 	}
 }

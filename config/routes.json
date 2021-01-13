@@ -63,6 +63,13 @@
 		"access": ["GUEST"]
 	},
 	{
+		"pattern": "/logout",
+		"method": "GET",
+		"name": "logout",
+		"class": "Auth\\LoginController.logout",
+		"access": ["USER"]
+	},
+	{
 		"pattern": "/forgot-password",
 		"method": "GET",
 		"name": "forgot_password_page",
@@ -95,6 +102,20 @@
 		"method": "POST",
 		"name": "reset_password_process",
 		"class": "Auth\\ResetPasswordController.process",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/delete-account",
+		"method": "GET",
+		"name": "delete_account_page",
+		"class": "Auth\\DeleteAccountController.page",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/delete-account",
+		"method": "POST",
+		"name": "delete_account_process",
+		"class": "Auth\\DeleteAccountController.process",
 		"access": ["VERIFIED"]
 	},
 	{

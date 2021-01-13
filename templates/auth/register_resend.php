@@ -9,16 +9,16 @@
 	<label>
 		Email
 		<input type="text" name="email" value="<?= $_POST['email'] ?? ''; ?>">
-		<?php $this->renderError('email'); ?>
+		<?php $this->error('email'); ?>
 	</label>
 
-	<?php $this->renderError('general'); ?>
+	<?php $this->error('general'); ?>
 
 	<button type="submit">Resend</button>
 
 	<p>
-		Already have an activated account? 
-		<a href="<?php $this->renderRouteUri('login_page'); ?>">Login</a>!
+		Or
+		<a href="<?php $this->renderRouteUri('login_page'); ?>">Login</a>
 	</p>
 
 	<p>

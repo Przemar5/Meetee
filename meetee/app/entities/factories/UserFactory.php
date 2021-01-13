@@ -18,7 +18,7 @@ abstract class UserFactory
 		$user->name = trim($_POST['name']);
 		$user->surname = trim($_POST['surname']);
 		$user->setBirth(trim($_POST['birth']));
-		$user->password = Hash::create(trim($_POST['password']));
+		$user->password = Hash::make(trim($_POST['password']));
 		$user->addRole(RoleFactory::createUserRole());
 		$table->save($user);
 		$user->setId($table->lastInsertId());

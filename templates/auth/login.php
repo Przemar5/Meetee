@@ -14,7 +14,7 @@
 		<input type="password" name="password">
 	</label>
 
-	<?php $this->renderError('general'); ?>
+	<?php $this->error('general'); ?>
 
 	<button type="submit">Login</button>
 
@@ -25,7 +25,7 @@
 
 	<p>
 		Forgot Your password?
-		<a href="<?php $this->renderRouteUri('forgot_password'); ?>">Click here</a>!
+		<a href="<?php $this->renderRouteUri('forgot_password_page'); ?>">Click here</a>!
 	</p>
 </form>
 <?php $this->endSection(); ?>

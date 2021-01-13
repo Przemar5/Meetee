@@ -7,37 +7,37 @@
 	<label>
 		Login
 		<input type="text" name="login" value="<?= $_POST['login'] ?? ''; ?>">
-		<?php $this->renderError('login'); ?>
+		<?php $this->error('login'); ?>
 	</label>
 
 	<label>
 		Email
 		<input type="text" name="email" value="<?= $_POST['email'] ?? ''; ?>">
-		<?php $this->renderError('email'); ?>
+		<?php $this->error('email'); ?>
 	</label>
 
 	<label>
 		Name
 		<input type="text" name="name" value="<?= $_POST['name'] ?? ''; ?>">
-		<?php $this->renderError('name'); ?>
+		<?php $this->error('name'); ?>
 	</label>
 
 	<label>
 		Surname
 		<input type="text" name="surname" value="<?= $_POST['surname'] ?? ''; ?>">
-		<?php $this->renderError('surname'); ?>
+		<?php $this->error('surname'); ?>
 	</label>
 
 	<label>
 		Birth
 		<input type="date" name="birth" value="<?= $_POST['birth'] ?? ''; ?>">
-		<?php $this->renderError('birth'); ?>
+		<?php $this->error('birth'); ?>
 	</label>
 
 	<label>
 		Password
 		<input type="password" name="password" value="Password1!">
-		<?php $this->renderError('password'); ?>
+		<?php $this->error('password'); ?>
 	</label>
 
 	<label>
@@ -50,6 +50,11 @@
 	<p>
 		Already have an account? 
 		<a href="<?php $this->renderRouteUri('login_page'); ?>">Login</a>!
+	</p>
+
+	<p>
+		Didn't get activation email?
+		<a href="<?php $this->renderRouteUri('registration_resend_page'); ?>">Resend</a>!
 	</p>
 </form>
 <?php $this->endSection(); ?>

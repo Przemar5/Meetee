@@ -4,8 +4,11 @@
 
 	<p>We've heard that You try to recover a password to Your account.</p>
 
+	<p>Click a link below to recover Your password.</p>
+	
+	<p>By doing so You will be redirected to our page.</p>
+
 	<form action="<?= $route; ?>" method="POST">
-		<p>Click a link below to recover Your password.</p>
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<button type="submit">Recover</button>
 	</form>

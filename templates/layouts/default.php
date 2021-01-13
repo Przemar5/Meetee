@@ -9,6 +9,8 @@
 		<?= $this->section('head'); ?>
 	</head>
 	<body>
+		<?php $this->success(); ?>
+
 		<?= $this->section('body'); ?>
 	</body>
 </html>
