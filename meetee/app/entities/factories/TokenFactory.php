@@ -68,7 +68,7 @@ class TokenFactory
 		$data = [];
 		$data['name'] = $token->name;
 		$data['value'] = $token->value;
-
+		
 		if (!$ignoreUserId)
 			$data['user_id'] = $token->userId;
 
@@ -94,7 +94,7 @@ class TokenFactory
 
 	public static function popRegistrationConfirmEmailTokenIfRequestValid(): ?Token
 	{
-		return static::popIfRequestValid('registration_confirm_email_token', true);
+		return static::popIfRequestValid('registration_email_verify', true);
 	}
 
 	// public static function popRegistrationConfirmEmailTokenIfRequestValid(): ?Token

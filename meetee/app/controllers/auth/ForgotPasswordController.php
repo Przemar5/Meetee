@@ -18,22 +18,23 @@ class ForgotPasswordController extends ControllerTemplate
 {
 	private static string $tokenName = 'forgot_password_token';
 	private ?User $user = null;
+	private array $errors = [];
 
-	public function page(?array $errors = []): void
+	public function page(): void
 	{
-		if (AuthFacade::getLoggedUser()) {
-			$router = RouterFactory::createComplete();
-			$router->redirectTo('home');
-		}
+		// if (AuthFacade::getLoggedUser()) {
+		// 	$router = RouterFactory::createComplete();
+		// 	$router->redirectTo('home');
+		// }
 
-		if (isset($_POST['email']) && is_string($_POST['email']))
-			$_POST['email'] = trim($_POST['email']);
+		// if (isset($_POST['email']) && is_string($_POST['email']))
+		// 	$_POST['email'] = trim($_POST['email']);
 		
 		$token = TokenFactory::generate(self::$tokenName);
 
 		$this->render('auth/forgot_password', [
 			'token' => $token,
-			'errors' => $errors,
+			'errors' => $this->errors,
 		]);
 	}
 
@@ -85,8 +86,8 @@ class ForgotPasswordController extends ControllerTemplate
 
 	private function returnPageWithError(): void
 	{
-		$this->page(['general' =>  
-			'Given email does not exist in database.']);
+		$this->errors = ['general' => 'Given email does not exist in database.'];
+		$this->page();
 		die;
 	}
 

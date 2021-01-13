@@ -17,14 +17,15 @@ class ResendRegistrationEmailController extends ControllerTemplate
 {
 	private static string $tokenName = 'csrf_registration_resend_token';
 	private ?User $user = null;
+	private array $errors = [];
 
-	public function page(?array $errors = []): void
+	public function page(): void
 	{
 		$token = TokenFactory::generate(self::$tokenName);
 
 		$this->render('auth/register_resend', [
 			'token' => $token,
-			'errors' => $errors,
+			'errors' => $this->errors,
 		]);
 	}
 
@@ -63,7 +64,8 @@ class ResendRegistrationEmailController extends ControllerTemplate
 		$validator = new UserEmailValidator();
 
 		if (!$validator->run($_POST['email'])) {
-			$this->page(['general' => "Email doesn't exist in our database."]);
+			$this->errors = ['general' => "Email doesn't exist in our database."];
+			$this->page();
 			die;
 		}
 	}
@@ -73,7 +75,8 @@ class ResendRegistrationEmailController extends ControllerTemplate
 		$this->user = UserFactory::getByEmail($_POST['email']);
 
 		if (!$this->user) {
-			$this->page(['general' => "Email doesn't exist in our database."]);
+			$this->errors = ['general' => "Email doesn't exist in our database."];
+			$this->page();
 			die;
 		}
 	}

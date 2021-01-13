@@ -33,7 +33,8 @@ class EmailController implements Sendable
 			$mail->msgHTML($data['template']);
 
 			if ($mail->send()) {
-			    // echo 'Message has been sent';
+			    echo 'Message has been sent';
+			    die;
 			}
 			else {
 			    // echo 'Message could not be sent.';

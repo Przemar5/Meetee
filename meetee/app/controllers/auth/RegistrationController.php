@@ -15,16 +15,15 @@ use Meetee\Libs\View\Utils\Notification;
 class RegistrationController extends ControllerTemplate
 {
 	private static string $tokenName = 'csrf_registration_token';
+	private array $errors = [];
 
-	public function page(?array $errors = []): void
+	public function page(): void
 	{
 		$token = TokenFactory::generate(self::$tokenName);
-		// $tokenTable = new TokenTable();
-		// $tokenTable->popOneWhere();
 
 		$this->render('auth/register', [
 			'token' => $token,
-			'errors' => $errors,
+			'errors' => $this->errors,
 		]);
 	}
 
@@ -61,7 +60,8 @@ class RegistrationController extends ControllerTemplate
 		$form = new RegistrationForm();
 
 		if (!$form->validate()) {
-			$this->page($form->getErrors());
+			$this->errors = $form->getErrors();
+			$this->page();
 			die;
 		}
 	}
@@ -76,7 +76,8 @@ class RegistrationController extends ControllerTemplate
 	private function successfulRegisterRequestValidationEvent(): void
 	{
 		$user = UserFactory::createAndSaveUserFromPostRequest();
-		EmailFacade::sendRegistrationConfirmEmail($user);
+		EmailFacade::sendRegistrationConfirmEmail(
+			$user, 'registration_confirm_email_token');
 		Notification::addSuccess('Check Your mailbox for an activation email!');
 		$this->redirect('login_page');
 	}
@@ -85,6 +86,7 @@ class RegistrationController extends ControllerTemplate
 	{
 		try {
 			$token = TokenFactory::popRegistrationConfirmEmailTokenIfRequestValid();
+			$token = TokenFactory::popIfRequestValid('registration_confirm_email_token');
 
 			if (!$token)
 				$this->redirect('registration_page');

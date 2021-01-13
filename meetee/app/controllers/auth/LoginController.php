@@ -17,8 +17,9 @@ class LoginController extends ControllerTemplate
 {
 	private static string $tokenName = 'csrf_login_token';
 	private ?User $user = null;
+	private array $errors = [];
 
-	public function page(?array $errors = []): void
+	public function page(): void
 	{
 		if (AuthFacade::getLoggedUser()) {
 			$router = RouterFactory::createComplete();
@@ -29,7 +30,7 @@ class LoginController extends ControllerTemplate
 
 		$this->render('auth/login', [
 			'token' => $token,
-			'errors' => $errors,
+			'errors' => $this->errors,
 		]);
 	}
 
@@ -80,7 +81,8 @@ class LoginController extends ControllerTemplate
 
 	private function returnPageWithError(string $msg): void
 	{
-		$this->page(['general' => $msg]);
+		$this->errors = ['general' => $msg];
+		$this->page();
 		die;
 	}
 
