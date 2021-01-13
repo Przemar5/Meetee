@@ -44,6 +44,7 @@ class TokenFactory
 		$token = new Token();
 		$token->name = $name;
 		$token->value = $_POST[$name];
+
 		$token->userId = $user->getId() ?? 0;
 
 		return $token;
@@ -55,11 +56,15 @@ class TokenFactory
 	): ?Token
 	{
 		$token = static::getFromRequest($name);
+
+		if (!$token)
+			return null;
+
 		$validator = new TokenValidator();
 		$valid = $validator->run([
 			'name' => $token->name,
 			'value' => $token->value,
-			'user_id' => $token->userId,
+			'user_id' => $token->userId ?? 0,
 		]);
 
 		if (!$valid)

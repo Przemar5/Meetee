@@ -77,7 +77,7 @@ class RegistrationController extends ControllerTemplate
 	{
 		$user = UserFactory::createAndSaveUserFromPostRequest();
 		EmailFacade::sendRegistrationConfirmEmail(
-			$user, 'registration_confirm_email_token');
+			'registration_confirm_email_token', $user);
 		Notification::addSuccess('Check Your mailbox for an activation email!');
 		$this->redirect('login_page');
 	}
@@ -85,8 +85,8 @@ class RegistrationController extends ControllerTemplate
 	public function verify(): void
 	{
 		try {
-			$token = TokenFactory::popRegistrationConfirmEmailTokenIfRequestValid();
-			$token = TokenFactory::popIfRequestValid('registration_confirm_email_token');
+			// $token = TokenFactory::popRegistrationConfirmEmailTokenIfRequestValid();
+			$token = TokenFactory::popIfRequestValid('registration_confirm_email_token', true);
 
 			if (!$token)
 				$this->redirect('registration_page');

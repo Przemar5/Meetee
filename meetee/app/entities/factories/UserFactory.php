@@ -21,6 +21,7 @@ abstract class UserFactory
 		$user->password = Hash::create(trim($_POST['password']));
 		$user->addRole(RoleFactory::createUserRole());
 		$table->save($user);
+		$user->setId($table->lastInsertId());
 
 		return $user;
 	}

@@ -1,8 +1,7 @@
 <?php
 
 require_once './vendor/autoload.php';
-
-require_once './config/emails.php';
+// require_once './config/emails.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -20,7 +19,7 @@ use Meetee\Libs\Database\Tables\RoleTable;
 use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Security\AuthFacade;
 
-// use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Factories\TokenFactory;
 
 
 spl_autoload_register(function($namespaceWithClass) {
@@ -40,7 +39,7 @@ function dd($data) {
 	die;
 }
 
-define('BASE_URI', 'http://localhost/files/projects/SocialNetwork/');
+define('BASE_URI', 'http://localhost/projects/Meetee/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 

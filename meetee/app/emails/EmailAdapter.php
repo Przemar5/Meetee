@@ -1,15 +1,30 @@
 <?php
 
-namespace Meetee\App\Emails\Controllers;
+namespace Meetee\App\Emails;
 
-use Meetee\App\Emails\Sendable;
-use Meetee\App\Emails\Email;
+use Meetee\Libs\View\ViewTemplate;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-class EmailController implements Sendable
+class EmailAdapter
 {
-	public function send(?array $data = []): void
+	public array $receivers; 
+	public string $subject;
+	public array $headers = [];
+	protected ?string $template = null;
+	protected ViewTemplate $view;
+
+	public function __construct(ViewTemplate $view)
+	{
+		$this->view = $view;
+	}
+
+	public function parseTemplate(string $path, ?array $args = []): void
+	{
+		$this->template = $this->view->getRendered($path, $args);
+	}
+
+	public function send(): void
 	{
 		try {
 			$mail = new PHPMailer();
@@ -17,28 +32,27 @@ class EmailController implements Sendable
 			$mail->SMTPDebug = 1;
 			$mail->SMTPAuth = true;
 			$mail->Host = 'smtp.gmail.com';
-			$mail->Subject = $data['subject'];
+			$mail->Subject = $this->subject;
 			$mail->Username = 'meetyea.app@gmail.com';
 			$mail->Password = '1qaz@WSX#EDC';
 			$mail->SMTPSecure = 'tls';
 			$mail->setFrom('meetyea.app@gmail.com', 'Meetyea');
 			$mail->addReplyTo('meetyea.app@gmail.com', 'Meetyea');
 	
-			foreach ($data['receivers'] as $user)
+			foreach ($this->receivers as $user)
 				$mail->addAddress($user->email, $user->login);
 	
-			// $mail->content = '<h1>Test mail using PHPMailer</h1>';
 			$mail->isHTML(true);
 			$mail->ContentType = 'text/html';
-			$mail->msgHTML($data['template']);
+			$mail->msgHTML($this->template);
 
 			if ($mail->send()) {
 			    echo 'Message has been sent';
 			    die;
 			}
 			else {
-			    // echo 'Message could not be sent.';
-			    // echo 'Mailer Error: ' . $mail->ErrorInfo;
+			    echo 'Message could not be sent.';
+			    echo 'Mailer Error: ' . $mail->ErrorInfo;
 			}
 		}
 		catch (\Exception $e) {

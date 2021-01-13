@@ -39,9 +39,9 @@ class User extends Entity
 
 	public function verify(): void
 	{
-		$this->setVerified(true);
+		$this->verified = true;
 		$this->addRole(RoleFactory::createVerifiedRole());
-		$this->save();
+		$this->table->save($this);
 	}
 
 	public function setId(int $id): void
