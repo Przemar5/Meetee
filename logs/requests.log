@@ -20243,3 +20243,786 @@ Method:	GET
 REMOTE USER:	::1
 Request:
 
+DATE:	2021.01.14 03:18:53
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:15:40
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:15:46
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:15:52
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:15:53
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: SFWmPrVTVpy6HQwmIQN2mCjrf6hANWaBzva238Zh74kwqL8crjabRCRQbkvM0R3y
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+
+DATE:	2021.01.14 11:15:54
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:15:58
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:16:01
+URI:	/settings/account
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:16:01
+URI:	/settings/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:16:01
+URI:	/settings/public/js/libs/http/Ajax.js
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:16:01
+URI:	/settings/public/js/index.js
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 11:22:45
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:17:13
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:36:51
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:36:53
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:38:02
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:38:05
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:38:44
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:40:25
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:42:12
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:44:51
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:46:00
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:47:06
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:47:22
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:47:32
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:47:37
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:47:46
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:48:37
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:49:05
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:54:47
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:55:03
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:55:28
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:56:14
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:56:35
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:56:47
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:57:04
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:57:12
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 12:59:44
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:00:05
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:01:10
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:01:16
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:01:57
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:02:07
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:02:13
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:02:19
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:02:58
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:03:04
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:04:48
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:04:57
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:05:57
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:06:18
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:08:28
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:08:41
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:08:50
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:11:16
+URI:	/settings/account
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:11:16
+URI:	/settings/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:11:16
+URI:	/settings/public/js/global.js
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:11:19
+URI:	/settings/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:13:51
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:14:44
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:15:15
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:15:26
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:15:38
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:16:00
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:24:18
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:24:28
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:25:04
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:26:05
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:26:14
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:26:27
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:26:35
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:27:54
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:28:10
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:28:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:28:47
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:29:10
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:29:58
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:31:33
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:32:08
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:33:22
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:33:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:34:10
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:34:38
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:35:23
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:35:41
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:36:16
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:37:23
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:37:37
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 13:54:04
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:05:53
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:06:02
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:06:19
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:14:53
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:15:12
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:15:12
+URI:	/public/js/libs/global.js
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:15:43
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:15:43
+URI:	/public/js/libs/global.js
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:16:33
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:17:22
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:18:48
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:19:14
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:19:14
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:19:22
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:19:22
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:19:46
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:19:47
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:20:08
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:20:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:20:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:21:14
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:21:14
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:21:42
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:21:50
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:21:50
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:22:07
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:22:07
+URI:	/
+Method:	undefined
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:22:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:22:56
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:23:14
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:23:43
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:23:55
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:24:38
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:25:28
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:28:11
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:28:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:28:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:29:00
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:29:12
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:29:32
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 14:29:32
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+

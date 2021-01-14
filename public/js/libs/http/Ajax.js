@@ -1,26 +1,24 @@
-let Ajax = (function () {
-	let xhr = new XMLHttpRequest()
-
-	this.get = (uri) => request('GET', uri)
-
-	this.post = (uri) => request('POST', uri)
-
-	let request = (method) => (uri) => {
-		return new Promise((resolve, reject) => {
-			xhr.open(method, uri)
-	    xhr.onload = () => resolve(xhr.responseText)
-	    xhr.onerror = () => reject(xhr.statusText)
-	    return xhr.send()
-	  })
+class Ajax {
+	constructor () {
+		this.xhr = new XMLHttpRequest()
 	}
-})
 
+	get (uri) {
+		return this.request('GET', uri)
+	}
 
+	post (uri) {
+		return this.request('POST', uri)
+	}
 
-var getUri = window.location;
-var baseUri = getUri.protocol + "//" + getUri.host + 
-	getUri.pathname.split('/').slice(0, 3).join('/');
+	request (method, uri) {
+		let callback = (resolve, reject) => {
+			this.xhr.open(method, uri)
+	    this.xhr.onload = () => resolve(this.xhr.responseText)
+	    this.xhr.onerror = () => reject(this.xhr.statusText)
+	    this.xhr.send()
+	  }
 
-
-ajax = new Ajax()
-console.log(ajax.get(baseUri).then(r => console.log(r)))
+		return new Promise(callback)
+	}
+}

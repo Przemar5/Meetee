@@ -1,0 +1,1 @@
+const Validator = new Interface('Validator', ['run'])

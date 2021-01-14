@@ -16,8 +16,9 @@
 			}
 		</style>
 
-		<script src="./public/js/index.js"></script>
+		<script src="./public/js/libs/global/Interface.js"></script>
 		<script src="./public/js/libs/http/Ajax.js"></script>
+		<script src="./public/js/libs/view/TemplateGenerator.js"></script>
 		
 		<?= $this->section('head'); ?>
 	</head>
