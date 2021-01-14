@@ -1,3 +1,3 @@
-let FormModel = (function () {
+export default class FormModel {
 	
-})
+}

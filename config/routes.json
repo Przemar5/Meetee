@@ -140,6 +140,13 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/settings/account",
+		"method": "POSTT",
+		"name": "settings_account_process",
+		"class": "SettingsController.accountProcess",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/settings/privacy",
 		"method": "GET",
 		"name": "settings_privacy_page",

@@ -1,7 +1,9 @@
-let FormController = (function () {
-	this.validators = []
-
-	this.validate = (data) => {
-		
+export default class FormController {
+	constructor () {
+		this.validators = []
 	}
-})
+
+	validate (data) {
+
+	}
+}

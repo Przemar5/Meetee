@@ -11,6 +11,9 @@ class RequestDataCollector
 		$content .= sprintf("Method:\t%s\r\n", $_SERVER['REQUEST_METHOD']);
 		$content .= sprintf("REMOTE USER:\t%s\r\n", $_SERVER['REMOTE_ADDR']);
 		$requestData = static::getRequestArrayData($_REQUEST);
+		$requestData .= sprintf("HEADERS:\r\n%s\r\n", 
+			static::getRequestArrayData(getallheaders()));
+
 		$content .= sprintf("Request:\r\n%s\n", $requestData);
 
 		return $content;

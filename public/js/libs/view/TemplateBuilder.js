@@ -1,7 +1,6 @@
-class TemplateGenerator {
+export default class TemplateBuilder {
 	constructor () {
 		this.template = null
-		this.html = false
 	}
 
 	reset () {
@@ -12,7 +11,11 @@ class TemplateGenerator {
 		this.template = html
 	}
 
-	isHtml () {
-		this.html = true
+	insert (data) {
+		this.data = data
+	}
+
+	build () {
+		//
 	}
 }

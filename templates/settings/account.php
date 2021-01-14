@@ -1,3 +1,8 @@
+<?php $this->startSection('head'); ?>
+
+<?php $this->endSection('head'); ?>
+
+
 <?php $this->startSection('body'); ?>
 
 Account

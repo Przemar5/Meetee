@@ -1,16 +1,13 @@
-let FormView = (function () {
-	let controller
-	let model
-
-	this.generate = () => {
+export default class  {
+	generate () {
 
 	}
 
-	this.toForm = (data) => {
+	toForm (data) {
 
 	}
 
-	this.toHtml = (data) => {
-		
+	toHtml (data) {
+
 	}
-})
+}

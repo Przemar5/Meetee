@@ -1,4 +1,4 @@
-class Ajax {
+export default class Ajax {
 	constructor () {
 		this.xhr = new XMLHttpRequest()
 	}

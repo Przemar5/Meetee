@@ -1,6 +1,4 @@
-class Interface {
-	'use strict'
-
+export default class Interface {
 	constructor (name, methods = [], properties = []) {
 		this.name = name
 		this.methods = []

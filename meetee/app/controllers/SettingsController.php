@@ -26,6 +26,11 @@ class SettingsController extends ControllerTemplate
 		]);
 	}
 
+	public function accountProcess(): void
+	{
+		$this->accountPage();
+	}
+
 	public function privacyPage(): void
 	{
 		$user = AuthFacade::getUser();
