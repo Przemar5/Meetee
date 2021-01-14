@@ -37,7 +37,7 @@ class EmailAdapter
 		try {
 			$mail = new PHPMailer();
 			$mail->isSMTP();
-			$mail->SMTPDebug = 1;
+			$mail->SMTPDebug = 0;
 			$mail->SMTPAuth = true;
 			$mail->Host = $this->host;
 			$mail->Subject = $this->subject;
@@ -53,15 +53,7 @@ class EmailAdapter
 			$mail->isHTML(true);
 			$mail->ContentType = 'text/html';
 			$mail->msgHTML($this->template);
-
-			if ($mail->send()) {
-			    echo 'Message has been sent';
-			    die;
-			}
-			else {
-			    echo 'Message could not be sent.';
-			    echo 'Mailer Error: ' . $mail->ErrorInfo;
-			}
+			$mail->send();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());

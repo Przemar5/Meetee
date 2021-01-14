@@ -54,6 +54,18 @@ catch (\Exception $e) {
 }
 
 
+
+
+// $view = new \Meetee\Libs\View\BrowserView();
+
+// ob_start();
+// require_once 'index2.php';
+// $v = ob_get_clean();
+
+
+
+
+
 // // Get token
 // // $token = TokenFactory::popIfRequestValid($name);
 // // dd($token);

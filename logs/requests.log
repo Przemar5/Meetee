@@ -18893,3 +18893,909 @@ Method:	GET
 REMOTE USER:	::1
 Request:
 
+DATE:	2021.01.14 00:01:50
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:13
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:17
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:18
+URI:	/logout
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:18
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:19
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:21
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: P9O4LrYm2KaFqBTnuSn3SkHArcgyYAtugBL8NB2wecGK3uicoRwdDbsldoNx9qF9
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+
+DATE:	2021.01.14 00:02:21
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:25
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:28
+URI:	/settings/privacy
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:28
+URI:	/settings/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:28
+URI:	/settings/public/js/index.js
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:29
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:33
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:35
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: oo53mhiuRZtxozVdNdbUAeqzPbiRHzDSiwZPXTNmvR6g8mzEUV9IPe4yDeK7KSqR
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+
+DATE:	2021.01.14 00:02:35
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:36
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:38
+URI:	/settings/account
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:38
+URI:	/settings/public/css/style.css
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:38
+URI:	/settings/public/js/index.js
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 00:02:45
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:02:36
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:03:16
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:03:50
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:03:57
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:04:11
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:04:17
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:04:25
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:04:42
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:12:52
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:12:56
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:13:04
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:13:22
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:13:39
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:15:00
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:15:31
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:15:38
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:15:42
+URI:	/register
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:15:47
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:15:58
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:16:06
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:16:39
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:18:59
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:19:10
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:19:18
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:20:20
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:29:23
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:29:42
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:29:58
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:30:31
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:30:56
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:31:13
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:31:30
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:31:38
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:31:58
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:33:38
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:41:37
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:41:46
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:42:06
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:42:34
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:42:49
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:44:04
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:46:48
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:47:04
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:47:31
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:47:52
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:47:58
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:50:14
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:50:21
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:50:41
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:51:01
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:51:13
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:51:17
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:52:30
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:52:46
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:52:59
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:53:17
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:53:41
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:53:58
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:56:41
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:56:41
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:57:39
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:57:39
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:57:49
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:57:49
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:57:59
+URI:	/register
+Method:	POST
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 01:58:00
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:23
+URI:	/reset-password
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:23
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:28
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:28
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:30
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: CTjqLHOjndIFs6bINJQUupZapLgKjE1TvDRVy5WYQ5xQ2bIpVSW7rRj65NapkD6S
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+
+DATE:	2021.01.14 02:07:30
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:35
+URI:	/settings
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:35
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:36
+URI:	/reset-password
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:37
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:39
+URI:	/reset-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_reset_password_token: nw6GhWiLXtJuqnVO169EbIQOL3fRFYnnN8RcVczug00n5QTYOzVy34ucvVE88IJ8
+	password: Password1!
+	repeat_password: Password1!
+
+DATE:	2021.01.14 02:07:39
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:39
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:42
+URI:	/logout
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:42
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:42
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:49
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:49
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:51
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:51
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:52
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:52
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:55
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:55
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:07:59
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:00
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:02
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:02
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:03
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:03
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:05
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:06
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:09
+URI:	/logout
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:10
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:12
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:12
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:39
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:39
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:41
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:08:41
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:09:17
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:09:17
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:09:19
+URI:	/register
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:09:19
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:09:27
+URI:	/forgot-password
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:09:27
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:09:30
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: YxT8EB9faTsYuLNkA7XDf443hvAT38Ud95MV7OPfFXv0ObzL5hGvYKEkMQ5hrpUY
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.14 02:10:20
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: YxT8EB9faTsYuLNkA7XDf443hvAT38Ud95MV7OPfFXv0ObzL5hGvYKEkMQ5hrpUY
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.14 02:10:20
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:10:22
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: mW7TsKNRhOVIjuEVUQhuDqyvkxaDWTIWPzX6QpowfzFdlUBTiDM1StCeEuNNEB5r
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.14 02:10:24
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:10:28
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: eAXQ1IKCUm63m1BVQ3C3QJRpSbeQzgkvfZIdlh4jmzVMGtIQkTeKgAfBgkvVKnUX
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.14 02:10:30
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:10:44
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: eAXQ1IKCUm63m1BVQ3C3QJRpSbeQzgkvfZIdlh4jmzVMGtIQkTeKgAfBgkvVKnUX
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.14 02:10:44
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:10:46
+URI:	/forgot-password
+Method:	POST
+REMOTE USER:	::1
+Request:
+	forgot_password_token: DeLBSRhfpIf3JvOGIRteIYegxlP5XtiKQn2kn3do7GUGEor1DnHeCB6fd25msiXl
+	email: 1234567890localhost@gmail.com
+
+DATE:	2021.01.14 02:10:47
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:10:55
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+
+DATE:	2021.01.14 02:10:56
+URI:	/
+Method:	GET
+REMOTE USER:	::1
+Request:
+

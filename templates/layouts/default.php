@@ -17,13 +17,14 @@
 		</style>
 
 		<script src="./public/js/index.js"></script>
+		<script src="./public/js/libs/http/Ajax.js"></script>
 		
 		<?= $this->section('head'); ?>
 	</head>
 	<body>
-		<?php $this->success(); ?>
-
 		<?= $this->render('includes/navbar'); ?>
+
+		<?php $this->success(); ?>
 
 		<?= $this->section('body'); ?>
 	</body>
