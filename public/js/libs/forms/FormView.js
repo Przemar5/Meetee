@@ -1,6 +1,6 @@
 export default class  {
 	generate () {
-
+		
 	}
 
 	toForm (data) {

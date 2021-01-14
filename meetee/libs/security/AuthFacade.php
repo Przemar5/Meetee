@@ -15,7 +15,7 @@ class AuthFacade
 	public static function getUser(): User
 	{
 		$id = Session::get('user_id');
-		
+
 		if (!preg_match('/^[1-9][0-9]*$/', $id))
 			return new NullUser();
 

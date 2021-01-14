@@ -1,39 +1,41 @@
 <?php $this->startSection('head'); ?>
-
+<script type="module" src="./public/js/app/pages/settings/account.js"></script>
 <?php $this->endSection('head'); ?>
 
 
 <?php $this->startSection('body'); ?>
 
+
+
 Account
 
-<label>
+<label id="userName" class="toggable-form">
 	Name: <?= $user->name ?? ''; ?>
 	<button>Change</button>
 </label>
 
-<label>
+<label id="userSecondName" class="toggable-form">
 	Second name: <?= $user->name ?? ''; ?>
 	<button>Change</button>
 </label>
 
-<label>
+<label id="userSurname" class="toggable-form">
 	Surname: <?= $user->surname ?? ''; ?>
 	<button>Change</button>
 </label>
 
-<label>
+<label id="userLogin" class="toggable-form">
 	Login: <?= $user->login ?? ''; ?>
 	<button>Change</button>
 </label>
 
-<label>
+<label id="userEmail" class="toggable-form">
 	Email: <?= $user->email ?? ''; ?>
 	<button>Change</button>
 </label>
 
-<label>
-	Birth: <?= $user->birth ?? ''; ?>
+<label id="userBirth" class="toggable-form">
+	Birth: <?= $user->getBirth()->format('M j, Y') ?? ''; ?>
 	<button>Change</button>
 </label>
 

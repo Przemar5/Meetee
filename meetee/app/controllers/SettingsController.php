@@ -20,7 +20,7 @@ class SettingsController extends ControllerTemplate
 	public function accountPage(): void
 	{
 		$user = AuthFacade::getUser();
-
+		
 		$this->render('settings/account', [
 			'user' => $user,
 		]);

@@ -133,24 +133,17 @@
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/settings/account",
+		"pattern": "/account",
 		"method": "GET",
 		"name": "settings_account_page",
-		"class": "SettingsController.accountPage",
+		"class": "Settings\\AccountController.page",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/settings/account",
-		"method": "POSTT",
-		"name": "settings_account_process",
-		"class": "SettingsController.accountProcess",
-		"access": ["VERIFIED"]
-	},
-	{
-		"pattern": "/settings/privacy",
+		"pattern": "/privacy",
 		"method": "GET",
 		"name": "settings_privacy_page",
-		"class": "SettingsController.privacyPage",
+		"class": "Settings\\PrivacyController.page",
 		"access": ["VERIFIED"]
 	}
 ]

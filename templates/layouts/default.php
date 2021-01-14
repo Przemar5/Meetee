@@ -16,7 +16,10 @@
 			}
 		</style>
 
+		<!-- development version, includes helpful console warnings -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
 		<script type="module" src="./public/js/init.js"></script>
+		<script type="module" src="./public/js/libs/security/validation/validation.js"></script>
 		
 		<?= $this->section('head'); ?>
 	</head>
