@@ -120,6 +120,9 @@ const isNotLonger = (number) => (value) => isString(value) &&
 const lengthBetween = (min, max) => (value) => isString(value) && 
 	isNumber(number) && between(min, max)(value.length)
 
+const exactLength = (number) => (value) => isString(value) && 
+	isNumber(number) && equals(number)(value.length)
+
 const matches = (pattern) => (value) => isString(value) && 
 	notNull(value.match(pattern))
 

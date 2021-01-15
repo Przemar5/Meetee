@@ -61,11 +61,12 @@
 
 	<script>
 		const birth = document.querySelector('input[name="birth"]')
-		birth.addEventListener('keyup', (e) => console.log(e.target.value))
+		birth.value = '2000-01-01'
 
 		const namesAndValidators = [
 			['name', userNameValidator],
 			['surname', userSurnameValidator],
+			// ['birth', userBirthValidator]
 			['password', userPasswordValidator]
 		]
 		namesAndValidators.forEach(fieldNameAndValidatorHandler)

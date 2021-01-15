@@ -16,6 +16,15 @@ let userSurnameValidator = validForAll([
 	[matches(/^[\w^_\-\d]+$/u), 'Surname may contain only alpha characters.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
+let userSurnameValidator = validForAll([
+	[isDefined, ''],
+	[notNull, ''],
+	[isString, ''],
+	[exactLength(10), ''],
+	[match(/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|(3[0-1]))$/), 
+		'Invalid format. Please try again.'],
+].map((v) => validOrThrow(v[0])(v[1])))
+
 // Regex not working
 let userPasswordValidator = validForAll([
 	[isDefined, 'Password is required.'],
@@ -28,3 +37,8 @@ let userPasswordValidator = validForAll([
 		'a number and special character.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
+
+		// $validators[] = ValidatorFactory::createDateAfterValidator(
+		// 	'-100 years', 'You are too old.');
+		// $validators[] = ValidatorFactory::createDateBeforeValidator(
+		// 	'-5 years', 'You are too young.');
