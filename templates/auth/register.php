@@ -7,37 +7,49 @@
 	<label>
 		Login
 		<input type="text" name="login" value="<?= $_POST['login'] ?? ''; ?>">
-		<?php $this->error('login'); ?>
+		<small class="error-msg">
+			<?php $this->error('login'); ?>
+		</small>
 	</label>
 
 	<label>
 		Email
 		<input type="text" name="email" value="<?= $_POST['email'] ?? ''; ?>">
-		<?php $this->error('email'); ?>
+		<small class="error-msg">
+			<?php $this->error('email'); ?>
+		</small>
 	</label>
 
 	<label>
 		Name
 		<input type="text" name="name" value="<?= $_POST['name'] ?? ''; ?>">
-		<?php $this->error('name'); ?>
+		<small class="error-msg">
+			<?php $this->error('name'); ?>
+		</small>
 	</label>
 
 	<label>
 		Surname
 		<input type="text" name="surname" value="<?= $_POST['surname'] ?? ''; ?>">
-		<?php $this->error('surname'); ?>
+		<small class="error-msg">
+			<?php $this->error('surname'); ?>
+		</small>
 	</label>
 
 	<label>
 		Birth
 		<input type="date" name="birth" value="<?= $_POST['birth'] ?? ''; ?>">
-		<?php $this->error('birth'); ?>
+		<small class="error-msg">
+			<?php $this->error('birth'); ?>
+		</small>
 	</label>
 
 	<label>
 		Password
 		<input type="password" name="password" value="Password1!">
-		<?php $this->error('password'); ?>
+		<small class="error-msg">
+			<?php $this->error('password'); ?>
+		</small>
 	</label>
 
 	<label>
@@ -46,6 +58,18 @@
 	</label>
 
 	<button type="submit">Register</button>
+
+	<script>
+		const birth = document.querySelector('input[name="birth"]')
+		birth.addEventListener('keyup', (e) => console.log(e.target.value))
+
+		const namesAndValidators = [
+			['name', userNameValidator],
+			['surname', userSurnameValidator],
+			['password', userPasswordValidator]
+		]
+		namesAndValidators.forEach(fieldNameAndValidatorHandler)
+	</script>
 
 	<p>
 		Already have an account? 

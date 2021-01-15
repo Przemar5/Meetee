@@ -50,7 +50,7 @@ class BrowserView extends ViewTemplate
 		$msg = Notification::popSuccess();
 
 		if ($msg)
-			printf('<small>%s</small>', $msg);
+			printf('%s', $msg);
 	}
 
 	private function isGranted(string $role): bool

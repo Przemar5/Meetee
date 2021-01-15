@@ -1,6 +1,5 @@
 import Ajax from './libs/http/Ajax.js'
 import Interface from './libs/global/Interface.js'
-import Validator from './libs/security/validation/Validator.js'
 import TemplateBuilder from './libs/view/TemplateBuilder.js'
 
 let getUri = window.location

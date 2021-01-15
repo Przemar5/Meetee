@@ -38,23 +38,23 @@ const validForAll = (funcs) => (value) => {
 
 // Specific
 
-const isDefined = notType(undefined)
+const isDefined = (value) => notType(undefined)(value)
 
-const notNull = notType(null)
+const notNull = (value) => notType(null)(value)
 
 const notEmpty = (value) => value !== '' && value !== []
 
-const isString = isType('string')
+const isString = (value) => isType('string')(value)
 
-const isNumber = isType('number')
+const isNumber = (value) => isType('number')(value)
 
-const isObject = isType('object')
+const isObject = (value) => isType('object')(value)
 
-const isArray = isInstance(Array)
+const isArray = (value) => isInstance(Array)(value)
 
-const isFunction = isInstance(Function)
+const isFunction = (value) => isInstance(Function)(value)
 
-const sameType = (first) => (second) => getType(first) === getType(second)
+const sameType = (a) => (b) => getType(a) === getType(b)
 
 const allAreType = (type) => (array) => isArray(array) && isString(type) && 
 	allValid(isType(type))(array)
@@ -84,7 +84,9 @@ const notLess = (a) => (b) => b >= a
 
 const notMore = (a) => (b) => b <= a
 
-const bothAreTypeAnd = (type) => (func) => (a) => (b) => bothAreType(type)(a)(b) && func(a)(b)
+const bothAreTypeAnd = (type) => (func) => (a) => (b) => {
+	return bothAreType(type)(a)(b) && func(a)(b)
+}
 
 const bothStringsAnd = (func) => (a) => (b) => bothAreTypeAnd('string')(func)(a)(b)
 
@@ -100,10 +102,30 @@ const isNotGreater = (number) => (value) => bothNumbersAnd(notMore)(number)(valu
 
 const isNotLess = (number) => (value) => bothNumbersAnd(notLess)(number)(value)
 
-const isShorter = (number) => (value) => bothStringsAnd(less)(number)(value)
+const isBetween = (min, max) => (value) => allValid(isNumber)([min, max, value]) && 
+	isNotLess(min)(value) && isNotGreater(max)(value)
 
-const isLonger = (number) => (value) => bothStringsAnd(more)(number)(value)
+const isShorter = (number) => (value) => isString(value) && 
+	isNumber(number) && less(number)(value.length)
 
-const isNotShorter = (number) => (value) => bothStringsAnd(notLess)(number)(value)
+const isLonger = (number) => (value) => isString(value) && 
+	isNumber(number) && more(number)(value.length)
 
-const isNotLonger = (number) => (value) => bothStringsAnd(notMore)(number)(value)
+const isNotShorter = (number) => (value) => isString(value) && 
+	isNumber(number) && notLess(number)(value.length)
+
+const isNotLonger = (number) => (value) => isString(value) && 
+	isNumber(number) && notMore(number)(value.length)
+
+const lengthBetween = (min, max) => (value) => isString(value) && 
+	isNumber(number) && between(min, max)(value.length)
+
+const matches = (pattern) => (value) => isString(value) && 
+	notNull(value.match(pattern))
+
+// Specific validators
+
+const validOrThrow = (validator) => (msg) => (a) => {
+	if (validator(a)) return true
+	throw new Error(msg)
+}

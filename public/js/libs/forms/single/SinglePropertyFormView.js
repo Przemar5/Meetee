@@ -5,6 +5,7 @@ export default class SinglePropertyFormView extends FormView {
 		let label = document.createElement('label')
 		label.setAttribute('id', data['id'])
 		label.innerText = 'Hello!'
+		label.
 			
 		return label
 	}
