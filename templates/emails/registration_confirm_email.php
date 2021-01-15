@@ -4,6 +4,8 @@
 
 	<p>Here is a link for activating Your account.</p>
 
+	<p>By clicking it You will be redirected to our page.</p>
+
 	<form action="<?= $route; ?>" method="POST">
 		<p>Click a link below and You're ready to login!</p>
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">

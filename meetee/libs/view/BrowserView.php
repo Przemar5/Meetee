@@ -25,7 +25,7 @@ class BrowserView extends ViewTemplate
 	private function error(string $name): void
 	{
 		if (isset($this->args['errors']) && isset($this->args['errors'][$name]))
-			printf('<small>%s</small>', $this->args['errors'][$name]);
+			printf('%s', $this->args['errors'][$name]);
 	}
 
 	private function allErrors(): void

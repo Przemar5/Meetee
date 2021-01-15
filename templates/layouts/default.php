@@ -19,6 +19,7 @@
 		<!-- development version, includes helpful console warnings -->
 		<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
 		<script type="module" src="./public/js/init.js"></script>
+		<script src="./public/js/libs/DateAdapter.js"></script>
 		<script src="./public/js/libs/security/validation/validation.js"></script>
 		<script src="./public/js/libs/security/validation/template.js"></script>
 		<script src="./public/js/libs/security/validation/form_validation.js"></script>

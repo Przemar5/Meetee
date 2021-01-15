@@ -1,4 +1,4 @@
-let userNameValidator = validForAll([
+const userNameValidator = validForAll([
 	[isDefined, 'Name is required.'],
 	[notNull, 'Name cannot be empty.'],
 	[isString, ''],
@@ -7,7 +7,7 @@ let userNameValidator = validForAll([
 	[matches(/^[\w^_\d]+$/u), 'Name may contain only alpha characters.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
-let userSurnameValidator = validForAll([
+const userSurnameValidator = validForAll([
 	[isDefined, 'Surname is required.'],
 	[notNull, 'Surname isrequired'],
 	[isString, ''],
@@ -16,17 +16,21 @@ let userSurnameValidator = validForAll([
 	[matches(/^[\w^_\-\d]+$/u), 'Surname may contain only alpha characters.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
-let userSurnameValidator = validForAll([
-	[isDefined, ''],
-	[notNull, ''],
+const userBirthValidator = validForAll([
+	[isDefined, 'Birth date is required.'],
+	[notNull, 'Birth date is required.'],
 	[isString, ''],
 	[exactLength(10), ''],
-	[match(/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|(3[0-1]))$/), 
+	[matches(/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|(3[0-1]))$/), 
 		'Invalid format. Please try again.'],
+	[notMore(DateAdapter.getStringFromInterval('-5 years')),
+		'You are too young.'],
+	[notLess(DateAdapter.getStringFromInterval('-100 years')),
+		'You are too old.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
 // Regex not working
-let userPasswordValidator = validForAll([
+const userPasswordValidator = validForAll([
 	[isDefined, 'Password is required.'],
 	[notNull, 'Password isrequired'],
 	[isString, ''],
@@ -37,8 +41,4 @@ let userPasswordValidator = validForAll([
 		'a number and special character.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
-
-		// $validators[] = ValidatorFactory::createDateAfterValidator(
-		// 	'-100 years', 'You are too old.');
-		// $validators[] = ValidatorFactory::createDateBeforeValidator(
-		// 	'-5 years', 'You are too young.');
+const nullValidator = (v) => true

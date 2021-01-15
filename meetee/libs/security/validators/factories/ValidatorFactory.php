@@ -13,6 +13,8 @@ use Meetee\Libs\Security\Validators\MaxLengthValidator;
 use Meetee\Libs\Security\Validators\ExactLengthValidator;
 use Meetee\Libs\Security\Validators\DateBeforeValidator;
 use Meetee\Libs\Security\Validators\DateAfterValidator;
+use Meetee\Libs\Security\Validators\DateNotBeforeValidator;
+use Meetee\Libs\Security\Validators\DateNotAfterValidator;
 use Meetee\Libs\Security\Validators\PatternValidator;
 use Meetee\Libs\Security\Validators\NotExistValidator;
 use Meetee\Libs\Security\Validators\EmailValidator;
@@ -158,6 +160,30 @@ class ValidatorFactory
 		$validator = new DateAfterValidator();
 		$validator->errorMsg = $errorMsg;
 		$validator->setLowerBound(new \DateTime($lowerBound));
+
+		return $validator;
+	}
+
+	public static function createDateNotBeforeValidator(
+		string $lowerBound,
+		?string $errorMsg = ''
+	): DateNotBeforeValidator
+	{
+		$validator = new DateNotBeforeValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setLowerBound(new \DateTime($lowerBound));
+
+		return $validator;
+	}
+
+	public static function createDateNotAfterValidator(
+		string $upperBound,
+		?string $errorMsg = ''
+	): DateNotAfterValidator
+	{
+		$validator = new DateNotAfterValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setUpperBound(new \DateTime($upperBound));
 
 		return $validator;
 	}
