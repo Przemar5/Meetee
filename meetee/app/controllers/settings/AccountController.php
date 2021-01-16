@@ -5,9 +5,11 @@ namespace Meetee\App\Controllers\Settings;
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Http\CurrentRequestFacade;
+use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
 
 class AccountController extends ControllerTemplate
 {
@@ -27,14 +29,41 @@ class AccountController extends ControllerTemplate
 	public function process(): void
 	{
 		$user = AuthFacade::getUser();
-		$this->returnToPageIfTokenInvalid(self::$tokenName, $user);
-
-		$request = CurrentRequestFacade::getAjax();
-
 		$token = TokenFactory::getFromAjax(self::$tokenName);
+		$validator = new TokenValidator();
+		$data = [
+			'name' => $token->name,
+			'value' => $token->value,
+		];
+		
+		if (!$validator->run($data))
+			die;
+
+		$table = new TokenTable();
+		$token = $table->getValidBy($data);
+
+		if ($token->userId !== $user->getId())
+			die;
 
 		dd($token);
 
+		$request = CurrentRequestFacade::getAjax();
+		$this->dispatchRequestHandling($request);
+		// $this->returnToPageIfTokenInvalid(self::$tokenName, $user);
+
+
+		// $token = TokenFactory::getByNameIfAjaxValid(self::$tokenName);
+
+		// dd($token);
+
+		
+
+		// echo json_encode($output);
+		// die;
+	}
+
+	private function dispatchRequestHandling(array $data): void
+	{
 		$data = [
 			'login' => $user->login,
 			'email' => $user->email,
@@ -42,21 +71,7 @@ class AccountController extends ControllerTemplate
 			'surname' => $user->surname,
 			'birth' => $user->getBirth(),
 		];
-
-		echo json_encode($output);
-		die;
-
-
-		// try {
-		// 	$this->trimValues();
-		// 	$this->returnToPageIfTokenInvalid(self::$tokenName);
-		// 	$this->returnToPageWithErrorsIfFormDataInvalid();
-			
-		// 	$this->successfulRequestValidationEvent();
-		// }
-		// catch (\Exception $e) {
-		// 	die($e->getMessage());
-		// }
+		dd($data);
 	}
 
 	private function trimValues(): void
@@ -65,34 +80,4 @@ class AccountController extends ControllerTemplate
 			if (is_string($value))
 				$_POST[$key] = trim($value);
 	}
-
-	private function returnToPageIfTokenInvalid(string $name, User $user): void
-	{
-		// if (!TokenFactory::popIfAjaxRequestValidByNameAndUser($name, $user)) {
-		// 	die;
-		// }
-	}
-
-	// private function returnToPageWithErrorsIfFormDataInvalid(): void
-	// {
-	// 	$form = new LoginForm();
-
-	// 	if (!$form->validate())
-	// 		$this->returnPageWithError('Invalid credentials. Please try again.');
-
-	// 	$table = new UserTable();
-	// 	$this->user = $table->findOneBy([
-	// 		'email' => $_POST['email'],
-	// 	]);
-		
-	// 	if (!$this->user)
-	// 		$this->returnPageWithError('Invalid credentials. Please try again.');
-
-	// 	if (!Hash::verify($_POST['password'], $this->user->password))
-	// 		$this->returnPageWithError('Invalid credentials. Please try again.');
-
-	// 	if (!$this->user->verified)
-	// 		$this->returnPageWithError(
-	// 			$this->getResendVerificationEmailMessage());
-	// }
 }

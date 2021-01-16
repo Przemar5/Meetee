@@ -4,6 +4,7 @@ namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\UserFactory;
 use Meetee\App\Forms\RegistrationForm;
 use Meetee\App\Entities\User;
@@ -53,7 +54,7 @@ class ResendRegistrationEmailController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFactory::popIfRequestValidByNameAndUser($name)) {
+		if (!TokenFacade::popTokenIfValidByName($name)) {
 			$this->page();
 			die;
 		}

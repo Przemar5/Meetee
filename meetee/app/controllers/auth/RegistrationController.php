@@ -3,6 +3,7 @@
 namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
+use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\Factories\UserFactory;
 use Meetee\App\Forms\RegistrationForm;
@@ -49,7 +50,7 @@ class RegistrationController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFactory::popIfRequestValidByNameAndUser($name)) {
+		if (!TokenFacade::popTokenIfValidByName($name)) {
 			$this->page();
 			die;
 		}
@@ -85,8 +86,7 @@ class RegistrationController extends ControllerTemplate
 	public function verify(): void
 	{
 		try {
-			// $token = TokenFactory::popRegistrationConfirmEmailTokenIfRequestValid();
-			$token = TokenFactory::popIfRequestValidByNameAndUser(
+			$token = TokenFacade::popTokenIfValidByNameAndUser(
 				'registration_confirm_email_token');
 
 			if (!$token)
@@ -103,6 +103,8 @@ class RegistrationController extends ControllerTemplate
 			die($e->getMessage());
 		}
 	}
+
+	private function redirectToPageIf()
 
 	private function successfulVerificationRequestValidationEvent(
 		User $user

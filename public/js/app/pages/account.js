@@ -59,6 +59,7 @@ const submit = (name, value) => {
 	// route = RouteDispatcher.routes['settings_account_process'].uri
 	// route
 	data = encodeQueryData(data)
+	
 	ajax.post(route, data)
 		.then((msg) => console.log(msg))
 }
@@ -76,36 +77,3 @@ const encodeQueryData = (data) => {
      ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
    return ret.join('&');
 }
-
-// let 
-
-// let formView = new SinglePropertyFormView()
-// console.log(formView.generate({id: 4}))
-
-// let nameForm = new FormView()
-// nameForm
-// let template = new TemplateBuilder()
-// template.reset()
-// template.generate()
-
-// let template = document.createElement('div')
-// template.append('a')
-
-
-// const getAreas = (labels) => {
-// 	let result = []
-// 	for (let i in labels) result[labels[i]] = document.getElementById(labels[i])
-// 	return result
-// }
-
-// const inputAreas = getAreas(labels)
-
-// Object.values(inputAreas).forEach(label => label
-// 	.querySelector('button')
-// 	.addEventListener('click', (e) => {
-// 		console.log(e.target.closest('label'))
-// 	})
-// )
-
-
-// console.log(inputAreas)

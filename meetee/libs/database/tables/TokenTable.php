@@ -15,11 +15,15 @@ class TokenTable extends TableTemplate
 
 	public function getValidByToken(Token $token): ?Token
 	{
-		return $this->getValiBy([
+		$data = [
 			'name' => $token->name,
 			'value' => $token->value,
-			'user_id' => $token->userId,
-		]);
+		];
+		
+		if (isset($token->userId))
+			$data['user_id'] = $token->userId;
+
+		return $this->getValiBy($data);
 	}
 
 	public function getValidBy(array $conditions): ?Token

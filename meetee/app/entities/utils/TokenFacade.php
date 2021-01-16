@@ -2,52 +2,117 @@
 
 namespace Meetee\App\Entities\Utils;
 
+use Meetee\App\Entities\User;
 use Meetee\App\Entities\Token;
+use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\Libs\Security\AuthFacade;
 
 class TokenFacade
 {
-	public static function getIfRequestValid(string $name, bool $ignoreUserId): ?Token
+	public static function getTokenIfValidByNameAndUser(
+		string $name,
+		?User $user = null
+	): ?Token
 	{
-		$token = TokenFactory::getFromRequest($name);
-
-		if (!static::validate($token))
+		$token = TokenFactory::getFromAjax($name);
+		
+		if (!$token || !static::tokenValidates($token))
 			return null;
 
-		$data = [];
-		$data['name'] = $token->getName();
-		$data['value'] = $token->getValue();
+		$data = static::serializeToken($token, $user);
+		$table = new TokenTable();
+		$token = $table->getValidByToken($token);
 
-		if (!$ignoreUserId)
-			$data['user_id'] = $token->getUserId();
+		if ($user && !empty($token->userId) && 
+			$token->userId !== $user->getId())
+			return null;
 
-		return $token->pop();
+		return $token;
 	}
 
-	public static function validate(
-		string $name, 
-		?string $method = 'POST'
-	): bool
+	public static function popTokenIfValidByName(string $name): ?Token
 	{
-		$token = TokenFactory::getFromRequest($name);
-		$method = self::getGlobalByMethod($method);
+		return static::popTokenIfValidByNameAndUser($name, null);
+	}
+
+	public static function popTokenIfValidByNameAndUser(
+		string $name,
+		?User $user = null
+	): ?Token
+	{
+		$token = TokenFactory::getFromPostRequest($name);
+
+		if (!$token || !static::tokenValidates($token))
+			return null;
+
+		$data = static::serializeToken($token, $user);
+		$table = new TokenTable();
+
+		if ($user && !empty($token->userId) && 
+			$token->userId !== $user->getId())
+			return null;
+
+		return $table->popValidBy($data);
+	}
+
+	public static function serializeToken(Token $token, ?User $user = null): array
+	{
+		$data = [];
+		$data['name'] = $token->name;
+		$data['value'] = $token->value;
+		
+		if ($user)
+			$data['user_id'] = (!empty($user->getId())) ? $user->getId() : 0;
+
+		return $data;
+	}
+
+	public static function getTokenIfValidByNameAndCurrentUser(
+		string $name
+	): ?Token
+	{
+		return static::getTokenIfValidByNameAndUser($name, AuthFacade::getUser());
+	}
+
+	private static function tokenValidates(Token $token): bool
+	{
 		$validator = new TokenValidator();
-		$values = [
-			'name' => $token->getName(),
-			'value' => $token->getValue(),
-			'user_id' => $token->getUserId(),
+		$data = [
+			'name' => $token->name,
+			'value' => $token->value,
 		];
 
-		return $validator->run($values);
+		return $validator->run($data);
 	}
 
-	private static function getGlobalByMethod(string $method): array
+	private static function getTokenFromDatabaseBy(array $data): ?Token
 	{
-		switch ($method) {
-			case 'GET': 	return $_GET;
-			case 'POST': 	return $_POST;
-			default: 		return $_GET;
-		}
+		$table = new TokenTable();
+		
+		return $table->getValidBy($data);
 	}
+
+	// generate
+	// get token from array 
+	// get token from array by user
+	// get token from array by logged user
+
+	// get token from get request
+	// get token from get request for user
+	// get token from get request for logged user
+	// get token from post request
+	// get token from post request for user
+	// get token from post request for logged user
+	// get token from ajax request
+	// get token from ajax request for user
+	// get token from ajax request for logged user
+
+
+	// pop token from request
+	// pop token from request for user
+	// pop token from request for logged user
+
+
 }

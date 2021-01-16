@@ -4,6 +4,7 @@ namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Utils\TokenFacadey;
 use Meetee\App\Entities\Factories\UserFactory;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\UserTable;
@@ -52,7 +53,7 @@ class DeleteAccountController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFactory::popIfRequestValidByNameAndUser(
+		if (!TokenFacade::popIfRequestValidByNameAndUser(
 			$name, AuthFacade::getUser())) {
 
 			$this->page();

@@ -4,6 +4,7 @@ namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
@@ -47,7 +48,7 @@ class ForgotPasswordController extends ControllerTemplate
 		?User $user = null
 	): void
 	{
-		if (!TokenFactory::popIfRequestValidByNameAndUser($name, $user)) {
+		if (!TokenFacade::popTokenIfValidByNameAndUser($name, $user)) {
 			$this->page();
 			die;
 		}
@@ -92,7 +93,7 @@ class ForgotPasswordController extends ControllerTemplate
 	public function verify(): void
 	{
 		try {
-			$token = TokenFactory::popIfRequestValidByNameAndUser(
+			$token = TokenFacade::popTokenIfValidByNameAndUser(
 				self::$emailTokenName);
 
 			if (!$token)
@@ -114,7 +115,12 @@ class ForgotPasswordController extends ControllerTemplate
 	{
 		$this->user->verify();
 		AuthFacade::login($this->user);
+		$this->redirect('reset_password_page');
+	}
+
+	private function redirect(string $route): void
+	{
 		$router = RouterFactory::createComplete();
-		$router->redirectTo('reset_password_page');
+		$router->redirectTo($route);
 	}
 }

@@ -45,7 +45,7 @@ class LoginController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFactory::popIfRequestValidByNameAndUser($name)) {
+		if (!TokenFacade::popTokenIfValidByName($name)) {
 			$this->page();
 			die;
 		}

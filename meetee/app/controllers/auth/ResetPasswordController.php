@@ -3,8 +3,9 @@
 namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
-use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\UserFactory;
+use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
@@ -53,7 +54,7 @@ class ResetPasswordController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFactory::popIfRequestValidByNameAndUser(
+		if (!TokenFacade::popTokenIfValidByNameAndUser(
 			$name, AuthFacade::getUser())) {
 
 			$this->page();

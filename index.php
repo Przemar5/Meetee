@@ -37,7 +37,7 @@ function dd($data) {
 	die;
 }
 
-define('BASE_URI', 'http://localhost/projects/Meetee/');
+define('BASE_URI', 'http://localhost/files/projects/Meetee/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
