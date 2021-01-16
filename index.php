@@ -19,8 +19,6 @@ use Meetee\Libs\Database\Tables\RoleTable;
 use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Security\AuthFacade;
 
-use Meetee\App\Entities\Factories\TokenFactory;
-
 
 spl_autoload_register(function($namespaceWithClass) {
 	$parts = explode('\\', $namespaceWithClass);

@@ -8,6 +8,7 @@ use Meetee\App\Entities\User;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
 use Meetee\Libs\Utils\RandomStringGenerator;
+use Meetee\Libs\Http\CurrentRequestFacade;
 
 class TokenFactory
 {
@@ -51,61 +52,61 @@ class TokenFactory
 	{
 		$token = static::getFromRequest($name);
 
-		if (!$token)
+		if (!$token || !static::tokenValidates($token))
 			return null;
 
-		$userId = (!is_null($user) && !empty($user->getId())) ? $user->getId() : 0;
-
-		$validator = new TokenValidator();
-		$valid = $validator->run([
-			'name' => $token->name,
-			'value' => $token->value,
-		]);
-
-		if (!$valid)
-			return null;
-
-		$data = [];
-		$data['name'] = $token->name;
-		$data['value'] = $token->value;
-		
-		if ($user)
-			$data['user_id'] = $userId;
-
+		$data = static::tokenToData($token, $user);
 		$tokenTable = new TokenTable();
 
 		return $tokenTable->popValidBy($data);
 	}
 
-	public static function popIfRequestValid(
-		string $name, 
-		bool $ignoreUserId = false
-	): ?Token
+	private static function tokenValidates(Token $token): bool
 	{
-		$token = static::getFromRequest($name);
-
-		if (!$token)
-			return null;
-
 		$validator = new TokenValidator();
-		$valid = $validator->run([
+		
+		return $validator->run([
 			'name' => $token->name,
 			'value' => $token->value,
 		]);
+	}
 
-		if (!$valid)
-			return null;
-
+	private static function tokenToArray(Token $token, ?User $user = null): array
+	{
 		$data = [];
 		$data['name'] = $token->name;
 		$data['value'] = $token->value;
 		
-		if (!$ignoreUserId)
-			$data['user_id'] = $token->userId;
+		if ($user) {
+			$userId = (!is_null($user) && !empty($user->getId())) 
+				? $user->getId() : 0;
+			$data['user_id'] = $userId;
+		}
 
-		$tokenTable = new TokenTable();
+		return $data;
+	}
 
-		return $tokenTable->popValidBy($data);
+	public static function popIfAjaxRequestValidByNameAndUser(
+		string $name, 
+		User $user
+	): ?Token
+	{
+
+	}
+
+	public static function getFromAjax(string $name): ?Token
+	{
+		$data = CurrentRequestFacade::getAjax();
+
+		if (isset($data[$name])) {
+			$token = new Token();
+			$token->name = $name;
+			$token->value = $data[$name];
+
+			return $token;
+		}
+
+		return null;
 	}
 
 	public static function generateResetPasswordEmailToken(User $user): ?Token
@@ -125,11 +126,12 @@ class TokenFactory
 
 	public static function popRegistrationConfirmEmailTokenIfRequestValid(): ?Token
 	{
-		return static::popIfRequestValid('registration_email_verify', true);
+		return static::popIfRequestValidByNameAndUser(
+			'registration_email_verify');
 	}
 
 	// public static function popRegistrationConfirmEmailTokenIfRequestValid(): ?Token
 	// {
-	// 	return static::popIfRequestValid('registration_confirm_email_token', true);
+	// 	return static::popIfRequestValidByNameAndUser('registration_confirm_email_token');
 	// }
 }

@@ -3,6 +3,7 @@
 namespace Meetee\App\Controllers\Settings;
 
 use Meetee\App\Controllers\ControllerTemplate;
+use Meetee\App\Entities\User;
 use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
@@ -25,10 +26,15 @@ class AccountController extends ControllerTemplate
 
 	public function process(): void
 	{
-		parse_str(file_get_contents("php://input"), $output);
-		dd(CurrentRequestFacade::getAjax());
-
 		$user = AuthFacade::getUser();
+		$this->returnToPageIfTokenInvalid(self::$tokenName, $user);
+
+		$request = CurrentRequestFacade::getAjax();
+
+		$token = TokenFactory::getFromAjax(self::$tokenName);
+
+		dd($token);
+
 		$data = [
 			'login' => $user->login,
 			'email' => $user->email,
@@ -41,16 +47,16 @@ class AccountController extends ControllerTemplate
 		die;
 
 
-		try {
-			$this->trimValues();
-			$this->returnToPageIfTokenInvalid(self::$tokenName);
-			$this->returnToPageWithErrorsIfFormDataInvalid();
+		// try {
+		// 	$this->trimValues();
+		// 	$this->returnToPageIfTokenInvalid(self::$tokenName);
+		// 	$this->returnToPageWithErrorsIfFormDataInvalid();
 			
-			$this->successfulRequestValidationEvent();
-		}
-		catch (\Exception $e) {
-			die($e->getMessage());
-		}
+		// 	$this->successfulRequestValidationEvent();
+		// }
+		// catch (\Exception $e) {
+		// 	die($e->getMessage());
+		// }
 	}
 
 	private function trimValues(): void
@@ -60,36 +66,33 @@ class AccountController extends ControllerTemplate
 				$_POST[$key] = trim($value);
 	}
 
-	private function returnToPageIfTokenInvalid(string $name): void
+	private function returnToPageIfTokenInvalid(string $name, User $user): void
 	{
-		$user = AuthFacade::getUser();
-
-		if (!TokenFactory::popIfRequestValidByNameAndUser($name, $user)) {
-			$this->page();
-			die;
-		}
+		// if (!TokenFactory::popIfAjaxRequestValidByNameAndUser($name, $user)) {
+		// 	die;
+		// }
 	}
 
-	private function returnToPageWithErrorsIfFormDataInvalid(): void
-	{
-		$form = new LoginForm();
+	// private function returnToPageWithErrorsIfFormDataInvalid(): void
+	// {
+	// 	$form = new LoginForm();
 
-		if (!$form->validate())
-			$this->returnPageWithError('Invalid credentials. Please try again.');
+	// 	if (!$form->validate())
+	// 		$this->returnPageWithError('Invalid credentials. Please try again.');
 
-		$table = new UserTable();
-		$this->user = $table->findOneBy([
-			'email' => $_POST['email'],
-		]);
+	// 	$table = new UserTable();
+	// 	$this->user = $table->findOneBy([
+	// 		'email' => $_POST['email'],
+	// 	]);
 		
-		if (!$this->user)
-			$this->returnPageWithError('Invalid credentials. Please try again.');
+	// 	if (!$this->user)
+	// 		$this->returnPageWithError('Invalid credentials. Please try again.');
 
-		if (!Hash::verify($_POST['password'], $this->user->password))
-			$this->returnPageWithError('Invalid credentials. Please try again.');
+	// 	if (!Hash::verify($_POST['password'], $this->user->password))
+	// 		$this->returnPageWithError('Invalid credentials. Please try again.');
 
-		if (!$this->user->verified)
-			$this->returnPageWithError(
-				$this->getResendVerificationEmailMessage());
-	}
+	// 	if (!$this->user->verified)
+	// 		$this->returnPageWithError(
+	// 			$this->getResendVerificationEmailMessage());
+	// }
 }
