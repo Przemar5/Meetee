@@ -45,24 +45,14 @@ class AccountController extends ControllerTemplate
 		if ($token->userId !== $user->getId())
 			die;
 
-		dd($token);
-
 		$request = CurrentRequestFacade::getAjax();
-		$this->dispatchRequestHandling($request);
-		// $this->returnToPageIfTokenInvalid(self::$tokenName, $user);
-
-
-		// $token = TokenFactory::getByNameIfAjaxValid(self::$tokenName);
-
-		// dd($token);
-
-		
-
-		// echo json_encode($output);
-		// die;
+		$this->dispatchRequestHandling($request, $user);
 	}
 
-	private function dispatchRequestHandling(array $data): void
+	private function dispatchRequestHandling(
+		array $data, 
+		User $user
+	): void
 	{
 		$data = [
 			'login' => $user->login,
@@ -71,7 +61,7 @@ class AccountController extends ControllerTemplate
 			'surname' => $user->surname,
 			'birth' => $user->getBirth(),
 		];
-		dd($data);
+		echo json_encode($data);
 	}
 
 	private function trimValues(): void

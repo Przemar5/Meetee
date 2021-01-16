@@ -32,21 +32,21 @@
 		"method": "POST",
 		"name": "registration_verify",
 		"class": "Auth\\RegistrationController.verify",
-		"access": ["GUEST", "USER"]
+		"access": ["GUEST"]
 	},
 	{
 		"pattern": "/register/resend",
 		"method": "GET",
 		"name": "registration_resend_page",
 		"class": "Auth\\ResendRegistrationEmailController.page",
-		"access": ["GUEST", "USER"]
+		"access": ["GUEST"]
 	},
 	{
 		"pattern": "/register/resend",
 		"method": "POST",
 		"name": "registration_resend_process",
 		"class": "Auth\\ResendRegistrationEmailController.process",
-		"access": ["GUEST", "USER"]
+		"access": ["GUEST"]
 	},
 	{
 		"pattern": "/login",
@@ -67,7 +67,7 @@
 		"method": "GET",
 		"name": "logout",
 		"class": "Auth\\LoginController.logout",
-		"access": ["USER"]
+		"access": ["VERIFIED"]
 	},
 	{
 		"pattern": "/forgot-password",

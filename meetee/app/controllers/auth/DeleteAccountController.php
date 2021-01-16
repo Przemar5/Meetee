@@ -4,17 +4,12 @@ namespace Meetee\App\Controllers\Auth;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Factories\TokenFactory;
-use Meetee\App\Entities\Utils\TokenFacadey;
-use Meetee\App\Entities\Factories\UserFactory;
+use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
-use Meetee\App\Emails\EmailFacade;
 use Meetee\Libs\View\Utils\Notification;
-use Meetee\Libs\Security\Validators\Compound\Users\UserEmailValidator;
-use Meetee\Libs\Security\Validators\Compound\Forms\ResetPasswordFormValidator;
 use Meetee\Libs\Security\AuthFacade;
-use Meetee\Libs\Security\Hash;
 
 class DeleteAccountController extends ControllerTemplate
 {
@@ -53,7 +48,7 @@ class DeleteAccountController extends ControllerTemplate
 
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
-		if (!TokenFacade::popIfRequestValidByNameAndUser(
+		if (!TokenFacade::popTokenIfValidByNameAndUser(
 			$name, AuthFacade::getUser())) {
 
 			$this->page();
@@ -64,6 +59,7 @@ class DeleteAccountController extends ControllerTemplate
 	private function successfulRequestValidationEvent(): void
 	{
 		$this->deleteUser();
+		Notification::addSuccess('Your account has been deleted successfully.');
 		$this->redirect('home');
 	}
 

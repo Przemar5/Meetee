@@ -81,6 +81,11 @@ class Route
 		return str_replace($patterns, $values, $this->pattern);
 	}
 
+	public function accepts(string $role): bool
+	{
+		return in_array($role, $this->access);
+	}
+
 	public function getPattern(): string
 	{
 		return $this->pattern;

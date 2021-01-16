@@ -104,8 +104,6 @@ class RegistrationController extends ControllerTemplate
 		}
 	}
 
-	private function redirectToPageIf()
-
 	private function successfulVerificationRequestValidationEvent(
 		User $user
 	): void
