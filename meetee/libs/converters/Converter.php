@@ -8,4 +8,9 @@ class Converter
 	{
 		return json_decode($json, true);
 	}
+
+	public static function ajaxToArray(string $request): array
+	{
+		return [];
+	}
 }

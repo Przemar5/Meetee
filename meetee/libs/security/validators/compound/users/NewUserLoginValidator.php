@@ -17,7 +17,7 @@ class NewUserLoginValidator extends CompoundValidator
 		$validators[] = ValidatorFactory::createMaxLengthValidator(
 			60, 'Login must be equal or shorter than 60 characters long.');
 		$validators[] = ValidatorFactory::createPatternValidator(
-			'/^[\w\d]+$/', 
+			'/^[\w\d\-]+$/', 
 			'Login may contain only alphanumeric characters and hyphens.');
 		$validators[] = ValidatorFactory::createNotExistValidator(
 			'users', 'login', 

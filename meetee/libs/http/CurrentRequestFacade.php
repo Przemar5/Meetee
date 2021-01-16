@@ -6,6 +6,7 @@ use Meetee\Libs\Http\Routing\Data\RouteListFactory;
 use Meetee\Libs\Security\Validators\RequestMethodValidator;
 use Meetee\Libs\Security\Validators\UriValidator;
 use Meetee\Libs\Security\Sanitizers\UriSanitizer;
+use Meetee\Libs\Converters\Converter;
 
 class CurrentRequestFacade
 {
@@ -65,5 +66,14 @@ class CurrentRequestFacade
 	private static function getSanitizedCurrentUri(): string
 	{
 		return UriSanitizer::run($_SERVER['PATH_INFO']);
+	}
+
+	public static function getAjax(): ?array
+	{
+		$content = file_get_contents("php://input");
+		$output;
+		parse_str($content, $output);
+
+		return $output;
 	}
 }

@@ -50,62 +50,14 @@
 		<small class="error-msg">
 			<?php $this->error('password'); ?>
 		</small>
+	</label>
 
+	<label>
 		Retype password
 		<input type="password" name="repeat_password" value="Password1!">
 	</label>
 
 	<button type="submit">Register</button>
-
-	<script>
-		const passField = document
-			.querySelector('input[name="password"]');
-		const repeatPassField = document
-			.querySelector('input[name="repeat_password"]');
-
-		passField.addEventListener('keyup', (evt) => {
-			let errorDiv = evt.target.closest('label')
-					.querySelector('.error-msg')
-			errorDiv.innerText = ''
-
-			try {
-				if (userPasswordValidator(evt.target.value)) {
-					repeatPassField.onkeyup = (evt2) => {
-						console.log(passField.value.trim() === repeatPassField.value.trim())
-
-						if (passField.value.trim() !== repeatPassField.value.trim()) {
-							console.log('ok')
-							throw new Error("Both passwords must be identical.")
-						}
-					}
-				}
-			} catch (err) {
-				errorDiv.innerText = err.message
-				console.log(err.message)
-				repeatPassField.onkeyup = () => null
-				repeatPassField.onkeydown = () => null
-			}
-		})
-
-		const namesAndValidators = [
-			['name', userNameValidator],
-			['surname', userSurnameValidator],
-			['birth', userBirthValidator],
-			// ['password', userPasswordValidator],
-			// ['repeat_password', userPasswordValidator]
-			// [['password', userPasswordValidator], ['repeat_password', nullValidator],
-			// 	([[name1, val1], [name2, val2]]) => {
-			// 		let first = document
-			// 			.querySelector('input[name="' + name1 + '"]')
-			// 		let second = document
-			// 			.querySelector('input[name="' + name2 + '"]')
-
-			// 		if (val1(first.value)) {}
-			// 	}
-			// ],
-		]
-		namesAndValidators.forEach(fieldHandlerDispatcher)
-	</script>
 
 	<p>
 		Already have an account? 

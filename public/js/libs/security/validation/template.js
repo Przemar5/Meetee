@@ -12,7 +12,7 @@ const basicFieldChangeHandler = (validator) => (e) => {
 
 const fieldHandlerDispatcher = (item) => {
 	if (item[0] instanceof Array) {
-		return multipleFieldsValidatorHandler(item)
+		return repeatedFieldValidatorHandler(item)
 	} else {
 		return fieldValidatorHandler(item)
 	}
@@ -36,5 +36,31 @@ const multipleFieldsValidatorHandler = (array, func) => {
 	func(array)
 }
 
+const repeatedFieldValidatorHandler = ([[name, second], validator, msg]) => {
+	const passField = document
+		.querySelector('input[name="' + name + '"]');
+	const repeatPassField = document
+		.querySelector('input[name="' + second + '"]');
+	let errorDiv = passField.closest('label').querySelector('.error-msg')
+
+	const handler = (evt) => {
+		try {
+			if (validator(passField.value.trim())) {
+				if (repeatPassField.value.trim() !== passField.value.trim()) {
+					errorDiv.innerText = msg
+				} else {
+					errorDiv.innerText = ''
+				}
+			}
+		} catch (err) {
+			errorDiv.innerText = err
+		}
+	}
+
+	passField.addEventListener('keyup', handler)
+	passField.addEventListener('keydown', handler)
+	repeatPassField.addEventListener('keyup', handler)
+	repeatPassField.addEventListener('keydown', handler)
+}
 
 	// [equals(secondField.value), 'Both passwords must be identical.']

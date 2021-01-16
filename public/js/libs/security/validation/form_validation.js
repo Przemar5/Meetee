@@ -1,6 +1,7 @@
 const userNameValidator = validForAll([
 	[isDefined, 'Name is required.'],
-	[notNull, 'Name cannot be empty.'],
+	[notNull, 'Name is required.'],
+	[notEmpty, 'Name is required.'],
 	[isString, ''],
 	[isNotShorter(2), 'Name must be 2 characters minimum.'],
 	[isNotLonger(40), 'Name must be equal or shorter than 40 characters long.'],
@@ -10,6 +11,7 @@ const userNameValidator = validForAll([
 const userSurnameValidator = validForAll([
 	[isDefined, 'Surname is required.'],
 	[notNull, 'Surname isrequired'],
+	[notEmpty, 'Surname isrequired'],
 	[isString, ''],
 	[isNotShorter(2), 'Surname must be 2 characters minimum.'],
 	[isNotLonger(70), 'Surname must be equal or shorter than 70 characters.'],
@@ -19,6 +21,7 @@ const userSurnameValidator = validForAll([
 const userBirthValidator = validForAll([
 	[isDefined, 'Birth date is required.'],
 	[notNull, 'Birth date is required.'],
+	[notEmpty, 'Birth date is required.'],
 	[isString, ''],
 	[exactLength(10), ''],
 	[matches(/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|(3[0-1]))$/), 
@@ -33,6 +36,7 @@ const userBirthValidator = validForAll([
 const userPasswordValidator = validForAll([
 	[isDefined, 'Password is required.'],
 	[notNull, 'Password isrequired'],
+	[notEmpty, 'Password isrequired'],
 	[isString, ''],
 	[isNotShorter(8), 'Password must be at least 8 characters long.'],
 	[isNotLonger(60), 'Password must be equal or shorter than 60 characters.'],
@@ -42,3 +46,25 @@ const userPasswordValidator = validForAll([
 ].map((v) => validOrThrow(v[0])(v[1])))
 
 const nullValidator = (v) => true
+
+const userEmailValidator = validForAll([
+	[isDefined, 'Email is required.'],
+	[notNull, 'Email is required.'],
+	[notEmpty, 'Email is required.'],
+	[isString, ''],
+	[isNotShorter(8), 'Email must be 8 characters minimum.'],
+	[isNotLonger(60), 'Email must be equal or shorter than 60 characters long.'],
+	[matches(/^(([^<>()[\]\.,;:\s@"]+(\.[^<>()[\]\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\.,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,})$/u), 
+		'Email has incorrect format.']
+].map((v) => validOrThrow(v[0])(v[1])))
+
+const userLoginValidator = validForAll([
+	[isDefined, 'Login is required.'],
+	[notNull, 'Login is required.'],
+	[notEmpty, 'Login is required.'],
+	[isString, ''],
+	[isNotShorter(3), 'Login must be 3 characters minimum.'],
+	[isNotLonger(60), 'Email must be equal or shorter than 60 characters long.'],
+	[matches(/^[\w\d\-]+$/u), 
+		'Login may contain only alphanumeric characters and hyphens.']
+].map((v) => validOrThrow(v[0])(v[1])))

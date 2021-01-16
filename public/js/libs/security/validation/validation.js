@@ -124,7 +124,7 @@ const exactLength = (number) => (value) => isString(value) &&
 	isNumber(number) && equals(number)(value.length)
 
 const matches = (pattern) => (value) => isString(value) && 
-	notNull(value.match(pattern))
+	pattern.test(value)
 
 // Specific validators
 

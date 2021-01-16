@@ -8,11 +8,13 @@
 		New Password
 		<input type="password" name="password" value="Password1!">
 		<?php $this->error('password'); ?>
+		<small class="error-msg"></small>
 	</label>
 
 	<label>
 		Retype new password
 		<input type="password" name="repeat_password" value="Password1!">
+		<small class="error-msg"></small>
 	</label>
 
 	<button type="submit">Confirm</button>

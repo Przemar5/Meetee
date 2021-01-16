@@ -1,42 +1,55 @@
-<?php $this->startSection('head'); ?>
-<script type="module" src="./public/js/app/pages/settings/account.js"></script>
-<?php $this->endSection('head'); ?>
-
-
 <?php $this->startSection('body'); ?>
-
-
 
 Account
 
-<label id="userName" class="toggable-form">
-	Name: <?= $user->name ?? ''; ?>
-	<button>Change</button>
+<input type="hidden" id="csrf_token" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+
+<label id="name" class="toggable-form">
+	Name: 
+	<span class="toggable-form-container">
+		<?= $user->name ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
 </label>
 
-<label id="userSecondName" class="toggable-form">
-	Second name: <?= $user->name ?? ''; ?>
-	<button>Change</button>
+<label id="second_name" class="toggable-form">
+	Second name: 
+	<span class="toggable-form-container">
+		<?= $user->name ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
 </label>
 
-<label id="userSurname" class="toggable-form">
-	Surname: <?= $user->surname ?? ''; ?>
-	<button>Change</button>
+<label id="surname" class="toggable-form">
+	Surname: 
+	<span class="toggable-form-container">
+		<?= $user->surname ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
 </label>
 
-<label id="userLogin" class="toggable-form">
-	Login: <?= $user->login ?? ''; ?>
-	<button>Change</button>
+<label id="login" class="toggable-form">
+	Login: 
+	<span class="toggable-form-container">
+		<?= $user->login ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
 </label>
 
-<label id="userEmail" class="toggable-form">
-	Email: <?= $user->email ?? ''; ?>
-	<button>Change</button>
+<label id="email" class="toggable-form">
+	Email: 
+	<span class="toggable-form-container">
+		<?= $user->email ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
 </label>
 
-<label id="userBirth" class="toggable-form">
-	Birth: <?= $user->getBirth()->format('M j, Y') ?? ''; ?>
-	<button>Change</button>
+<label id="birth" class="toggable-form">
+	Birth: 
+	<span class="toggable-form-container">
+		<?= $user->getBirth()->format('M j, Y') ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
 </label>
 
 <a href="<?php $this->renderRouteUri('settings_index_page'); ?>">Return</a>

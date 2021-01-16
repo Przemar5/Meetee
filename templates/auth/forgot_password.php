@@ -7,6 +7,7 @@
 	<label>
 		Email
 		<input type="text" name="email" value="<?= $_POST['email'] ?? ''; ?>">
+		<small class="error-msg"></small>
 	</label>
 
 	<?php $this->error('general'); ?>

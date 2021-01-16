@@ -20,7 +20,7 @@ class EmailFacade
 		$email = new EmailAdapter($view);
 		$email->subject = 'Registration confirmation';
 		$email->receivers = [$user];
-		static::completeEmailWithConfig();
+		static::completeEmailWithConfig($email);
 		$email->parseTemplate('emails/registration_confirm_email', [
 			'receiver' => $user,
 			'token' => TokenFactory::generate($tokenName, $user),
