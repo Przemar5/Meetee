@@ -68,3 +68,12 @@ const userLoginValidator = validForAll([
 	[matches(/^[\w\d\-]+$/u), 
 		'Login may contain only alphanumeric characters and hyphens.']
 ].map((v) => validOrThrow(v[0])(v[1])))
+
+
+const validatorFactory = (name) => {
+	switch (name) {
+		case 'name': return userNameValidator
+		case 'surname': return userSurnameValidator
+		case 'birth': return userBirthValidator
+	}
+}

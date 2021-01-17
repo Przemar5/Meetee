@@ -76,7 +76,7 @@ class TokenFacade
 		return static::getTokenIfValidByNameAndUser($name, AuthFacade::getUser());
 	}
 
-	private static function tokenValidates(Token $token): bool
+	public static function tokenValidates(Token $token): bool
 	{
 		$validator = new TokenValidator();
 		$data = [
@@ -85,6 +85,30 @@ class TokenFacade
 		];
 
 		return $validator->run($data);
+	}
+
+	public static function isTokenValidForUser(Token $token, User $user): bool
+	{
+		if (!static::tokenValidates($token))
+			return false;
+
+		$data = static::serializeToken($token);
+		$token = static::getTokenFromDatabaseBy($data);
+
+		return $token->userId === $user->getId();
+	}
+
+	public static function isRequestTokenValidForUser(
+		string $name, 
+		User $user
+	): bool
+	{
+		$token = TokenFactory::getFromAjax($name);
+
+		if (!$token)
+			return false;
+
+		return static::isTokenValidForUser($token, $user);
 	}
 
 	private static function getTokenFromDatabaseBy(array $data): ?Token

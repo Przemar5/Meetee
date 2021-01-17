@@ -14,7 +14,8 @@ export default class Ajax {
 	request (method, uri, data, headers) {
 		let callback = (resolve, reject) => {
 			this.xhr.open(method, uri, true)
-			this.xhr.setRequestHeader('Content-Type', 'application/json');
+			this.xhr.setRequestHeader('Content-Type', 'application/json')
+			this.xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
 	    this.xhr.onload = () => {
 	    	if (this.xhr.status >= 200 && this.xhr.status < 300) {
 	        resolve(this.xhr.responseText);

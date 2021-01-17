@@ -5,11 +5,14 @@ namespace Meetee\App\Controllers\Settings;
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\App\Entities\Utils\TokenFacade;
+use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Http\CurrentRequestFacade;
 use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
+use Meetee\Libs\Security\Validators\Factories\CompoundValidatorFactory;
 
 class AccountController extends ControllerTemplate
 {
@@ -29,45 +32,53 @@ class AccountController extends ControllerTemplate
 	public function process(): void
 	{
 		$user = AuthFacade::getUser();
-		$token = TokenFactory::getFromAjax(self::$tokenName);
-		$validator = new TokenValidator();
-		$data = [
-			'name' => $token->name,
-			'value' => $token->value,
-		];
 		
-		if (!$validator->run($data))
-			die;
-
-		$table = new TokenTable();
-		$token = $table->getValidBy($data);
-
-		if ($token->userId !== $user->getId())
+		if (!TokenFacade::isRequestTokenValidForUser(self::$tokenName, $user))
 			die;
 
 		$request = CurrentRequestFacade::getAjax();
+
 		$this->dispatchRequestHandling($request, $user);
 	}
 
 	private function dispatchRequestHandling(
-		array $data, 
+		array $request, 
 		User $user
 	): void
 	{
-		$data = [
-			'login' => $user->login,
-			'email' => $user->email,
-			'name' => $user->name,
-			'surname' => $user->surname,
-			'birth' => $user->getBirth(),
-		];
-		echo json_encode($data);
+		$accepts = ['name', 'surname', 'birth'];
+
+		foreach ($accepts as $attr) {
+			if (isset($request[$attr])) {
+				$this->updateAttr($user, $attr, $request[$attr]);
+				die;
+			}
+		}
 	}
 
-	private function trimValues(): void
+	private function updateAttr(User $user, string $attr, $value): void
 	{
-		foreach ($_POST as $key => $value)
-			if (is_string($value))
-				$_POST[$key] = trim($value);
+		$value = trim($value);
+		$validator = CompoundValidatorFactory::createUserValidator($attr);
+
+		if (!$validator->run($value)) {
+			echo json_encode([$attr => $user->{$attr}]);
+			die;
+		}
+
+		$this->setUserAttr($user, $attr, $value);
+
+		$table = new UserTable();
+		$table->save($user);
+
+		echo json_encode([$attr => $user->{$attr}]);
+	}
+
+	private function setUserAttr(User &$user, string $attr, $value): void
+	{
+		if (method_exists($user, 'set'.$attr))
+			$user->{'set'.$attr}($value);
+		else
+			$user->{$attr} = $value;
 	}
 }
