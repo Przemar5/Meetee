@@ -32,13 +32,11 @@ class AccountController extends ControllerTemplate
 	public function process(): void
 	{
 		$user = AuthFacade::getUser();
-		
-		if (!TokenFacade::isRequestTokenValidForUser(self::$tokenName, $user))
+
+		if (!TokenFacade::isPostRequestTokenValidForUser(self::$tokenName, $user))
 			die;
 
-		$request = CurrentRequestFacade::getAjax();
-
-		$this->dispatchRequestHandling($request, $user);
+		$this->dispatchRequestHandling($_POST, $user);
 	}
 
 	private function dispatchRequestHandling(

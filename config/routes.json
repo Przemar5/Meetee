@@ -145,5 +145,12 @@
 		"name": "settings_account_process",
 		"class": "Settings\\AccountController.process",
 		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/profiles/(?<id>\\d+)",
+		"method": "GET",
+		"name": "profiles_show_page",
+		"class": "ProfileController.page",
+		"access": ["VERIFIED"]
 	}
 ]

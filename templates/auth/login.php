@@ -11,7 +11,7 @@
 
 	<label>
 		Password
-		<input type="password" name="password">
+		<input type="password" name="password" value="Password1!">
 	</label>
 
 	<?php $this->error('general'); ?>

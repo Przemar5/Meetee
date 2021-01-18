@@ -18,7 +18,10 @@ class RouterTemplate
 		if (is_null($route))
 			$this->renderNotFoundErrorPage();
 		else
-			$this->callControllerMethod($route->getClassName());
+			$this->callControllerMethod(
+				$route->getClassName(), 
+				$route->getArgsForUri($_SERVER['PATH_INFO'] ?? '')
+			);
 	}
 
 	protected function getRouteByName(string $name): Route
@@ -34,12 +37,15 @@ class RouterTemplate
 		return RouteListFactory::createFromJsonConfig('./config/routes.json');
 	}
 
-	protected function callControllerMethod(string $classAndMethod): void
+	protected function callControllerMethod(
+		string $classAndMethod, 
+		?array $args = []
+	): void
 	{
 		[$class, $method] = explode('.', $classAndMethod);
 		$controller = ControllerFactory::createFromClassNameForBrowser($class);
 
-		$controller->{$method}();
+		call_user_func_array([$controller, $method], $args);
 	}
 
 	public function redirect(string $route, ?array $headers = []): void

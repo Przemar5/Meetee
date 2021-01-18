@@ -6,16 +6,6 @@
 
 		<link rel="stylesheet" type="text/css" href="./public/css/style.css">
 
-		<style type="text/css">
-			body {
-
-			}
-
-			label {
-				display: block;
-			}
-		</style>
-
 		<script src="./public/js/global.js"></script>
 		<script src="./public/js/libs/DateAdapter.js"></script>
 		<script src="./public/js/libs/security/validation/validation.js"></script>

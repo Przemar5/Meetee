@@ -2,8 +2,10 @@
 
 Account
 
+<input type="hidden" id="csrf_token" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+
 <template id="csrfToken">
-	<input type="hidden" id="csrf_token" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+	<input type="hidden" id="token" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 </template>
 
 <label id="name" class="toggable-form">
@@ -49,7 +51,7 @@ Account
 <label id="birth" class="toggable-form">
 	Birth: 
 	<span class="toggable-form-container">
-		<?= $user->getBirth()->format('M j, Y') ?? ''; ?>
+		<?= $user->getBirth()->format('Y-m-d') ?? ''; ?>
 	</span>
 	<button class="form-toggler">Change</button>
 </label>

@@ -30,6 +30,29 @@ Object.prototype.forEachWithKey = function (func) {
 	}
 }
 
+Object.prototype.mapWithKeysToArray = function (func) {
+	let result = []
+	for (let i in this) {
+		if (this[i] !== forEachWithKey && this[i] !== undefined) {
+			result.push(func(this[i], i))
+		}
+	}
+	return result
+}
+
+String.prototype.toHTMLElement = function () {
+	let wrapper = document.createElement('div')
+	wrapper.setAttribute('id', 'TEMP_WRAPPER')
+	wrapper.innerHTML = this
+	return wrapper.querySelector('#TEMP_WRAPPER > *')
+}
+
+HTMLElement.prototype.toString = function () {
+	let wrapper = document.createElement('div')
+	wrapper.setAttribute('id', 'TEMP_WRAPPER')
+	wrapper.appendChild(this)
+	return wrapper.innerHTML
+}
 
 
 // let IHireable = new Interface('IHireale', ['writeCode'], ['name'])

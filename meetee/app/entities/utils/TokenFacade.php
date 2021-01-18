@@ -98,17 +98,36 @@ class TokenFacade
 		return $token->userId === $user->getId();
 	}
 
-	public static function isRequestTokenValidForUser(
-		string $name, 
-		User $user
+	private static function isRequestTokenValidForUser(
+		string $name,
+		User $user,
+		callable $func
 	): bool
 	{
-		$token = TokenFactory::getFromAjax($name);
+		$token = $func($name);
 
 		if (!$token)
 			return false;
 
 		return static::isTokenValidForUser($token, $user);
+	}
+
+	public static function isAjaxRequestTokenValidForUser(
+		string $name, 
+		User $user
+	): bool
+	{
+		return static::isRequestTokenValidForUser(
+			$name, $user, [TokenFactory::class, 'getFromAjax']);
+	}
+
+	public static function isPostRequestTokenValidForUser(
+		string $name, 
+		User $user
+	): bool
+	{	
+		return static::isRequestTokenValidForUser(
+			$name, $user, [TokenFactory::class, 'getFromPostRequest']);
 	}
 
 	private static function getTokenFromDatabaseBy(array $data): ?Token

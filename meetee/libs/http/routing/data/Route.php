@@ -36,7 +36,7 @@ class Route
 	{
 		$uri = preg_replace(['/(\{[^\:]*\:)/', '/(\})/'], '', $this->pattern);
 
-		return sprintf("/^%s$/", addcslashes($uri, '/'));
+		return sprintf("/^%s$/", addcslashes($this->pattern, '/'));
 	}
 
 	protected function getUriPatternRegexPartByName(string $name): ?string
@@ -58,11 +58,14 @@ class Route
 
 	public function getArgsForUri(string $uri): array
 	{
-		$pattern = $this->preparePattern();
+		$pattern = $this->getUriPatternRegex();
+		$pattern = addcslashes($this->pattern, '/');
 		$args = [];
-		preg_match($pattern, $uri, $args);
+		preg_match(sprintf('/^%s$/', $pattern), $uri, $args);
+		$args = array_filter($args, fn($i) => is_string($i), 
+			ARRAY_FILTER_USE_KEY);
 
-		return array_slice($args, 1);
+		return $args;
 	}
 
 	public function getPreparedUri(?array $args = []): string
