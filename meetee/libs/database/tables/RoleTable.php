@@ -11,7 +11,7 @@ class RoleTable extends TableTemplate
 {
 	public function __construct()
 	{
-		parent::__construct('users', false);
+		parent::__construct('roles', Role::class, false);
 	}
 
 	protected function fetchEntity($data): Role

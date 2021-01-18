@@ -36,6 +36,6 @@ class ExistsValidator extends Validator
 
 		$user = $table->findOneBy([$this->column => $value]);
 
-		return ($user) ? false : true;
+		return ($user) ? true : false;
 	}
 }

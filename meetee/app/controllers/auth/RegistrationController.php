@@ -9,9 +9,11 @@ use Meetee\App\Entities\Factories\UserFactory;
 use Meetee\App\Forms\RegistrationForm;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\UserTable;
+use Meetee\Libs\Database\Tables\CountryTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\App\Emails\EmailFacade;
 use Meetee\Libs\View\Utils\Notification;
+use Meetee\Libs\Security\AuthFacade;
 
 class RegistrationController extends ControllerTemplate
 {
@@ -24,14 +26,22 @@ class RegistrationController extends ControllerTemplate
 
 		$this->render('auth/register', [
 			'token' => $token,
+			'countries' => $this->getCountries(),
 			'errors' => $this->errors,
 		]);
+	}
+
+	private function getCountries(): array
+	{
+		$table = new CountryTable();
+
+		return $table->getAll();
 	}
 
 	public function process(): void
 	{
 		try {
-			$this->trimValues();
+			$this->trimPostValues();
 			$this->returnToPageIfTokenInvalid(self::$tokenName);
 			$this->returnToPageWithErrorsIfFormDataInvalid();
 
@@ -67,7 +77,7 @@ class RegistrationController extends ControllerTemplate
 		}
 	}
 
-	private function trimValues(): void
+	private function trimPostValues(): void
 	{
 		foreach ($_POST as $key => $value)
 			if (is_string($value))
@@ -108,7 +118,7 @@ class RegistrationController extends ControllerTemplate
 		User $user
 	): void
 	{
-		$user->verify();
+		AuthFacade::verifyUser($user);
 		Notification::addSuccess(
 			'Your account was activated. Now You can login!');
 		$this->redirect('login_page');

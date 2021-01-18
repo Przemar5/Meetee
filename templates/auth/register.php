@@ -33,6 +33,14 @@
 	</label>
 
 	<label>
+		Second name
+		<input type="text" name="second_name" value="<?= $_POST['second_name'] ?? ''; ?>">
+		<small class="error-msg">
+			<?php $this->error('second_name'); ?>
+		</small>
+	</label>
+
+	<label>
 		Surname
 		<input type="text" name="surname" value="<?= $_POST['surname'] ?? ''; ?>">
 		<small class="error-msg">
@@ -45,6 +53,38 @@
 		<input type="date" name="birth" value="<?= $_POST['birth'] ?? ''; ?>">
 		<small class="error-msg">
 			<?php $this->error('birth'); ?>
+		</small>
+	</label>
+
+	<label>
+		Country
+		<select name="country">
+			<?php foreach ($countries as $country): ?>
+				<option value="<?= $country->getId(); ?>" <?= 
+					(isset($_POST['country']) && $_POST['country'] == $country->getId()) ? 'selected' : ''; 
+				?>>
+					<?= $country->name; ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+		<small class="error-msg">
+			<?php $this->error('country'); ?>
+		</small>
+	</label>
+
+	<label>
+		City
+		<input type="text" name="city" value="<?= $_POST['city'] ?? ''; ?>">
+		<small class="error-msg">
+			<?php $this->error('city'); ?>
+		</small>
+	</label>
+
+	<label>
+		Zip code
+		<input type="text" name="zip" value="<?= $_POST['zip'] ?? ''; ?>">
+		<small class="error-msg">
+			<?php $this->error('zip'); ?>
 		</small>
 	</label>
 

@@ -41,7 +41,7 @@ abstract class FormTemplate
 			$method = $this->getGlobalByMethod($method);
 
 			foreach ($names as $name) {
-				$data[$name] = $method[$name] ?? null;
+				$data[$name] = trim($method[$name]) ?? null;
 			}
 		}
 		return $data;

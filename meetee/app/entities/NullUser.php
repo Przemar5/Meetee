@@ -9,7 +9,6 @@ class NullUser extends User
 {
 	public function __construct()
 	{
-		parent::__construct();
 		$this->roles = [RoleFactory::createGuestRole()];
 		$this->id = 0;
 	}

@@ -11,8 +11,9 @@ class RegistrationForm extends FormTemplate
 	public function __construct()
 	{
 		$requestKeys = [
-			'POST' => ['login', 'email', 'name', 'surname', 
-				'birth', 'password', 'repeat_password'],
+			'POST' => ['login', 'email', 'name', 'second_name', 
+				'surname', 'birth', 'country', 'city',
+				'zip', 'password', 'repeat_password'],
 		];
 
 		parent::__construct(

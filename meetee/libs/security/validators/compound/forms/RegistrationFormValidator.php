@@ -6,7 +6,11 @@ use Meetee\Libs\Security\Validators\Compound\FormValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\NewUserLoginValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\NewUserEmailValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserNameValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\UserSecondNameValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserSurnameValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\CountryIdValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\CityNameValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\ZipCodeValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserBirthValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserPasswordValidator;
 
@@ -23,15 +27,31 @@ class RegistrationFormValidator extends FormValidator
 			'password' => new UserPasswordValidator(),
 		];
 
-		parent::__construct($validators);
+		$optional = [
+			'second_name' => new UserSecondNameValidator(),
+			'country' => new CountryIdValidator(),
+			'city' => new CityNameValidator(),
+			'zip' => new ZipCodeValidator(),
+		];
+
+		parent::__construct($validators, $optional);
 	}
 
 	public function run(array $values): bool
 	{
 		$this->errors = [];
+		
+		if (!empty($values['country']))
+			$values['country'] = (int) $values['country'];
 
 		foreach ($this->validators as $attr => $validator) {
 			if (!$validator->run($values[$attr])) {
+				$this->errors[$attr] = $validator->errorMsg;
+			}
+		}
+
+		foreach ($this->optional as $attr => $validator) {
+			if (!empty($values[$attr]) && !$validator->run($values[$attr])) {
 				$this->errors[$attr] = $validator->errorMsg;
 			}
 		}

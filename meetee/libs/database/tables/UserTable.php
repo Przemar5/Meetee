@@ -6,6 +6,7 @@ use Meetee\Libs\Database\Tables\TableTemplate;
 use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\Pivots\UserRoleTable;
+use Meetee\Libs\Database\Tables\CountryTable;
 
 class UserTable extends TableTemplate
 {
@@ -21,13 +22,19 @@ class UserTable extends TableTemplate
 		$user->login = $data['login'];
 		$user->email = $data['email'];
 		$user->name = $data['name'];
+		$user->secondName = $data['second_name'];
 		$user->surname = $data['surname'];
 		$user->setBirth(new \DateTime($data['birth']));
+		$user->city = $data['city'];
+		$user->zipCode = $data['zip'];
 		$user->password = $data['password'];
 		$user->verified = $data['verified'];
 		$user->setCreatedAt($data['created_at']);
 		$user->setUpdatedAt($data['updated_at']);
 		$user->deleted = $data['deleted'];
+
+		$table = new CountryTable();
+		$user->country = $country = $table->find($data['country']);
 
 		$userRole = new UserRoleTable();
 		$user->setRoles($userRole->findRolesForUserId($data['id']));
@@ -47,7 +54,11 @@ class UserTable extends TableTemplate
 		$data = [];
 		$data['login'] = $user->login;
 		$data['name'] = $user->name;
+		$data['second_name'] = $user->secondName;
 		$data['surname'] = $user->surname;
+		$data['country'] = $user->country->getId();
+		$data['city'] = $user->city;
+		$data['zip'] = $user->zipCode;
 		$data['email'] = $user->email;
 		$data['birth'] = $user->getBirth()->format('Y-m-d H:i:s');
 		$data['password'] = $user->password;

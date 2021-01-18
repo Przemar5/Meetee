@@ -44,11 +44,20 @@ class AccountController extends ControllerTemplate
 		User $user
 	): void
 	{
-		$accepts = ['name', 'surname', 'birth'];
+		$accepts = [
+			'name' => 'name', 
+			'second_name' => 'secondName', 
+			'surname' => 'surname', 
+			'birth' => 'birth',
+			'country' => 'country', 
+			'city' => 'city', 
+			'zip' => 'zipCode'
+		];
 
-		foreach ($accepts as $attr) {
-			if (isset($request[$attr])) {
-				$this->updateAttr($user, $attr, $request[$attr]);
+		foreach ($accepts as $key => $attr) {
+			if (isset($request[$key])) {
+				$this->updateAttr($user, $attr, $request[$key]);
+				echo json_encode([$key => $this->getUserAttr($user, $attr)]);
 				die;
 			}
 		}
@@ -60,8 +69,7 @@ class AccountController extends ControllerTemplate
 		$validator = CompoundValidatorFactory::createUserValidator($attr);
 
 		if (!$validator->run($value)) {
-			echo json_encode([$attr => $user->{$attr}]);
-			die;
+			return;
 		}
 
 		$this->setUserAttr($user, $attr, $value);
@@ -69,7 +77,7 @@ class AccountController extends ControllerTemplate
 		$table = new UserTable();
 		$table->save($user);
 
-		echo json_encode([$attr => $user->{$attr}]);
+		return;
 	}
 
 	private function setUserAttr(User &$user, string $attr, $value): void
@@ -78,5 +86,12 @@ class AccountController extends ControllerTemplate
 			$user->{'set'.$attr}($value);
 		else
 			$user->{$attr} = $value;
+	}
+
+	private function getUserAttr(User $user, string $attr)
+	{
+		return (method_exists($user, 'get'.$attr))
+			? $user->{'get'.$attr}()
+			: $user->{$attr};
 	}
 }

@@ -17,8 +17,8 @@ class UserSurnameValidator extends CompoundValidator
 		$validators[] = ValidatorFactory::createMaxLengthValidator(
 			70, 'Surname must be equal or shorter than 70 characters.');
 		$validators[] = ValidatorFactory::createPatternValidator(
-			'/^[\w^\_\-\d]+$/u', 
-			'Surname may contain only alpha characters.');
+			'/^[\w\-^\_\d]+$/u', 
+			'Surname may contain only letters and dashes.');
 
 		parent::__construct($validators);
 	}

@@ -5,7 +5,14 @@ const userNameValidator = validForAll([
 	[isString, ''],
 	[isNotShorter(2), 'Name must be 2 characters minimum.'],
 	[isNotLonger(40), 'Name must be equal or shorter than 40 characters long.'],
-	[matches(/^[\w^_\d]+$/u), 'Name may contain only alpha characters.']
+	[matches(/^[\w^_\d]+$/u), 'Name may contain only letters.']
+].map((v) => validOrThrow(v[0])(v[1])))
+
+const userSecondNameValidator = validForAll([
+	[isString, ''],
+	[isNotShorter(2), 'Second name must be 2 characters minimum.'],
+	[isNotLonger(40), 'Second name must be equal or shorter than 40 characters long.'],
+	[matches(/^[\w^_\d]+$/u), 'Second name may contain only letters.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
 const userSurnameValidator = validForAll([
@@ -15,7 +22,7 @@ const userSurnameValidator = validForAll([
 	[isString, ''],
 	[isNotShorter(2), 'Surname must be 2 characters minimum.'],
 	[isNotLonger(70), 'Surname must be equal or shorter than 70 characters.'],
-	[matches(/^[\w^_\-\d]+$/u), 'Surname may contain only alpha characters.']
+	[matches(/^[\w^_\-\d]+$/u), 'Surname may contain only letters and dashes.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
 const userBirthValidator = validForAll([
@@ -30,6 +37,19 @@ const userBirthValidator = validForAll([
 		'You are too young.'],
 	[notLess(DateAdapter.getStringFromInterval('-100 years')),
 		'You are too old.']
+].map((v) => validOrThrow(v[0])(v[1])))
+
+const cityNameValidator = validForAll([
+	[isString, ''],
+	[isNotShorter(2), 'City name must be longer or equal 2 characters.'],
+	[isNotLonger(180), 'City name must be equal or shorter than 180 characters long.'],
+	[matches(/^[\w\- \(\)]+$/u), 
+		'City name may contain only letters, dashes, spaces and parentheses.']
+].map((v) => validOrThrow(v[0])(v[1])))
+
+const zipCodeValidator = validForAll([
+	[isString, ''],
+	[matches(/^\d{2}-?\d{3}$/u), 'Zip code has inproper format.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
 // Regex not working
@@ -73,7 +93,10 @@ const userLoginValidator = validForAll([
 const validatorFactory = (name) => {
 	switch (name) {
 		case 'name': return userNameValidator
+		case 'second_name': return userNameValidator
 		case 'surname': return userSurnameValidator
 		case 'birth': return userBirthValidator
+		case 'city': return cityNameValidator
+		case 'zip': return zipCodeValidator
 	}
 }

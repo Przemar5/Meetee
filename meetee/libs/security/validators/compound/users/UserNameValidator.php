@@ -18,7 +18,7 @@ class UserNameValidator extends CompoundValidator
 			40, 'Name must be equal or shorter than 40 characters long.');
 		$validators[] = ValidatorFactory::createPatternValidator(
 			'/^[\w^\_\d]+$/u', 
-			'Name may contain only alpha characters.');
+			'Name may contain only letters.');
 
 		parent::__construct($validators);
 	}

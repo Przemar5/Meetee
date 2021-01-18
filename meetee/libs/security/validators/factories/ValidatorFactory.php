@@ -16,6 +16,7 @@ use Meetee\Libs\Security\Validators\DateAfterValidator;
 use Meetee\Libs\Security\Validators\DateNotBeforeValidator;
 use Meetee\Libs\Security\Validators\DateNotAfterValidator;
 use Meetee\Libs\Security\Validators\PatternValidator;
+use Meetee\Libs\Security\Validators\ExistsValidator;
 use Meetee\Libs\Security\Validators\NotExistValidator;
 use Meetee\Libs\Security\Validators\EmailValidator;
 use Meetee\Libs\Security\Validators\BothMatchValidator;
@@ -196,6 +197,20 @@ class ValidatorFactory
 		$validator = new PatternValidator();
 		$validator->errorMsg = $errorMsg;
 		$validator->setPattern($pattern);
+
+		return $validator;
+	}
+
+	public static function createExistsValidator(
+		string $table,
+		string $column,
+		?string $errorMsg = ''
+	): ExistsValidator
+	{
+		$validator = new ExistsValidator();
+		$validator->errorMsg = $errorMsg;
+		$validator->setTable($table);
+		$validator->setColumn($column);
 
 		return $validator;
 	}

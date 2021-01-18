@@ -7,9 +7,10 @@ abstract class FormValidator
 	protected array $validators;
 	protected array $errors = [];
 
-	public function __construct(array $validators = [])
+	public function __construct(array $validators = [], ?array $optional = [])
 	{
 		$this->validators = $validators;
+		$this->optional = $optional;
 	}
 
 	public function run(array $values): bool
@@ -18,6 +19,12 @@ abstract class FormValidator
 
 		foreach ($this->validators as $attr => $validator) {
 			if (!$validator->run($values[$attr])) {
+				$this->errors[$attr] = $validator->errorMsg;
+			}
+		}
+
+		foreach ($this->optional as $attr => $validator) {
+			if (!empty($values[$attr]) && !$validator->run($values[$attr])) {
 				$this->errors[$attr] = $validator->errorMsg;
 			}
 		}

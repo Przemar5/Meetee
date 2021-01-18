@@ -9,6 +9,7 @@ use Meetee\App\Entities\NullUser;
 use Meetee\Libs\Storage\Session;
 use Meetee\Libs\Utils\RandomStringGenerator;
 use Meetee\Libs\Database\Tables\UserTable;
+use Meetee\App\Entities\Factories\RoleFactory;
 
 class AuthFacade
 {
@@ -34,6 +35,14 @@ class AuthFacade
 	public static function checkToken(Token $token): bool
 	{
 		return $token->isValid();
+	}
+
+	public static function verifyUser(User $user): void
+	{
+		$user->verified = true;
+		$user->addRole(RoleFactory::createVerifiedRole());
+		$table = new UserTable();
+		$table->save($user);
 	}
 
 	public static function login(User $user): void

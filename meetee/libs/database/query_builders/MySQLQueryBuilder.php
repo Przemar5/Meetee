@@ -62,7 +62,7 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 
 	private function appendWherePartIfExists(): void
 	{
-		if (is_null($this->conditions))
+		if (empty($this->conditions))
 			return;
 
 		$conditions = [];
@@ -83,6 +83,9 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 		if (is_null($this->whereNull))
 			return;
 
+		if (empty($this->conditions))
+			$this->query .= ' WHERE ';
+
 		if (!empty($this->conditions))
 			$this->query .= ' AND ';
 
@@ -97,6 +100,9 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 	{
 		if (is_null($this->whereStrings))
 			return;
+
+		if (empty($this->conditions) && empty($this->whereNull))
+			$this->query .= ' WHERE ';
 
 		if (!empty($this->conditions) || !empty($this->whereNull))
 			$this->query .= ' AND ';

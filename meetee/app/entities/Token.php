@@ -4,7 +4,6 @@ namespace Meetee\App\Entities;
 
 use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\User;
-use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Utils\RandomStringGenerator;
 
 class Token extends Entity
@@ -14,11 +13,6 @@ class Token extends Entity
 	public string $value;
 	public int $userId;
 	protected \DateTime $expiry;
-
-	public function __construct()
-	{
-		parent::__construct(new TokenTable());
-	}
 
 	public function setId(int $id): void
 	{

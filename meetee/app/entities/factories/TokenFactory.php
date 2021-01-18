@@ -4,6 +4,7 @@ namespace Meetee\App\Entities\Factories;
 
 use Meetee\App\Entities\Token;
 use Meetee\App\Entities\User;
+use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Utils\RandomStringGenerator;
 use Meetee\Libs\Http\CurrentRequestFacade;
@@ -24,7 +25,8 @@ class TokenFactory
 		$token->value = RandomStringGenerator::generate(64);
 		$token->userId = $user->getId() ?? 0;
 		$token->setExpiry($delay);
-		$token->save();
+		$table = new TokenTable();
+		$table->save($token);
 
 		return $token;
 	}

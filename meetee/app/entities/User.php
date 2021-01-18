@@ -3,9 +3,9 @@
 namespace Meetee\App\Entities;
 
 use Meetee\App\Entities\Entity;
+use Meetee\App\Entities\Country;
 use Meetee\Libs\Http\Routing\Data\Route;
 use Meetee\Libs\Security\AuthenticationFacade;
-use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\App\Entities\Traits\Timestamps;
 use Meetee\App\Entities\Traits\SoftDelete;
 use Meetee\App\Entities\Factories\RoleFactory;
@@ -18,30 +18,23 @@ class User extends Entity
 	protected ?int $id = null;
 	public string $login;
 	public string $name;
+	public string $secondName;
 	public string $surname;
 	public string $email;
+	public string $secondaryEmail;
+	public Country $country;
+	public string $city;
+	public string $zipCode;
 	public string $password;
 	public bool $verified = false;
 	protected \DateTime $birth;
 	protected array $roles = [];
-
-	public function __construct()
-	{
-		parent::__construct(new UserTable());
-	}
 
 	public function hasAccess(Route $route): bool
 	{
 		$common = array_intersect($route->getAccess(), $this->roles);
 
 		return !empty($common);
-	}
-
-	public function verify(): void
-	{
-		$this->verified = true;
-		$this->addRole(RoleFactory::createVerifiedRole());
-		$this->table->save($this);
 	}
 
 	public function setId(int $id): void

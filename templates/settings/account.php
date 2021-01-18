@@ -21,7 +21,7 @@ Account
 <label id="second_name" class="toggable-form">
 	Second name: 
 	<span class="toggable-form-container">
-		<?= $user->name ?? ''; ?>
+		<?= $user->secondName ?? ''; ?>
 	</span>
 	<button class="form-toggler">Change</button>
 </label>
@@ -54,6 +54,30 @@ Account
 	Birth: 
 	<span class="toggable-form-container">
 		<?= $user->getBirth()->format('Y-m-d') ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
+</label>
+
+<label id="country" class="toggable-form">
+	Country: 
+	<span class="toggable-form-container">
+		<?= (isset($user->country)) ? $user->country->name : ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
+</label>
+
+<label id="city" class="toggable-form">
+	City: 
+	<span class="toggable-form-container">
+		<?= $user->city ?? ''; ?>
+	</span>
+	<button class="form-toggler">Change</button>
+</label>
+
+<label id="zip" class="toggable-form">
+	Zip code: 
+	<span class="toggable-form-container">
+		<?= $user->zipCode ?? ''; ?>
 	</span>
 	<button class="form-toggler">Change</button>
 </label>

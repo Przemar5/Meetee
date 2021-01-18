@@ -10,11 +10,6 @@ class Role extends Entity
 	protected ?int $id = null;
 	public string $name;
 
-	public function __construct()
-	{
-		parent::__construct(new RoleTable());
-	}
-
 	public function __toString()
 	{
 		return $this->name;

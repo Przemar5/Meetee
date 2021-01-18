@@ -6,9 +6,11 @@ const csrfToken = document.getElementById('csrfToken')
 const errorMsgClass = 'error-msg'
 const templates = {
 	'name': '<input type="text" name="name">', 
-	// 'second_name': ['<input type="text" name="second_name">', userNameValidator], 
+	'second_name': '<input type="text" name="second_name">', 
 	'surname': '<input type="text" name="surname">', 
-	'birth': '<input type="date" name="birth">'
+	'birth': '<input type="date" name="birth">', 
+	'city': '<input type="text" name="city">', 
+	'zip': '<input type="text" name="zip">', 
 }
 
 templates.mapWithKeysToArray((input, id) => {

@@ -1,10 +1,10 @@
-const basicFieldChangeHandler = (validator) => (e) => {
+const basicFieldChangeHandler = (validator, required = true) => (e) => {
 	let value = e.target.value.trim()
 	let errorDiv = e.target.closest('label').querySelector('.error-msg')
 	errorDiv.innerText = ''
 
 	try {
-		validator(value)
+		if (required || (!required && value !== '')) validator(value)
 	} catch (e) {
 		errorDiv.innerText = e.message
 	}
@@ -18,19 +18,19 @@ const fieldHandlerDispatcher = (item) => {
 	}
 }
 
-const fieldValidatorHandler = ([name, validator]) => {
+const fieldValidatorHandler = ([name, validator, required = true]) => {
 	let element = document.querySelector('input[name="' + name + '"]')
 
-	element.addEventListener('keyup', basicFieldChangeHandler(validator))
-	element.addEventListener('keydown', basicFieldChangeHandler(validator))
+	element.addEventListener('keyup', basicFieldChangeHandler(validator, required))
+	element.addEventListener('keydown', basicFieldChangeHandler(validator, required))
 }
 
 const multipleFieldsValidatorHandler = (array, func) => {
-	let elements = array.map(([name, validator]) => {
+	let elements = array.map(([name, validator, required = true]) => {
 		let item = document.querySelector('input[name="' + name + '"]')
 
-		item.addEventListener('keyup', basicFieldChangeHandler(validator))
-		item.addEventListener('keydown', basicFieldChangeHandler(validator))
+		item.addEventListener('keyup', basicFieldChangeHandler(validator, required))
+		item.addEventListener('keydown', basicFieldChangeHandler(validator, required))
 	})
 
 	func(array)
