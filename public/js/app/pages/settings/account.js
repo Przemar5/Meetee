@@ -1,6 +1,6 @@
-import Router from '../../libs/http/Router.js'
-import RouteDispatcher from '../../libs/http/RouteDispatcher.js'
-import ToggableForm from '../../libs/forms/ToggableForm.js'
+import Router from '../../../libs/http/Router.js'
+import RouteDispatcher from '../../../libs/http/RouteDispatcher.js'
+import ToggableForm from '../../../libs/forms/ToggableForm.js'
 
 const csrfToken = document.getElementById('csrfToken')
 const errorMsgClass = 'error-msg'

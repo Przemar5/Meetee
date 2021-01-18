@@ -91,11 +91,11 @@ export default class RouteDispatcher {
 			"method": "GET"
 		},
 		"settings_account_page": {
-			"uri": "/account",
+			"uri": "/settings/account",
 			"method": "GET"
 		},
 		"settings_account_process": {
-			"uri": "/account",
+			"uri": "/settings/account",
 			"method": "POST"
 		}
 	}

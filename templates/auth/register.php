@@ -1,3 +1,7 @@
+<?php $this->startSection('head'); ?>
+<script type="module" src="<?= JS_DIR; ?>app/pages/register.js"></script>
+<?php $this->endSection(); ?>
+
 <?php $this->startSection('body'); ?>
 <form method="POST">
 	<h2>Registration</h2>

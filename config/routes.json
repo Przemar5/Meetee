@@ -133,14 +133,14 @@
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/account",
+		"pattern": "/settings/account",
 		"method": "GET",
 		"name": "settings_account_page",
 		"class": "Settings\\AccountController.page",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/account",
+		"pattern": "/settings/account",
 		"method": "POST",
 		"name": "settings_account_process",
 		"class": "Settings\\AccountController.process",

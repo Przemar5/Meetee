@@ -11,7 +11,7 @@ class Session implements Storage
 		session_name($name);
 		session_cache_limiter('nocache');
 		session_start();
-		session_regenerate_id(true);
+		session_regenerate_id();
 	}
 
 	public static function get(string $name)

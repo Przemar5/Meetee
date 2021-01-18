@@ -1,8 +1,10 @@
+<?php $this->startSection('head'); ?>
+<script type="module" src="<?= JS_DIR; ?>app/pages/settings/account.js"></script>
+<?php $this->endSection(); ?>
+
 <?php $this->startSection('body'); ?>
 
 Account
-
-<input type="hidden" id="csrf_token" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 
 <template id="csrfToken">
 	<input type="hidden" id="token" name="<?= $token->name; ?>" value="<?= $token->value; ?>">

@@ -6,12 +6,15 @@
 
 		<link rel="stylesheet" type="text/css" href="./public/css/style.css">
 
-		<script src="./public/js/global.js"></script>
-		<script src="./public/js/libs/DateAdapter.js"></script>
-		<script src="./public/js/libs/security/validation/validation.js"></script>
-		<script src="./public/js/libs/security/validation/template.js"></script>
-		<script src="./public/js/libs/security/validation/form_validation.js"></script>
-		<script type="module" src="./public/js/app/pages<?= str_replace('-', '_', $_SERVER['PATH_INFO'] ?? '/'); ?>.js" defer></script>
+		<style type="text/css">
+			label { display: block; }
+		</style>
+
+		<script src="<?= JS_DIR; ?>global.js"></script>
+		<script src="<?= JS_DIR; ?>libs/DateAdapter.js"></script>
+		<script src="<?= JS_DIR; ?>libs/security/validation/validation.js"></script>
+		<script src="<?= JS_DIR; ?>libs/security/validation/template.js"></script>
+		<script src="<?= JS_DIR; ?>libs/security/validation/form_validation.js"></script>
 		
 		<?= $this->section('head'); ?>
 	</head>

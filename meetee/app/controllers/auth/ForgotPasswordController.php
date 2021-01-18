@@ -111,8 +111,6 @@ class ForgotPasswordController extends ControllerTemplate
 		}
 	}
 
-	private function redirectToBa
-
 	private function successfulVerificationRequestValidationEvent(): void
 	{
 		$this->user->verify();
