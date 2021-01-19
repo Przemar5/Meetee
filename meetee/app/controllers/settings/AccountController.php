@@ -4,10 +4,12 @@ namespace Meetee\App\Controllers\Settings;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\User;
+use Meetee\App\Entities\Country;
 use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\TokenTable;
+use Meetee\Libs\Database\Tables\CountryTable;
 use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Http\CurrentRequestFacade;
@@ -25,8 +27,16 @@ class AccountController extends ControllerTemplate
 
 		$this->render('settings/account', [
 			'user' => $user,
+			'countries' => $this->getCountries(),
 			'token' => $token,
 		]);
+	}
+
+	private function getCountries(): array
+	{
+		$table = new CountryTable();
+
+		return $table->getAllRaw();
 	}
 
 	public function process(): void
@@ -51,7 +61,7 @@ class AccountController extends ControllerTemplate
 			'birth' => 'birth',
 			'country' => 'country', 
 			'city' => 'city', 
-			'zip' => 'zipCode'
+			'zip' => 'zipCode',
 		];
 
 		foreach ($accepts as $key => $attr) {
@@ -68,9 +78,14 @@ class AccountController extends ControllerTemplate
 		$value = trim($value);
 		$validator = CompoundValidatorFactory::createUserValidator($attr);
 
-		if (!$validator->run($value)) {
+		if ($attr === 'country')
+			$value = (int) $value;
+
+		if (!$validator->run($value))
 			return;
-		}
+
+		if ($attr === 'country')
+			$value = $this->initializeCountryEntity($value);
 
 		$this->setUserAttr($user, $attr, $value);
 
@@ -78,6 +93,13 @@ class AccountController extends ControllerTemplate
 		$table->save($user);
 
 		return;
+	}
+
+	private function initializeCountryEntity(int $id): ?Country
+	{
+		$table = new CountryTable();
+		
+		return $table->find($id);
 	}
 
 	private function setUserAttr(User &$user, string $attr, $value): void
@@ -91,7 +113,7 @@ class AccountController extends ControllerTemplate
 	private function getUserAttr(User $user, string $attr)
 	{
 		return (method_exists($user, 'get'.$attr))
-			? $user->{'get'.$attr}()
-			: $user->{$attr};
+			? (string) $user->{'get'.$attr}()
+			: (string) $user->{$attr};
 	}
 }

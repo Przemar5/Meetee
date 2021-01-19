@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title></title>
 
-		<link rel="stylesheet" type="text/css" href="./public/css/style.css">
+		<link rel="stylesheet" type="text/css" href="<?= CSS_DIR; ?>style.css">
 
 		<style type="text/css">
 			label { display: block; }

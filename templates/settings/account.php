@@ -7,79 +7,141 @@
 Account
 
 <template id="csrfToken">
-	<input type="hidden" id="token" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+	<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 </template>
 
-<label id="name" class="toggable-form">
+<label id="name" class="toggable-container">
 	Name: 
-	<span class="toggable-form-container">
-		<?= $user->name ?? ''; ?>
+	<form method="POST" class="toggable-form display-none">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<input type="text" class="form-input" name="name" value="<?= $user->name; ?>" required>
+		<small class="error-msg"></small>
+		<button type="submit">Submit</button>
+	</form>
+	<span class="toggable-text">
+		<span class="attribute">
+			<?= $user->name ?? ''; ?>
+		</span>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
-<label id="second_name" class="toggable-form">
+<label id="second_name" class="toggable-container">
 	Second name: 
-	<span class="toggable-form-container">
-		<?= $user->secondName ?? ''; ?>
+	<form method="POST" class="toggable-form display-none">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<input type="text" class="form-input" name="second_name" value="<?= $user->secondName; ?>">
+		<small class="error-msg"></small>
+		<button type="submit">Submit</button>
+	</form>
+	<span class="toggable-text">
+		<span class="attribute">
+			<?= $user->secondName ?? ''; ?>
+		</span>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
-<label id="surname" class="toggable-form">
+<label id="surname" class="toggable-container">
 	Surname: 
-	<span class="toggable-form-container">
-		<?= $user->surname ?? ''; ?>
+	<form method="POST" class="toggable-form display-none">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<input type="text" class="form-input" name="surname" value="<?= $user->surname; ?>" required>
+		<small class="error-msg"></small>
+		<button type="submit">Submit</button>
+	</form>
+	<span class="toggable-text">
+		<span class="attribute">
+			<?= $user->surname ?? ''; ?>
+		</span>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
-<label id="login" class="toggable-form">
+<label id="login" class="toggable-container">
 	Login: 
-	<span class="toggable-form-container">
+	<span class="toggable-text">
 		<?= $user->login ?? ''; ?>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
-<label id="email" class="toggable-form">
+<label id="email" class="toggable-container">
 	Email: 
-	<span class="toggable-form-container">
+	<span class="toggable-text">
 		<?= $user->email ?? ''; ?>
 	</span>
 	<button class="form-toggler">Change</button>
 </label>
 
-<label id="birth" class="toggable-form">
+<label id="birth" class="toggable-container">
 	Birth: 
-	<span class="toggable-form-container">
-		<?= $user->getBirth()->format('Y-m-d') ?? ''; ?>
+	<form method="POST" class="toggable-form display-none">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<input type="date" class="form-input" name="birth" value="<?= $user->getBirth()->format('Y-m-d'); ?>" required>
+		<small class="error-msg"></small>
+		<button type="submit">Submit</button>
+	</form>
+	<span class="toggable-text">
+		<span class="attribute">
+			<?= $user->getBirth()->format('Y-m-d') ?? ''; ?>
+		</span>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
-<label id="country" class="toggable-form">
+<label id="country" class="toggable-container">
 	Country: 
-	<span class="toggable-form-container">
-		<?= (isset($user->country)) ? $user->country->name : ''; ?>
+	<form method="POST" class="toggable-form display-none">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<select name="country">
+			<?php foreach ($countries as $country): ?>
+				<option value="<?= $country['id']; ?>"<?= ($country['id'] == $user->country->getId()) ? ' selected' : ''; ?>>
+					<?= $country['name']; ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+		<small class="error-msg"></small>
+		<button type="submit">Submit</button>
+	</form>
+	<span class="toggable-text">
+		<span class="attribute">
+			<?= (isset($user->country)) ? $user->country->name : ''; ?>
+		</span>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
-<label id="city" class="toggable-form">
+<label id="city" class="toggable-container">
 	City: 
-	<span class="toggable-form-container">
-		<?= $user->city ?? ''; ?>
+	<form method="POST" class="toggable-form display-none">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<input type="text" class="form-input" name="city" value="<?= $user->city; ?>">
+		<small class="error-msg"></small>
+		<button type="submit">Submit</button>
+	</form>
+	<span class="toggable-text">
+		<span class="attribute">
+			<?= $user->city ?? ''; ?>
+		</span>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
-<label id="zip" class="toggable-form">
+<label id="zip" class="toggable-container">
 	Zip code: 
-	<span class="toggable-form-container">
-		<?= $user->zipCode ?? ''; ?>
+	<form method="POST" class="toggable-form display-none">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<input type="text" class="form-input" name="zip" value="<?= $user->zipCode; ?>">
+		<small class="error-msg"></small>
+		<button type="submit">Submit</button>
+	</form>
+	<span class="toggable-text">
+		<span class="attribute">
+			<?= $user->zipCode ?? ''; ?>
+		</span>
+		<button class="form-toggler">Change</button>
 	</span>
-	<button class="form-toggler">Change</button>
 </label>
 
 <a href="<?php $this->renderRouteUri('settings_index_page'); ?>">Return</a>

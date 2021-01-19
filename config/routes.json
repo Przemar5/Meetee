@@ -152,5 +152,12 @@
 		"name": "profiles_show_page",
 		"class": "ProfileController.page",
 		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/rest/countries",
+		"method": "GET",
+		"name": "rest_countries_all",
+		"class": "Rest\\CountryController.getAll",
+		"access": ["GUEST", "VERIFIED"]
 	}
 ]

@@ -20,12 +20,22 @@ export default class ToggableForm {
 	}
 
 	prepareBasicViewWithInput (input) {
+		input = this.#parseVariables(input)
+		console.log(input)
 		this.view = '<form method="POST">' + 
 			input + 
 			'<small class="error-msg"></small>' + 
 			'<button type="submit">Submit</button>' +
 			'</form>'
 		this.view = this.view.toHTMLElement()
+	}
+
+	#parseVariables (input) {
+		let regex = /(?:\${)(.*)(?:})/
+		let found = regex.exec(input)
+		if (!found) return input
+		let result = eval(found[1])
+		return input.replace(regex, result)
 	}
 
 	createForm = (e) => {

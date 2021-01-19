@@ -40,6 +40,7 @@ function dd($data) {
 define('BASE_URI', 'http://localhost/files/projects/Meetee/');
 define('BASE_DIR', '/xampp/htdocs/files/projects/Meetee/');
 define('JS_DIR', 'http://localhost/files/projects/Meetee/public/js/');
+define('CSS_DIR', 'http://localhost/files/projects/Meetee/public/css/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 

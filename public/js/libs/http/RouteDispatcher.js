@@ -97,6 +97,10 @@ export default class RouteDispatcher {
 		"settings_account_process": {
 			"uri": "/settings/account",
 			"method": "POST"
-		}
+		},
+		"rest_countries_all": {
+			"uri": "/rest/countries",
+			"method": "GET"
+		},
 	}
 }

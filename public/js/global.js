@@ -40,6 +40,12 @@ Object.prototype.mapWithKeysToArray = function (func) {
 	return result
 }
 
+Object.prototype.toArray = function () {
+	let result = []
+	for (let i in this) result.push([i, this[i]])
+	return result
+}
+
 String.prototype.toHTMLElement = function () {
 	let wrapper = document.createElement('div')
 	wrapper.setAttribute('id', 'TEMP_WRAPPER')

@@ -9,6 +9,7 @@ use Meetee\Libs\Security\AuthenticationFacade;
 use Meetee\App\Entities\Traits\Timestamps;
 use Meetee\App\Entities\Traits\SoftDelete;
 use Meetee\App\Entities\Factories\RoleFactory;
+use Meetee\Libs\Utils\StringableDate;
 
 class User extends Entity
 {

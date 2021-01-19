@@ -34,14 +34,15 @@ class CountryTable extends TableTemplate
 		return $data;
 	}
 
-	public function getAll(): array
+	public function getAllRaw(): array
 	{
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->orderBy(['name']);
 
 		$result = $this->database->findMany($this->queryBuilder->getResult());
-
-		return array_map(fn($r) => $this->fetchEntity($r), $result);
+		
+		return $result;
 	}
 }
