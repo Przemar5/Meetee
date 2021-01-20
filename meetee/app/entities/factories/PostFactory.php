@@ -2,11 +2,21 @@
 
 namespace Meetee\App\Entities\Factories;
 
-use Meetee\App\Entities\Factories\Factory;
-use Meetee\App\Entities\Post; 
-use Meetee\App\Entities\Comment;
+use Meetee\App\Entities\Post;
+use Meetee\Libs\Database\Tables\PostTable;
+use Meetee\Libs\Security\AuthFacade;
 
-class PostFactory implements Factory
+class PostFactory
 {
-	public function create(): Post;
-} 
+	public static function createAndSavePostFromRequest(): Post
+	{
+		$post = new Post();
+		$post->content = trim($_POST['content']);
+		$post->author = AuthFacade::getUser();
+		
+		$table = new PostTable();
+		$table->save($post);
+
+		return $post;
+	}
+}

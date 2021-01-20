@@ -42,7 +42,7 @@ class BrowserView extends ViewTemplate
 
 	private function escape(string $value): string
 	{
-		return addslashe($value);
+		return addslashes($value);
 	}
 
 	private function success(): void
@@ -56,5 +56,13 @@ class BrowserView extends ViewTemplate
 	private function isGranted(string $role): bool
 	{
 		return AuthFacade::isGranted($role);
+	}
+
+	private function include(string $path, ?array $args = []): void
+	{
+		$file = $this->getTemplatePathIfValid($path);
+		extract($args);
+
+		require $file;
 	}
 }

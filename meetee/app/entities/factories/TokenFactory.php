@@ -8,6 +8,7 @@ use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Utils\RandomStringGenerator;
 use Meetee\Libs\Http\CurrentRequestFacade;
+use Meetee\Libs\Storage\Session;
 
 class TokenFactory
 {

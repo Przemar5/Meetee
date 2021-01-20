@@ -6,10 +6,6 @@
 
 Account
 
-<template id="csrfToken">
-	<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
-</template>
-
 <label id="name" class="toggable-container">
 	Name: 
 	<form method="POST" class="toggable-form display-none">

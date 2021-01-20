@@ -37,7 +37,6 @@ inputs.forEach((i) => {
 		let errorMsgDiv = form.querySelector('.error-msg')
 		let value = e.target.value.trim()
 		let required = e.target.hasAttribute('required')
-		console.log(required === undefined)
 		let name = e.target.getAttribute('name')
 		let validator = validatorFactory(name)
 

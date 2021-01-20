@@ -60,10 +60,10 @@
 		Country
 		<select name="country">
 			<?php foreach ($countries as $country): ?>
-				<option value="<?= $country->getId(); ?>" <?= 
-					(isset($_POST['country']) && $_POST['country'] == $country->getId()) ? 'selected' : ''; 
+				<option value="<?= $country['id']; ?>"<?= 
+					(isset($_POST['country']) && $_POST['country'] == $country['id']) ? ' selected' : ''; 
 				?>>
-					<?= $country->name; ?>
+					<?= $country['name']; ?>
 				</option>
 			<?php endforeach; ?>
 		</select>

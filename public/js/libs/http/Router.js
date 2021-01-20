@@ -1,7 +1,7 @@
 export default class Router {
 	static baseUri () {
 		return window.location.protocol + "//" + window.location.host + 
-			window.location.pathname.split('/').slice(0, 4).join('/')
+			window.location.pathname.split('/').slice(0, 3).join('/')
 	}
 
 	static pathInfo () {

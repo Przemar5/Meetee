@@ -35,7 +35,7 @@ class RegistrationController extends ControllerTemplate
 	{
 		$table = new CountryTable();
 
-		return $table->getAll();
+		return $table->getAllRaw();
 	}
 
 	public function process(): void

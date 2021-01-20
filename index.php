@@ -1,7 +1,7 @@
 <?php
 
 require_once './vendor/autoload.php';
-// require_once './config/emails.php';
+require_once './meetee/libs/utils/functions.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -9,15 +9,14 @@ ini_set('register_globals', 0);
 
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\Libs\Storage\Session;
-use Meetee\Libs\Database\Factories\DatabaseFactory;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Role;
 use Meetee\App\Entities\Token;
+use Meetee\Libs\Database\Factories\DatabaseFactory;
 use Meetee\App\Entities\Factories\RoleFactory;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\RoleTable;
 use Meetee\Libs\Database\Tables\TokenTable;
-use Meetee\Libs\Security\AuthFacade;
 
 
 spl_autoload_register(function($namespaceWithClass) {
@@ -31,18 +30,13 @@ spl_autoload_register(function($namespaceWithClass) {
 		require_once $path;
 });
 
-function dd($data) {
-	echo "<pre>";
-	var_dump($data);
-	die;
-}
-
-define('BASE_URI', 'http://localhost/files/projects/Meetee/');
-define('BASE_DIR', '/xampp/htdocs/files/projects/Meetee/');
-define('JS_DIR', 'http://localhost/files/projects/Meetee/public/js/');
-define('CSS_DIR', 'http://localhost/files/projects/Meetee/public/css/');
+define('BASE_URI', 'http://localhost/projects/Meetee/');
+define('JS_DIR', BASE_URI . 'public/js/');
+define('CSS_DIR', BASE_URI . 'public/css/');
+define('VIEW_DIR', BASE_URI . 'templates/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
+
 
 // echo "<pre>";
 

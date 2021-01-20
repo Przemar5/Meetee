@@ -98,4 +98,16 @@ class TokenTable extends TableTemplate
 		
 		return $copy;
 	}
+
+	public function deleteOld(): void
+	{
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->delete();
+		$this->queryBuilder->whereStrings(['expiry < NOW()']);
+
+		$this->database->sendQuery(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
 }

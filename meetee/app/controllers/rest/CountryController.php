@@ -3,7 +3,6 @@
 namespace Meetee\App\Controllers\Rest;
 
 use Meetee\App\Controllers\Rest\RestController;
-use Meetee\Libs\View\ViewTemplate;
 use Meetee\Libs\Database\Tables\CountryTable;
 
 class CountryController extends RestController

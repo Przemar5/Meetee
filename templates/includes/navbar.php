@@ -1,6 +1,7 @@
 <nav>
 	<?php if ($this->isGranted('VERIFIED')): ?>
 		<a href="<?= $this->renderRouteUri('main_page'); ?>">Main</a>
+		<a href="<?= route('profiles_show_page', ['id' => user()->getId()]); ?>">Profile</a>
 		<a href="<?= $this->renderRouteUri('settings_index_page'); ?>">Settings</a>
 		<a href="<?= $this->renderRouteUri('logout'); ?>">Logout</a>
 	<?php else: ?>

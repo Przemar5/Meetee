@@ -29,7 +29,7 @@ class Route
 	{
 		$pattern = $this->getUriPatternRegex();
 
-		return preg_match($pattern, $uri) && $this->method === $method;
+		return preg_match($pattern.'u', $uri) && $this->method === $method;
 	}
 
 	protected function getUriPatternRegex(): string
@@ -71,17 +71,23 @@ class Route
 	public function getPreparedUri(?array $args = []): string
 	{
 		$extracted = [];
-		preg_match_all('/(?:\{)(\w+)(?:\:[^\}]*\})/', $this->pattern, $extracted);
+		preg_match_all('/(?:\(\?\<)(\w+)(?:\>[^\)]*\))/', $this->pattern, $extracted);
+
 		[$patterns, $keys] = $extracted;
+		$insertions = [];
 
-		foreach ($keys as $key)
-			if (!isset($args[$key]))
-				throw new \Exception(
-					sprintf("route URI argument '%s' is missing.", $key));
+		foreach ($keys as $key) {
+			if (!isset($args[$key]) || empty($args[$key]))
+				throw new \Exception(sprintf(
+					"route URI argument '%s' is missing.", $key));
+			$insertions[] = $args[$key];
+		}
 
-		$values = array_map(fn($k) => $args[$k], $keys);
+		$insertions = array_map(fn($k) => $args[$k], $keys);
+		$patterns = array_map(fn($p) => '/'.addcslashes($p, '()<>\\?+').'/', $patterns);
+		$uri = preg_replace($patterns, $insertions, $this->pattern);
 
-		return str_replace($patterns, $values, $this->pattern);
+		return $uri;
 	}
 
 	public function accepts(string $role): bool

@@ -14,34 +14,40 @@ class Post extends Entity
 	use Timestamps;
 	use SoftDelete;
 
-	private string $table;
-	private int $id;
-	private string $title;
-	private string $content;
-	private User $author;
-	private Collection $comments;
+	private ?int $id = null;
+	public string $content;
+	public User $author;
+	public Collection $comments;
 
-	public function addComment(Comment $comment): void;
+	public function addComment(Comment $comment): void
+	{
+		$this->comments[] = $comment;
+	}
 
-	public function removeComment(Comment $comment): void;
+	public function removeComment(Comment $comment): void
+	{
+		// if (in_array($comment, $this->comments))
+		// 	$this->comments
+	}
 
-	public function setId(int $id): void;
+	public function setId(int $id): void
+	{
+		if (isset($this->id) || is_null($this->id))
+			$this->id = $id;
+	}
 
-	public function setTitle(string $title): void;
+	public function setComments(Collection $comments): void
+	{
+		$this->comments = $comments;
+	}
 
-	public function setContent(string $content): void;
-	
-	public function setAuthor(User $user): void;
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-	public function setComments(Collection $comments): void;
-
-	public function getId(): ?int;
-
-	public function getTitle(): string;
-
-	public function getContent(): string;
-	
-	public function getAuthor(): User;
-
-	public function getComments(): Collection;
+	public function getComments(): Collection
+	{
+		return $this->comments;
+	}
 }

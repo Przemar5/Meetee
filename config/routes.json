@@ -147,17 +147,17 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/posts/create",
+		"method": "POST",
+		"name": "posts_create_process",
+		"class": "PostController.create",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/profiles/(?<id>\\d+)",
 		"method": "GET",
 		"name": "profiles_show_page",
 		"class": "ProfileController.page",
 		"access": ["VERIFIED"]
-	},
-	{
-		"pattern": "/rest/countries",
-		"method": "GET",
-		"name": "rest_countries_all",
-		"class": "Rest\\CountryController.getAll",
-		"access": ["GUEST", "VERIFIED"]
 	}
 ]
