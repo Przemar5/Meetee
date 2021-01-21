@@ -5,8 +5,22 @@ export default class RouteDispatcher {
 		return this.routes[name]
 	}
 
-	static getRouteUri (name) {
-		return Router.baseUri() + this.routes[name].uri
+	static getRouteUri (name, args = []) {
+		let route = Router.baseUri() + this.routes[name].uri
+		let matches
+
+		if (matches = route.match(/(?:\()([^\)]+)(?:\))/gu)) {
+			for (let i in matches) {
+				if (typeof matches[i] !== 'string') continue
+				let argName = matches[i].substring(1, matches[i].length - 1)
+				if (args[argName] === undefined || args[argName] === null) {
+					throw new Error("Argument '" + i + "' not found in RouteDispatcher.getRouteUri")
+				}
+				route = route.replace(new RegExp('\\(' + argName + '\\)', 'ug'), args[argName])
+			}
+		}
+
+		return route
 	}
 
 	static getRouteMethod (name) {
@@ -102,5 +116,13 @@ export default class RouteDispatcher {
 			"uri": "/rest/countries",
 			"method": "GET"
 		},
+		"posts_select_process": {
+			"uri": "/posts/select",
+			"method": "GET"
+		},
+		"posts_update_process": {
+			"uri": "/posts/(id)/update",
+			"method": "POST"
+		}
 	}
 }

@@ -22,7 +22,7 @@ class PostTable extends TableTemplate
 		$post = new Post();
 		$post->setId($data['id']);
 		$post->content = $data['content'];
-		$post->author = $user;
+		$post->authorId = $user->getId();
 		$post->setCreatedAt($data['created_at']);
 		$post->setUpdatedAt($data['updated_at']);
 		$post->deleted = $data['deleted'];
@@ -37,9 +37,31 @@ class PostTable extends TableTemplate
 		$data = [];
 		$data['id'] = $post->getId();
 		$data['content'] = $post->content;
-		$data['user_id'] = $post->author->getId();
+		$data['user_id'] = $post->authorId;
 		$data['deleted'] = $post->deleted;
 
 		return $data;
+	}
+
+	public function findByAuthor(User $user): ?array
+	{
+		return $this->findManyBy(['user_id' => $user->getId()]);
+	}
+
+	public function findLastFromByAuthorId(int $last, int $limit, int $authorId): ?array
+	{
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->where(['user_id' => $authorId]);
+		$this->queryBuilder->whereStrings(['id < :id', 'deleted IS NULL']);
+		$this->queryBuilder->limit($limit);
+		$this->queryBuilder->orderBy(['id']);
+		$this->queryBuilder->orderDesc();
+		$this->queryBuilder->setAdditionalBindings(['id' => $last]);
+
+		return $this->database->findMany(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings(),
+		);
 	}
 }

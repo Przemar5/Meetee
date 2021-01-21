@@ -13,6 +13,7 @@ class UserIdValidator extends CompoundValidator
 		$validators[] = ValidatorFactory::createIntValidator();
 		$validators[] = ValidatorFactory::createMinValidator(0);
 		$validators[] = ValidatorFactory::createMaxValidator(99999999999);
+		$validators[] = ValidatorFactory::createExistsValidator('users', 'id');
 
 		parent::__construct($validators);
 	}

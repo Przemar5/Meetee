@@ -72,8 +72,6 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 			$this->additionalBindings[":$key"] = $value;
 		}
 
-		// var_dump($this->conditions);
-
 		$conditions = implode(' AND ', $conditions);
 		$this->query .= ' WHERE ' . $conditions;
 	}
@@ -85,8 +83,7 @@ class MySQLQueryBuilder extends QueryBuilderTemplate
 
 		if (empty($this->conditions))
 			$this->query .= ' WHERE ';
-
-		if (!empty($this->conditions))
+		else
 			$this->query .= ' AND ';
 
 		$mapFunc = fn($c) => sprintf('%s IS NULL', $c);

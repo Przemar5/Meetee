@@ -147,10 +147,31 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/posts/select",
+		"method": "GET",
+		"name": "posts_select_process",
+		"class": "PostController.select",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/posts/create",
 		"method": "POST",
 		"name": "posts_create_process",
 		"class": "PostController.create",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/posts/(?<id>\\d+)/update",
+		"method": "POST",
+		"name": "posts_update_process",
+		"class": "PostController.update",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/posts/(?<id>\\d+)/delete",
+		"method": "POST",
+		"name": "posts_delete_process",
+		"class": "PostController.delete",
 		"access": ["VERIFIED"]
 	},
 	{

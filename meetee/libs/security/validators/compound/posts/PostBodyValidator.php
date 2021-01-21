@@ -17,7 +17,7 @@ class PostBodyValidator extends CompoundValidator
 		$validators[] = ValidatorFactory::createMaxLengthValidator(
 			65535, 'Post body is too long.');
 		$validators[] = ValidatorFactory::createPatternValidator(
-			'/^[\w\d\s\- \#\$\@\!\^\&\*\(\)\+\=\{\}\[\]\;\:\"\,\<\.\>\/\?]+$/u', 
+			'/^[\w\d\s\- \|\#\$\@\!\^\&\*\(\)\+\=\{\}\[\]\;\:\"\,\<\.\>\/\?]+$/u', 
 			'Post body contains inproper characters.');
 
 		parent::__construct($validators);

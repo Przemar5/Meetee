@@ -42,4 +42,14 @@ trait Timestamps
 	{
 		return $this->updatedAt ?? null;
 	}
+
+	public function getCreatedAtString(): string
+	{
+		return $this->createdAt->format('Y-m-d H:i:s');
+	}
+
+	public function getUpdatedAtString(): string
+	{
+		return $this->updatedAt->format('Y-m-d H:i:s');
+	}
 }

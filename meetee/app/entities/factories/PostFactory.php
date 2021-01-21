@@ -12,7 +12,7 @@ class PostFactory
 	{
 		$post = new Post();
 		$post->content = trim($_POST['content']);
-		$post->author = AuthFacade::getUser();
+		$post->authorId = AuthFacade::getUser()->getId();
 		
 		$table = new PostTable();
 		$table->save($post);

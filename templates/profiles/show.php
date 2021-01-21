@@ -1,5 +1,5 @@
 <?php $this->startSection('head'); ?>
-<script type="module" src="<?= JS_DIR; ?>app/pages/settings/account.js"></script>
+<script type="module" src="<?= JS_DIR; ?>app/pages/posts/show.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->startSection('body'); ?>
@@ -69,8 +69,28 @@ Account
 	</span>
 </label>
 
+<template id="postTemplate">
+	<div class="post">
+		<span class="post__modification">
+			<span class="post__modification--type"></span> 
+			<time datetime="" class="post__modification--date"></time>
+		</span>
+		<button class="post__button--edit form-toggler">Edit</button>
+		<button class="post__button--delete">Delete</button>
+		<form method="POST" class="post__form toggable-form display-none">
+			<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+			<textarea name="content" class="post__content"></textarea>
+			<small class="error-msg"></small>
+			<button type="submit" class="post__submit">Save</button>
+		</form>
+		<span class="post__content--view toggable-text"></span>
+	</div>
+</template>
+
 <div class="container">
 	<?php $this->include('posts/forms/create', ['token' => $token]); ?>
+
+	<div id="posts"></div>
 </div>
 
 <?php $this->endSection('body'); ?>

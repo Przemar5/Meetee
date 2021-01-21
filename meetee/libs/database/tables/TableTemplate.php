@@ -220,15 +220,30 @@ abstract class TableTemplate
 
 		$taked = $this->find($entity->getId());
 
-		if (!$taked)
+		if (!$taken)
 			return;
 
 		foreach ($attrs as $attr) {
 			if (method_exists(get_class($entity), 'set'.$attr))
 				$entity->{'set'.$attr}($attr);
 			
-			$entity->{$attr} = $taked->{$attr};
+			$entity->{$attr} = $taken->{$attr};
 		}
+	}
+
+	public function saveComplete(
+		Entity $entity
+	): ?Entity
+	{
+		$this->throwExceptionIfInvalidClass($entity);
+		$this->save($entity);
+
+		$taken = $this->find($entity->getId());
+
+		if (!$taken)
+			return null;
+
+		return $taken;
 	}
 
 	public function popComplete(

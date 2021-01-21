@@ -7,6 +7,7 @@ use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\User;
 use Meetee\Libs\Database\Tables\Pivots\UserRoleTable;
 use Meetee\Libs\Database\Tables\CountryTable;
+use Meetee\Libs\Database\Tables\PostTable;
 
 class UserTable extends TableTemplate
 {
@@ -36,8 +37,8 @@ class UserTable extends TableTemplate
 		$table = new CountryTable();
 		$user->country = $country = $table->find($data['country']);
 
-		$userRole = new UserRoleTable();
-		$user->setRoles($userRole->findRolesForUserId($data['id']));
+		$table = new UserRoleTable();
+		$user->setRoles($table->findRolesForUserId($data['id']));
 
 		return $user;
 	}

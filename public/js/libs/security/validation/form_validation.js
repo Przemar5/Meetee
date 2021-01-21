@@ -17,8 +17,8 @@ const userSecondNameValidator = validForAll([
 
 const userSurnameValidator = validForAll([
 	[isDefined, 'Surname is required.'],
-	[notNull, 'Surname isrequired'],
-	[notEmpty, 'Surname isrequired'],
+	[notNull, 'Surname isrequired.'],
+	[notEmpty, 'Surname isrequired.'],
 	[isString, ''],
 	[isNotShorter(2), 'Surname must be 2 characters minimum.'],
 	[isNotLonger(70), 'Surname must be equal or shorter than 70 characters.'],
@@ -55,8 +55,8 @@ const zipCodeValidator = validForAll([
 // Regex not working
 const userPasswordValidator = validForAll([
 	[isDefined, 'Password is required.'],
-	[notNull, 'Password isrequired'],
-	[notEmpty, 'Password isrequired'],
+	[notNull, 'Password isrequired.'],
+	[notEmpty, 'Password isrequired.'],
 	[isString, ''],
 	[isNotShorter(8), 'Password must be at least 8 characters long.'],
 	[isNotLonger(60), 'Password must be equal or shorter than 60 characters.'],
@@ -89,6 +89,16 @@ const userLoginValidator = validForAll([
 		'Login may contain only alphanumeric characters and hyphens.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
+const postBodyValidator = validForAll([
+	[isDefined, 'Post body is required.'],
+	[notNull, 'Post body is required.'],
+	[notEmpty, 'Post body is required.'],
+	[isString, ''],
+	[isNotShorter(20), 'Post body must be longer or equal 20 characters.'],
+	[isNotLonger(65535), 'Post body is too long.'],
+	[matches(/^[\w\d\s\-#\$@!\^&\*()\+={}[\];:"\|,<.>\/\?]+$/u), 
+		'Post body contains inproper characters.']
+].map((v) => validOrThrow(v[0])(v[1])))
 
 const validatorFactory = (name) => {
 	switch (name) {
@@ -98,5 +108,6 @@ const validatorFactory = (name) => {
 		case 'birth': return userBirthValidator
 		case 'city': return cityNameValidator
 		case 'zip': return zipCodeValidator
+		case 'post_body': return postBodyValidator
 	}
 }

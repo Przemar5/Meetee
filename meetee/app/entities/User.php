@@ -4,6 +4,7 @@ namespace Meetee\App\Entities;
 
 use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\Country;
+use Meetee\App\Entities\Pivots\UserPost;
 use Meetee\Libs\Http\Routing\Data\Route;
 use Meetee\Libs\Security\AuthenticationFacade;
 use Meetee\App\Entities\Traits\Timestamps;
@@ -95,5 +96,12 @@ class User extends Entity
 	public function getRoles(): array
 	{
 		return $this->roles ?? [];
+	}
+
+	public function getPosts(): ?array
+	{
+		$pivot = new UserPost();
+
+		return $pivot->postsForUser($this);
 	}
 }

@@ -16,7 +16,7 @@ class Post extends Entity
 
 	private ?int $id = null;
 	public string $content;
-	public User $author;
+	public int $authorId;
 	public Collection $comments;
 
 	public function addComment(Comment $comment): void

@@ -17,6 +17,7 @@ class TableFactory
 			case 'roles': return new RoleTable();
 			case 'tokens': return new TokenTable();
 			case 'countries': return new CountryTable();
+			case 'posts': return new TokenTable();
 		}
 	}
 }
