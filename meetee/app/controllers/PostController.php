@@ -39,7 +39,7 @@ class PostController extends ControllerTemplate
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieAndPrintErrorsIfFormDataInvalid();
 
-			$this->successfulCreateRequestValidationEvent();
+			$this->createAndPrintJsonPostData();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -56,7 +56,8 @@ class PostController extends ControllerTemplate
 	{
 		$user = AuthFacade::getUser();
 
-		if (!TokenFacade::popTokenIfValidByName($name, $user)) {
+		if (!TokenFacade::getTokenFromPostRequestIfValidByNameAndUser(
+			$name, $user)) {
 			die;
 		}
 	}
@@ -78,11 +79,12 @@ class PostController extends ControllerTemplate
 				$_POST[$key] = trim($value);
 	}
 
-	private function successfulCreateRequestValidationEvent(): void
+	private function createAndPrintJsonPostData(): void
 	{
-		$post = PostFactory::createAndSavePostFromRequest();
-		echo json_encode($post);
-		die;
+		$post = new Post();
+		$post->content = trim($_POST['content']);
+		
+		$this->savePostAndPrintJsonData($post);
 	}
 
 	public function update($id): void
@@ -92,7 +94,7 @@ class PostController extends ControllerTemplate
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieAndPrintErrorsIfUpdateFormDataInvalid($id);
 
-			$this->successfulUpdateRequestValidationEvent((int) $id);
+			$this->updateAndPrintJsonPostData((int) $id);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -121,29 +123,29 @@ class PostController extends ControllerTemplate
 
 		if (!$post || $post->authorId !== AuthFacade::getUserId())
 			die;
-
-		$this->updatePost($post);
 	}
 
-	private function updatePost(Post $post): void
-	{
-		$post->content = trim($_POST['content']);
-		$table = new PostTable();
-		$post = $table->saveComplete($post);
-
-		echo json_encode($post);
-		die;
-	}
-
-	private function successfulUpdateRequestValidationEvent(int $id): void
+	private function updateAndPrintJsonPostData(int $id): void
 	{
 		$table = new PostTable();
 		$post = $table->find($id);
-
 		$post->content = trim($_POST['content']);
-		$table->save($post);
+		
+		$this->savePostAndPrintJsonData($post);
+	}
 
-		echo json_encode($post);
+	private function savePostAndPrintJsonData(Post $post): void
+	{
+		$table = new PostTable();
+		$post = $table->saveComplete($post);
+
+		echo json_encode([
+			'id' => $post->getId(),
+			'content' => $post->content,
+			'author_id' => $post->authorId,
+			'created_at' => $post->getCreatedAtString(),
+			'updated_at' => $post->getUpdatedAtString(),
+		]);
 		die;
 	}
 
@@ -154,7 +156,7 @@ class PostController extends ControllerTemplate
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieIfPostIdInvalid((int) $id);
 
-			$this->successfulUpdateRequestValidationEvent();
+			$this->successfulDeleteRequestValidationEvent();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());

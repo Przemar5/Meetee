@@ -23,7 +23,7 @@ class TokenTable extends TableTemplate
 		if (isset($token->userId))
 			$data['user_id'] = $token->userId;
 
-		return $this->getValiBy($data);
+		return $this->getValidBy($data);
 	}
 
 	public function getValidBy(array $conditions): ?Token

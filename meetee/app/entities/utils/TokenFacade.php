@@ -11,13 +11,14 @@ use Meetee\Libs\Security\AuthFacade;
 
 class TokenFacade
 {
-	public static function getTokenIfValidByNameAndUser(
+	public static function getTokenFromArrayIfValidByNameAndUser(
+		array $data,
 		string $name,
-		?User $user = null
+		?User $user = null,
 	): ?Token
 	{
-		$token = TokenFactory::getFromAjax($name);
-		
+		$token = TokenFactory::getFromArray($name, $data);
+
 		if (!$token || !static::tokenValidates($token))
 			return null;
 
@@ -30,6 +31,15 @@ class TokenFacade
 			return null;
 
 		return $token;
+	}
+
+	public static function getTokenFromPostRequestIfValidByNameAndUser(
+		string $name,
+		?User $user = null,
+	): ?Token
+	{
+		return static::getTokenFromArrayIfValidByNameAndUser(
+			$_POST, $name, $user);
 	}
 
 	public static function popTokenIfValidByName(string $name): ?Token

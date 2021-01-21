@@ -81,7 +81,7 @@ Account
 			<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 			<textarea name="content" class="post__content"></textarea>
 			<small class="error-msg"></small>
-			<button type="submit" class="post__submit">Save</button>
+			<button type="submit" class="post__button--save">Save</button>
 		</form>
 		<span class="post__content--view toggable-text"></span>
 	</div>

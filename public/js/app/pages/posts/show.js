@@ -1,4 +1,5 @@
 import Ajax from '../../../libs/http/Ajax.js'
+import Request from '../../../libs/http/Request.js'
 import RouteDispatcher from '../../../libs/http/RouteDispatcher.js'
 
 const postTemplate = document.getElementById('postTemplate')
@@ -37,6 +38,7 @@ class PostHandler {
 		let contentInput = temp.querySelector('.post__content')
 		let errorSpan = temp.querySelector('.error-msg')
 		let contentView = temp.querySelector('.post__content--view')
+		let btnSave = temp.querySelector('.post__button--save')
 		let btnEdit = temp.querySelector('.post__button--edit')
 		let btnDelete = temp.querySelector('.post__button--delete')
 		let route
@@ -52,6 +54,7 @@ class PostHandler {
 			contentView.innerText = data['content']
 			this.addContentInputEventListeners(contentInput)
 			this.addEditBtnEventListener(btnEdit)
+			form.addEventListener('submit', this.updateSubmitEvent)
 		} catch (e) {
 			console.log(e.message)
 		}
@@ -65,29 +68,58 @@ class PostHandler {
 	}
 
 	addEditBtnEventListener (btn) {
-		btn.addEventListener('click', (e) => {
-			let container = e.target.closest('.post')
-			container.querySelector('.toggable-form').classList.toggle('display-none')
-			container.querySelector('.toggable-text').classList.toggle('display-none')
-		})
+		btn.addEventListener('click', (e) => this.toggleFormAndPlainText(e.target))
+	}
+
+	toggleFormAndPlainText = (item) => {
+		let container = item.closest('.post')
+		container.querySelector('.toggable-form').classList.toggle('display-none')
+		container.querySelector('.toggable-text').classList.toggle('display-none')
 	}
 
 	inputKeyEvent = (e) => {
 		let value = e.target.value.trim()
 		let form = e.target.closest('form')
-		let errorMsgDiv = form.find('.post__error-msg')
+		let errorMsgDiv = form.querySelector('.error-msg')
+		let btnSubmit = form.querySelector('.post__button--save')
 
 		try {
-			if (PostBodyValidator(value)) {
+			if (postBodyValidator(value)) {
 				errorMsgDiv.innerText = ''
-				form.removeAttribute('disabled')
+				btnSubmit.removeAttribute('disabled')
 			}
 		} catch (e) {
 			errorMsgDiv.innerText = e.message
-			form.setAttribute('disabled', true)
+			btnSubmit.setAttribute('disabled', true)
 		}
 	}
+
+	updateSubmitEvent = (e) => {
+		e.preventDefault()
+		let formData = new FormData(e.target)
+		let uri = e.target.getAttribute('action')
+		let ajax = new Ajax()
+		let request = new Request()
+
+		request.post(uri, formData, this.updatePost(e.target), () => null)
+	}
+
+	updatePost = (form) => (data) => {
+		let post = form.closest('.post')
+		let contentView = post.querySelector('.post__content--view')
+		let modificationType = post.querySelector('.post__modification--type')
+		let modificationDate = post.querySelector('.post__modification--date')
+
+		contentView.innerText = data.content
+		modificationType.innerText = 'Updated at:'
+		modificationDate.setAttribute('datetime', data['updated_at'])
+		modificationDate.innerText = data['updated_at']
+
+		this.toggleFormAndPlainText(form)
+	}
 }
+
+// console.log(new Request())
 
 let postHandler = new PostHandler()
 postHandler.loadPosts()
