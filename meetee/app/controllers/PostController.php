@@ -103,13 +103,7 @@ class PostController extends ControllerTemplate
 
 	private function dieAndPrintErrorsIfUpdateFormDataInvalid($postId): void
 	{
-		if (!preg_match('/^[1-9][0-9]*$/', $postId))
-			die;
-
-		$validator = new PostIdValidator();
-
-		if (!$validator->run((int) $postId))
-			die;
+		$this->dieIfPostIdInvalid($postId);
 
 		$validator = new PostBodyValidator();
 
@@ -122,6 +116,17 @@ class PostController extends ControllerTemplate
 		$post = $table->find((int) $postId);
 
 		if (!$post || $post->authorId !== AuthFacade::getUserId())
+			die;
+	}
+
+	private function dieIfPostIdInvalid($postId): void
+	{
+		if (!preg_match('/^[1-9][0-9]*$/', $postId))
+			die;
+
+		$validator = new PostIdValidator();
+
+		if (!$validator->run((int) $postId))
 			die;
 	}
 
@@ -154,17 +159,18 @@ class PostController extends ControllerTemplate
 		try {
 			$this->trimPostValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
-			$this->dieIfPostIdInvalid((int) $id);
+			$this->dieIfPostIdInvalid($id);
 
-			$this->successfulDeleteRequestValidationEvent();
+			$this->deletePost((int) $id);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
-	private function dieIfPostIdInvalid(int $id): void
+	private function deletePost(int $id): void
 	{
-		// $validator = new PostIdValidator();
+		$table = new PostTable();
+		$table->delete($id);
 	}
 }

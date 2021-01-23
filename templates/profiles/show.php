@@ -76,8 +76,11 @@ Account
 			<time datetime="" class="post__modification--date"></time>
 		</span>
 		<button class="post__button--edit form-toggler">Edit</button>
-		<button class="post__button--delete">Delete</button>
-		<form method="POST" class="post__form toggable-form display-none">
+		<form class="post__form post__form--delete">
+			<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+			<button type="submit" class="post__button--delete">Delete</button>
+		</form>
+		<form method="POST" class="post__form post__form--edit toggable-form display-none">
 			<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 			<textarea name="content" class="post__content"></textarea>
 			<small class="error-msg"></small>
@@ -90,7 +93,9 @@ Account
 <div class="container">
 	<?php $this->include('posts/forms/create', ['token' => $token]); ?>
 
-	<div id="posts"></div>
+	<div id="posts">
+		<p class="no-result-msg">No posts found.</p>
+	</div>
 </div>
 
 <?php $this->endSection('body'); ?>

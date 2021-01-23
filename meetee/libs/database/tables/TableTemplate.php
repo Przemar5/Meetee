@@ -86,7 +86,7 @@ abstract class TableTemplate
 		$this->queryBuilder->where($conditions);
 		
 		if ($this->softDelete)
-			$this->queryBuilder->whereNull(['deleted']);
+			$this->queryBuilder->whereStrings(['deleted IS NULL OR deleted = 0']);
 	}
 
 	abstract protected function fetchEntity($data): Entity;
@@ -176,9 +176,30 @@ abstract class TableTemplate
 
 	public function deleteBy(array $conditions): void
 	{
+		if ($this->softDelete)
+			$this->softDeleteBy($conditions);
+		else
+			$this->hardDeleteBy($conditions);
+	}
+
+	public function hardDeleteBy(array $conditions): void
+	{
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->delete();
+		$this->queryBuilder->where($conditions);
+		
+		$this->database->sendQuery(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
+
+	public function softDeleteBy(array $conditions): void
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->update(['deleted' => true]);
 		$this->queryBuilder->where($conditions);
 		
 		$this->database->sendQuery(

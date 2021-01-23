@@ -123,6 +123,10 @@ export default class RouteDispatcher {
 		"posts_update_process": {
 			"uri": "/posts/(id)/update",
 			"method": "POST"
+		},
+		"posts_delete_process": {
+			"uri": "/posts/(id)/delete",
+			"method": "POST"
 		}
 	}
 }

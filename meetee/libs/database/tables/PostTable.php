@@ -53,7 +53,7 @@ class PostTable extends TableTemplate
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
 		$this->queryBuilder->where(['user_id' => $authorId]);
-		$this->queryBuilder->whereStrings(['id < :id', 'deleted IS NULL']);
+		$this->queryBuilder->whereStrings(['id < :id', 'deleted IS NULL OR deleted = 0']);
 		$this->queryBuilder->limit($limit);
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
