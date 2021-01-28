@@ -8,6 +8,7 @@ abstract class WebSocketServer extends SocketServer
 {
 	public const string ADDRESS = '0.0.0.0';
 	public const int PORT = 12344;
+	public static array $users = [];
 	private \Socket $client;
 
 	public function __construct(): void
@@ -23,8 +24,10 @@ abstract class WebSocketServer extends SocketServer
 		socket_set_option($server, SOL_SOCKET, SO_REUSEADDR, 1);
 		socket_bind($server, static::ADDRESS, static::PORT);
 		socket_listen($server);
+		$client = socket_accept($server);
+		static::$users[] = $client;
 
-		return socket_accept($server);
+		return $client;
 	}
 
 	private function prepareHeaders(string $key): string

@@ -127,6 +127,10 @@ export default class RouteDispatcher {
 		"posts_delete_process": {
 			"uri": "/posts/(id)/delete",
 			"method": "POST"
+		},
+		"ratings_rate_process": {
+			"uri": "/ratings/r/(id)/type/(type)/res/(resourceId)/rate",
+			"method": "POST"
 		}
 	}
 }

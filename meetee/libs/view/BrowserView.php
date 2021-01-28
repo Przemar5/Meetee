@@ -65,4 +65,11 @@ class BrowserView extends ViewTemplate
 
 		require $file;
 	}
+
+	private function includeRaw(string $path): void
+	{
+		$file = $this->getTemplatePathIfValid($path);
+		
+		printf('%s', file_get_contents($file));
+	}
 }

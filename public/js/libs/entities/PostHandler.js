@@ -68,11 +68,36 @@ export default class PostHandler {
 
 			formEdit.addEventListener('submit', this.updateSubmitEvent)
 			formDelete.addEventListener('submit', this.deleteSubmitEvent)
+
+			this.prepareRatingForm(temp, data['id'])
 		} catch (e) {
 			console.log(e.message)
 		}
 
 		return temp
+	}
+
+	prepareRatingForm (template, postId) {
+		const forms = template.querySelectorAll('.ratings form')
+		forms.forEach((f) => {
+			let ratingId = f.querySelector('input[name="rating_id"]').value
+			let route = RouteDispatcher.getRouteUri('ratings_rate_process', {
+				'id': ratingId,
+				'type': 'post',
+				'resourceId': postId,
+			})
+			f.setAttribute('action', route)
+			f.addEventListener('submit', this.rateEvent)
+		})
+	}
+
+	rateEvent = (e) => {
+		e.preventDefault()
+		let formData = new FormData(e.target)
+		let uri = e.target.getAttribute('action')
+		let request = new Request()
+
+		request.post(uri, formData, ((d) => console.log(d)), ((d) => console.log(d)))
 	}
 
 	addContentInputEventListeners (contentInput) {

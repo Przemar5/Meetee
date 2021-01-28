@@ -175,10 +175,24 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/ratings/r/(?<id>\\d+)/type/(?<type>(post|comment))/res/(?<resourceId>\\d+)/rate",
+		"method": "POST",
+		"name": "ratings_rate_process",
+		"class": "RatingController.rate",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/profiles/(?<id>\\d+)",
 		"method": "GET",
 		"name": "profiles_show_page",
 		"class": "ProfileController.page",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/chat",
+		"method": "GET",
+		"name": "chat_message",
+		"class": "Chat\\ChatController.request",
 		"access": ["VERIFIED"]
 	}
 ]
