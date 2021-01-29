@@ -89,15 +89,15 @@ const userLoginValidator = validForAll([
 		'Login may contain only alphanumeric characters and hyphens.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
-const postBodyValidator = validForAll([
-	[isDefined, 'Post body is required.'],
-	[notNull, 'Post body is required.'],
-	[notEmpty, 'Post body is required.'],
+const commentBodyValidator = validForAll([
+	[isDefined, 'Comment body is required.'],
+	[notNull, 'Comment body is required.'],
+	[notEmpty, 'Comment body is required.'],
 	[isString, ''],
-	[isNotShorter(20), 'Post body must be longer or equal 20 characters.'],
-	[isNotLonger(65535), 'Post body is too long.'],
+	[isNotShorter(20), 'Comment body must be longer or equal 20 characters.'],
+	[isNotLonger(65535), 'Comment body is too long.'],
 	[matches(/^[\w\d\s\-#\$@!\^&\*()\+={}[\];:"\|,<.>\/\?]+$/u), 
-		'Post body contains inproper characters.']
+		'Comment body contains inproper characters.']
 ].map((v) => validOrThrow(v[0])(v[1])))
 
 const validatorFactory = (name) => {

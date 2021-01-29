@@ -147,35 +147,35 @@
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/posts/select",
+		"pattern": "/comments/select",
 		"method": "GET",
-		"name": "posts_select_process",
-		"class": "PostController.select",
+		"name": "comments_select_process",
+		"class": "CommentController.select",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/posts/create",
+		"pattern": "/comments/create",
 		"method": "POST",
-		"name": "posts_create_process",
-		"class": "PostController.create",
+		"name": "comments_create_process",
+		"class": "CommentController.create",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/posts/(?<id>\\d+)/update",
+		"pattern": "/comments/(?<id>\\d+)/update",
 		"method": "POST",
-		"name": "posts_update_process",
-		"class": "PostController.update",
+		"name": "comments_update_process",
+		"class": "CommentController.update",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/posts/(?<id>\\d+)/delete",
+		"pattern": "/comments/(?<id>\\d+)/delete",
 		"method": "POST",
-		"name": "posts_delete_process",
-		"class": "PostController.delete",
+		"name": "comments_delete_process",
+		"class": "CommentController.delete",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/ratings/r/(?<id>\\d+)/type/(?<type>(post|comment))/res/(?<resourceId>\\d+)/rate",
+		"pattern": "/ratings/r/(?<id>\\d+)/c/(?<commentId>\\d+)/rate",
 		"method": "POST",
 		"name": "ratings_rate_process",
 		"class": "RatingController.rate",

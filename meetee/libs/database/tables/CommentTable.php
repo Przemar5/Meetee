@@ -11,7 +11,7 @@ class CommentTable extends TableTemplate
 {
 	public function __construct()
 	{
-		parent::__construct('posts', Comment::class, true);
+		parent::__construct('comments', Comment::class, true);
 	}
 
 	protected function fetchEntity($data): Comment
@@ -19,26 +19,26 @@ class CommentTable extends TableTemplate
 		$table = new UserTable();
 		$user = $table->find($data['user_id']);
 
-		$post = new Comment();
-		$post->setId($data['id']);
-		$post->content = $data['content'];
-		$post->authorId = $user->getId();
-		$post->setCreatedAt($data['created_at']);
-		$post->setUpdatedAt($data['updated_at']);
-		$post->deleted = $data['deleted'];
+		$comment = new Comment();
+		$comment->setId($data['id']);
+		$comment->content = $data['content'];
+		$comment->authorId = $user->getId();
+		$comment->setCreatedAt($data['created_at']);
+		$comment->setUpdatedAt($data['updated_at']);
+		$comment->deleted = $data['deleted'];
 
-		return $post;
+		return $comment;
 	}
 
-	protected function getEntityData(Entity $post): array
+	protected function getEntityData(Entity $comment): array
 	{
-		$this->throwExceptionIfInvalidClass($post, Comment::class);
+		$this->throwExceptionIfInvalidClass($comment, Comment::class);
 
 		$data = [];
-		$data['id'] = $post->getId();
-		$data['content'] = $post->content;
-		$data['user_id'] = $post->authorId;
-		$data['deleted'] = $post->deleted;
+		$data['id'] = $comment->getId();
+		$data['content'] = $comment->content;
+		$data['user_id'] = $comment->authorId;
+		$data['deleted'] = $comment->deleted;
 
 		return $data;
 	}
@@ -48,7 +48,11 @@ class CommentTable extends TableTemplate
 		return $this->findManyBy(['user_id' => $user->getId()]);
 	}
 
-	public function findLastFromByAuthorId(int $last, int $limit, int $authorId): ?array
+	public function findLastFromByAuthorId(
+		int $last, 
+		int $limit, 
+		int $authorId
+	): ?array
 	{
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);

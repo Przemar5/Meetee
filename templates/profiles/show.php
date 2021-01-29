@@ -1,5 +1,5 @@
 <?php $this->startSection('head'); ?>
-<script type="module" src="<?= JS_DIR; ?>app/pages/posts/show.js"></script>
+<script type="module" src="<?= JS_DIR; ?>app/pages/comments/show.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->startSection('body'); ?>
@@ -69,12 +69,14 @@ Account
 	</span>
 </label>
 
-<?php $this->include('posts/template', ['token' => $token]); ?>
+<?php $this->include('comments/template', [
+	'token' => $token
+]); ?>
 
 <div class="container">
-	<?php $this->include('posts/forms/create', ['token' => $token]); ?>
+	<?php $this->include('comments/forms/create', ['token' => $token]); ?>
 
-	<div id="posts">
+	<div id="commentsBase">
 		<p class="no-result-msg">No posts found.</p>
 	</div>
 </div>

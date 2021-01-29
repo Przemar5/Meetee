@@ -116,20 +116,24 @@ export default class RouteDispatcher {
 			"uri": "/rest/countries",
 			"method": "GET"
 		},
-		"posts_select_process": {
-			"uri": "/posts/select",
+		"comments_select_process": {
+			"uri": "/comments/select",
 			"method": "GET"
 		},
-		"posts_update_process": {
-			"uri": "/posts/(id)/update",
+		"comments_create_process": {
+			"uri": "/comments/(id)/create",
 			"method": "POST"
 		},
-		"posts_delete_process": {
-			"uri": "/posts/(id)/delete",
+		"comments_update_process": {
+			"uri": "/comments/(id)/update",
+			"method": "POST"
+		},
+		"comments_delete_process": {
+			"uri": "/comments/(id)/delete",
 			"method": "POST"
 		},
 		"ratings_rate_process": {
-			"uri": "/ratings/r/(id)/type/(type)/res/(resourceId)/rate",
+			"uri": "/ratings/r/(id)/c/(commentId)/rate",
 			"method": "POST"
 		}
 	}

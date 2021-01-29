@@ -20,15 +20,14 @@ class RatingController extends ControllerTemplate
 	private static string $tokenName = 'csrf_token';
 	private array $errors = [];
 
-	public function rate($ratingId, $postId, $commentId): void
+	public function rate($id, $type, $resourceId): void
 	{
-		die('ok');
 		try {
 			$this->trimPostValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
-			$this->dieAndPrintErrorsIfFormDataInvalid();
+			$this->dieIfSendDataInvalid($id);
 
-			$this->createAndPrintJsonPostData();
+			$this->createAndPrintJsonResponse((int) $id, $type, (int) $resourceId);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -46,19 +45,15 @@ class RatingController extends ControllerTemplate
 		$user = AuthFacade::getUser();
 
 		if (!TokenFacade::getTokenFromPostRequestIfValidByNameAndUser(
-			$name, $user)) {
+			$name, $user))
 			die;
-		}
 	}
 
-	private function dieAndPrintErrorsIfFormDataInvalid(): void
+	private function dieIfSendDataInvalid($ratingId): void
 	{
-		$form = new CommentForm();
-
-		if (!$form->validate()) {
-			echo json_encode($form->getErrors());
+		if ($_POST['rating_id'] != $ratingId || 
+			!preg_match('/^[1-9][0-9]*$/', $ratingId))
 			die;
-		}
 	}
 
 	private function trimPostValues(): void
@@ -68,7 +63,11 @@ class RatingController extends ControllerTemplate
 				$_POST[$key] = trim($value);
 	}
 
-	private function createAndPrintJsonPostData(): void
+	private function createAndPrintJsonResponse(
+		int $id, 
+		string $type, 
+		int $resourceId
+	): void
 	{
 		$comment = new Comment();
 		$comment->content = trim($_POST['content']);

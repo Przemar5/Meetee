@@ -3,10 +3,10 @@
 namespace Meetee\App\Controllers;
 
 use Meetee\App\Controllers\ControllerTemplate;
-use Meetee\App\Entities\Post;
+use Meetee\App\Entities\Comment;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\TokenFactory;
-// use Meetee\App\Entities\Factories\PostFactory;
+use Meetee\App\Entities\Factories\CommentFactory;
 use Meetee\App\Forms\CommentForm;
 use Meetee\Libs\Database\Tables\CommentTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
@@ -22,24 +22,24 @@ class CommentController extends ControllerTemplate
 
 	public function select(): void
 	{
-		// $userId = (int) trim($_GET['user-id']);
-		// $maxId = (int) trim($_GET['max-id']);
-		// $amount = (int) trim($_GET['limit']);
-		// $table = new PostTable();
-		// $comments = $table->findLastFromByAuthorId($maxId, $amount, $userId);
+		$userId = (int) trim($_GET['user-id']);
+		$maxId = (int) trim($_GET['max-id']);
+		$amount = (int) trim($_GET['limit']);
+		$table = new commentTable();
+		$comments = $table->findLastFromByAuthorId($maxId, $amount, $userId);
 
-		// echo json_encode($comments);
-		// die;
+		echo json_encode($comments);
+		die;
 	}
 
 	public function create(): void
 	{
 		try {
-			$this->trimPostValues();
+			$this->trimcommentValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieAndPrintErrorsIfFormDataInvalid();
 
-			$this->createAndPrintJsonPostData();
+			$this->createAndPrintJsonResponse();
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -72,29 +72,32 @@ class CommentController extends ControllerTemplate
 		}
 	}
 
-	private function trimPostValues(): void
+	private function trimCommentValues(): void
 	{
 		foreach ($_POST as $key => $value)
 			if (is_string($value))
 				$_POST[$key] = trim($value);
 	}
 
-	private function createAndPrintJsonPostData(): void
+	private function createAndPrintJsonResponse(): void
 	{
 		$comment = new Comment();
 		$comment->content = trim($_POST['content']);
+
+		if (!$comment->authorId = AuthFacade::getUserId())
+			die;
 		
-		$this->saveCommentAndPrintJsonData($post);
+		$this->savecommentAndPrintJsonData($comment);
 	}
 
 	public function update($id): void
 	{
 		try {
-			$this->trimPostValues();
+			$this->trimCommentValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieAndPrintErrorsIfUpdateFormDataInvalid($id);
 
-			$this->updateAndPrintJsonPostData((int) $id);
+			$this->updateAndPrintJsoncommentData((int) $id);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -103,16 +106,16 @@ class CommentController extends ControllerTemplate
 
 	private function dieAndPrintErrorsIfUpdateFormDataInvalid($commentId): void
 	{
-		$this->dieIfCommentIdInvalid($commentId);
+		$this->dieIfcommentIdInvalid($commentId);
 
-		$validator = new PostBodyValidator();
+		$validator = new commentBodyValidator();
 
-		if (!$validator->run(trim($_POST['content'] ?? null))) {
+		if (!$validator->run(trim($_comment['content'] ?? null))) {
 			echo json_encode(['error' => $validator->errorMsg]);
 			die;
 		}
 
-		$table = new PostTable();
+		$table = new CommentTable();
 		$comment = $table->find((int) $commentId);
 
 		if (!$comment || $comment->authorId !== AuthFacade::getUserId())
@@ -124,22 +127,22 @@ class CommentController extends ControllerTemplate
 		if (!preg_match('/^[1-9][0-9]*$/', $commentId))
 			die;
 
-		$validator = new PostIdValidator();
+		$validator = new CommentIdValidator();
 
 		if (!$validator->run((int) $commentId))
 			die;
 	}
 
-	private function updateAndPrintJsonPostData(int $id): void
+	private function updateAndPrintJsoncommentData(int $id): void
 	{
 		$table = new CommentTable();
 		$comment = $table->find($id);
 		$comment->content = trim($_POST['content']);
 		
-		$this->saveCommentAndPrintJsonData($comment);
+		$this->savecommentAndPrintJsonData($comment);
 	}
 
-	private function saveCommentAndPrintJsonData(Comment $comment): void
+	private function savecommentAndPrintJsonData(Comment $comment): void
 	{
 		$table = new CommentTable();
 		$comment = $table->saveComplete($comment);
@@ -157,7 +160,7 @@ class CommentController extends ControllerTemplate
 	public function delete($id): void
 	{
 		try {
-			$this->trimPostValues();
+			$this->trimcommentValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieIfCommentIdInvalid($id);
 
