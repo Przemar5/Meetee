@@ -3,41 +3,42 @@
 namespace Meetee\App\Controllers;
 
 use Meetee\App\Controllers\ControllerTemplate;
-use Meetee\App\Entities\Post;
+use Meetee\App\Entities\Comment;
+use Meetee\App\Entities\Rate;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\TokenFactory;
-// use Meetee\App\Entities\Factories\PostFactory;
-use Meetee\App\Forms\CommentForm;
 use Meetee\Libs\Database\Tables\CommentTable;
+use Meetee\Libs\Database\Tables\RateTable;
+use Meetee\Libs\Database\Tables\Pivots\CommentUserRateTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Security\Validators\Compound\Comments\CommentIdValidator;
-use Meetee\Libs\Security\Validators\Compound\Comments\CommentBodyValidator;
 
 class RatingController extends ControllerTemplate
 {
 	private static string $tokenName = 'csrf_token';
 	private array $errors = [];
 
-	public function rate($id, $type, $resourceId): void
+	public function rate($id, $commentId): void
 	{
 		try {
 			$this->trimPostValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
-			$this->dieIfSendDataInvalid($id);
-
-			$this->createAndPrintJsonResponse((int) $id, $type, (int) $resourceId);
+			$this->dieIfSendDataInvalid((int) $id, (int) $commentId);
+			
+			$this->rateCommentAndPrintJsonResponse((int) $id, (int) $commentId);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
-	private function redirect(string $route): void
+	private function trimPostValues(): void
 	{
-		$router = RouterFactory::createComplete();
-		$router->redirectTo($route);
+		foreach ($_POST as $key => $value)
+			if (is_string($value))
+				$_POST[$key] = trim($value);
 	}
 
 	private function dieIfTokenInvalid(string $name): void
@@ -49,97 +50,71 @@ class RatingController extends ControllerTemplate
 			die;
 	}
 
-	private function dieIfSendDataInvalid($ratingId): void
+	private function dieIfSendDataInvalid(int $ratingId, int $commentId): void
 	{
+		$validator = new CommentIdValidator();
+		
 		if ($_POST['rating_id'] != $ratingId || 
-			!preg_match('/^[1-9][0-9]*$/', $ratingId))
+			!preg_match('/^[1-9][0-9]*$/', $ratingId) || 
+			!$validator->run($commentId))
 			die;
 	}
 
-	private function trimPostValues(): void
-	{
-		foreach ($_POST as $key => $value)
-			if (is_string($value))
-				$_POST[$key] = trim($value);
-	}
-
-	private function createAndPrintJsonResponse(
+	private function rateCommentAndPrintJsonResponse(
 		int $id, 
-		string $type, 
-		int $resourceId
+		int $commentId
 	): void
 	{
-		$comment = new Comment();
-		$comment->content = trim($_POST['content']);
-		
-		$this->saveCommentAndPrintJsonData($post);
+		$comment = $this->getCommentIfAuthorizedOrDie($commentId);
+		$rate = $this->getRateOrDie($id);
+
+		$this->rateComment($comment, $rate);
+		$this->printJsonResponse($comment, $rate);
 	}
 
-	public function update($id): void
-	{
-		try {
-			$this->trimPostValues();
-			$this->dieIfTokenInvalid(self::$tokenName);
-			$this->dieAndPrintErrorsIfUpdateFormDataInvalid($id);
-
-			$this->updateAndPrintJsonPostData((int) $id);
-		}
-		catch (\Exception $e) {
-			die($e->getMessage());
-		}
-	}
-
-	private function dieAndPrintErrorsIfUpdateFormDataInvalid($commentId): void
-	{
-		$this->dieIfCommentIdInvalid($commentId);
-
-		$validator = new PostBodyValidator();
-
-		if (!$validator->run(trim($_POST['content'] ?? null))) {
-			echo json_encode(['error' => $validator->errorMsg]);
-			die;
-		}
-
-		$table = new PostTable();
-		$comment = $table->find((int) $commentId);
-
-		if (!$comment || $comment->authorId !== AuthFacade::getUserId())
-			die;
-	}
-
-	private function dieIfCommentIdInvalid($commentId): void
-	{
-		if (!preg_match('/^[1-9][0-9]*$/', $commentId))
-			die;
-
-		$validator = new PostIdValidator();
-
-		if (!$validator->run((int) $commentId))
-			die;
-	}
-
-	private function updateAndPrintJsonPostData(int $id): void
+	private function getCommentIfAuthorizedOrDie(int $id): Comment
 	{
 		$table = new CommentTable();
 		$comment = $table->find($id);
-		$comment->content = trim($_POST['content']);
-		
-		$this->saveCommentAndPrintJsonData($comment);
+
+		if (!$comment)
+			die;
+
+		$userId = AuthFacade::getUserId();
+
+		if ($comment->authorId != $userId)
+			die;
+
+		return $comment;
 	}
 
-	private function saveCommentAndPrintJsonData(Comment $comment): void
+	private function getRateOrDie(int $id): Rate
 	{
-		$table = new CommentTable();
-		$comment = $table->saveComplete($comment);
+		$table = new RateTable();
+		$rate = $table->find($id);
 
-		echo json_encode([
-			'id' => $comment->getId(),
-			'content' => $comment->content,
-			'author_id' => $comment->authorId,
-			'created_at' => $comment->getCreatedAtString(),
-			'updated_at' => $comment->getUpdatedAtString(),
-		]);
-		die;
+		if (!$rate)
+			die;
+
+		return $rate;
+	}
+
+	private function rateComment(Comment $comment, Rate $rate): void
+	{
+		$user = AuthFacade::getUser();
+		$table = new CommentUserRateTable();
+
+		$table->rateCommentByUser($rate, $comment, $user);
+	}
+
+	private function printJsonResponse(Comment $comment, Rate $rate): void
+	{
+		$data = [
+			'comment_id' => $comment->getId(),
+			'rate_id' => $rate->getId(),
+		];
+
+		echo json_encode($data);
 	}
 
 	public function delete($id): void
