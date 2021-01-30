@@ -25,7 +25,7 @@ class CommentUserRateTable extends Pivot
 		$this->addRateForCommentByUser($rate, $comment, $user);
 	}
 
-	private function removeRateForCommentByUser(
+	public function removeRateForCommentByUser(
 		Comment $comment,
 		User $user
 	): void
@@ -44,7 +44,7 @@ class CommentUserRateTable extends Pivot
 		);
 	}
 
-	private function addRateForCommentByUser(
+	public function addRateForCommentByUser(
 		Rate $rate,
 		Comment $comment,
 		User $user

@@ -23,7 +23,6 @@ class RatingController extends ControllerTemplate
 	public function rate($id, $commentId): void
 	{
 		try {
-			$this->trimPostValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieIfSendDataInvalid((int) $id, (int) $commentId);
 			
@@ -32,13 +31,6 @@ class RatingController extends ControllerTemplate
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
-	}
-
-	private function trimPostValues(): void
-	{
-		foreach ($_POST as $key => $value)
-			if (is_string($value))
-				$_POST[$key] = trim($value);
 	}
 
 	private function dieIfTokenInvalid(string $name): void
@@ -65,24 +57,23 @@ class RatingController extends ControllerTemplate
 		int $commentId
 	): void
 	{
-		$comment = $this->getCommentIfAuthorizedOrDie($commentId);
+		$comment = $this->getCommentOrDie($commentId);
 		$rate = $this->getRateOrDie($id);
 
-		$this->rateComment($comment, $rate);
+		if ($this->commentHasThatRate($comment, $rate))
+			$this->unrateComment($comment);
+		else
+			$this->rateComment($comment, $rate);
+
 		$this->printJsonResponse($comment, $rate);
 	}
 
-	private function getCommentIfAuthorizedOrDie(int $id): Comment
+	private function getCommentOrDie(int $id): Comment
 	{
 		$table = new CommentTable();
 		$comment = $table->find($id);
 
 		if (!$comment)
-			die;
-
-		$userId = AuthFacade::getUserId();
-
-		if ($comment->authorId != $userId)
 			die;
 
 		return $comment;
@@ -99,12 +90,34 @@ class RatingController extends ControllerTemplate
 		return $rate;
 	}
 
+	private function commentHasThatRate(Comment $comment, Rate $rate): bool
+	{
+		$user = AuthFacade::getUser();
+		$table = new CommentUserRateTable();
+
+		$result = $table->findOneBy([
+			'comment_id' => $comment->getId(),
+			'user_id' => $user->getId(),
+			'rate_id' => $rate->getId(),
+		]);
+
+		return !empty($result);
+	}
+
 	private function rateComment(Comment $comment, Rate $rate): void
 	{
 		$user = AuthFacade::getUser();
 		$table = new CommentUserRateTable();
 
 		$table->rateCommentByUser($rate, $comment, $user);
+	}
+
+	private function unrateComment(Comment $comment): void
+	{
+		$user = AuthFacade::getUser();
+		$table = new CommentUserRateTable();
+
+		$table->removeRateForCommentByUser($comment, $user);
 	}
 
 	private function printJsonResponse(Comment $comment, Rate $rate): void
@@ -115,25 +128,5 @@ class RatingController extends ControllerTemplate
 		];
 
 		echo json_encode($data);
-	}
-
-	public function delete($id): void
-	{
-		try {
-			$this->trimPostValues();
-			$this->dieIfTokenInvalid(self::$tokenName);
-			$this->dieIfCommentIdInvalid($id);
-
-			$this->deleteComment((int) $id);
-		}
-		catch (\Exception $e) {
-			die($e->getMessage());
-		}
-	}
-
-	private function deleteComment(int $id): void
-	{
-		$table = new CommentTable();
-		$table->delete($id);
 	}
 }
