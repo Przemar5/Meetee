@@ -70,15 +70,17 @@ Account
 </label>
 
 <?php $this->include('comments/template', [
-	'token' => $token
+	'token' => $token,
 ]); ?>
 
-<div class="container">
-	<?php $this->include('comments/forms/create', ['token' => $token]); ?>
+<section class="container" id="commentSection">
+	<?php $this->include('comments/forms/create', [
+		'token' => $token,
+	]); ?>
 
 	<div id="commentsBase">
 		<p class="no-result-msg">No posts found.</p>
 	</div>
-</div>
+</section>
 
 <?php $this->endSection('body'); ?>

@@ -12,31 +12,85 @@ export default class CommentHandler {
 		this.noCommentsMsg
 	}
 
-	loadComments () {
+	loadComments (parent, template) {
 		let ajax = new Ajax()
 		let route = RouteDispatcher.getRouteUri('comments_select_process')
 		route = route + '?user-id=' + this.userId + '&limit=' + this.limit + '&max-id=' + this.lastCommentId
 		ajax.get(route, null, null)
-			.then(this.callback)
+			.then(this.callback(parent, template))
 	}
 
-	callback = (data) => {
+	callback = (parent, template) => (data) => {
 		data = JSON.parse(data)
 		for (let i in data) {
 			if (data[i] instanceof Function) continue
-			let temp = this.prepareTemplate(data[i])
-			this.commentsContainer.appendChild(temp)
+			let temp = this.prepareTemplate(template, data[i])
+			parent.appendChild(temp)
 			this.lastCommentId = data[i]['id']
 		}
 
 		if (data.length > 0) {
-			let noCommentsMsg = this.commentsContainer.querySelector('p.no-result-msg')
-			if (noCommentsMsg) this.commentsContainer.removeChild(noCommentsMsg)
+			let noCommentsMsg = parent.querySelector('p.no-result-msg')
+			if (noCommentsMsg) parent.removeChild(noCommentsMsg)
 		}
 	}
 
-	prepareTemplate (data) {
-		let temp = this.commentTemplate.content.cloneNode(true)
+	initFormCreate (data) {
+		let parent = data['formContainer']
+		let commentForm = data['formTemplate']
+		let commentsContainer = data['commentContainer']
+		let commentTemplate = data['commentTemplate']
+		let form = commentForm.content.cloneNode(true)
+		let textarea = form.querySelector('textarea[name="content"]')
+
+		parent.prepend(form)
+		form = parent.querySelector('form')
+
+		textarea.addEventListener('keyup', this.validateNewPost)
+		textarea.addEventListener('keydown', this.validateNewPost)
+
+		form.addEventListener('submit', (e) => {
+			e.preventDefault()
+			let formData = new FormData(e.target)
+			let request = new Request()
+			let uri = e.target.getAttribute('action')
+			let addNewestComment = this.addComment(commentsContainer, commentTemplate)
+			 
+			request.post(
+				uri, 
+				formData, 
+				(data) => {
+					form.querySelector('textarea').value = ''
+					addNewestComment(data)
+				}, 
+				() => null
+			)
+		})
+	}
+
+	validateNewPost = (e) => {
+		let value = e.target.value
+		let submitBtn = e.target.closest('form').querySelector('button[type="submit"]')
+		let errorMsgDiv = e.target.closest('form').querySelector('.error-msg')
+
+		try {
+			if (commentBodyValidator(value)) {
+				errorMsgDiv.innerText = ''
+				submitBtn.removeAttribute('disabled')
+			}
+		} catch (e) {
+			errorMsgDiv.innerText = e.message
+			submitBtn.setAttribute('disabled', true)
+		}
+	}
+
+	addComment = (commentSection, commentTemplate) => (data) => {
+		let comment = this.prepareTemplate(commentTemplate, data)
+		commentSection.prepend(comment)
+	}
+
+	prepareTemplate (template, data) {
+		let temp = template.content.cloneNode(true)
 		let modificationType = temp.querySelector('.comment__modification--type')
 		let modificationDate = temp.querySelector('.comment__modification--date')
 		let formEdit = temp.querySelector('.comment__form--edit')
@@ -71,7 +125,7 @@ export default class CommentHandler {
 
 			this.prepareRatingForm(temp, data['id'])
 		} catch (e) {
-			console.log(e.message)
+			console.log(e)
 		}
 
 		return temp
@@ -171,7 +225,6 @@ export default class CommentHandler {
 	deleteComment = (form) => (data) => {
 		let comment = form.closest('.comment')
 		this.commentsContainer.removeChild(comment)
-		console.log(this.noCommentsMsg)
 		let commentsCount = this.commentsContainer.childElementCount
 		if (commentsCount === 0) this.commentsContainer.appendChild(this.nocommentsMsg)
 	}

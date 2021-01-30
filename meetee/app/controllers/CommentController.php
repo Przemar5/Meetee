@@ -110,7 +110,7 @@ class CommentController extends ControllerTemplate
 
 		$validator = new commentBodyValidator();
 
-		if (!$validator->run(trim($_comment['content'] ?? null))) {
+		if (!$validator->run(trim($_POST['content'] ?? null))) {
 			echo json_encode(['error' => $validator->errorMsg]);
 			die;
 		}

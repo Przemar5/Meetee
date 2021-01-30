@@ -7,6 +7,7 @@ use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\RoleTable;
 use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Database\Tables\CountryTable;
+use Meetee\Libs\Database\Tables\CommentTable;
 
 class TableFactory
 {
@@ -17,7 +18,7 @@ class TableFactory
 			case 'roles': return new RoleTable();
 			case 'tokens': return new TokenTable();
 			case 'countries': return new CountryTable();
-			case 'posts': return new TokenTable();
+			case 'comments': return new CommentTable();
 		}
 	}
 }

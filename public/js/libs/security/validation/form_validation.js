@@ -94,7 +94,7 @@ const commentBodyValidator = validForAll([
 	[notNull, 'Comment body is required.'],
 	[notEmpty, 'Comment body is required.'],
 	[isString, ''],
-	[isNotShorter(20), 'Comment body must be longer or equal 20 characters.'],
+	[isNotShorter(1), 'Comment body must be longer or equal 1 character.'],
 	[isNotLonger(65535), 'Comment body is too long.'],
 	[matches(/^[\w\d\s\-#\$@!\^&\*()\+={}[\];:"\|,<.>\/\?]+$/u), 
 		'Comment body contains inproper characters.']
