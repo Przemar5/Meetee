@@ -135,6 +135,10 @@ export default class RouteDispatcher {
 		"ratings_rate_process": {
 			"uri": "/ratings/r/(id)/c/(commentId)/rate",
 			"method": "POST"
+		},
+		"ratings_get_process": {
+			"uri": "/ratings/c/(commentId)",
+			"method": "GET"
 		}
 	}
 }

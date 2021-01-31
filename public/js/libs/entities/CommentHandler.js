@@ -6,16 +6,18 @@ export default class CommentHandler {
 	constructor () {
 		this.lastCommentId = 99999999999999
 		this.userId = /\d+$/.exec(window.location.href)
-		this.limit = 20
+		this.limit = 3
 		this.commentsContainer
 		this.commentTemplate
 		this.noCommentsMsg
 	}
 
-	loadComments (parent, template) {
+	loadComments (parent, template, parentComment = null) {
 		let ajax = new Ajax()
 		let route = RouteDispatcher.getRouteUri('comments_select_process')
 		route = route + '?user-id=' + this.userId + '&limit=' + this.limit + '&max-id=' + this.lastCommentId
+		if (parentComment != null) route += '&parent=' + parentComment
+		
 		ajax.get(route, null, null)
 			.then(this.callback(parent, template))
 	}
@@ -132,7 +134,8 @@ export default class CommentHandler {
 	}
 
 	prepareRatingForm (template, commentId) {
-		const forms = template.querySelectorAll('.ratings form')
+		const ratingsArea = template.querySelector('.ratings')
+		const forms = ratingsArea.querySelectorAll('form')
 		forms.forEach((f) => {
 			let ratingId = f.querySelector('input[name="rating_id"]').value
 			let route = RouteDispatcher.getRouteUri('ratings_rate_process', {
@@ -142,6 +145,30 @@ export default class CommentHandler {
 			f.setAttribute('action', route)
 			f.addEventListener('submit', this.rateEvent)
 		})
+		this.getCommentRatings(ratingsArea, commentId)
+	}
+
+	getCommentRatings (ratingsArea, commentId) {
+		let uri = RouteDispatcher.getRouteUri('ratings_get_process', {'commentId': commentId})
+		let request = new Request()
+
+		let callback = (data) => {
+			let rates = {}
+
+			for (let i = 1; i < 8; i++)
+				rates[i+''] = {'count': 0, 'users': []}
+
+			for (let i in data) {
+				if (data[i] instanceof Function) continue
+				let rateId = data[i]['rate_id'] + ''
+				rates[rateId].count++
+				rates[rateId].users.push(data[i]['user_id'])
+			}
+
+			// Other actions
+		}
+
+		request.get(uri, null, callback, callback)
 	}
 
 	rateEvent = (e) => {
@@ -150,7 +177,7 @@ export default class CommentHandler {
 		let uri = e.target.getAttribute('action')
 		let request = new Request()
 
-		request.post(uri, formData, () => {console.log(1)}, () => { console.log(0) })
+		request.post(uri, formData, (data) => {console.log(data)}, () => { console.log(0) })
 	}
 
 	addContentInputEventListeners (contentInput) {

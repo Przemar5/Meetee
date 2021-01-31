@@ -25,8 +25,11 @@ class CommentController extends ControllerTemplate
 		$userId = (int) trim($_GET['user-id']);
 		$maxId = (int) trim($_GET['max-id']);
 		$amount = (int) trim($_GET['limit']);
+		$parentId = (isset($_GET['parent'])) ? (int) $_GET['parent'] : null;
+
 		$table = new commentTable();
-		$comments = $table->findLastFromByAuthorId($maxId, $amount, $userId);
+		$comments = $table->findLastFromByAuthorIdAndParentId(
+			$maxId, $amount, $userId, $parentId);
 
 		echo json_encode($comments);
 		die;

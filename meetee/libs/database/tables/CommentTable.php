@@ -48,19 +48,39 @@ class CommentTable extends TableTemplate
 		return $this->findManyBy(['user_id' => $user->getId()]);
 	}
 
-	public function findLastFromByAuthorId(
+	public function findLastFromByAuthorIdAndParentId(
 		int $last, 
 		int $limit, 
-		int $authorId
+		int $authorId,
+		?int $parentId
 	): ?array
 	{
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
-		$this->queryBuilder->where(['user_id' => $authorId]);
-		$this->queryBuilder->whereStrings(['id < :id', 'deleted IS NULL OR deleted = 0']);
+		
+		if (is_null($parentId)) {
+			$this->queryBuilder->where(['user_id' => $authorId]);
+			$this->queryBuilder->whereStrings([
+				'id < :id', 
+				'deleted IS NULL OR deleted = 0', 
+				'parent_id IS NULL'
+			]);
+		}
+		else {
+			$this->queryBuilder->where([
+				'user_id' => $authorId,
+				'parent_id' => $parentId,
+			]);
+			$this->queryBuilder->whereStrings([
+				'id < :id', 
+				'deleted IS NULL OR deleted = 0'
+			]);
+		}
+
 		$this->queryBuilder->limit($limit);
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
+		$this->queryBuilder->setAdditionalBindings(['id' => $last]);
 		$this->queryBuilder->setAdditionalBindings(['id' => $last]);
 
 		return $this->database->findMany(

@@ -17,3 +17,22 @@ commentHandler.initFormCreate({
 	'commentContainer': commentsContainer, 
 	'commentTemplate': commentTemplate
 })
+
+let disabled = false
+document.addEventListener('scroll', (e) => {
+	let html = document.documentElement
+	let body = document.body
+	let yPos = (window.pageYOffset || html.scrollTop) - (html.clientTop || 0)
+	let height = Math.max(body.scrollHeight, body.offsetHeight, 
+    html.clientHeight, html.scrollHeight, html.offsetHeight)
+	
+	if (height - 200 < (yPos + window.innerHeight) && !disabled) {
+		// loadMoreBtn.click()
+		// loadMoreBtn.setAttribute('disabled', true)
+		// setTimeout(() => loadMoreBtn.removeAttribute('disabled', true), 100)
+
+		disabled = true
+		commentHandler.loadComments(commentsContainer, commentTemplate)
+		setTimeout(() => disabled = false, 100)
+	}
+})

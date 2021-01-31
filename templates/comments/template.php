@@ -17,5 +17,7 @@
 		</form>
 		<span class="comment__content--view toggable-text"></span>
 		<?php $this->include('ratings/form', ['token' => $token]); ?>
+
+		<div class="comments"></div>
 	</div>
 </template>

@@ -10,10 +10,9 @@ use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\Libs\Database\Tables\CommentTable;
 use Meetee\Libs\Database\Tables\RateTable;
 use Meetee\Libs\Database\Tables\Pivots\CommentUserRateTable;
-use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
-use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Security\Validators\Compound\Comments\CommentIdValidator;
+use Meetee\Libs\Security\Validators\Compound\Rates\RateIdValidator;
 
 class RatingController extends ControllerTemplate
 {
@@ -24,7 +23,8 @@ class RatingController extends ControllerTemplate
 	{
 		try {
 			$this->dieIfTokenInvalid(self::$tokenName);
-			$this->dieIfSendDataInvalid((int) $id, (int) $commentId);
+			$this->dieIfRateIdInvalid($id);
+			$this->dieIfCommentIdInvalid($commentId);
 			
 			$this->rateCommentAndPrintJsonResponse((int) $id, (int) $commentId);
 		}
@@ -42,13 +42,21 @@ class RatingController extends ControllerTemplate
 			die;
 	}
 
-	private function dieIfSendDataInvalid(int $ratingId, int $commentId): void
+	private function dieIfRateIdInvalid($ratingId): void
+	{
+		$validator = new RateIdValidator();
+		
+		if ($_POST['rating_id'] != $ratingId || 
+			!$validator->run((int) $ratingId))
+			die;
+	}
+
+	private function dieIfCommentIdInvalid($commentId): void
 	{
 		$validator = new CommentIdValidator();
 		
-		if ($_POST['rating_id'] != $ratingId || 
-			!preg_match('/^[1-9][0-9]*$/', $ratingId) || 
-			!$validator->run($commentId))
+		if (!preg_match('/^[1-9][0-9]*$/', $commentId) || 
+			!$validator->run((int) $commentId))
 			die;
 	}
 
@@ -60,12 +68,14 @@ class RatingController extends ControllerTemplate
 		$comment = $this->getCommentOrDie($commentId);
 		$rate = $this->getRateOrDie($id);
 
-		if ($this->commentHasThatRate($comment, $rate))
+		if ($this->commentHasThatRate($comment, $rate)) {
 			$this->unrateComment($comment);
-		else
+			$this->printJsonResponse($comment, null);
+		}
+		else {
 			$this->rateComment($comment, $rate);
-
-		$this->printJsonResponse($comment, $rate);
+			$this->printJsonResponse($comment, $rate);
+		}
 	}
 
 	private function getCommentOrDie(int $id): Comment
@@ -120,13 +130,33 @@ class RatingController extends ControllerTemplate
 		$table->removeRateForCommentByUser($comment, $user);
 	}
 
-	private function printJsonResponse(Comment $comment, Rate $rate): void
+	private function printJsonResponse(Comment $comment, ?Rate $rate = null): void
 	{
 		$data = [
 			'comment_id' => $comment->getId(),
-			'rate_id' => $rate->getId(),
+			'rate_id' => ($rate) ? $rate->getId() : null,
 		];
 
 		echo json_encode($data);
+	}
+
+	public function getByComment($commentId)
+	{
+		try {
+			$this->dieIfCommentIdInvalid($commentId);
+			
+			$this->getCommentRatesAndPrintJsonResponse((int) $commentId);
+		}
+		catch (\Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function getCommentRatesAndPrintJsonResponse(int $commentId): void
+	{
+		$table = new CommentUserRateTable();
+		$result = $table->findManyBy(['comment_id' => $commentId]);
+
+		echo json_encode($result);
 	}
 }

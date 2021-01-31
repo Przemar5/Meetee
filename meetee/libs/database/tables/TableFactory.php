@@ -8,6 +8,7 @@ use Meetee\Libs\Database\Tables\RoleTable;
 use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Database\Tables\CountryTable;
 use Meetee\Libs\Database\Tables\CommentTable;
+use Meetee\Libs\Database\Tables\RateTable;
 
 class TableFactory
 {
@@ -19,6 +20,7 @@ class TableFactory
 			case 'tokens': return new TokenTable();
 			case 'countries': return new CountryTable();
 			case 'comments': return new CommentTable();
+			case 'rates': return new RateTable();
 		}
 	}
 }

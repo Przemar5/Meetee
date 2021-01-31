@@ -182,6 +182,13 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/ratings/c/(?<commentId>\\d+)",
+		"method": "GET",
+		"name": "ratings_get_process",
+		"class": "RatingController.getByComment",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/profiles/(?<id>\\d+)",
 		"method": "GET",
 		"name": "profiles_show_page",

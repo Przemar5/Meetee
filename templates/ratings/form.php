@@ -1,4 +1,6 @@
 <div class="ratings">
+	<div class="ratings__count"></div>
+
 	<form post="POST">
 		<input type="hidden" name="rating_id" value="1">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
