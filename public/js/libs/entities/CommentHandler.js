@@ -253,6 +253,6 @@ export default class CommentHandler {
 		let comment = form.closest('.comment')
 		this.commentsContainer.removeChild(comment)
 		let commentsCount = this.commentsContainer.childElementCount
-		if (commentsCount === 0) this.commentsContainer.appendChild(this.nocommentsMsg)
+		if (commentsCount === 0) this.commentsContainer.appendChild(this.noCommentsMsg)
 	}
 }
