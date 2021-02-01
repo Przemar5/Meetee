@@ -4,8 +4,10 @@ namespace Meetee\Libs\Database\Factories;
 
 use Meetee\Libs\Database\DatabaseTemplate;
 use Meetee\Libs\Database\MySQLDatabase;
+use Meetee\Libs\Database\PostgresDatabase;
 use Meetee\Libs\Database\Query_builders\QueryBuilderTemplate;
 use Meetee\Libs\Database\Query_builders\MySQLQueryBuilder;
+use Meetee\Libs\Database\Query_builders\PostgresQueryBuilder;
 use Meetee\Libs\Converters\Converter;
 
 class DatabaseAbstractFactory
@@ -16,8 +18,9 @@ class DatabaseAbstractFactory
 		$details = Converter::jsonToArray($config);
 
 		switch ($details['driver']) {
-			case 'mysql': 	return MySQLDatabase::getInstance($details);
-			default: 		return MySQLDatabase::getInstance($details);
+			case 'mysql': 		return MySQLDatabase::getInstance($details);
+			case 'postgres': 	return PostgresDatabase::getInstance($details);
+			default: 			return MySQLDatabase::getInstance($details);
 		}
 	}
 
@@ -27,8 +30,9 @@ class DatabaseAbstractFactory
 		$details = Converter::jsonToArray($config);
 
 		switch ($details['driver']) {
-			case 'mysql': 	return new MySQLQueryBuilder();
-			default: 		return new MySQLQueryBuilder();
+			case 'mysql': 		return new MySQLQueryBuilder();
+			case 'postgres': 	return new PostgresQueryBuilder();
+			default: 			return new MySQLQueryBuilder();
 		}
 	}
 }

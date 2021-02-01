@@ -55,6 +55,7 @@ class CommentTable extends TableTemplate
 		?int $parentId
 	): ?array
 	{
+		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
 		
@@ -85,7 +86,62 @@ class CommentTable extends TableTemplate
 
 		return $this->database->findMany(
 			$this->queryBuilder->getResult(),
-			$this->queryBuilder->getBindings(),
+			$this->queryBuilder->getBindings()
 		);
+	}
+
+	public function findBaseCommentsRecursiveBy(array $conditions)
+	{
+		return $this->findManyRecursiveBy($conditions, null);
+	}
+
+	public function findManyRecursiveBy(array $conditions, int $parentId = null)
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->withRecursive('cte');
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select(['*']);
+
+		/*
+WITH RECURSIVE cte (id, content, parent_id) 
+AS (
+	SELECT c1.id, c1.content, c1.parent_id 
+	FROM comments c1
+	JOIN (
+		SELECT id 
+		FROM comments 
+		WHERE parent_id is null 
+		ORDER BY id DESC 
+		LIMIT 1
+	) AS c2 
+	ON c1.id = c2.id 
+	UNION ALL
+		SELECT c3.id, c3.content, c3.parent_id 
+		FROM comments c3 
+		INNER JOIN cte 
+		ON c3.parent_id = cte.id
+) 
+SELECT * FROM cte;
+
+
+WITH RECURSIVE cte (id, content, parent_id) 
+AS (
+	SELECT c1.id, c1.content, c1.parent_id 
+	FROM comments c1
+	WHERE c1.id IN (
+		SELECT id 
+		FROM comments 
+		WHERE parent_id is null 
+		ORDER BY id DESC 
+		LIMIT 1
+	)
+	UNION ALL
+		SELECT c3.id, c3.content, c3.parent_id 
+		FROM comments c3 
+		INNER JOIN cte 
+		ON c3.parent_id = cte.id
+) 
+SELECT * FROM cte;
+		*/
 	}
 }
