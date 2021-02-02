@@ -38,7 +38,59 @@ define('VIEW_DIR', BASE_URI . 'templates/');
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
 
-// echo "<pre>";
+$where = [
+	'OR' => [
+		'AND' => [
+			'a' => 'something',
+			'b' => null,
+			'c' => false,
+			'd' => true,
+		],
+		'AND' => [
+			'e' => ['=', 1],
+			'f' => ['<', 1],
+			'g' => ['<=', 1],
+		],
+	],
+];
+$bindings = [];
+
+function parse($data) {
+	$result = '';
+	foreach ($data as $key => $value) {
+		if (is_string($value)) {
+			$bindings = ["$key" => $value];
+			return "$key = :$key";
+		}
+		elseif (is_bool($value)) {
+			return ($value) ? "$key = TRUE" : "$key = FALSE";
+		}
+		elseif (is_integer($value)) {
+			$bindings = ["$key" => $value];
+			return "$key = :$key";
+		}
+		elseif (is_array($value)) {
+			if (is_string($value[0]) && is_integer($value[1]) && 
+				in_array($value[0], ['=', '<', '>', '<=', '>='])) {
+				return ":$key " . $value[0] . " :$key";
+			}
+			else {
+				$results = array_map($)
+				return 
+			}
+			// $
+			// return ""
+		}
+	}
+	return $result;
+}
+
+echo parse($where);
+die;
+
+
+
+
 
 try {
 	$router = RouterFactory::createComplete();
@@ -47,74 +99,3 @@ try {
 catch (\Exception $e) {
 	die($e);
 }
-
-
-
-
-// $view = new \Meetee\Libs\View\BrowserView();
-
-// ob_start();
-// require_once 'index2.php';
-// $v = ob_get_clean();
-
-
-
-
-
-// // Get token
-// // $token = TokenFactory::popIfRequestValid($name);
-// // dd($token);
-
-// // Generate and request
-
-
-
-// // $opt = [
-// // 	'http' => [
-// // 		'method' => 'POST',
-
-// // 	],
-// // ];
-
-
-
-// echo $response;
-
-// dd($token);
-
-// $token = new Token();
-// $token->name = 'Token';
-// $token->value = 'dctfvghjbceuiofw';
-// $token->userId = 0;
-// $token->setExpiry('+3 hours');
-// $table->save($token);
-// $token->setId($table->lastinsertId());
-// dd($token);
-
-// $token = $table->pop(6);
-// dd($token);
-// dd($token);
-// $table = new UserTable();
-// $user = $table->find(5);
-// $user->
-// $user = new User();
-// $user->setId(5);
-// $user->login = 'Alanio';
-// $user->email = 'panolo@mail.com';
-// $user->name = 'Alan';
-// $user->surname = 'Goody';
-// $user->setBirth(new \DateTime());
-// $user->password = 'password';
-// $user->addRole(RoleFactory::createUserRole());
-// $user->addRole(RoleFactory::createAdminRole());
-// $table->save($user);
-// dd($user);
-// $table->delete();
-// $table->save($user);
-// $user->setId($table->lastInsertId());
-
-// $user->save();
-// $user = $table->find(4);
-// dd($user);
-// $user->setId($table->lastInsertId());
-// dd($token);

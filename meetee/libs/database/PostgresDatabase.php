@@ -3,7 +3,6 @@
 namespace Meetee\Libs\Database;
 
 use Meetee\Libs\Database\DatabaseTemplate;
-use Meetee\Libs\Database\Query_builders\MySQLQueryBuilder;
 
 class PostgresDatabase extends DatabaseTemplate
 {
@@ -11,7 +10,7 @@ class PostgresDatabase extends DatabaseTemplate
 
 	protected function __construct(array $connectionDetails = [])
 	{
-		$connectionDetails['driver'] = 'psql';
+		$connectionDetails['driver'] = 'pgsql';
 		$connectionDetails['port'] = $connectionDetails['port'] ?? 5432;
 
 		parent::__construct($connectionDetails);

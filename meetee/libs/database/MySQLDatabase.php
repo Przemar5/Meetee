@@ -3,7 +3,6 @@
 namespace Meetee\Libs\Database;
 
 use Meetee\Libs\Database\DatabaseTemplate;
-use Meetee\Libs\Database\Query_builders\MySQLQueryBuilder;
 
 class MySQLDatabase extends DatabaseTemplate
 {
@@ -83,7 +82,6 @@ class MySQLDatabase extends DatabaseTemplate
 
 	public function debug()
 	{
-		// return $this->stmt-
 		return $this->stmt->debugDumpParams();
 	}
 }

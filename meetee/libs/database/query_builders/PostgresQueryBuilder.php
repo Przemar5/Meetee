@@ -28,7 +28,7 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 	private function prepareSelect(): void
 	{
 		$columns = implode(', ', $this->columns);
-		$this->query = sprintf('SELECT %s FROM `%s`', $columns, $this->table);
+		$this->query = sprintf('SELECT %s FROM %s', $columns, $this->table);
 		$this->appendJoinPartIfExist();
 		$this->appendOptionalParts();
 	}
@@ -68,7 +68,7 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 			$this->whereAre
 		);
 
-		$this->query .= implode(' AND ', $conditions);
+		$this->query .= ' WHERE ' . implode(' AND ', $conditions);
 	}
 
 	private function getWherePart(): array

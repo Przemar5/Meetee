@@ -86,7 +86,7 @@ abstract class TableTemplate
 		$this->queryBuilder->where($conditions);
 		
 		if ($this->softDelete)
-			$this->queryBuilder->whereStrings(['deleted IS NULL OR deleted = 0']);
+			$this->queryBuilder->whereAre(['deleted IS NULL OR deleted = 0']);
 	}
 
 	abstract protected function fetchEntity($data): Entity;
@@ -143,10 +143,6 @@ abstract class TableTemplate
 		$this->throwExceptionIfInvalidClass($entity);
 
 		$values = $this->getEntityData($entity);
-
-		// if (method_exists(get_class($entity), 'isDeleted') 
-		// 	&& !is_null($entity->isDeleted()))
-		// 	$values['deleted'] = $entity->isDeleted();
 
 		if ($this->softDelete)
 			$values['deleted'] = $entity->isDeleted();
