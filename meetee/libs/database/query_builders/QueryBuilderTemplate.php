@@ -4,6 +4,7 @@ namespace Meetee\Libs\Database\Query_builders;
 
 abstract class QueryBuilderTemplate
 {
+	protected int $bindingsCounter = 0;
 	protected ?string $query = null;
 	protected ?string $table = null;
 	protected ?string $action = null;
@@ -13,10 +14,6 @@ abstract class QueryBuilderTemplate
 	protected ?string $joinType = null;
 	protected ?array $joinOn = null;
 	protected array $conditions = [];
-	protected array $whereNull = [];
-	protected array $whereFalse = [];
-	protected array $whereTrue = [];
-	protected array $whereAre = [];
 	protected ?array $orderBy = null;
 	protected bool $orderDesc = false;
 	protected ?int $limit = null;
@@ -25,6 +22,7 @@ abstract class QueryBuilderTemplate
 
 	public function reset(): void
 	{
+		$this->bindingsCounter = 0;
 		$this->query = null;
 		$this->table = null;
 		$this->action = null;
@@ -34,10 +32,6 @@ abstract class QueryBuilderTemplate
 		$this->joinType = null;
 		$this->joinOn = null;
 		$this->conditions = [];
-		$this->whereNull = [];
-		$this->whereFalse = [];
-		$this->whereTrue = [];
-		$this->whereAre = [];
 		$this->orderBy = null;
 		$this->orderDesc = false;
 		$this->limit = null;
@@ -95,26 +89,6 @@ abstract class QueryBuilderTemplate
 		$this->conditions = $conditions;
 	}
 
-	public function whereNull(array $whereNull): void
-	{
-		$this->whereNull = $whereNull;
-	}
-
-	public function whereFalse(array $whereFalse): void
-	{
-		$this->whereFalse = $whereFalse;
-	}
-
-	public function whereTrue(array $whereTrue): void
-	{
-		$this->whereTrue = $whereTrue;
-	}
-
-	public function whereAre(array $whereAre): void
-	{
-		$this->whereAre = $whereAre;
-	}
-
 	public function orderBy(array $columns): void
 	{
 		$this->orderBy = $columns;
@@ -147,6 +121,11 @@ abstract class QueryBuilderTemplate
 	public function getAdditionalBindings(): ?array
 	{
 		return $this->additionalBindings;
+	}
+
+	protected function getNewBindingName(): string
+	{
+		return 'b_' . $this->bindingsCounter++;
 	}
 
 	protected function throwExceptionIfSomethingMissing(): void

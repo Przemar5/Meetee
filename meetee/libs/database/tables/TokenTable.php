@@ -32,7 +32,8 @@ class TokenTable extends TableTemplate
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
 		$this->queryBuilder->where($conditions);
-		$this->queryBuilder->whereAre(['expiry >= NOW()']);
+		$this->queryBuilder->where([
+			'expiry' => ['>=', (new \DateTime())->format('Y-m-d H:i:s')]]);
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
 		$this->queryBuilder->limit(1);

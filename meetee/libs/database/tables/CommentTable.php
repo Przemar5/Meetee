@@ -60,22 +60,20 @@ class CommentTable extends TableTemplate
 		$this->queryBuilder->select(['*']);
 		
 		if (is_null($parentId)) {
-			$this->queryBuilder->where(['user_id' => $authorId]);
-			$this->queryBuilder->whereStrings([
-				'id < :id', 
-				'deleted IS NULL OR deleted = 0', 
-				'parent_id IS NULL'
-			]);
+			$this->queryBuilder->where(
+				$this->prepareConditionsRespectSoftDelete([
+					'id' => ['<', $last], 
+					'user_id' => $authorId,
+					'parent_id' => null,
+				]));
 		}
 		else {
-			$this->queryBuilder->where([
-				'user_id' => $authorId,
-				'parent_id' => $parentId,
-			]);
-			$this->queryBuilder->whereStrings([
-				'id < :id', 
-				'deleted IS NULL OR deleted = 0'
-			]);
+			$this->queryBuilder->where(
+				$this->prepareConditionsRespectSoftDelete([
+					'id' => ['<', $last], 
+					'user_id' => $authorId,
+					'parent_id' => $parentId,
+				]));
 		}
 
 		$this->queryBuilder->limit($limit);

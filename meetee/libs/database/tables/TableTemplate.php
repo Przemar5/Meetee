@@ -83,10 +83,32 @@ abstract class TableTemplate
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
-		$this->queryBuilder->where($conditions);
 		
 		if ($this->softDelete)
-			$this->queryBuilder->whereAre(['deleted IS NULL OR deleted = 0']);
+			$this->queryBuilder->where(
+				$this->prepareConditionsRespectSoftDelete($conditions));
+		else
+			$this->queryBuilder->where($conditions);
+	}
+
+	protected function prepareConditionsRespectSoftDelete(array $conditions): array
+	{
+		return $this->prepareConditions($conditions, [
+			'OR',
+			'deleted' => null,
+			'deleted' => false,
+		]);
+	}
+
+	protected function prepareConditions(array $conditions, ?array $rest = []): array
+	{
+		array_unshift($conditions, 'AND');
+
+		return [
+			'AND',
+			$conditions,
+			$rest
+		];
 	}
 
 	abstract protected function fetchEntity($data): Entity;

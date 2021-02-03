@@ -34,8 +34,10 @@ class UserTable extends TableTemplate
 		$user->setUpdatedAt($data['updated_at']);
 		$user->deleted = $data['deleted'];
 
-		$table = new CountryTable();
-		$user->country = $country = $table->find($data['country']);
+		if ($data['country']) {
+			$table = new CountryTable();
+			$user->country = $table->find($data['country']);
+		}
 
 		$table = new UserRoleTable();
 		$user->setRoles($table->findRolesForUserId($data['id']));
@@ -77,6 +79,7 @@ class UserTable extends TableTemplate
 	public function findOneVerifiedWhere(array $conditions): array
 	{
 		$conditions['verified'] = 'TRUE';
+		array_unsift($conditions, 'AND');
 
 		return $this->findOneWhere($conditions);
 	}

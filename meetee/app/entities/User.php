@@ -20,15 +20,15 @@ class User extends Entity
 	protected ?int $id = null;
 	public string $login;
 	public string $name;
-	public string $secondName;
+	public ?string $secondName;
 	public string $surname;
 	public string $email;
 	public string $secondaryEmail;
-	public Country $country;
-	public string $city;
-	public string $zipCode;
+	public ?Country $country;
+	public ?string $city;
+	public ?string $zipCode;
 	public string $password;
-	public bool $verified = false;
+	public ?bool $verified = false;
 	protected \DateTime $birth;
 	protected array $roles = [];
 

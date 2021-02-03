@@ -52,56 +52,53 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 
 	private function appendOptionalParts(): void
 	{
-		$this->appendAllWhereParts();
+		$this->appendWherePartIfExists();
 		$this->appendOrderByPartIfExists();
 		$this->appendLimitPartIfExists();
 		$this->appendOffsetPartIfExists();
 	}
 
-	private function appendAllWhereParts(): void
+	private function appendWherePartIfExists(): void
 	{
-		$conditions = array_merge(
-			$this->getWherePart(),
-			$this->getWhereNullPart(),
-			$this->getWhereFalsePart(),
-			$this->getWhereTruePart(),
-			$this->whereAre
-		);
-
-		$this->query .= ' WHERE ' . implode(' AND ', $conditions);
+		$where = $this->parseWhereClause($this->conditions);
+		$this->query .= (!empty($where)) ? ' WHERE ' . $where : '';
 	}
 
-	private function getWherePart(): array
+	private function parseWhereClause($data): string
 	{
-		$conditions = [];
+		$result = [];
+		$type = (isset($data[0]) && is_string($data[0]))
+			? array_shift($data) : 'AND';
 
-		foreach ($this->conditions as $key => $value) {
-			$conditions[] = sprintf('%s = :%s', $key, $key);
-			$this->additionalBindings[":$key"] = $value;
+		if (strcasecmp($type, 'AND') !== 0 || strcasecmp($type, 'OR') !== 0)
+			return '';
+
+		foreach ($data as $key => $value) {
+			if (is_integer($key)) {
+				$result[] = parse($value);
+			}
+			elseif ($value === false) {
+				$result[] = "$key = FALSE";
+			}
+			elseif ($value === true) {
+				$result[] = "$key = TRUE";
+			}
+			elseif (is_null($value)) {
+				$result[] = "$key IS NULL";
+			}
+			elseif (is_string($value) || is_integer($value) || is_float($value)) {
+				$bindingName = $this->getNewBindingName();
+				$result[] = sprintf('%s = :%s', $key, $bindingName);
+				$this->additionalBindings[':'.$bindingName] = $value;
+			}
+			elseif (is_array($value) && isset($value[0]) && isset($value[1]) &&
+				in_array($value[0], ['=', '<', '<=', '>', '>='])) {
+				$bindingName = $this->getNewBindingName();
+				$result[] = sprintf('%s %s :%s', $key, $value[0], $bindingName);
+				$this->additionalBindings[':'.$bindingName] = $value;
+			}
 		}
-
-		return $conditions;
-	}
-
-	private function getWhereNullPart(): array
-	{
-		$mapFunc = fn($c) => sprintf('%s IS NULL', $c);
-
-		return array_map($mapFunc, $this->whereNull);
-	}
-
-	private function getWhereFalsePart(): array
-	{
-		$mapFunc = fn($c) => sprintf('%s IS FALSE', $c);
-
-		return array_map($mapFunc, $this->whereFalse);
-	}
-
-	private function getWhereTruePart(): array
-	{
-		$mapFunc = fn($c) => sprintf('%s IS TRUE', $c);
-
-		return array_map($mapFunc, $this->whereTrue);
+		return "(" . implode(" $type ", $result) . ")";
 	}
 
 	private function appendOrderByPartIfExists(): void
@@ -129,6 +126,7 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 
 	private function prepareInsert(): void
 	{
+		unset($this->values['id']);
 		$columns = array_keys($this->values);
 		$toBind = array_map(fn($c) => ":$c", $columns);
 		$columns = implode(', ', $columns);
@@ -164,10 +162,9 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 
 	public function getBindings(): array
 	{
-		$allToBind = array_merge($this->values, $this->conditions);
-		$keys = array_keys($allToBind);
+		$keys = array_keys($this->values);
 		$keys = array_map(fn($k) => ":$k", $keys);
-		$values = array_values($allToBind);
+		$values = array_values($this->values);
 		$bindings = array_combine($keys, $values);
 
 		return array_merge($bindings, $this->additionalBindings);
