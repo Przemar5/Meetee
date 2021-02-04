@@ -13,7 +13,6 @@ class Comment extends Entity
 	use Timestamps;
 	use SoftDelete;
 
-	private ?int $id = null;
 	public string $content;
 	public int $authorId;
 	public Collection $comments;
@@ -29,20 +28,9 @@ class Comment extends Entity
 		// 	$this->comments
 	}
 
-	public function setId(int $id): void
-	{
-		if (isset($this->id) || is_null($this->id))
-			$this->id = $id;
-	}
-
 	public function setComments(Collection $comments): void
 	{
 		$this->comments = $comments;
-	}
-
-	public function getId(): ?int
-	{
-		return $this->id;
 	}
 
 	public function getComments(): Collection

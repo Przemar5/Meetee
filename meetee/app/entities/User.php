@@ -17,7 +17,6 @@ class User extends Entity
 	use Timestamps;
 	use SoftDelete;
 
-	protected ?int $id = null;
 	public string $login;
 	public string $name;
 	public ?string $secondName;
@@ -37,12 +36,6 @@ class User extends Entity
 		$common = array_intersect($route->getAccess(), $this->roles);
 
 		return !empty($common);
-	}
-
-	public function setId(int $id): void
-	{
-		if (is_null($this->id))
-			$this->id = $id;
 	}
 
 	public function setBirth($birth): void
@@ -81,11 +74,6 @@ class User extends Entity
 	public function delete(): void
 	{
 		// $this->deleted = true;
-	}
-
-	public function getId(): ?int
-	{
-		return $this->id;
 	}
 
 	public function getBirth(): \DateTime

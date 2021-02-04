@@ -139,6 +139,7 @@ abstract class TableTemplate
 		$this->throwExceptionIfInvalidClass($entity);
 
 		$data = $this->getEntityData($entity);
+		unset($data['id']);
 
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
