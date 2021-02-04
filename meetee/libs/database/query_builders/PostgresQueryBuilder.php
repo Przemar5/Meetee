@@ -126,14 +126,35 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 
 	private function prepareInsert(): void
 	{
-		unset($this->values['id']);
-		$columns = array_keys($this->values);
-		$toBind = array_map(fn($c) => ":$c", $columns);
-		$columns = implode(', ', $columns);
-		$toBind = implode(', ', $toBind);
+		$fields = [];
+		$values = [];
+
+		foreach ($this->values as $key => $value) {
+			if (is_string($value) || is_numeric($value)) {
+				$bind = $this->getNewBindingName();
+				$fields[] = $key;
+				$values[] = $bind;
+				$this->additionalBindings[$bind] = $value;
+			}
+			elseif ($value === false) {
+				$fields[] = $key;
+				$values[] = 'FALSE';
+			}
+			elseif ($value === true) {
+				$fields[] = $key;
+				$values[] = 'TRUE';
+			}
+			elseif ($value === null) {
+				$fields[] = $key;
+				$values[] = 'NULL';
+			}
+		}
 
 		$this->query = sprintf('INSERT INTO %s (%s) VALUES (%s)', 
-			$this->table, $columns, $toBind);
+			$this->table, 
+			implode(', ', $fields), 
+			implode(', ', $values)
+		);
 	}
 
 	private function prepareInsertMultiple(): void
@@ -162,26 +183,34 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 
 	public function getBindings(): array
 	{
-		$keys = array_keys($this->values);
-		$keys = array_map(fn($k) => ":$k", $keys);
-		$values = array_values($this->values);
-		$bindings = array_combine($keys, $values);
-
-		return array_merge($bindings, $this->additionalBindings);
+		return $this->additionalBindings;
 	}
 
 	private function prepareUpdate(): void
 	{
-		$columns = array_keys($this->values);
-		$toBind = array_map(fn($c) => ":$c", $columns);
-		$updatePart = [];
-
-		for ($i = 0; $i < count($columns); $i++)
-			$updatePart[] = sprintf('%s = %s', $columns[$i], $toBind[$i]);
+		$fields = [];
 		
-		$updatePart = implode(', ', $updatePart);
+		foreach ($this->values as $key => $value) {
+			if (is_string($value) || is_numeric($value)) {
+				$bind = $this->getNewBindingName();
+				$fields[] = "$key = $bind";
+				$this->additionalBindings[$bind] = $value;
+			}
+			elseif ($value === false) {
+				$fields[] = "$key = FALSE";
+			}
+			elseif ($value === true) {
+				$fields[] = "$key = TRUE";
+			}
+			elseif ($value === null) {
+				$fields[] = "$key = NULL";
+			}
+		}
 
-		$this->query = sprintf('UPDATE %s SET %s', $this->table, $updatePart);
+		$this->query = sprintf('UPDATE %s SET %s', 
+			$this->table, 
+			implode(', ', $fields)
+		);
 		$this->appendOptionalParts();
 	}
 

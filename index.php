@@ -37,6 +37,8 @@ define('VIEW_DIR', BASE_URI . 'templates/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
+// unset($_SESSION['user_id']);
+
 try {
 	$router = RouterFactory::createComplete();
 	$router->route();

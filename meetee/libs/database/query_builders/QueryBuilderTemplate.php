@@ -125,7 +125,7 @@ abstract class QueryBuilderTemplate
 
 	protected function getNewBindingName(): string
 	{
-		return 'b_' . $this->bindingsCounter++;
+		return ':b_' . $this->bindingsCounter++;
 	}
 
 	protected function throwExceptionIfSomethingMissing(): void
