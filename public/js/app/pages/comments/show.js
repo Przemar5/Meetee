@@ -10,7 +10,13 @@ let commentHandler = new CommentHandler()
 commentHandler.commentsContainer = commentsContainer
 commentHandler.commentTemplate = commentTemplate
 commentHandler.noCommentsMsg = noCommentsMsg
-commentHandler.loadComments(commentsContainer, commentTemplate)
+let data = {
+	'max_id': 99999999999999,
+	'user_id': /\d+$/.exec(window.location.href),
+	'amount': 3,
+	'on_profile': 1
+}
+commentHandler.loadComments(commentsContainer, commentTemplate, data)
 commentHandler.initFormCreate({
 	'formContainer': commentSection, 
 	'formTemplate': commentFormTemplate, 

@@ -4,12 +4,11 @@ namespace Meetee\App\Entities\Traits;
 
 trait SoftDelete
 {
-	public ?bool $deleted = null;
+	public bool $deleted = false;
 
-	public function setDeleted(?int $deleted): void
+	public function setDeleted($deleted): void
 	{
-		if ($deleted === 0 || $deleted === 1 || is_null($deleted))
-			$this->deleted = $deleted;
+		$this->deleted = (bool) $deleted;
 	}
 
 	public function isDeleted(): ?bool
@@ -19,7 +18,7 @@ trait SoftDelete
 
 	public function softDelete(): void
 	{
-		$this->deleted = 1;
+		$this->deleted = true;
 		$this->save($this);
 	}
 }

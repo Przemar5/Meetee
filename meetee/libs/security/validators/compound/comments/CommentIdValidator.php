@@ -11,7 +11,7 @@ class CommentIdValidator extends CompoundValidator
 	{
 		$validators[] = ValidatorFactory::createIssetValidator();
 		$validators[] = ValidatorFactory::createIntValidator();
-		$validators[] = ValidatorFactory::createMinValidator(0);
+		$validators[] = ValidatorFactory::createMinValidator(1);
 		$validators[] = ValidatorFactory::createMaxValidator(99999999999);
 		$validators[] = ValidatorFactory::createExistsValidator('comments', 'id');
 

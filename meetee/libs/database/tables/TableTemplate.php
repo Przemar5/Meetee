@@ -36,7 +36,7 @@ abstract class TableTemplate
 	public function findOneBy(array $conditions): ?Entity
 	{
 		$data = $this->getDataForOneBy($conditions);
-		
+
 		if (!$data)
 			return null;
 
@@ -57,7 +57,7 @@ abstract class TableTemplate
 		return $entities;
 	}
 
-	protected function getDataForOneBy(array $conditions)
+	public function getDataForOneBy(array $conditions)
 	{
 		$this->prepareSelectBy($conditions);
 		$this->queryBuilder->limit(1);
@@ -68,7 +68,7 @@ abstract class TableTemplate
 		);
 	}
 
-	protected function getDataForManyBy(array $conditions)
+	public function getDataForManyBy(array $conditions)
 	{
 		$this->prepareSelectBy($conditions);
 
@@ -94,8 +94,6 @@ abstract class TableTemplate
 	protected function prepareConditionsRespectSoftDelete(array $conditions): array
 	{
 		return $this->prepareConditions($conditions, [
-			'OR',
-			'deleted' => null,
 			'deleted' => false,
 		]);
 	}
@@ -166,6 +164,7 @@ abstract class TableTemplate
 		$this->throwExceptionIfInvalidClass($entity);
 
 		$values = $this->getEntityData($entity);
+		unset($values['id']);
 
 		if ($this->softDelete)
 			$values['deleted'] = $entity->isDeleted();
@@ -251,45 +250,33 @@ abstract class TableTemplate
 		return $entity;
 	}
 
-	public function complete(
-		Entity &$entity, 
-		?array $attrs = ['id']
-	): void
+	public function complete(Entity &$entity): void
 	{
 		$this->throwExceptionIfInvalidClass($entity);
 
-		$taked = $this->find($entity->getId());
+		$taken = $this->find($entity->getId());
 
 		if (!$taken)
 			return;
 
-		foreach ($attrs as $attr) {
+		foreach ($taken as $attr => $value) {
 			if (method_exists(get_class($entity), 'set'.$attr))
-				$entity->{'set'.$attr}($attr);
+				$entity->{'set'.$attr}($value);
 			
 			$entity->{$attr} = $taken->{$attr};
 		}
 	}
 
-	public function saveComplete(
-		Entity $entity
-	): ?Entity
+	public function saveComplete(Entity $entity): ?Entity
 	{
-		$this->throwExceptionIfInvalidClass($entity);
+		// $this->throwExceptionIfInvalidClass($entity);
 		$this->save($entity);
+		$this->complete($entity);
 
-		$taken = $this->find($entity->getId());
-
-		if (!$taken)
-			return null;
-
-		return $taken;
+		return $entity;
 	}
 
-	public function popComplete(
-		Entity &$entity, 
-		?array $attrs = ['id']
-	): void
+	public function popComplete(Entity &$entity, ?array $attrs = ['id']): void
 	{
 		$this->complete($entity, $attrs);
 

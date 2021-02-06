@@ -12,11 +12,12 @@ export default class CommentHandler {
 		this.noCommentsMsg
 	}
 
-	loadComments (parent, template, parentComment = null) {
+	loadComments (parent, template, data) {
 		let ajax = new Ajax()
 		let route = RouteDispatcher.getRouteUri('comments_select_process')
-		route = route + '?user-id=' + this.userId + '&limit=' + this.limit + '&max-id=' + this.lastCommentId
-		if (parentComment != null) route += '&parent=' + parentComment
+		route += '?' + Object.keys(data)
+			.map((k) => k + '=' + data[k].toString())
+			.join('&')
 		
 		ajax.get(route, null, null)
 			.then(this.callback(parent, template))

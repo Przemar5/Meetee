@@ -17,6 +17,7 @@ use Meetee\App\Entities\Factories\RoleFactory;
 use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\RoleTable;
 use Meetee\Libs\Database\Tables\TokenTable;
+use Meetee\Libs\Database\Tables\CommentTable;
 
 
 spl_autoload_register(function($namespaceWithClass) {
@@ -37,7 +38,8 @@ define('VIEW_DIR', BASE_URI . 'templates/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
-// unset($_SESSION['user_id']);
+// Test pop, complete and save Table functions
+die;
 
 try {
 	$router = RouterFactory::createComplete();

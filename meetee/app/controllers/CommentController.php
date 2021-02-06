@@ -14,6 +14,7 @@ use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Security\Validators\Compound\Comments\CommentIdValidator;
 use Meetee\Libs\Security\Validators\Compound\Comments\CommentBodyValidator;
+use Meetee\Libs\Security\Validators\Compound\Forms\CommentSelectValidator;
 
 class CommentController extends ControllerTemplate
 {
@@ -22,17 +23,35 @@ class CommentController extends ControllerTemplate
 
 	public function select(): void
 	{
-		$userId = (int) trim($_GET['user-id']);
-		$maxId = (int) trim($_GET['max-id']);
-		$amount = (int) trim($_GET['limit']);
-		$parentId = (isset($_GET['parent'])) ? (int) $_GET['parent'] : null;
+		$conditions = $this->prepareConditionsForSelect();
+		$validator = new CommentSelectValidator();
+
+		if (!$validator->run($conditions))
+			die;
 
 		$table = new commentTable();
-		$comments = $table->findLastFromByAuthorIdAndParentId(
-			$maxId, $amount, $userId, $parentId);
+		$comments = $table->getDataForManyBy($conditions);
 
-		echo json_encode($comments);
-		die;
+		die(json_encode($comments));
+	}
+
+	private function prepareConditionsForSelect(): array
+	{
+		$data = [
+			'user_id' => (int) trim($_GET['user_id']),
+			'max_id' => (int) trim($_GET['max_id']),
+			'amount' => (int) trim($_GET['amount']),
+			'parent_id' => (isset($_GET['parent_id'])) 
+				? (int) $_GET['parent_id'] : null,
+			'topic_id' => (isset($_GET['topic_id'])) 
+				? (int) $_GET['topic_id'] : null,
+			'group_id' => (isset($_GET['group_id'])) 
+				? (int) $_GET['group_id'] : null,
+			'on_profile' => (isset($_GET['on_profile'])) 
+				? (bool) $_GET['on_profile'] : false,
+		];
+
+		return $data;
 	}
 
 	public function create(): void
@@ -69,10 +88,8 @@ class CommentController extends ControllerTemplate
 	{
 		$form = new CommentForm();
 
-		if (!$form->validate()) {
-			echo json_encode($form->getErrors());
-			die;
-		}
+		if (!$form->validate())
+			die(json_encode($form->getErrors()));
 	}
 
 	private function trimCommentValues(): void
@@ -86,6 +103,7 @@ class CommentController extends ControllerTemplate
 	{
 		$comment = new Comment();
 		$comment->content = trim($_POST['content']);
+		$comment->onProfile = ($_POST['on_profile'] == 1) ? true : false;
 
 		if (!$comment->authorId = AuthFacade::getUserId())
 			die;
@@ -113,10 +131,8 @@ class CommentController extends ControllerTemplate
 
 		$validator = new commentBodyValidator();
 
-		if (!$validator->run(trim($_POST['content'] ?? null))) {
-			echo json_encode(['error' => $validator->errorMsg]);
-			die;
-		}
+		if (!$validator->run(trim($_POST['content'] ?? null)))
+			die(json_encode(['error' => $validator->errorMsg]));
 
 		$table = new CommentTable();
 		$comment = $table->find((int) $commentId);
@@ -150,14 +166,17 @@ class CommentController extends ControllerTemplate
 		$table = new CommentTable();
 		$comment = $table->saveComplete($comment);
 
-		echo json_encode([
+		die(json_encode([
 			'id' => $comment->getId(),
 			'content' => $comment->content,
 			'author_id' => $comment->authorId,
+			'topic_id' => $comment->topicId,
+			'group_id' => $comment->groupId,
+			'parent_id' => $comment->parentId,
+			'on_profile' => $comment->onProfile,
 			'created_at' => $comment->getCreatedAtString(),
 			'updated_at' => $comment->getUpdatedAtString(),
-		]);
-		die;
+		]));
 	}
 
 	public function delete($id): void

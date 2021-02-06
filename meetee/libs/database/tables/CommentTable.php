@@ -22,7 +22,11 @@ class CommentTable extends TableTemplate
 		$comment = new Comment();
 		$comment->setId($data['id']);
 		$comment->content = $data['content'];
+		$comment->onProfile = $data['on_profile'];
 		$comment->authorId = $user->getId();
+		$comment->parentId = $data['parent_id'];
+		$comment->topicId = $data['topic_id'];
+		$comment->groupId = $data['group_id'];
 		$comment->setCreatedAt($data['created_at']);
 		$comment->setUpdatedAt($data['updated_at']);
 		$comment->deleted = $data['deleted'];
@@ -38,6 +42,10 @@ class CommentTable extends TableTemplate
 		$data['id'] = $comment->getId();
 		$data['content'] = $comment->content;
 		$data['user_id'] = $comment->authorId;
+		$data['parent_id'] = $comment->parentId;
+		$data['topic_id'] = $comment->topicId;
+		$data['group_id'] = $comment->groupId;
+		$data['on_profile'] = $comment->onProfile;
 		$data['deleted'] = $comment->deleted;
 
 		return $data;
@@ -55,6 +63,7 @@ class CommentTable extends TableTemplate
 		?int $parentId
 	): ?array
 	{
+		die;
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
@@ -79,7 +88,6 @@ class CommentTable extends TableTemplate
 		$this->queryBuilder->limit($limit);
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
-		$this->queryBuilder->setAdditionalBindings(['id' => $last]);
 		$this->queryBuilder->setAdditionalBindings(['id' => $last]);
 
 		return $this->database->findMany(

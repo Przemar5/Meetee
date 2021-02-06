@@ -11,7 +11,7 @@ class CommentForm extends FormTemplate
 	public function __construct()
 	{
 		$requestKeys = [
-			'POST' => ['content'],
+			'POST' => ['content', 'on_profile'],
 		];
 
 		parent::__construct(

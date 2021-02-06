@@ -70,12 +70,12 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 		$type = (isset($data[0]) && is_string($data[0]))
 			? array_shift($data) : 'AND';
 
-		if (strcasecmp($type, 'AND') !== 0 || strcasecmp($type, 'OR') !== 0)
-			return '';
+		// if (strcasecmp($type, 'AND') !== 0 || strcasecmp($type, 'OR') !== 0)
+		// 	return '';
 
 		foreach ($data as $key => $value) {
 			if (is_integer($key)) {
-				$result[] = parse($value);
+				$result[] = $this->parseWhereClause($value);
 			}
 			elseif ($value === false) {
 				$result[] = "$key = FALSE";
@@ -88,14 +88,14 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 			}
 			elseif (is_string($value) || is_integer($value) || is_float($value)) {
 				$bindingName = $this->getNewBindingName();
-				$result[] = sprintf('%s = :%s', $key, $bindingName);
-				$this->additionalBindings[':'.$bindingName] = $value;
+				$result[] = sprintf('%s = %s', $key, $bindingName);
+				$this->additionalBindings[$bindingName] = $value;
 			}
-			elseif (is_array($value) && isset($value[0]) && isset($value[1]) &&
+			elseif (is_array($value) && isset($value[0]) && isset($value[1]) && 
 				in_array($value[0], ['=', '<', '<=', '>', '>='])) {
 				$bindingName = $this->getNewBindingName();
-				$result[] = sprintf('%s %s :%s', $key, $value[0], $bindingName);
-				$this->additionalBindings[':'.$bindingName] = $value;
+				$result[] = sprintf('%s %s %s', $key, $value[0], $bindingName);
+				$this->additionalBindings[$bindingName] = $value;
 			}
 		}
 		return "(" . implode(" $type ", $result) . ")";

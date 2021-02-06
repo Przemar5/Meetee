@@ -57,6 +57,13 @@ class ValidatorFactory
 		return static::createTypeValidator('integer', $errorMsg);
 	}
 
+	public static function createBoolValidator(
+		?string $errorMsg = ''
+	): TypeValidator
+	{
+		return static::createTypeValidator('boolean', $errorMsg);
+	}
+
 	public static function createTypeValidator(
 		string $type,
 		?string $errorMsg = ''

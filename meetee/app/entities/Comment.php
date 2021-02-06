@@ -14,7 +14,11 @@ class Comment extends Entity
 	use SoftDelete;
 
 	public string $content;
+	public bool $onProfile;
 	public int $authorId;
+	public ?int $parentId = null;
+	public ?int $topicId = null;
+	public ?int $groupId = null;
 	public Collection $comments;
 
 	public function addComment(Comment $comment): void
