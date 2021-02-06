@@ -267,7 +267,7 @@ abstract class TableTemplate
 		}
 	}
 
-	public function saveComplete(Entity $entity): ?Entity
+	public function saveComplete(Entity &$entity): ?Entity
 	{
 		// $this->throwExceptionIfInvalidClass($entity);
 		$this->save($entity);
@@ -276,9 +276,9 @@ abstract class TableTemplate
 		return $entity;
 	}
 
-	public function popComplete(Entity &$entity, ?array $attrs = ['id']): void
+	public function popComplete(Entity &$entity): void
 	{
-		$this->complete($entity, $attrs);
+		$this->complete($entity);
 
 		$id = (method_exists($entity, 'getId')) ? $entity->getId() : $entity->id;
 		

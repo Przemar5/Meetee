@@ -38,9 +38,6 @@ define('VIEW_DIR', BASE_URI . 'templates/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
-// Test pop, complete and save Table functions
-die;
-
 try {
 	$router = RouterFactory::createComplete();
 	$router->route();
