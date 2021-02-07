@@ -28,12 +28,12 @@ class TokenTable extends TableTemplate
 
 	public function getValidBy(array $conditions): ?Token
 	{
+		$conditions['expiry'] = ['>=', (new \DateTime())->format('Y-m-d H:i:s')];
+
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
 		$this->queryBuilder->where($conditions);
-		$this->queryBuilder->where([
-			'expiry' => ['>=', (new \DateTime())->format('Y-m-d H:i:s')]]);
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->orderDesc();
 		$this->queryBuilder->limit(1);
@@ -43,10 +43,7 @@ class TokenTable extends TableTemplate
 			$this->queryBuilder->getBindings()
 		);
 
-		if ($data)
-			return $this->fetchEntity($data);
-
-		return null;
+		return ($data) ? $this->fetchEntity($data) : null;
 	}
 
 	protected function fetchEntity($data): Token
@@ -78,7 +75,7 @@ class TokenTable extends TableTemplate
 	{
 		$token = $this->getValidByToken($token);
 
-		if (!is_null($token))
+		if (is_null($token))
 			return null;
 
 		$copy = $token;
@@ -104,7 +101,8 @@ class TokenTable extends TableTemplate
 	{
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->delete();
-		$this->queryBuilder->whereAre(['expiry < NOW()']);
+		$this->queryBuilder->where([
+			'expiry' => ['<', (new \DateTime())->format('Y-m-d H:i:s')]]);
 
 		$this->database->sendQuery(
 			$this->queryBuilder->getResult(),

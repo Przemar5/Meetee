@@ -60,11 +60,13 @@ class TokenFacade
 		$data = static::serializeToken($token, $user);
 		$table = new TokenTable();
 
-		if ($user && !empty($token->userId) && 
-			$token->userId !== $user->getId())
+		if ($user && !empty($token->userId) && $token->userId !== $user->getId())
 			return null;
 
-		return $table->popValidBy($data);
+		$token = $table->getValidBy($data);
+		// dd($data);
+		
+		return $token;
 	}
 
 	public static function serializeToken(Token $token, ?User $user = null): array

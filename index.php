@@ -12,6 +12,7 @@ use Meetee\Libs\Storage\Session;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Role;
 use Meetee\App\Entities\Token;
+use Meetee\App\Entities\Comment;
 use Meetee\Libs\Database\Factories\DatabaseFactory;
 use Meetee\App\Entities\Factories\RoleFactory;
 use Meetee\Libs\Database\Tables\UserTable;
@@ -37,6 +38,29 @@ define('CSS_DIR', BASE_URI . 'public/css/');
 define('VIEW_DIR', BASE_URI . 'templates/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
+
+// Test pop, complete and save Table functions
+// $table = new CommentTable();
+// $comment = new Comment();
+// $comment->userId = 2;
+// $comment->content = 'Comment content.';
+// $comment->value = 'token_value';
+// $comment->setExpiry('2021-02-08 10:30:30');
+// // $table->save($token);
+// $comment->saveComplete($token);
+
+// dd($token);
+
+// $token = new Token();
+// $data = [
+// 	'name' => 'token_name',
+// 	'value' => 'token_value',
+// ];
+// $token = $table->popValidByToken($token);
+
+// dd($token);
+
+// die;
 
 try {
 	$router = RouterFactory::createComplete();

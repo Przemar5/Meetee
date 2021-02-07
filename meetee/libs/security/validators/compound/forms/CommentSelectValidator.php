@@ -16,8 +16,6 @@ class CommentSelectValidator extends FormValidator
 	public function __construct()
 	{
 		$validators = [
-			'max_id' => new UnsignedIntValidator(),
-			'amount' => new UnsignedIntValidator(),
 			'on_profile' => ValidatorFactory::createBoolValidator(),
 		];
 

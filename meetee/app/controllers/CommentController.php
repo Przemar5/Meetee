@@ -29,18 +29,21 @@ class CommentController extends ControllerTemplate
 		if (!$validator->run($conditions))
 			die;
 
-		$table = new commentTable();
-		$comments = $table->getDataForManyBy($conditions);
+		$comments = $this->selectRawDataForComments($conditions);
 
 		die(json_encode($comments));
 	}
 
 	private function prepareConditionsForSelect(): array
 	{
-		$data = [
+		$maxId = trim($_GET['max_id']);
+		
+		if (!preg_match('/^\d{1,9}$/', $maxId))
+			die;
+
+		return [
 			'user_id' => (int) trim($_GET['user_id']),
-			'max_id' => (int) trim($_GET['max_id']),
-			'amount' => (int) trim($_GET['amount']),
+			'id' => ['<=', (int) $maxId],
 			'parent_id' => (isset($_GET['parent_id'])) 
 				? (int) $_GET['parent_id'] : null,
 			'topic_id' => (isset($_GET['topic_id'])) 
@@ -50,8 +53,25 @@ class CommentController extends ControllerTemplate
 			'on_profile' => (isset($_GET['on_profile'])) 
 				? (bool) $_GET['on_profile'] : false,
 		];
+	}
 
-		return $data;
+	private function getClausesIfValidOrDie(): array
+	{
+		if (!preg_match('/^\d{1,9}$/', $_GET['amount']))
+			die;
+
+		return [
+			'limit' => (int) trim($_GET['amount']),
+		];
+	}
+
+	private function selectRawDataForComments(array $conditions): array
+	{
+		
+		$clauses = $this->getClausesIfValidOrDie();
+		$table = new CommentTable();
+
+		return $table->getDataForManyBy($conditions, $clauses);
 	}
 
 	public function create(): void

@@ -4,7 +4,7 @@ import RouteDispatcher from '../../libs/http/RouteDispatcher.js'
 
 export default class CommentHandler {
 	constructor () {
-		this.lastCommentId = 99999999999999
+		this.lastCommentId = 99999999999
 		this.userId = /\d+$/.exec(window.location.href)
 		this.limit = 3
 		this.commentsContainer

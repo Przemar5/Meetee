@@ -95,7 +95,7 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 				in_array($value[0], ['=', '<', '<=', '>', '>='])) {
 				$bindingName = $this->getNewBindingName();
 				$result[] = sprintf('%s %s %s', $key, $value[0], $bindingName);
-				$this->additionalBindings[$bindingName] = $value;
+				$this->additionalBindings[$bindingName] = $value[1];
 			}
 		}
 		return "(" . implode(" $type ", $result) . ")";

@@ -11,7 +11,7 @@ commentHandler.commentsContainer = commentsContainer
 commentHandler.commentTemplate = commentTemplate
 commentHandler.noCommentsMsg = noCommentsMsg
 let data = {
-	'max_id': 99999999999999,
+	'max_id': 999999999,
 	'user_id': /\d+$/.exec(window.location.href),
 	'amount': 3,
 	'on_profile': 1

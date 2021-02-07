@@ -45,9 +45,9 @@ abstract class TableTemplate
 		return $entity;
 	}
 
-	public function findManyBy(array $conditions)
+	public function findManyBy(array $conditions, ?array $clauses = [])
 	{
-		$data = $this->getDataForManyBy($conditions);
+		$data = $this->getDataForManyBy($conditions, $clauses);
 		
 		if (!$data)
 			return null;
@@ -57,9 +57,9 @@ abstract class TableTemplate
 		return $entities;
 	}
 
-	public function getDataForOneBy(array $conditions)
+	public function getDataForOneBy(array $conditions, ?array $clauses = [])
 	{
-		$this->prepareSelectBy($conditions);
+		$this->prepareSelectBy($conditions, $clauses);
 		$this->queryBuilder->limit(1);
 
 		return $this->database->findOne(
@@ -68,9 +68,9 @@ abstract class TableTemplate
 		);
 	}
 
-	public function getDataForManyBy(array $conditions)
+	public function getDataForManyBy(array $conditions, ?array $clauses = [])
 	{
-		$this->prepareSelectBy($conditions);
+		$this->prepareSelectBy($conditions, $clauses);
 
 		return $this->database->findMany(
 			$this->queryBuilder->getResult(),
@@ -78,7 +78,7 @@ abstract class TableTemplate
 		);
 	}
 
-	protected function prepareSelectBy(array $conditions): void
+	protected function prepareSelectBy(array $conditions, array $clauses = []): void
 	{
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
@@ -89,6 +89,18 @@ abstract class TableTemplate
 				$this->prepareConditionsRespectSoftDelete($conditions));
 		else
 			$this->queryBuilder->where($conditions);
+
+		$this->appendOptionalParts($clauses);
+	}
+
+	protected function appendOptionalParts(array $clauses = []): void
+	{
+		$available = ['limit', 'offset'];
+
+		foreach ($clauses as $key => $value) {
+			if (in_array($key, $available))
+				$this->queryBuilder->{$key}($value);
+		}
 	}
 
 	protected function prepareConditionsRespectSoftDelete(array $conditions): array
@@ -116,7 +128,7 @@ abstract class TableTemplate
 		return array_map(fn($d) => $this->fetchEntity($d), $data);
 	}
 
-	public function save(Entity $entity): void
+	public function save(Entity &$entity): void
 	{
 		if (is_null($entity->getId()))
 			$this->insert($entity);
@@ -132,7 +144,7 @@ abstract class TableTemplate
 				$this->entityClass, get_class($entity)));
 	}
 
-	public function insert(Entity $entity): void
+	public function insert(Entity &$entity): void
 	{
 		$this->throwExceptionIfInvalidClass($entity);
 
@@ -159,7 +171,7 @@ abstract class TableTemplate
 		//
 	}
 
-	public function update(Entity $entity): void
+	public function update(Entity &$entity): void
 	{
 		$this->throwExceptionIfInvalidClass($entity);
 
@@ -254,22 +266,16 @@ abstract class TableTemplate
 	{
 		$this->throwExceptionIfInvalidClass($entity);
 
-		$taken = $this->find($entity->getId());
+		$taken = $this->getDataForOneBy(['id' => $entity->getId()]);
 
 		if (!$taken)
 			return;
 
-		foreach ($taken as $attr => $value) {
-			if (method_exists(get_class($entity), 'set'.$attr))
-				$entity->{'set'.$attr}($value);
-			
-			$entity->{$attr} = $taken->{$attr};
-		}
+		$entity = $this->fetchEntity($taken);
 	}
 
 	public function saveComplete(Entity &$entity): ?Entity
 	{
-		// $this->throwExceptionIfInvalidClass($entity);
 		$this->save($entity);
 		$this->complete($entity);
 
@@ -278,10 +284,8 @@ abstract class TableTemplate
 
 	public function popComplete(Entity &$entity): void
 	{
+		$this->throwExceptionIfInvalidClass($entity);
 		$this->complete($entity);
-
-		$id = (method_exists($entity, 'getId')) ? $entity->getId() : $entity->id;
-		
-		$this->delete($id);
+		$this->delete($entity->getId());
 	}
 }
