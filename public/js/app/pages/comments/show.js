@@ -33,12 +33,13 @@ document.addEventListener('scroll', (e) => {
     html.clientHeight, html.scrollHeight, html.offsetHeight)
 	
 	if (height - 200 < (yPos + window.innerHeight) && !disabled) {
-		// loadMoreBtn.click()
-		// loadMoreBtn.setAttribute('disabled', true)
-		// setTimeout(() => loadMoreBtn.removeAttribute('disabled', true), 100)
+		// console.log('ok')
+		loadMoreBtn.click()
+		loadMoreBtn.setAttribute('disabled', true)
+		setTimeout(() => loadMoreBtn.removeAttribute('disabled', true), 100)
 
 		disabled = true
-		commentHandler.loadComments(commentsContainer, commentTemplate)
+		commentHandler.loadComments(commentsContainer, commentTemplate, data)
 		setTimeout(() => disabled = false, 100)
 	}
 })

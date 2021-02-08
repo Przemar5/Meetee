@@ -25,6 +25,7 @@ export default class CommentHandler {
 
 	callback = (parent, template) => (data) => {
 		data = JSON.parse(data)
+		
 		for (let i in data) {
 			if (data[i] instanceof Function) continue
 			let temp = this.prepareTemplate(template, data[i])
@@ -104,6 +105,11 @@ export default class CommentHandler {
 		let btnSave = temp.querySelector('.comment__button--save')
 		let btnEdit = temp.querySelector('.comment__button--edit')
 		let btnDelete = temp.querySelector('.comment__button--delete')
+		let btnComment = temp.querySelector('.comment__button--comment')
+		let parentIdInput = temp.querySelector('input[name="parent_id"]')
+		let topicIdInput = temp.querySelector('input[name="topic_id"]')
+		let groupIdInput = temp.querySelector('input[name="group_id"]')
+		let formSubcomment = temp.querySelector('.comment__form--comment')
 		let route
 
 		try {
@@ -125,6 +131,13 @@ export default class CommentHandler {
 
 			formEdit.addEventListener('submit', this.updateSubmitEvent)
 			formDelete.addEventListener('submit', this.deleteSubmitEvent)
+			formSubcomment.addEventListener('submit', this.subcommentSubmitEvent)
+			
+			btnComment.addEventListener('click', this.toggleFormComment)
+
+			parentIdInput.setAttribute('value', data['id'])
+			topicIdInput.setAttribute('value', data['topic_id'])
+			groupIdInput.setAttribute('value', data['group_id'])
 
 			this.prepareRatingForm(temp, data['id'])
 		} catch (e) {
@@ -134,9 +147,36 @@ export default class CommentHandler {
 		return temp
 	}
 
+	toggleFormComment = (e) => {
+		e.preventDefault()
+		let subcommentForm = e.target
+			.closest('.comment__commenting')
+			.querySelector('.comment__form--comment')
+
+		subcommentForm.classList.toggle('display-none')
+	}
+
+	subcommentSubmitEvent = (e) => {
+		e.preventDefault()
+		let formData = new FormData(e.target)
+		let route = e.target.getAttribute('action')
+		let request = new Request()
+		let subcommentContainer = e.target.closest('.comment').querySelector('.comment__subcomments')
+
+		let callback = (container) => (data) => {
+			let comment = this.prepareTemplate(this.commentTemplate, data)
+			container.prepend(comment)
+			// console.log(this.commentTemplate.content.cloneNode(true))
+			console.log(comment)
+		}
+
+		request.post(route, formData, callback(subcommentContainer), callback)
+	}
+
 	prepareRatingForm (template, commentId) {
 		const ratingsArea = template.querySelector('.ratings')
 		const forms = ratingsArea.querySelectorAll('form')
+		
 		forms.forEach((f) => {
 			let ratingId = f.querySelector('input[name="rating_id"]').value
 			let route = RouteDispatcher.getRouteUri('ratings_rate_process', {

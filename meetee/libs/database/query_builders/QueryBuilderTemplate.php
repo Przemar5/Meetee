@@ -8,6 +8,7 @@ abstract class QueryBuilderTemplate
 	protected ?string $query = null;
 	protected ?string $table = null;
 	protected ?string $action = null;
+	protected array $withRecursive = [];
 	protected ?array $columns = null;
 	protected array $values = [];
 	protected ?string $joinTable = null;
@@ -26,6 +27,7 @@ abstract class QueryBuilderTemplate
 		$this->query = null;
 		$this->table = null;
 		$this->action = null;
+		$this->withRecursive = [];
 		$this->columns = null;
 		$this->values = [];
 		$this->joinTable = null;
@@ -109,9 +111,10 @@ abstract class QueryBuilderTemplate
 		$this->offset = $offset;
 	}
 
-	public function setAdditionalBindings(array $bindings): void
+	public function withRecursive(array $values): void
 	{
-		$this->additionalBindings = $bindings;
+		$this->action = 'WITH';
+		$this->withRecursive = $values;
 	}
 
 	abstract public function getBindings(): array;

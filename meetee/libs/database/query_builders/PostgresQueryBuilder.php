@@ -17,12 +17,18 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 	private function prepareQuery(): void
 	{
 		switch ($this->action) {
+			case 'WITH': $this->prepareWith(); break;
 			case 'SELECT': $this->prepareSelect(); break;
 			case 'INSERT': $this->prepareInsert(); break;
 			case 'INSERT MANY': $this->prepareInsertMultiple(); break;
 			case 'UPDATE': $this->prepareUpdate(); break;
 			case 'DELETE': $this->prepareDelete(); break;
 		}
+	}
+
+	private function prepareWith(): void
+	{
+		//
 	}
 
 	private function prepareSelect(): void

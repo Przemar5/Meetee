@@ -15,6 +15,7 @@ export default class Comment {
 		let btnSave = this.template.querySelector('.comment__button--save')
 		let btnEdit = this.template.querySelector('.comment__button--edit')
 		let btnDelete = this.template.querySelector('.comment__button--delete')
+		let btnComment = this.template.querySelector('.comment__button--comment')
 		let route
 
 		try {
@@ -39,10 +40,22 @@ export default class Comment {
 
 			btnEdit.addEventListener('click', (e) => this.toggleFormEvent(e.target))
 
+			btnComment.addEventListener('click', this.toggleFormComment)
+
 			this.prepareRatingForm(this.template, data['id'])
 		} catch (e) {
 			console.log(e)
 		}
+	}
+
+	toggleFormComment = (e) => {
+		e.preventDefault()
+		let commentForm = e.target
+			.closest('.comment__commenting')
+			.find('.comment__form--comment')
+		console.log(commentForm)
+
+		commentForm.classList.toggle('display-none')
 	}
 
 	rateEvent = (e) => {

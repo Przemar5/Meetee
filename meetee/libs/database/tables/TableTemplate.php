@@ -33,9 +33,9 @@ abstract class TableTemplate
 		return $this->findOneBy(['id' => $id]);
 	}
 
-	public function findOneBy(array $conditions): ?Entity
+	public function findOneBy(array $conditions, ?array $clauses = []): ?Entity
 	{
-		$data = $this->getDataForOneBy($conditions);
+		$data = $this->getDataForOneBy($conditions, $clauses);
 
 		if (!$data)
 			return null;
@@ -95,7 +95,7 @@ abstract class TableTemplate
 
 	protected function appendOptionalParts(array $clauses = []): void
 	{
-		$available = ['limit', 'offset'];
+		$available = ['limit', 'offset', 'orderDesc', 'orderBy'];
 
 		foreach ($clauses as $key => $value) {
 			if (in_array($key, $available))

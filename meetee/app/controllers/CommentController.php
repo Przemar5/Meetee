@@ -24,12 +24,13 @@ class CommentController extends ControllerTemplate
 	public function select(): void
 	{
 		$conditions = $this->prepareConditionsForSelect();
+		$clauses = $this->getClausesIfValidOrDie();
 		$validator = new CommentSelectValidator();
 
 		if (!$validator->run($conditions))
 			die;
 
-		$comments = $this->selectRawDataForComments($conditions);
+		$comments = $this->selectRawCommentsData($conditions, $clauses);
 
 		die(json_encode($comments));
 	}
@@ -61,14 +62,17 @@ class CommentController extends ControllerTemplate
 			die;
 
 		return [
+			'orderDesc' => null,
+			'orderBy' => ['id'],
 			'limit' => (int) trim($_GET['amount']),
 		];
 	}
 
-	private function selectRawDataForComments(array $conditions): array
+	private function selectRawCommentsData(
+		array $conditions, 
+		array $clauses
+	): array
 	{
-		
-		$clauses = $this->getClausesIfValidOrDie();
 		$table = new CommentTable();
 
 		return $table->getDataForManyBy($conditions, $clauses);
@@ -124,11 +128,17 @@ class CommentController extends ControllerTemplate
 		$comment = new Comment();
 		$comment->content = trim($_POST['content']);
 		$comment->onProfile = ($_POST['on_profile'] == 1) ? true : false;
+		$comment->parentId = (preg_match('/^\d{1,9}$/', $_POST['parent_id']))
+			? $_POST['parent_id'] : null;
+		$comment->topicId = (preg_match('/^\d{1,9}$/', $_POST['topic_id']))
+			? $_POST['topic_id'] : null;
+		$comment->groupId = (preg_match('/^\d{1,9}$/', $_POST['group_id']))
+			? $_POST['group_id'] : null;
 
 		if (!$comment->authorId = AuthFacade::getUserId())
 			die;
 		
-		$this->savecommentAndPrintJsonData($comment);
+		$this->saveCommentAndPrintJsonData($comment);
 	}
 
 	public function update($id): void
@@ -178,10 +188,10 @@ class CommentController extends ControllerTemplate
 		$comment = $table->find($id);
 		$comment->content = trim($_POST['content']);
 		
-		$this->savecommentAndPrintJsonData($comment);
+		$this->saveCommentAndPrintJsonData($comment);
 	}
 
-	private function savecommentAndPrintJsonData(Comment $comment): void
+	private function saveCommentAndPrintJsonData(Comment $comment): void
 	{
 		$table = new CommentTable();
 		$comment = $table->saveComplete($comment);

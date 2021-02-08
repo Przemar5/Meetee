@@ -104,50 +104,36 @@ class CommentTable extends TableTemplate
 	public function findManyRecursiveBy(array $conditions, int $parentId = null)
 	{
 		$this->queryBuilder->reset();
-		$this->queryBuilder->withRecursive('cte');
+		$this->queryBuilder->withRecursive(['id', 'content', 'parent_id']);
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
+	}
 
-		/*
-WITH RECURSIVE cte (id, content, parent_id) 
-AS (
-	SELECT c1.id, c1.content, c1.parent_id 
-	FROM comments c1
-	JOIN (
-		SELECT id 
-		FROM comments 
-		WHERE parent_id is null 
-		ORDER BY id DESC 
-		LIMIT 1
-	) AS c2 
-	ON c1.id = c2.id 
-	UNION ALL
-		SELECT c3.id, c3.content, c3.parent_id 
-		FROM comments c3 
-		INNER JOIN cte 
-		ON c3.parent_id = cte.id
-) 
-SELECT * FROM cte;
+	public function findRecursive(int $id)
+	{
+		$this->queryBuilder->reset();
+		$query = 'WITH RECURSIVE cte (id, content, parent_id) 
+		AS (
+			SELECT c1.id, c1.content, c1.parent_id 
+			FROM comments c1
+			JOIN (
+				SELECT id 
+				FROM comments 
+				WHERE parent_id = :id 
+				ORDER BY id DESC 
+				LIMIT 1
+			) AS c2 
+			ON c1.id = c2.id 
+			UNION ALL
+				SELECT c3.id, c3.content, c3.parent_id 
+				FROM comments c3 
+				INNER JOIN cte 
+				ON c3.parent_id = cte.id
+		) 
+		SELECT * FROM cte';
 
+		$bindings = [':id' => $id];
 
-WITH RECURSIVE cte (id, content, parent_id) 
-AS (
-	SELECT c1.id, c1.content, c1.parent_id 
-	FROM comments c1
-	WHERE c1.id IN (
-		SELECT id 
-		FROM comments 
-		WHERE parent_id is null 
-		ORDER BY id DESC 
-		LIMIT 1
-	)
-	UNION ALL
-		SELECT c3.id, c3.content, c3.parent_id 
-		FROM comments c3 
-		INNER JOIN cte 
-		ON c3.parent_id = cte.id
-) 
-SELECT * FROM cte;
-		*/
+		return $this->database->findMany($query, $bindings);
 	}
 }
