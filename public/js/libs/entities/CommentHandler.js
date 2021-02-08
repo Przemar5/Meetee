@@ -133,6 +133,7 @@ export default class CommentHandler {
 			formDelete.addEventListener('submit', this.deleteSubmitEvent)
 			formSubcomment.addEventListener('submit', this.subcommentSubmitEvent)
 			
+			this.addSubcommentInputEvents(formSubcomment)
 			btnComment.addEventListener('click', this.toggleFormComment)
 
 			parentIdInput.setAttribute('value', data['id'])
@@ -140,11 +141,37 @@ export default class CommentHandler {
 			groupIdInput.setAttribute('value', data['group_id'])
 
 			this.prepareRatingForm(temp, data['id'])
+			
 		} catch (e) {
 			console.log(e)
 		}
 
 		return temp
+	}
+
+	addSubcommentInputEvents (form) {
+		let textarea = form.querySelector('[name="content"]')
+
+		textarea.addEventListener('keyup', this.validateNewPost)
+		textarea.addEventListener('keydown', this.validateNewPost)
+
+		form.addEventListener('submit', (e) => {
+			e.preventDefault()
+			let formData = new FormData(e.target)
+			let request = new Request()
+			let uri = e.target.getAttribute('action')
+			let addNewestComment = this.addComment(commentsContainer, commentTemplate)
+			 
+			request.post(
+				uri, 
+				formData, 
+				(data) => {
+					form.querySelector('textarea').value = ''
+					addNewestComment(data)
+				}, 
+				() => null
+			)
+		})
 	}
 
 	toggleFormComment = (e) => {
@@ -168,6 +195,7 @@ export default class CommentHandler {
 			container.prepend(comment)
 			// console.log(this.commentTemplate.content.cloneNode(true))
 			console.log(comment)
+			e.target.querySelector('textarea').value = ''
 		}
 
 		request.post(route, formData, callback(subcommentContainer), callback)
@@ -279,7 +307,7 @@ export default class CommentHandler {
 	deleteSubmitEvent = (e) => {
 		e.preventDefault()
 		let confirmation = confirm(
-			'Are You sure You want to delte this comment? This action is irreversible.')
+			'Are You sure You want to delete this comment? This action is irreversible.')
 
 		if (confirmation) {
 			let formData = new FormData(e.target)
@@ -292,7 +320,7 @@ export default class CommentHandler {
 
 	deleteComment = (form) => (data) => {
 		let comment = form.closest('.comment')
-		this.commentsContainer.removeChild(comment)
+		comment.parentElement.removeChild(comment)
 		let commentsCount = this.commentsContainer.childElementCount
 		if (commentsCount === 0) this.commentsContainer.appendChild(this.noCommentsMsg)
 	}
