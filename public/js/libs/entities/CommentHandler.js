@@ -106,10 +106,12 @@ export default class CommentHandler {
 		let btnEdit = temp.querySelector('.comment__button--edit')
 		let btnDelete = temp.querySelector('.comment__button--delete')
 		let btnComment = temp.querySelector('.comment__button--comment')
+		let btnShowSubs = temp.querySelector('.comment__button--show-subs')
 		let parentIdInput = temp.querySelector('input[name="parent_id"]')
 		let topicIdInput = temp.querySelector('input[name="topic_id"]')
 		let groupIdInput = temp.querySelector('input[name="group_id"]')
 		let formSubcomment = temp.querySelector('.comment__form--comment')
+		let subcommentsContainer = temp.querySelector('.comment__subcomments')
 		let route
 
 		try {
@@ -118,10 +120,12 @@ export default class CommentHandler {
 			modificationDate.innerText = data['updated_at']
 			modificationDate.setAttribute('datetime', data['updated_at'])
 			
-			route = RouteDispatcher.getRouteUri('comments_update_process', {'id': data['id']})
+			route = RouteDispatcher.getRouteUri(
+				'comments_update_process', {'id': data['id']})
 			formEdit.setAttribute('action', route)
 
-			route = RouteDispatcher.getRouteUri('comments_delete_process', {'id': data['id']})
+			route = RouteDispatcher.getRouteUri(
+				'comments_delete_process', {'id': data['id']})
 			formDelete.setAttribute('action', route)
 
 			contentInput.innerText = data['content']
@@ -141,7 +145,23 @@ export default class CommentHandler {
 			groupIdInput.setAttribute('value', data['group_id'])
 
 			this.prepareRatingForm(temp, data['id'])
-			
+
+			subcommentsContainer.classList.add('display-none')
+			btnShowSubs.addEventListener('click', (e) => {
+				e.target.classList.add('display-none')
+				e.target.closest('.comment')
+					.querySelector('.comment__subcomments')
+					.classList.remove('display-none')
+			})
+
+			if (data['comments'].length > 0) {
+				for (let i in data['comments']) {
+					if (data['comments'][i] instanceof Function) continue
+					let subcomment = this.prepareTemplate(template, data['comments'][i])
+					subcommentsContainer.appendChild(subcomment)
+				}
+			}
+
 		} catch (e) {
 			console.log(e)
 		}
@@ -193,8 +213,6 @@ export default class CommentHandler {
 		let callback = (container) => (data) => {
 			let comment = this.prepareTemplate(this.commentTemplate, data)
 			container.prepend(comment)
-			// console.log(this.commentTemplate.content.cloneNode(true))
-			console.log(comment)
 			e.target.querySelector('textarea').value = ''
 		}
 

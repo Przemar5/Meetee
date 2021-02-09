@@ -109,31 +109,60 @@ class CommentTable extends TableTemplate
 		$this->queryBuilder->select(['*']);
 	}
 
-	public function findRecursive(int $id)
+	public function findDataRecursive(array $conditions, array $clauses = [])
 	{
 		$this->queryBuilder->reset();
-		$query = 'WITH RECURSIVE cte (id, content, parent_id) 
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->where($conditions);
+		$this->queryBuilder->orderDesc();
+		$this->queryBuilder->orderBy(['id']);
+		$this->queryBuilder->where($conditions);
+		$this->appendOptionalParts($clauses);
+		$subQuery = $this->queryBuilder->getResult();
+		$bindings = $this->queryBuilder->getBindings();
+
+		$query = "WITH RECURSIVE cte (id, content, parent_id) 
 		AS (
-			SELECT c1.id, c1.content, c1.parent_id 
+			SELECT c1.*
 			FROM comments c1
-			JOIN (
-				SELECT id 
-				FROM comments 
-				WHERE parent_id = :id 
-				ORDER BY id DESC 
-				LIMIT 1
-			) AS c2 
+			JOIN ($subQuery) AS c2 
 			ON c1.id = c2.id 
 			UNION ALL
-				SELECT c3.id, c3.content, c3.parent_id 
+				SELECT c3.*
 				FROM comments c3 
 				INNER JOIN cte 
 				ON c3.parent_id = cte.id
 		) 
-		SELECT * FROM cte';
+		SELECT * FROM cte";
 
-		$bindings = [':id' => $id];
+		return $this->prepareRecursiveCommentsRawData(
+			$this->database->findMany($query, $bindings));
+	}
 
-		return $this->database->findMany($query, $bindings);
+	public function prepareRecursiveCommentsRawData(array $comments)
+	{
+		$i;
+		for ($i = 0; $i < count($comments); $i++) {
+			if ($comments[$i]['parent_id'] === null)
+				$comments[$i] = $this->appendSubcomment($comments, $comments[$i]);
+			else
+				break;
+		}
+
+		return array_slice($comments, 0, $i);
+	}
+
+	private function appendSubcomment(array $comments, array $parent) 
+	{
+		$parent['comments'] = [];
+
+		for ($i = 0; $i < count($comments); $i++) {
+			if ($comments[$i]['parent_id'] == $parent['id'])
+				$parent['comments'][] = 
+					$this->appendSubcomment($comments, $comments[$i]);
+		}
+
+		return $parent;
 	}
 }

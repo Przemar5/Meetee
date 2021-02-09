@@ -19,6 +19,7 @@
 		<?php $this->include('ratings/form', ['token' => $token]); ?>
 
 		<div class="comment__subcomments"></div>
+		<button class="comment__button--show-subs">Show subcomments</button>
 
 		<div class="comment__commenting">
 			<button type="button" class="comment__button--comment">Comment</button>

@@ -75,7 +75,7 @@ class CommentController extends ControllerTemplate
 	{
 		$table = new CommentTable();
 
-		return $table->getDataForManyBy($conditions, $clauses);
+		return $table->findDataRecursive($conditions, $clauses);
 	}
 
 	public function create(): void
