@@ -88,9 +88,12 @@ export default class CommentHandler {
 		}
 	}
 
-	addComment = (commentSection, commentTemplate) => (data) => {
+	addComment = (commentSection, commentTemplate, desc = false) => (data) => {
 		let comment = this.prepareTemplate(commentTemplate, data)
-		commentSection.prepend(comment)
+		if (desc)
+			commentSection.prepend(comment)
+		else
+			commentSection.append(comment)
 	}
 
 	prepareTemplate (template, data) {
@@ -146,18 +149,13 @@ export default class CommentHandler {
 
 			this.prepareRatingForm(temp, data['id'])
 
-			subcommentsContainer.classList.add('display-none')
-			btnShowSubs.addEventListener('click', (e) => {
-				e.target.classList.add('display-none')
-				e.target.closest('.comment')
-					.querySelector('.comment__subcomments')
-					.classList.remove('display-none')
-			})
+			btnShowSubs.addEventListener('click', this.subcommentShowEvent)
 
 			if (data['comments'].length > 0) {
 				for (let i in data['comments']) {
 					if (data['comments'][i] instanceof Function) continue
 					let subcomment = this.prepareTemplate(template, data['comments'][i])
+					subcomment.querySelector('.comment').classList.add('display-none')
 					subcommentsContainer.appendChild(subcomment)
 				}
 			}
@@ -167,6 +165,24 @@ export default class CommentHandler {
 		}
 
 		return temp
+	}
+
+	subcommentShowEvent = (e) => {
+		let subcomments = e.target
+			.closest('.comment')
+			.querySelectorAll('.comment__subcomments > .comment')
+		let length = subcomments.length
+		let toggled = 0
+		let limit = 3
+
+		for (let i = length - 1; i >= 0; i--) {
+			if (toggled >= limit) break
+			if (!subcomments[i].classList.contains('display-none')) continue
+			subcomments[i].classList.remove('display-none')
+			toggled++
+		}
+
+		if (toggled < limit) e.target.classList.add('display-none')
 	}
 
 	addSubcommentInputEvents (form) {
@@ -180,7 +196,7 @@ export default class CommentHandler {
 			let formData = new FormData(e.target)
 			let request = new Request()
 			let uri = e.target.getAttribute('action')
-			let addNewestComment = this.addComment(commentsContainer, commentTemplate)
+			let addNewestComment = this.addComment(commentsContainer, commentTemplate, true)
 			 
 			request.post(
 				uri, 
