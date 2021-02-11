@@ -56,6 +56,11 @@ class CommentTable extends TableTemplate
 		return $this->findManyBy(['user_id' => $user->getId()]);
 	}
 
+	public function debug(): void
+	{
+		$this->database->debug();
+	}
+
 	public function findLastFromByAuthorIdAndParentId(
 		int $last, 
 		int $limit, 
@@ -63,7 +68,6 @@ class CommentTable extends TableTemplate
 		?int $parentId
 	): ?array
 	{
-		die;
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['*']);
@@ -117,8 +121,10 @@ class CommentTable extends TableTemplate
 		$this->queryBuilder->where($conditions);
 		$this->queryBuilder->orderDesc();
 		$this->queryBuilder->orderBy(['id']);
-		$this->queryBuilder->where($conditions);
+		$this->queryBuilder->where(
+			$this->prepareConditionsRespectSoftDelete($conditions));
 		$this->appendOptionalParts($clauses);
+		
 		$subQuery = $this->queryBuilder->getResult();
 		$bindings = $this->queryBuilder->getBindings();
 

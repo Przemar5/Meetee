@@ -106,6 +106,7 @@ abstract class TableTemplate
 	protected function prepareConditionsRespectSoftDelete(array $conditions): array
 	{
 		return $this->prepareConditions($conditions, [
+			'AND',
 			'deleted' => false,
 		]);
 	}
