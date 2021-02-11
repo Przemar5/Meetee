@@ -33,7 +33,6 @@ document.addEventListener('scroll', (e) => {
     html.clientHeight, html.scrollHeight, html.offsetHeight)
 	
 	if (height - 200 < (yPos + window.innerHeight) && !disabled) {
-		// console.log('ok')
 		loadMoreBtn.click()
 		loadMoreBtn.setAttribute('disabled', true)
 		setTimeout(() => loadMoreBtn.removeAttribute('disabled', true), 100)

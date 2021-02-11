@@ -142,25 +142,26 @@ class CommentTable extends TableTemplate
 
 	public function prepareRecursiveCommentsRawData(array $comments)
 	{
-		$i;
+		$reversed = [];
+		
 		for ($i = 0; $i < count($comments); $i++) {
 			if ($comments[$i]['parent_id'] === null)
-				$comments[$i] = $this->appendSubcomment($comments, $comments[$i]);
+				array_push($reversed, $this->prependSubcomment($comments, $comments[$i]));
 			else
 				break;
 		}
 
-		return array_slice($comments, 0, $i);
+		return $reversed;
 	}
 
-	private function appendSubcomment(array $comments, array $parent) 
+	private function prependSubcomment(array $comments, array $parent) 
 	{
 		$parent['comments'] = [];
 
 		for ($i = 0; $i < count($comments); $i++) {
 			if ($comments[$i]['parent_id'] == $parent['id'])
-				$parent['comments'][] = 
-					$this->appendSubcomment($comments, $comments[$i]);
+				array_push($parent['comments'], 
+					$this->prependSubcomment($comments, $comments[$i]));
 		}
 
 		return $parent;

@@ -55,25 +55,25 @@ class AccountController extends ControllerTemplate
 	): void
 	{
 		$accepts = [
-			'name' => 'name', 
-			'second_name' => 'secondName', 
-			'surname' => 'surname', 
-			'birth' => 'birth',
-			'country' => 'country', 
-			'city' => 'city', 
-			'zip' => 'zipCode',
+			'name' => ['name', false], 
+			'second_name' => ['secondName', true], 
+			'surname' => ['surname', false], 
+			'birth' => ['birth', false],
+			'country' => ['country', true], 
+			'city' => ['city', true], 
+			'zip' => ['zipCode', true],
 		];
 
-		foreach ($accepts as $key => $attr) {
+		foreach ($accepts as $key => [$attr, $nullable]) {
 			if (isset($request[$key])) {
-				$this->updateAttr($user, $attr, $request[$key]);
+				$this->updateAttr($user, $attr, $request[$key], $nullable);
 				echo json_encode([$key => $this->getUserAttr($user, $attr)]);
 				die;
 			}
 		}
 	}
 
-	private function updateAttr(User $user, string $attr, $value): void
+	private function updateAttr(User $user, string $attr, $value, bool $nullable): void
 	{
 		$value = trim($value);
 		$validator = CompoundValidatorFactory::createUserValidator($attr);
@@ -81,7 +81,8 @@ class AccountController extends ControllerTemplate
 		if ($attr === 'country')
 			$value = (int) $value;
 
-		if (!$validator->run($value))
+		if ((!$nullable && $validator->run($value)) || 
+			($nullable && $value !== '' && $validator->run($value)))
 			return;
 
 		if ($attr === 'country')

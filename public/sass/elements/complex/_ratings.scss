@@ -1,0 +1,14 @@
+.ratings {
+  
+  &__count {
+
+  }
+
+  &__forms {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+  }
+}

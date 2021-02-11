@@ -175,11 +175,6 @@ class CommentController extends ControllerTemplate
 	{
 		if (!preg_match('/^[1-9][0-9]*$/', $commentId))
 			die;
-
-		$validator = new CommentIdValidator();
-
-		if (!$validator->run((int) $commentId))
-			die;
 	}
 
 	private function updateAndPrintJsoncommentData(int $id): void

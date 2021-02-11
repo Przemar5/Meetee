@@ -1,7 +1,53 @@
-label {
-	display: block;
-}
+.margin-xs {
+  margin: .25rem; }
+
+.margin-sm {
+  margin: .5rem; }
+
+.margin-md {
+  margin: 1rem; }
+
+.margin-lg {
+  margin: 1.5rem; }
+
+.margin-xl {
+  margin: 2rem; }
+
+.padding-xs {
+  padding: .25rem; }
+
+.padding-sm {
+  padding: .5rem; }
+
+.padding-md {
+  padding: 1rem; }
+
+.padding-lg {
+  padding: 1.5rem; }
+
+.padding-xl {
+  padding: 2rem; }
 
 .display-none {
-	display: none;
-}
+  display: none; }
+
+html {
+  margin: 0;
+  padding: 0;
+  font-size: 0.625em; }
+
+body {
+  font-size: 1.6rem; }
+
+.comment {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid black; }
+
+.ratings__forms {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center; }
+
+/*# sourceMappingURL=style.css.map */

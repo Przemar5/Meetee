@@ -67,7 +67,7 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 	private function appendWherePartIfExists(): void
 	{
 		$where = $this->parseWhereClause($this->conditions);
-		$this->query .= (!empty($where)) ? ' WHERE ' . $where : '';
+		$this->query .= (!empty(trim($where, '()'))) ? ' WHERE ' . $where : '';
 	}
 
 	private function parseWhereClause($data): string

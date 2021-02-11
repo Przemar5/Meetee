@@ -58,8 +58,8 @@ export default class CommentHandler {
 			let formData = new FormData(e.target)
 			let request = new Request()
 			let uri = e.target.getAttribute('action')
-			let addNewestComment = this.addComment(commentsContainer, commentTemplate)
-			 
+			let addNewestComment = this.addComment(commentsContainer, commentTemplate, true)
+			
 			request.post(
 				uri, 
 				formData, 
@@ -151,13 +151,11 @@ export default class CommentHandler {
 
 			btnShowSubs.addEventListener('click', this.subcommentShowEvent)
 
-			if (data['comments'].length > 0) {
-				for (let i in data['comments']) {
-					if (data['comments'][i] instanceof Function) continue
-					let subcomment = this.prepareTemplate(template, data['comments'][i])
-					subcomment.querySelector('.comment').classList.add('display-none')
-					subcommentsContainer.appendChild(subcomment)
-				}
+			for (let i in data['comments']) {
+				if (data['comments'][i] instanceof Function) continue
+				let subcomment = this.prepareTemplate(template, data['comments'][i])
+				subcomment.querySelector('.comment').classList.add('display-none')
+				subcommentsContainer.appendChild(subcomment)
 			}
 
 		} catch (e) {
@@ -196,8 +194,9 @@ export default class CommentHandler {
 			let formData = new FormData(e.target)
 			let request = new Request()
 			let uri = e.target.getAttribute('action')
-			let addNewestComment = this.addComment(commentsContainer, commentTemplate, true)
-			 
+			let commentsContainer = e.target.closest('.comment').querySelector('.comment__subcomments')
+			let addNewestComment = this.addComment(commentsContainer, commentTemplate, false)
+
 			request.post(
 				uri, 
 				formData, 
@@ -228,11 +227,11 @@ export default class CommentHandler {
 
 		let callback = (container) => (data) => {
 			let comment = this.prepareTemplate(this.commentTemplate, data)
-			container.prepend(comment)
+			container.append(comment)
 			e.target.querySelector('textarea').value = ''
 		}
 
-		request.post(route, formData, callback(subcommentContainer), callback)
+		// request.post(route, formData, callback(subcommentContainer), callback)
 	}
 
 	prepareRatingForm (template, commentId) {
@@ -348,7 +347,8 @@ export default class CommentHandler {
 			let uri = e.target.getAttribute('action')
 			let request = new Request()
 
-			request.post(uri, formData, this.deleteComment(e.target), this.deleteComment(e.target))
+			request.post(uri, formData, 
+				this.deleteComment(e.target), this.deleteComment(e.target))
 		}
 	}
 
