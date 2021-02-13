@@ -14,14 +14,14 @@ use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\App\Emails\EmailFacade;
 use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
-use Meetee\Libs\Files\FileUploader;
+use Meetee\Libs\Files\Uploaders\ImageUploader;
 
 class RegistrationController extends ControllerTemplate
 {
 	private static string $tokenName = 'csrf_registration_token';
 	private array $errors = [];
-	private ?string $profilePhoto = null;
-	private string $defaultProfileFilename = 'users/noimage.png';
+	private ?string $profilePhotoFilename = null;
+	private string $defaultPhotoFilename = 'users/noimage.png';
 
 	public function page(): void
 	{
@@ -72,28 +72,17 @@ class RegistrationController extends ControllerTemplate
 	private function returnToPageWithErrorsIfFormDataInvalid(): void
 	{
 		$form = new RegistrationForm();
+		$uploader = new ImageUploader();
 
-		if ((!empty($_FILES['profile']['name']) && !$this->validateAndUploadImage()) || 
+		if ((!empty($_FILES['profile']['name']) && 
+			!$uploader->validateAndUploadImage('profile', 'users/')) || 
 			!$form->validate()) {
 			$this->errors = $form->getErrors();
 			$this->page();
 			die;
-		}
-	}
+		} 
 
-	private function validateAndUploadImage(): bool
-	{
-		[$usec, $sec] = explode(' ', microtime());
-		$time = $sec . explode('.', $usec)[1];
-		$uploader = new FileUploader();
-		$uploader->setExtensions(['jpeg', 'jpg', 'png']);
-		$baseDir = './' . substr(IMG_DIR, strcmp(BASE_URI, IMG_DIR));
-		$uploader->setBaseDirectory($baseDir);
-		$path = 'users/';
-		$uploader->upload('profile', $path);
-		$this->profilePhoto = $uploader->getFilename();
-		
-		return !$uploader->hasError();
+		$this->profilePhotoFilename = $uploader->getProfilePhotoFilename();
 	}
 
 	private function trimPostValues(): void
@@ -106,7 +95,7 @@ class RegistrationController extends ControllerTemplate
 	private function successfulRegisterRequestValidationEvent(): void
 	{
 		$user = UserFactory::createAndSaveUserFromPostRequest(
-			$this->profilePhoto ?? $this->defaultProfileFilename);
+			$this->profilePhotoFilename ?? $this->defaultPhotoFilename);
 		EmailFacade::sendRegistrationConfirmEmail(
 			'registration_confirm_email_token', $user);
 		Notification::addSuccess('Check Your mailbox for an activation email!');

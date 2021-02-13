@@ -15,6 +15,7 @@ use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Http\CurrentRequestFacade;
 use Meetee\Libs\Security\Validators\Compound\Forms\TokenValidator;
 use Meetee\Libs\Security\Validators\Factories\CompoundValidatorFactory;
+use Meetee\Libs\Files\Uploaders\ImageUploader;
 
 class AccountController extends ControllerTemplate
 {
@@ -62,13 +63,13 @@ class AccountController extends ControllerTemplate
 			'country' => ['country', true], 
 			'city' => ['city', true], 
 			'zip' => ['zipCode', true],
+			'gender' => ['gender', true],
 		];
 
 		foreach ($accepts as $key => [$attr, $nullable]) {
 			if (isset($request[$key])) {
 				$this->updateAttr($user, $attr, $request[$key], $nullable);
-				echo json_encode([$key => $this->getUserAttr($user, $attr)]);
-				die;
+				die(json_encode([$key => $this->getUserAttr($user, $attr)]));
 			}
 		}
 	}
@@ -81,8 +82,8 @@ class AccountController extends ControllerTemplate
 		if ($attr === 'country')
 			$value = (int) $value;
 
-		if ((!$nullable && $validator->run($value)) || 
-			($nullable && $value !== '' && $validator->run($value)))
+		if ((!$nullable && !$validator->run($value)) || 
+			($nullable && $value !== '' && !$validator->run($value)))
 			return;
 
 		if ($attr === 'country')

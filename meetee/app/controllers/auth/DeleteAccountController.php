@@ -15,6 +15,7 @@ class DeleteAccountController extends ControllerTemplate
 {
 	private static string $tokenName = 'csrf_delete_account_token';
 	private array $errors = [];
+	private string $defaultProfileFilename = 'users/noimage.png';
 
 	public function page(): void
 	{
@@ -58,16 +59,21 @@ class DeleteAccountController extends ControllerTemplate
 
 	private function successfulRequestValidationEvent(): void
 	{
-		$this->deleteProfilePhoto();
+		$this->deleteProfilePhotoIfNotDefault();
 		$this->deleteUser();
 		Notification::addSuccess('Your account has been deleted successfully.');
 		$this->redirect('home');
 	}
 
-	private function deleteProfilePhoto(): void
+	private function deleteProfilePhotoIfNotDefault(): void
 	{
+		$profile = AuthFacade::getUser()->profile;
+		
+		if ($profile === $this->defaultProfileFilename)
+			return;
+
 		$path = './' . substr(IMG_DIR, strcmp(BASE_URI, IMG_DIR));
-		$filepath = $path . AuthFacade::getUser()->profile;
+		$filepath = $path . $profile;
 		echo $filepath;
 		unlink($filepath);
 	}
@@ -78,6 +84,7 @@ class DeleteAccountController extends ControllerTemplate
 		$user->deleted = true;
 		$table = new UserTable();
 		$table->save($user);
+		AuthFacade::logout();
 	}
 
 	private function redirect(string $route): void

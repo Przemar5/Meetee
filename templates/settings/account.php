@@ -6,11 +6,18 @@
 
 Account
 
-<img src="<?= IMG_DIR . $user->profile; ?>" width="400" height="300" alt="photo">
+<label id="profilePhoto" class="updatable-photo-container">
+	<img src="<?= IMG_DIR . $user->profile; ?>" width="400" height="300" alt="photo">
+	<form method="POST" enctype="multipart/form-data">
+		<input type="file" name="profile">
+		<button type="submit">Submit</button>
+		<small class="error-msg"></small>
+	</form>
+</label>
 
 <label id="name" class="toggable-container">
 	Name: 
-	<form method="POST" class="toggable-form display-none">
+	<form method="POST" class="toggable-form attribute-form display-none">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<input type="text" class="form-input" name="name" value="<?= $user->name; ?>" required>
 		<small class="error-msg"></small>
@@ -26,7 +33,7 @@ Account
 
 <label id="second_name" class="toggable-container">
 	Second name: 
-	<form method="POST" class="toggable-form display-none">
+	<form method="POST" class="toggable-form attribute-form display-none">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<input type="text" class="form-input" name="second_name" value="<?= $user->secondName; ?>">
 		<small class="error-msg"></small>
@@ -42,7 +49,7 @@ Account
 
 <label id="surname" class="toggable-container">
 	Surname: 
-	<form method="POST" class="toggable-form display-none">
+	<form method="POST" class="toggable-form attribute-form display-none">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<input type="text" class="form-input" name="surname" value="<?= $user->surname; ?>" required>
 		<small class="error-msg"></small>
@@ -74,7 +81,7 @@ Account
 
 <label id="birth" class="toggable-container">
 	Birth: 
-	<form method="POST" class="toggable-form display-none">
+	<form method="POST" class="toggable-form attribute-form display-none">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<input type="date" class="form-input" name="birth" value="<?= $user->getBirth()->format('Y-m-d'); ?>" required>
 		<small class="error-msg"></small>
@@ -90,7 +97,7 @@ Account
 
 <label id="country" class="toggable-container">
 	Country: 
-	<form method="POST" class="toggable-form display-none">
+	<form method="POST" class="toggable-form attribute-form display-none">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<select name="country">
 			<?php foreach ($countries as $country): ?>
@@ -112,7 +119,7 @@ Account
 
 <label id="city" class="toggable-container">
 	City: 
-	<form method="POST" class="toggable-form display-none">
+	<form method="POST" class="toggable-form attribute-form display-none">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<input type="text" class="form-input" name="city" value="<?= $user->city; ?>">
 		<small class="error-msg"></small>
@@ -128,7 +135,7 @@ Account
 
 <label id="zip" class="toggable-container">
 	Zip code: 
-	<form method="POST" class="toggable-form display-none">
+	<form method="POST" class="toggable-form attribute-form display-none">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<input type="text" class="form-input" name="zip" value="<?= $user->zipCode; ?>">
 		<small class="error-msg"></small>
@@ -140,6 +147,34 @@ Account
 		</span>
 		<button class="form-toggler">Change</button>
 	</span>
+</label>
+
+<label>
+	Gender
+	<form method="POST" class="attribute-form">
+		<select name="gender">
+			<option value=""<?php 
+				if (!isset($_POST['gender']))
+					echo ' selected';
+				?>>Don't want to say</option>
+			<option value="male"<?php 
+				if (isset($_POST['gender']) && $_POST['gender'] === 'male')
+					echo ' selected'; 
+				?>>Male</option>
+			<option value="female"<?php 
+				if (isset($_POST['gender']) && $_POST['gender'] === 'female')
+					echo ' selected'; 
+				?>>Female</option>
+			<option value="other"<?php 
+				if (isset($_POST['gender']) && $_POST['gender'] === 'other')
+					echo ' selected'; 
+				?>>Other</option>
+		</select>
+		<button type="submit">Submit</button>
+		<small class="error-msg">
+			<?php $this->error('gender'); ?>
+		</small>
+	</form>
 </label>
 
 <a href="<?php $this->renderRouteUri('settings_index_page'); ?>">Return</a>

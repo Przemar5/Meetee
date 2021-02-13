@@ -8,6 +8,13 @@
 
 	<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 
+	<label id="profileImageContainer">
+		Profile image
+		<img id="profileImage" accept="image/*" src="<?= IMG_DIR . $this->getDefaultProfileImageFilename(); ?>" width="400" height="300" alt="photo">
+		<input type="file" name="profile">
+		<small class="error-msg"></small>
+	</label>
+
 	<label>
 		Login
 		<input type="text" name="login" value="<?= $_POST['login'] ?? ''; ?>">
@@ -124,11 +131,6 @@
 	<label>
 		Retype password
 		<input type="password" name="repeat_password" value="Password1!">
-	</label>
-
-	<label>
-		Profile picture
-		<input type="file" name="profile" accept="image/*">
 	</label>
 
 	<button type="submit">Register</button>

@@ -72,4 +72,9 @@ class BrowserView extends ViewTemplate
 		
 		printf('%s', file_get_contents($file));
 	}
+
+	private function getDefaultProfileImageFilename(): string
+	{
+		return 'users/noimage.png';
+	}
 }
