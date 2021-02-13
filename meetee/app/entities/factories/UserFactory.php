@@ -10,7 +10,9 @@ use Meetee\Libs\Security\Hash;
 
 abstract class UserFactory
 {
-	public static function createAndSaveUserFromPostRequest(): User
+	public static function createAndSaveUserFromPostRequest(
+		?string $profilePhoto
+	): User
 	{
 		$table = new UserTable();
 		$user = new User();
@@ -25,8 +27,11 @@ abstract class UserFactory
 		$user->country = $countryTable->find((int) $_POST['country']);
 		$user->city = trim($_POST['city']);
 		$user->zipCode = trim($_POST['zip']);
+		$user->gender = (isset($_POST['gender']) && is_string($_POST['gender'])) 
+			? trim($_POST['gender']) : null;
 		$user->password = Hash::make(trim($_POST['password']));
 		$user->addRole(RoleFactory::createUserRole());
+		$user->profile = $profilePhoto;
 		$table->save($user);
 		$user->setId($table->lastInsertId());
 

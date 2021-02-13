@@ -35,6 +35,7 @@ spl_autoload_register(function($namespaceWithClass) {
 define('BASE_URI', 'http://localhost/projects/Meetee/');
 define('JS_DIR', BASE_URI . 'public/js/');
 define('CSS_DIR', BASE_URI . 'public/css/');
+define('IMG_DIR', BASE_URI . 'public/images/');
 define('VIEW_DIR', BASE_URI . 'templates/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');

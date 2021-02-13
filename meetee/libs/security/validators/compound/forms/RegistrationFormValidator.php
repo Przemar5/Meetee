@@ -13,6 +13,7 @@ use Meetee\Libs\Security\Validators\Compound\Users\CityNameValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\ZipCodeValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserBirthValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserPasswordValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\GenderValidator;
 
 class RegistrationFormValidator extends FormValidator
 {
@@ -32,6 +33,7 @@ class RegistrationFormValidator extends FormValidator
 			'country' => new CountryIdValidator(),
 			'city' => new CityNameValidator(),
 			'zip' => new ZipCodeValidator(),
+			'gender' => new GenderValidator(),
 		];
 
 		parent::__construct($validators, $optional);

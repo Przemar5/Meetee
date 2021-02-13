@@ -6,63 +6,66 @@
 
 Account
 
-<label id="name" class="toggable-container">
+
+<img src="<?= IMG_DIR . $user->profile; ?>" width="400" height="300" alt="photo">
+
+<label>
 	Name: 
 	<span class="attribute">
 		<?= $user->name ?? ''; ?>
 	</span>
 </label>
 
-<label id="second_name" class="toggable-container">
+<label>
 	Second name: 
 	<span class="attribute">
 		<?= $user->secondName ?? ''; ?>
 	</span>
 </label>
 
-<label id="surname" class="toggable-container">
+<label>
 	Surname: 
 	<span class="attribute">
 		<?= $user->surname ?? ''; ?>
 	</span>
 </label>
 
-<label id="login" class="toggable-container">
+<label>
 	Login: 
 	<span class="toggable-text">
 		<?= $user->login ?? ''; ?>
 	</span>
 </label>
 
-<label id="email" class="toggable-container">
+<label>
 	Email: 
 	<span class="toggable-text">
 		<?= $user->email ?? ''; ?>
 	</span>
 </label>
 
-<label id="birth" class="toggable-container">
+<label>
 	Birth: 
 	<span class="attribute">
 		<?= $user->getBirth()->format('Y-m-d') ?? ''; ?>
 	</span>
 </label>
 
-<label id="country" class="toggable-container">
+<label>
 	Country: 
 	<span class="attribute">
 		<?= (isset($user->country)) ? $user->country->name : ''; ?>
 	</span>
 </label>
 
-<label id="city" class="toggable-container">
+<label>
 	City: 
 	<span class="attribute">
 		<?= $user->city ?? ''; ?>
 	</span>
 </label>
 
-<label id="zip" class="toggable-container">
+<label>
 	Zip code: 
 	<span class="attribute">
 		<?= $user->zipCode ?? ''; ?>

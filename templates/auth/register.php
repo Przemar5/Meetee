@@ -3,7 +3,7 @@
 <?php $this->endSection(); ?>
 
 <?php $this->startSection('body'); ?>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 	<h2>Registration</h2>
 
 	<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
@@ -45,6 +45,31 @@
 		<input type="text" name="surname" value="<?= $_POST['surname'] ?? ''; ?>">
 		<small class="error-msg">
 			<?php $this->error('surname'); ?>
+		</small>
+	</label>
+
+	<label>
+		Gender
+		<select name="gender">
+			<option value=""<?php 
+				if (!isset($_POST['gender']))
+					echo ' selected';
+				?>>Don't want to say</option>
+			<option value="male"<?php 
+				if (isset($_POST['gender']) && $_POST['gender'] === 'male')
+					echo ' selected'; 
+				?>>Male</option>
+			<option value="female"<?php 
+				if (isset($_POST['gender']) && $_POST['gender'] === 'female')
+					echo ' selected'; 
+				?>>Female</option>
+			<option value="other"<?php 
+				if (isset($_POST['gender']) && $_POST['gender'] === 'other')
+					echo ' selected'; 
+				?>>Other</option>
+		</select>
+		<small class="error-msg">
+			<?php $this->error('gender'); ?>
 		</small>
 	</label>
 
@@ -99,6 +124,11 @@
 	<label>
 		Retype password
 		<input type="password" name="repeat_password" value="Password1!">
+	</label>
+
+	<label>
+		Profile picture
+		<input type="file" name="profile" accept="image/*">
 	</label>
 
 	<button type="submit">Register</button>

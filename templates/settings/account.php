@@ -6,6 +6,8 @@
 
 Account
 
+<img src="<?= IMG_DIR . $user->profile; ?>" width="400" height="300" alt="photo">
+
 <label id="name" class="toggable-container">
 	Name: 
 	<form method="POST" class="toggable-form display-none">

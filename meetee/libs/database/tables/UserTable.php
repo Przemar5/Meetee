@@ -28,8 +28,10 @@ class UserTable extends TableTemplate
 		$user->setBirth(new \DateTime($data['birth']));
 		$user->city = $data['city'];
 		$user->zipCode = $data['zip'];
+		$user->gender = $data['gender'];
 		$user->password = $data['password'];
 		$user->verified = $data['verified'];
+		$user->profile = $data['profile'];
 		$user->setCreatedAt($data['created_at']);
 		$user->setUpdatedAt($data['updated_at']);
 		$user->deleted = $data['deleted'];
@@ -62,10 +64,12 @@ class UserTable extends TableTemplate
 		$data['country'] = $user->country->getId();
 		$data['city'] = $user->city;
 		$data['zip'] = $user->zipCode;
+		$data['gender'] = $user->gender;
 		$data['email'] = $user->email;
 		$data['birth'] = $user->getBirth()->format('Y-m-d H:i:s');
 		$data['password'] = $user->password;
 		$data['verified'] = $user->verified;
+		$data['profile'] = $user->profile;
 
 		return $data;
 	}

@@ -58,9 +58,18 @@ class DeleteAccountController extends ControllerTemplate
 
 	private function successfulRequestValidationEvent(): void
 	{
+		$this->deleteProfilePhoto();
 		$this->deleteUser();
 		Notification::addSuccess('Your account has been deleted successfully.');
 		$this->redirect('home');
+	}
+
+	private function deleteProfilePhoto(): void
+	{
+		$path = './' . substr(IMG_DIR, strcmp(BASE_URI, IMG_DIR));
+		$filepath = $path . AuthFacade::getUser()->profile;
+		echo $filepath;
+		unlink($filepath);
 	}
 
 	private function deleteUser(): void

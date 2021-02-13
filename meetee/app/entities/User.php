@@ -26,8 +26,10 @@ class User extends Entity
 	public ?Country $country;
 	public ?string $city;
 	public ?string $zipCode;
+	public string $gender;
 	public string $password;
-	public ?bool $verified = false;
+	public ?string $profile = null;
+	public bool $verified = false;
 	protected \DateTime $birth;
 	protected array $roles = [];
 
