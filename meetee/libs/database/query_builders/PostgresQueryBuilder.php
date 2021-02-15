@@ -185,6 +185,9 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 
 		$this->query = sprintf('INSERT INTO %s (%s) VALUES %s', 
 			$this->table, $columns, $toBind);
+
+		if (!empty($this->onConflict))
+			$this->query .= ' ON CONFLICT DO ' . $this->onConflict;
 	}
 
 	public function getBindings(): array

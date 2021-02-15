@@ -211,9 +211,8 @@ class CommentController extends ControllerTemplate
 	{
 		$table = new CommentTagTable();
 		$tags = $this->getTagsForComment($comment);
-		$tags = $this->saveGetCompleteTags($tags);
 
-		$comment->tags = $tags;
+		$comment->tags = $this->saveGetCompleteTags($tags);
 		$table->setTagsForComment($comment);
 		die;
 	}

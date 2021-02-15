@@ -49,6 +49,7 @@ class TagTable extends TableTemplate
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->insertMultiple($tags);
+		$this->queryBuilder->onConflictNothing();
 
 		$this->database->sendQuery(
 			$this->queryBuilder->getResult(),

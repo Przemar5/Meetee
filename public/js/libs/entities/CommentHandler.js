@@ -129,7 +129,6 @@ export default class CommentHandler {
 
 			route = RouteDispatcher.getRouteUri(
 				'comments_delete_process', {'id': data['id']})
-			console.log(data)
 			formDelete.setAttribute('action', route)
 
 			contentInput.innerText = data['content']

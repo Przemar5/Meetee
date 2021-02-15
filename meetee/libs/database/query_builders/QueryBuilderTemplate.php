@@ -19,6 +19,7 @@ abstract class QueryBuilderTemplate
 	protected bool $orderDesc = false;
 	protected ?int $limit = null;
 	protected ?int $offset = null;
+	protected ?string $onConflict = null;
 	protected array $additionalBindings = [];
 
 	public function reset(): void
@@ -38,6 +39,7 @@ abstract class QueryBuilderTemplate
 		$this->orderDesc = false;
 		$this->limit = null;
 		$this->offset = null;
+		$this->onConflict = null;
 		$this->additionalBindings = [];
 	}
 
@@ -109,6 +111,11 @@ abstract class QueryBuilderTemplate
 	public function offset(int $offset): void
 	{
 		$this->offset = $offset;
+	}
+
+	public function onConflictNothing(): void
+	{
+		$this->onConflict = 'NOTHING';
 	}
 
 	public function withRecursive(array $values): void
