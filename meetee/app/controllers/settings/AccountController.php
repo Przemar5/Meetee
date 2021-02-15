@@ -54,10 +54,13 @@ class AccountController extends ControllerTemplate
 
 	private function uploadProfilePhotoAndDieIfPresent(string $name): void
 	{
+		if (empty($_FILES[$name]['name']))
+			return;
+		
 		$uploader = new ImageUploader();
 
-		if (!empty($_FILES['profile']['name']) && 
-			!$uploader->validateAndUploadImage('profile', 'users/'))
+		if (!empty($_FILES[$name]['name']) && 
+			!$uploader->validateAndUploadImage($name, 'users/'))
 			die;
 
 		$photoFilename = $uploader->getProfilePhotoFilename();

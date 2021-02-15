@@ -9,6 +9,8 @@ use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\Factories\CommentFactory;
 use Meetee\App\Forms\CommentForm;
 use Meetee\Libs\Database\Tables\CommentTable;
+use Meetee\Libs\Database\Tables\TagTable;
+use Meetee\Libs\Database\Tables\Pivots\CommentTagTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 use Meetee\Libs\View\Utils\Notification;
 use Meetee\Libs\Security\AuthFacade;
@@ -190,6 +192,7 @@ class CommentController extends ControllerTemplate
 	{
 		$table = new CommentTable();
 		$comment = $table->saveComplete($comment);
+		$this->updateTagsForComment($comment);
 
 		die(json_encode([
 			'id' => $comment->getId(),
@@ -202,6 +205,33 @@ class CommentController extends ControllerTemplate
 			'created_at' => $comment->getCreatedAtString(),
 			'updated_at' => $comment->getUpdatedAtString(),
 		]));
+	}
+
+	private function updateTagsForComment(Comment $comment): void
+	{
+		$table = new CommentTagTable();
+		$tags = $this->getTagsForComment($comment);
+		$tags = $this->saveGetCompleteTags($tags);
+
+		$comment->tags = $tags;
+		$table->setTagsForComment($comment);
+		die;
+	}
+
+	private function getTagsForComment(Comment $comment): array
+	{
+		$matches = [];
+		preg_match_all('/(?:#)(\w+)/', $comment->content, $matches);
+
+		return $matches[1];
+	}
+
+	private function saveGetCompleteTags(array $tags): array
+	{
+		$table = new TagTable();
+		$table->completeMultiple($tags);
+
+		return $tags;
 	}
 
 	public function delete($id): void

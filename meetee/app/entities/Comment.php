@@ -20,6 +20,7 @@ class Comment extends Entity
 	public ?int $topicId = null;
 	public ?int $groupId = null;
 	public Collection $comments;
+	public array $tags = [];
 
 	public function addComment(Comment $comment): void
 	{
