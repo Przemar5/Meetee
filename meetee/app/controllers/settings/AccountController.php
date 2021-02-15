@@ -20,6 +20,7 @@ use Meetee\Libs\Files\Uploaders\ImageUploader;
 class AccountController extends ControllerTemplate
 {
 	private static string $tokenName = 'settings_account_csrf_token';
+	private string $defaultPhotoFilename = 'users/noimage.png';
 
 	public function page(): void
 	{
@@ -47,7 +48,46 @@ class AccountController extends ControllerTemplate
 		if (!TokenFacade::isPostRequestTokenValidForUser(self::$tokenName, $user))
 			die;
 
+		$this->uploadProfilePhotoAndDieIfPresent('profile');
 		$this->dispatchRequestHandling($_POST, $user);
+	}
+
+	private function uploadProfilePhotoAndDieIfPresent(string $name): void
+	{
+		$uploader = new ImageUploader();
+
+		if (!empty($_FILES['profile']['name']) && 
+			!$uploader->validateAndUploadImage('profile', 'users/'))
+			die;
+
+		$photoFilename = $uploader->getProfilePhotoFilename();
+		
+		if (!$uploader->hasError())
+			$this->changeUserProfilePhotoFor($photoFilename);
+
+		die;
+	}
+
+	private function changeUserProfilePhotoFor(string $filename): void
+	{
+		$user = AuthFacade::getUser();
+		$table = new UserTable();
+		
+		$this->deleteProfilePhotoIfNotDefault();
+		$user->profile = $filename;
+		$table->save($user);
+	}
+
+	private function deleteProfilePhotoIfNotDefault(): void
+	{
+		$profile = AuthFacade::getUser()->profile;
+		
+		if ($profile === $this->defaultPhotoFilename)
+			return;
+
+		$path = './' . substr(IMG_DIR, strcmp(BASE_URI, IMG_DIR));
+		$filepath = $path . $profile;
+		unlink($filepath);
 	}
 
 	private function dispatchRequestHandling(

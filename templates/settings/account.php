@@ -9,6 +9,7 @@ Account
 <label id="profilePhoto" class="updatable-photo-container">
 	<img src="<?= IMG_DIR . $user->profile; ?>" width="400" height="300" alt="photo">
 	<form method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 		<input type="file" name="profile">
 		<button type="submit">Submit</button>
 		<small class="error-msg"></small>

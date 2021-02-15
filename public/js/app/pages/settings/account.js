@@ -29,6 +29,15 @@ profileImageInput.addEventListener('change', (e) => {
   }
 })
 
+profileImageForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  let route = RouteDispatcher.getRouteUri('settings_account_process')
+  let formData = new FormData(e.target)
+  let request = new Request()
+
+  request.post(route, formData, () => null, () => null)
+})
+
 togglers.forEach((t) => {
 	t.addEventListener('click', (e) => {
 		let container = e.target.closest('.toggable-container')
