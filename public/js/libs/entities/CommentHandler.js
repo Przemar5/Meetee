@@ -132,7 +132,7 @@ export default class CommentHandler {
 			formDelete.setAttribute('action', route)
 
 			contentInput.innerText = data['content']
-			contentView.innerText = data['content']
+			contentView.innerHTML = this.processContent(data['content'])
 			this.addContentInputEventListeners(contentInput)
 			this.addEditBtnEventListener(btnEdit)
 
@@ -163,6 +163,16 @@ export default class CommentHandler {
 		}
 
 		return temp
+	}
+
+	processContent (content) {
+		content = this.addLinksToUris(content)
+		return content
+	}
+
+	addLinksToUris (content) {
+		let replacer = (str) => '<a href="' + str + '">' + str + '</a>'
+		return content.replace(/(https?\:\/\/[\w\d\-\_\?\&\=\+\[\]\.\,\'\/]+)/gi, replacer('$1'))
 	}
 
 	subcommentShowEvent = (e) => {
@@ -329,7 +339,7 @@ export default class CommentHandler {
 		let modificationType = comment.querySelector('.comment__modification--type')
 		let modificationDate = comment.querySelector('.comment__modification--date')
 
-		contentView.innerText = data.content
+		contentView.innerHTML = this.processContent(data.content)
 		modificationType.innerText = 'Updated at:'
 		modificationDate.setAttribute('datetime', data['updated_at'])
 		modificationDate.innerText = data['updated_at']

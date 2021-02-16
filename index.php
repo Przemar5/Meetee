@@ -32,6 +32,7 @@ spl_autoload_register(function($namespaceWithClass) {
 		require_once $path;
 });
 
+define('SESSION_LIFETIME', (int) ini_get('session.gc_maxlifetime'));
 define('BASE_URI', 'http://localhost/projects/Meetee/');
 define('JS_DIR', BASE_URI . 'public/js/');
 define('CSS_DIR', BASE_URI . 'public/css/');

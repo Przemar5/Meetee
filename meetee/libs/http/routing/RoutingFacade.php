@@ -31,7 +31,7 @@ class RoutingFacade
 
 	public static function redirectTo(string $route, ?array $args = []): void
 	{
-		
+		//
 	}
 
 	public static function getLinkTo(string $route, ?array $args = []): ?string

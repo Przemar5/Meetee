@@ -11,6 +11,7 @@
 		</style>
 
 		<script src="<?= JS_DIR; ?>global.js"></script>
+		<script src="<?= JS_DIR; ?>app/user_timing.js"></script>
 		<script src="<?= JS_DIR; ?>libs/DateAdapter.js"></script>
 		<script src="<?= JS_DIR; ?>libs/security/validation/validation.js"></script>
 		<script src="<?= JS_DIR; ?>libs/security/validation/template.js"></script>
