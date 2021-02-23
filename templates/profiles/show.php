@@ -84,6 +84,8 @@ Account
 	<div id="commentsBase">
 		<p class="no-result-msg">No posts found.</p>
 	</div>
+
+	<button id="loadComments">Load more comments</button>
 </section>
 
 <?php $this->endSection('body'); ?>

@@ -10,13 +10,15 @@ export default class CommentHandler {
 		this.commentsContainer
 		this.commentTemplate
 		this.noCommentsMsg
+		this.settings
 	}
 
-	loadComments (parent, template, data) {
+	loadComments (parent, template, settings = null) {
 		let ajax = new Ajax()
 		let route = RouteDispatcher.getRouteUri('comments_select_process')
-		route += '?' + Object.keys(data)
-			.map((k) => k + '=' + data[k].toString())
+		settings = (settings) ? settings : this.settings
+		route += '?' + Object.keys(settings)
+			.map((k) => k + '=' + this.settings[k].toString())
 			.join('&')
 		
 		ajax.get(route, null, null)
@@ -31,6 +33,7 @@ export default class CommentHandler {
 			let temp = this.prepareTemplate(template, data[i])
 			parent.appendChild(temp)
 			this.lastCommentId = data[i]['id']
+			this.settings['max_id'] = this.lastCommentId
 		}
 
 		if (data.length > 0) {

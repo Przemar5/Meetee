@@ -26,6 +26,7 @@ class UserTable extends TableTemplate
 		$user->secondName = $data['second_name'];
 		$user->surname = $data['surname'];
 		$user->setBirth(new \DateTime($data['birth']));
+		$user->setSessionExpiry($data['session_expiry']);
 		$user->city = $data['city'];
 		$user->zipCode = $data['zip'];
 		$user->gender = $data['gender'];
@@ -70,6 +71,9 @@ class UserTable extends TableTemplate
 		$data['password'] = $user->password;
 		$data['verified'] = $user->verified;
 		$data['profile'] = $user->profile;
+		
+		if ($sessionExpiry = $user->getSessionExpiry())
+			$data['session_expiry'] = $sessionExpiry->format('Y-m-d H:i:s');
 
 		return $data;
 	}

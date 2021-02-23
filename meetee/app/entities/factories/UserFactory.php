@@ -32,6 +32,7 @@ abstract class UserFactory
 		$user->password = Hash::make(trim($_POST['password']));
 		$user->addRole(RoleFactory::createUserRole());
 		$user->profile = $profilePhoto;
+		$user->setSessionExpirySecondsFromNow(SESSION_LIFETIME);
 		$table->save($user);
 		$user->setId($table->lastInsertId());
 

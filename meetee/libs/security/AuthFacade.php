@@ -52,10 +52,19 @@ class AuthFacade
 		Session::set('user_last_activity_time', time());
 		setcookie('user_last_activity_time', time() + SESSION_LIFETIME, 
 				time() + SESSION_LIFETIME);
+
+		$user->setSessionExpirySecondsFromNow(SESSION_LIFETIME);
+		$table = new UserTable();
+		$table->save($user);
 	}
 
 	public static function logout(): void
 	{
+		$user = static::getLoggedUser();
+		$user->setSessionExpirySecondsFromNow(0);
+		$table = new UserTable();
+		$table->save($user);
+
 		Session::unset('user_id');
 		Session::unset('user_last_activity_time');
 		Cookie::unset('user_last_activity_time');
@@ -82,9 +91,11 @@ class AuthFacade
 
 	public static function isLogged(?User $user = null): bool
 	{
-		if (!$user && !$user = static::getLoggedUser())
+		if (!$user)
+			return !empty(static::getLoggedUser()) && Session::isset('user_id');
+		elseif ($sessionExpiry = $user->getSessionExpiry())
+			return $sessionExpiry->format('U') <= time();
+		else
 			return false;
-
-		return Session::isset('user_id');
 	}
 }

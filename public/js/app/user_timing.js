@@ -1,11 +1,8 @@
-// console.log(browser.cookies.get('user_last_activity_time'))
-
 const getCookie = (name) => {
 	const value = `; ${document.cookie}`
 	const parts = value.split(`; ${name}=`)
 	if (parts.length === 2) return parts.pop().split(';').shift()
 }
-
 
 setInterval(() => {
 	let limit = parseInt(getCookie('user_last_activity_time'))

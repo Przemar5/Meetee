@@ -31,6 +31,7 @@ class User extends Entity
 	public ?string $profile = null;
 	public bool $verified = false;
 	protected \DateTime $birth;
+	protected \DateTime $sessionExpiry;
 	protected array $roles = [];
 
 	public function hasAccess(Route $route): bool
@@ -50,6 +51,25 @@ class User extends Entity
 			throw new \Exception(sprintf(
 				"Birth date must be type string or DateTime object, '%s' given.",
 				gettype($birth)));
+	}
+
+	public function setSessionExpiry($sessionExpiry = null): void
+	{
+		if (is_null($sessionExpiry))
+			$this->sessionExpiry = null;
+		elseif (is_string($sessionExpiry))
+			$this->sessionExpiry = new \DateTime($sessionExpiry);
+		elseif ($sessionExpiry instanceof \DateTime)
+			$this->sessionExpiry = $sessionExpiry;
+		else
+			throw new \Exception(sprintf(
+				"Birth date must be type string or DateTime object, '%s' given.",
+				gettype($sessionExpiry)));
+	}
+
+	public function setSessionExpirySecondsFromNow(int $seconds): void
+	{
+		$this->sessionExpiry = new \DateTime('@'. time()+$seconds);
 	}
 
 	public function setRoles(array $roles): void
@@ -81,6 +101,11 @@ class User extends Entity
 	public function getBirth(): \DateTime
 	{
 		return $this->birth;
+	}
+
+	public function getSessionExpiry(): \DateTime
+	{
+		return $this->sessionExpiry;
 	}
 
 	public function getRoles(): array

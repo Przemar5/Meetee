@@ -224,7 +224,7 @@ class CommentController extends ControllerTemplate
 		$matches = [];
 		preg_match_all('/(?:#)(\w+)/', $comment->content, $matches);
 
-		return $matches[1];
+		return array_filter($matches[1], fn($m) => strlen($m) <= 255);
 	}
 
 	private function saveGetCompleteTags(array $tags): array
