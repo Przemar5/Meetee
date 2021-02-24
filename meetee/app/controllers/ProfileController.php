@@ -17,14 +17,14 @@ class ProfileController extends ControllerTemplate
 		$user = $table->find($id);
 		$token = TokenFactory::generate('csrf_token');
 
-		if (!$user) {
+		if (!$user)
 			$this->renderNotFoundPage();
+		else {
+			$this->render('profiles/show', [
+				'user' => $user,
+				'token' => $token,
+			]);
 		}
-
-		$this->render('profiles/show', [
-			'user' => $user,
-			'token' => $token,
-		]);
 	}
 
 	private function renderNotFoundPage(): void

@@ -196,6 +196,27 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/groups",
+		"method": "GET",
+		"name": "groups_index_page",
+		"class": "GroupController.pageIndex",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/groups/create",
+		"method": "GET",
+		"name": "groups_create_page",
+		"class": "GroupController.pageCreate",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/groups/(?<id>\\d+)",
+		"method": "GET",
+		"name": "groups_show_page",
+		"class": "GroupController.pageShow",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/chat",
 		"method": "GET",
 		"name": "chat_message",
