@@ -60,26 +60,30 @@ class UserRoleTable extends Pivot
 		if (empty($user->getId()))
 			return;
 
-		$userId = $user->getId();
-
 		$this->removeRolesForUser($user);
 		$this->addRolesForUser($user);
+		echo '<p class="display-none"></p>';
 	}
 
 	private function addRolesForUser(User $user): void
 	{
 		$roles = $user->getRoles();
+
+		if (empty($roles))
+			return;
+
 		$data = array_map(fn($r) => [
 			'user_id' => $user->getId(), 
 			'role_id' => $r->getId(),
 		], $roles);
 
+		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->insertMultiple($data);
 		
 		$this->database->sendQuery(
 			$this->queryBuilder->getResult(),
-			$this->queryBuilder->getAdditionalBindings()
+			$this->queryBuilder->getBindings()
 		);
 	}
 
@@ -87,6 +91,7 @@ class UserRoleTable extends Pivot
 	{
 		$id = $user->getId();
 
+		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->delete();
 		$this->queryBuilder->where(['user_id' => $id]);

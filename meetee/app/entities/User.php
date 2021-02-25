@@ -33,12 +33,38 @@ class User extends Entity
 	protected \DateTime $birth;
 	protected \DateTime $sessionExpiry;
 	protected array $roles = [];
+	protected array $friends = [];
 
 	public function hasAccess(Route $route): bool
 	{
 		$common = array_intersect($route->getAccess(), $this->roles);
 
 		return !empty($common);
+	}
+
+	public function addFriend(User $user): void
+	{
+		$this->friends[] = $user;
+	}
+
+	public function removeFriend(User $user): void
+	{
+		$this->friends = array_filter($this->friends, fn($u) => $u !== $u);
+	}
+
+	public function setFriends(array $friends): void
+	{
+		$this->friends = $friends;
+	}
+
+	public function getFriends(): array
+	{
+		return $this->friends;
+	}
+
+	public function hasFriend(User $user): bool
+	{
+		return in_array($user, $this->friends);
 	}
 
 	public function setBirth($birth): void

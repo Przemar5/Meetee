@@ -71,7 +71,7 @@ class UserTable extends TableTemplate
 		$data['password'] = $user->password;
 		$data['verified'] = $user->verified;
 		$data['profile'] = $user->profile;
-		
+
 		if ($sessionExpiry = $user->getSessionExpiry())
 			$data['session_expiry'] = $sessionExpiry->format('Y-m-d H:i:s');
 

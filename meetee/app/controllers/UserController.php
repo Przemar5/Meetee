@@ -3,15 +3,11 @@
 namespace Meetee\App\Controllers;
 
 use Meetee\App\Controllers\ControllerTemplate;
-use Meetee\App\Entities\Comment;
-use Meetee\App\Entities\Rate;
+use Meetee\App\Entities\User;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\TokenFactory;
-use Meetee\Libs\Database\Tables\CommentTable;
-use Meetee\Libs\Database\Tables\RateTable;
-use Meetee\Libs\Database\Tables\Pivots\CommentUserRateTable;
+use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Security\AuthFacade;
-use Meetee\Libs\Security\Validators\Compound\Comments\CommentIdValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserIdValidator;
 
 class UserController extends ControllerTemplate
@@ -25,7 +21,7 @@ class UserController extends ControllerTemplate
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieIfUserIdInvalid($id);
 			
-			$this->friendComment((int) $id);
+			$this->toggleFriendForId((int) $id);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
@@ -41,30 +37,25 @@ class UserController extends ControllerTemplate
 			die;
 	}
 
-	private function dieIfUserIdInvalid($ratingId): void
+	private function dieIfUserIdInvalid($id): void
 	{
 		$validator = new UserIdValidator();
 		
-		if ($_POST['rating_id'] != $ratingId || 
-			!$validator->run((int) $ratingId))
+		if (!preg_match('/^[1-9][0-9]*$/', $id) || 
+			!$validator->run((int) $id))
 			die;
 	}
 
-	private function friendUser(int $id): void
+	private function toggleFriendForId(int $id): void
 	{
 		$table = new UserTable();
 		$current = AuthFacade::getUser();
 		$user = $table->find($id);
-		$relations = $this->getRateOrDie($id);
 
-		if ($this->commentHasThatRate($comment, $rate)) {
-			$this->unrateComment($comment);
-			$this->printJsonResponse($comment, null);
-		}
-		else {
-			$this->rateComment($comment, $rate);
-			$this->printJsonResponse($comment, $rate);
-		}
+		if ($user->hasFriend($current))
+			$user->removeFriend($current);
+		else
+			$user->addFriend($current);
 	}
 
 	private function getCommentOrDie(int $id): Comment

@@ -182,7 +182,6 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 		}
 		$columns = implode(', ', $columns);
 		$toBind = implode(', ', $toBind);
-
 		$this->query = sprintf('INSERT INTO %s (%s) VALUES %s', 
 			$this->table, $columns, $toBind);
 
