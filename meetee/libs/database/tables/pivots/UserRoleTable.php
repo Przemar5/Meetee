@@ -62,7 +62,6 @@ class UserRoleTable extends Pivot
 
 		$this->removeRolesForUser($user);
 		$this->addRolesForUser($user);
-		echo '<p class="display-none"></p>';
 	}
 
 	private function addRolesForUser(User $user): void

@@ -45,6 +45,8 @@ class RouterTemplate
 		[$class, $method] = explode('.', $classAndMethod);
 		$controller = ControllerFactory::createFromClassNameForBrowser($class);
 
+		echo '<p class="display-none"></p>';
+
 		call_user_func_array([$controller, $method], $args);
 	}
 
