@@ -20,6 +20,7 @@ class RouterLoggedUserGuardProxy extends RouterTemplate
 	{
 		$user = AuthFacade::getUser();
 		$route = RouteFactory::getCurrentRouteOrThrowException();
+
 		if (is_null($route) || is_null($user)) {
 			$this->renderNotFoundErrorPage();
 		}

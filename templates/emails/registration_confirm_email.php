@@ -6,11 +6,11 @@
 
 	<p>By clicking it You will be redirected to our page.</p>
 
-	<form action="<?= $route; ?>" method="POST">
-		<p>Click a link below and You're ready to login!</p>
-		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
-		<button type="submit">Confirm registration</button>
-	</form>
+	<p>Click a link below and You're ready to login!</p>
+	
+	<a href="<?= $route; ?>?<?= $token->name; ?>=<?= $token->value; ?>">
+		Confirm registration
+	</a>
 
 	<p>This email will be valid only for 2 hours.</p>
 

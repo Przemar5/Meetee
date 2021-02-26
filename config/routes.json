@@ -29,7 +29,7 @@
 	},
 	{
 		"pattern": "/register/verify",
-		"method": "POST",
+		"method": "GET",
 		"name": "registration_verify",
 		"class": "Auth\\RegistrationController.verify",
 		"access": ["GUEST"]

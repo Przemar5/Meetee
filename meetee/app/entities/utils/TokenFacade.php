@@ -42,6 +42,15 @@ class TokenFacade
 			$_POST, $name, $user);
 	}
 
+	public static function getTokenFromGetRequestIfValidByNameAndUser(
+		string $name,
+		?User $user = null,
+	): ?Token
+	{
+		return static::getTokenFromArrayIfValidByNameAndUser(
+			$_GET, $name, $user);
+	}
+
 	public static function popTokenIfValidByName(string $name): ?Token
 	{
 		return static::popTokenIfValidByNameAndUser($name, null);
@@ -52,7 +61,8 @@ class TokenFacade
 		?User $user = null
 	): ?Token
 	{
-		$token = TokenFactory::getFromPostRequest($name);
+		$token = TokenFactory::getFromArray(
+			$name, static::getCurrentRequestParamsArray());
 
 		if (!$token || !static::tokenValidates($token))
 			return null;
@@ -64,9 +74,17 @@ class TokenFacade
 			return null;
 
 		$token = $table->getValidBy($data);
-		// dd($data);
 		
 		return $token;
+	}
+
+	private static function getCurrentRequestParamsArray(): array
+	{
+		switch ($_SERVER['REQUEST_METHOD']) {
+			case 'GET': return $_GET;
+			case 'POST': return $_POST;
+			default: return $_GET;
+		}
 	}
 
 	public static function serializeToken(Token $token, ?User $user = null): array
