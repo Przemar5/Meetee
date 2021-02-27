@@ -20,6 +20,7 @@ class RouterFactory
 		$loggedGuard = new RouterLoggedUserGuardProxy($guestGuard);
 		$loggedWatcher = new RouterLoggedUserWatcherProxy($loggedGuard);
 		$loggerRouter = new RouterLoggerProxy($loggedWatcher);
+		// $loggerRouter = new RouterLoggerProxy($loggedGuard);
 		$logger = LoggerFactory::createRequestLogger();
 		$loggerRouter->setLogger($logger);
 

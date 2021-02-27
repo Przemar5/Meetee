@@ -19,6 +19,7 @@ use Meetee\Libs\Database\Tables\UserTable;
 use Meetee\Libs\Database\Tables\RoleTable;
 use Meetee\Libs\Database\Tables\TokenTable;
 use Meetee\Libs\Database\Tables\CommentTable;
+use Meetee\Libs\Security\AuthFacade;
 
 
 spl_autoload_register(function($namespaceWithClass) {

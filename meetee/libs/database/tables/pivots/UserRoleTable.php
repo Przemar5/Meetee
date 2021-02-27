@@ -79,7 +79,7 @@ class UserRoleTable extends Pivot
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->insertMultiple($data);
-		
+
 		$this->database->sendQuery(
 			$this->queryBuilder->getResult(),
 			$this->queryBuilder->getBindings()

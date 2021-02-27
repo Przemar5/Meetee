@@ -196,6 +196,13 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/profiles/(?<id>\\d+)/friend",
+		"method": "POST",
+		"name": "users_friend_process",
+		"class": "UserController.friend",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/groups",
 		"method": "GET",
 		"name": "groups_index_page",

@@ -7,6 +7,7 @@ use Meetee\App\Entities\User;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\Libs\Database\Tables\UserTable;
+use Meetee\Libs\Database\Tables\Pivots\UserUserRelationTable;
 use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Security\Validators\Compound\Users\UserIdValidator;
 
@@ -33,7 +34,7 @@ class UserController extends ControllerTemplate
 		$user = AuthFacade::getUser();
 
 		if (!TokenFacade::getTokenFromPostRequestIfValidByNameAndUser(
-			$name, $user))
+			$name, $user))//popTokenIfValidByNameAndUser
 			die;
 	}
 
@@ -52,10 +53,54 @@ class UserController extends ControllerTemplate
 		$current = AuthFacade::getUser();
 		$user = $table->find($id);
 
-		if ($user->hasFriend($current))
-			$user->removeFriend($current);
-		else
-			$user->addFriend($current);
+		if ($this->userHasFriend($current, $user)) {
+			$this->breakFriendship($current, $user);
+			$this->printRequestedRelationResponse('FRIEND');
+		}
+		else {
+			$this->requestFriend($current, $user);
+			$this->printRequestedRelationResponse('FRIEND');
+		}
+	}
+
+	private function userHasFriend(User $first, User $second): bool
+	{
+		$table = new UserUserRelationTable();
+		
+		return $table->areInRelation($first, $second, 'FRIEND');
+	}
+
+	private function userRequestedRelation(User $first, User $second): bool
+	{
+		$table = new UserUserRelationTable();
+		
+		return $table->haveNotAcceptedRelation($first, $second, 'FRIEND');
+	}
+
+	private function requestFriend(User $first, User $second): void
+	{
+		$table = new UserUserRelationTable();
+		$table->requestForRelation($first, $second, 'FRIEND');
+	}
+
+	private function breakFriendship(User $first, User $second): void
+	{
+		$table = new UserUserRelationTable();
+		$table->cancelRelation($first, $second, 'FRIEND');
+	}
+
+	private function printRequestedRelationResponse(string $relationName): void
+	{
+		die(json_encode([
+			'message' => "You requested for this. Wait until it'll be accepted.",
+		]));
+	}
+
+	private function printAcceptedRelationResponse(string $relationName): void
+	{
+		die(json_encode([
+			'message' => "Request has been accepted.",
+		]));
 	}
 
 	private function getCommentOrDie(int $id): Comment

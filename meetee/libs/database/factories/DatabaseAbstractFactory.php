@@ -18,9 +18,9 @@ class DatabaseAbstractFactory
 		$details = Converter::jsonToArray($config);
 
 		switch ($details['driver']) {
-			case 'mysql': 		return MySQLDatabase::getInstance($details);
+			case 'mysql': 	return MySQLDatabase::getInstance($details);
 			case 'pgsql': 	return PostgresDatabase::getInstance($details);
-			default: 			return MySQLDatabase::getInstance($details);
+			default: 		return MySQLDatabase::getInstance($details);
 		}
 	}
 
@@ -31,7 +31,7 @@ class DatabaseAbstractFactory
 
 		switch ($details['driver']) {
 			case 'mysql': 		return new MySQLQueryBuilder();
-			case 'pgsql': 	return new PostgresQueryBuilder();
+			case 'pgsql': 		return new PostgresQueryBuilder();
 			default: 			return new MySQLQueryBuilder();
 		}
 	}

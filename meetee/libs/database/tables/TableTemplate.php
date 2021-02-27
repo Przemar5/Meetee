@@ -289,4 +289,28 @@ abstract class TableTemplate
 		$this->complete($entity);
 		$this->delete($entity->getId());
 	}
+
+	protected function sendQuery(): void
+	{
+		$this->database->sendQuery(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
+
+	protected function getOneResult()
+	{
+		return $this->database->findOne(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
+
+	protected function getManyResults()
+	{
+		return $this->database->findMany(
+			$this->queryBuilder->getResult(),
+			$this->queryBuilder->getBindings()
+		);
+	}
 }

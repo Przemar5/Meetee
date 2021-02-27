@@ -6,6 +6,14 @@
 
 Account
 
+<?php if ($this->isGranted('VERIFIED') && user() && user()->getId() != $user->getId()): ?>
+	<form action="<?= route('users_friend_process', ['id' => $user->getId()]); ?>" method="POST">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<button type="submit">
+			<?= (user()->hasFriend($user)) ? 'Unfriend' : 'Add friend'; ?>
+		</button>
+	</form>
+<?php endif; ?>
 
 <img src="<?= IMG_DIR . $user->profile; ?>" width="400" height="300" alt="photo">
 
