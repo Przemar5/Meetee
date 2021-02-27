@@ -203,6 +203,13 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/profiles/(?<id>\\d+)/accept-friend",
+		"method": "POST",
+		"name": "users_accept_friend_process",
+		"class": "UserController.acceptFriend",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/groups",
 		"method": "GET",
 		"name": "groups_index_page",

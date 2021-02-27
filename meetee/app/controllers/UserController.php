@@ -96,92 +96,33 @@ class UserController extends ControllerTemplate
 		]));
 	}
 
-	private function printAcceptedRelationResponse(string $relationName): void
-	{
-		die(json_encode([
-			'message' => "Request has been accepted.",
-		]));
-	}
-
-	private function getCommentOrDie(int $id): Comment
-	{
-		$table = new CommentTable();
-		$comment = $table->find($id);
-
-		if (!$comment)
-			die;
-
-		return $comment;
-	}
-
-	private function getRateOrDie(int $id): Rate
-	{
-		$table = new RateTable();
-		$rate = $table->find($id);
-
-		if (!$rate)
-			die;
-
-		return $rate;
-	}
-
-	private function commentHasThatRate(Comment $comment, Rate $rate): bool
-	{
-		$user = AuthFacade::getUser();
-		$table = new CommentUserRateTable();
-
-		$result = $table->findOneBy([
-			'comment_id' => $comment->getId(),
-			'user_id' => $user->getId(),
-			'rate_id' => $rate->getId(),
-		]);
-
-		return !empty($result);
-	}
-
-	private function rateComment(Comment $comment, Rate $rate): void
-	{
-		$user = AuthFacade::getUser();
-		$table = new CommentUserRateTable();
-
-		$table->rateCommentByUser($rate, $comment, $user);
-	}
-
-	private function unrateComment(Comment $comment): void
-	{
-		$user = AuthFacade::getUser();
-		$table = new CommentUserRateTable();
-
-		$table->removeRateForCommentByUser($comment, $user);
-	}
-
-	private function printJsonResponse(Comment $comment, ?Rate $rate = null): void
-	{
-		$data = [
-			'comment_id' => $comment->getId(),
-			'rate_id' => ($rate) ? $rate->getId() : null,
-		];
-
-		echo json_encode($data);
-	}
-
-	public function getByComment($commentId)
+	public function acceptFriend($id): void
 	{
 		try {
-			$this->dieIfCommentIdInvalid($commentId);
+			$this->dieIfTokenInvalid(self::$tokenName);
+			$this->dieIfUserIdInvalid($id);
 			
-			$this->getCommentRatesAndPrintJsonResponse((int) $commentId);
+			$this->acceptFriendshipWithUserAndPrintResponse((int) $id);
 		}
 		catch (\Exception $e) {
 			die($e->getMessage());
 		}
 	}
 
-	private function getCommentRatesAndPrintJsonResponse(int $commentId): void
+	private function acceptFriendshipWithUserAndPrintResponse(int $id): void
 	{
-		$table = new CommentUserRateTable();
-		$result = $table->findManyBy(['comment_id' => $commentId]);
+		$table = new UserTable();
+		$user = $table->find($id);
+		$current = AuthFacade::getUser();
+		$table = new UserUserRelationTable();
+		$table->acceptRelationIfHadBeenRequested($current, $user, 'FRIEND');
+		$this->printAcceptedRelationResponse('FRIEND');
+	}
 
-		echo json_encode($result);
+	private function printAcceptedRelationResponse(string $relationName): void
+	{
+		die(json_encode([
+			'message' => "Request has been accepted.",
+		]));
 	}
 }

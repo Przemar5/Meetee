@@ -181,7 +181,7 @@ class UserUserRelationTable extends Pivot
 	{
 		$request = $this->getNotAcceptedRelation($first, $second, $relationName);
 
-		if ($request['receiver_id'] == $first->getId())
+		if (is_array($request) && $request['receiver_id'] == $first->getId())
 			$this->acceptRelationRequest($first, $second, $relationName);
 	}
 
