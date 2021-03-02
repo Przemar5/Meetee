@@ -34,6 +34,7 @@ class User extends Entity
 	protected \DateTime $sessionExpiry;
 	protected array $roles = [];
 	protected array $friends = [];
+	protected bool $updatePivots = false;
 
 	public function hasAccess(Route $route): bool
 	{
@@ -45,11 +46,13 @@ class User extends Entity
 	public function addFriend(User $user): void
 	{
 		$this->friends[] = $user;
+		$this->updatePivots = true;
 	}
 
 	public function removeFriend(User $user): void
 	{
 		$this->friends = array_filter($this->friends, fn($u) => $u !== $u);
+		$this->updatePivots = true;
 	}
 
 	public function setFriends(array $friends): void
@@ -144,5 +147,10 @@ class User extends Entity
 		$pivot = new UserPost();
 
 		return $pivot->postsForUser($this);
+	}
+
+	public function hasToUpdatePivots(): bool
+	{
+		return $this->updatePivots;
 	}
 }

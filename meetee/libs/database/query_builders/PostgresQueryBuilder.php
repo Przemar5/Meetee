@@ -41,19 +41,15 @@ class PostgresQueryBuilder extends QueryBuilderTemplate
 
 	private function appendJoinPartIfExist(): void
 	{
-		if (is_null($this->joinType))
+		if (empty($this->joins))
 			return;
 
-		if (is_null($this->joinTable))
-			return;
+		// $joinOn = implode(', ', $this->joinOn);
 
-		if (is_null($this->joinOn))
-			return;
-
-		$joinOn = implode(', ', $this->joinOn);
-
-		$this->query .= sprintf(" %s JOIN %s ON %s", 
-			$this->joinType, $this->joinTable, $joinOn);
+		foreach ($this->joins as $table => $data) {
+			$this->query .= sprintf(" %s JOIN %s ON %s",
+				$data['type'], $table, $data['on']);
+		}
 	}
 
 	private function appendOptionalParts(): void

@@ -283,7 +283,7 @@ export default class CommentHandler {
 			// Other actions
 		}
 
-		request.get(uri, null, callback, callback)
+		request.get(uri, callback, callback)
 	}
 
 	rateEvent = (e) => {

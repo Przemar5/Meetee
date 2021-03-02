@@ -9,6 +9,9 @@
 		</div>
 		<div>
 			<a href="<?= route('groups_index_page'); ?>">Groups</a>
+			<button type="button" class="navbar__button" id="navbarRequestsBtn">
+				Requests
+			</button>
 		</div>
 	<?php else: ?>
 		<a href="<?= route('registration_page'); ?>">Register</a>

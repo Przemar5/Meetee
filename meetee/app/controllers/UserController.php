@@ -3,6 +3,7 @@
 namespace Meetee\App\Controllers;
 
 use Meetee\App\Controllers\ControllerTemplate;
+use Meetee\App\Controllers\ErrorController;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Factories\TokenFactory;
@@ -124,5 +125,24 @@ class UserController extends ControllerTemplate
 		die(json_encode([
 			'message' => "Request has been accepted.",
 		]));
+	}
+
+	public function getUserRequests(): void
+	{
+		try {
+			$this->printRelationRequestsForUser();
+		}
+		catch (\Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function printRelationRequestsForUser(): void
+	{
+		$user = AuthFacade::getUser();
+		$table = new UserUserRelationTable();
+		$requests = $table->getNotAcceptedRequestsForUser($user);
+
+		die(json_encode($requests));
 	}
 }

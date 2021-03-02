@@ -19,8 +19,12 @@ class UserRoleTable extends Pivot
 		$this->queryBuilder->reset();
 		$this->queryBuilder->select(['roles.*']);
 		$this->queryBuilder->in('roles');
-		$this->queryBuilder->innerJoin('user_role');
-		$this->queryBuilder->on(['user_role.role_id = roles.id']);
+		$this->queryBuilder->join([
+			'user_role' => [
+				'type' => 'INNER',
+				'on' => 'user_role.role_id = roles.id',
+			],
+		]);
 		$this->queryBuilder->where(['user_role.user_id' => $id]);
 		// $this->queryBuilder->setAdditionalBindings([':user_id' => $id]);
 

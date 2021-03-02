@@ -139,6 +139,22 @@ export default class RouteDispatcher {
 		"ratings_get_process": {
 			"uri": "/ratings/c/(commentId)",
 			"method": "GET"
+		},
+		"profiles_show_page": {
+			"uri": "/profiles/(id)",
+			"method": "GET"
+		},
+		"users_friend_process": {
+			"uri": "/profiles/(id)/friend",
+			"method": "POST"
+		},
+		"users_accept_friend_process": {
+			"uri": "/profiles/(id)/accept-friend",
+			"method": "POST"
+		},
+		"users_relation_requests_page": {
+			"uri": "/profiles/relations-to-accept",
+			"method": "GET"
 		}
 	}
 }

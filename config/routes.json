@@ -210,6 +210,13 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/profiles/relations-to-accept",
+		"method": "GET",
+		"name": "users_relation_requests_page",
+		"class": "UserController.getUserRequests",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/groups",
 		"method": "GET",
 		"name": "groups_index_page",

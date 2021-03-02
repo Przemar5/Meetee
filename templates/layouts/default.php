@@ -17,6 +17,7 @@
 		<script src="<?= JS_DIR; ?>libs/security/validation/validation.js"></script>
 		<script src="<?= JS_DIR; ?>libs/security/validation/template.js"></script>
 		<script src="<?= JS_DIR; ?>libs/security/validation/form_validation.js"></script>
+		<script src="<?= JS_DIR; ?>app/navbar.js" type="module" defer></script>
 		
 		<?= $this->section('head'); ?>
 	</head>

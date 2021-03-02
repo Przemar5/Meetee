@@ -12,6 +12,7 @@ abstract class QueryBuilderTemplate
 	protected ?array $columns = null;
 	protected array $values = [];
 	protected ?string $joinTable = null;
+	protected ?array $joins = null; // Corrected
 	protected ?string $joinType = null;
 	protected ?array $joinOn = null;
 	protected array $conditions = [];
@@ -32,6 +33,7 @@ abstract class QueryBuilderTemplate
 		$this->columns = null;
 		$this->values = [];
 		$this->joinTable = null;
+		$this->joins = null;
 		$this->joinType = null;
 		$this->joinOn = null;
 		$this->conditions = [];
@@ -77,15 +79,9 @@ abstract class QueryBuilderTemplate
 		$this->action = 'DELETE';
 	}
 
-	public function innerJoin(string $table): void
+	public function join(array $joins): void
 	{
-		$this->joinType = 'INNER';
-		$this->joinTable = $table;
-	}
-
-	public function on(array $joins): void
-	{
-		$this->joinOn = $joins;
+		$this->joins = $joins;
 	}
 
 	public function where(array $conditions): void

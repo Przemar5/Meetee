@@ -80,8 +80,10 @@ class UserTable extends TableTemplate
 
 	protected function updatePivots(Entity $user): void
 	{
-		$userRole = new UserRoleTable();
-		$userRole->setRolesForUser($user);
+		if ($user->hasToUpdatePivots()) {
+			$userRole = new UserRoleTable();
+			$userRole->setRolesForUser($user);
+		}
 	}
 
 	public function findOneVerifiedWhere(array $conditions): array

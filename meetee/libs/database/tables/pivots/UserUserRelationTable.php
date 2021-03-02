@@ -22,8 +22,12 @@ class UserUserRelationTable extends Pivot
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select(['relations.*']);
-		$this->queryBuilder->innerJoin('relations');
-		$this->queryBuilder->on(['user_user_relation.relation_id = relations.id']);
+		$this->queryBuilder->join([
+			'relations' => [
+				'type' => 'INNER',
+				'on' => 'user_user_relation.relation_id = relations.id',
+			],
+		]);
 		$this->queryBuilder->where([
 			'AND',
 			[
@@ -78,8 +82,12 @@ class UserUserRelationTable extends Pivot
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select([$this->name . '.*']);
-		$this->queryBuilder->innerJoin('relations');
-		$this->queryBuilder->on(['user_user_relation.relation_id = relations.id']);
+		$this->queryBuilder->join([
+			'relations' => [
+				'type' => 'INNER',
+				'on' => 'user_user_relation.relation_id = relations.id',
+			],
+		]);
 		$this->queryBuilder->where([
 			'AND',
 			[
@@ -119,8 +127,12 @@ class UserUserRelationTable extends Pivot
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->select([$this->name . '.*']);
-		$this->queryBuilder->innerJoin('relations');
-		$this->queryBuilder->on(['user_user_relation.relation_id = relations.id']);
+		$this->queryBuilder->join([
+			'relations' => [
+				'type' => 'INNER',
+				'on' => 'user_user_relation.relation_id = relations.id',
+			],
+		]);
 		$this->queryBuilder->where([
 			'AND',
 			[
@@ -139,6 +151,32 @@ class UserUserRelationTable extends Pivot
 		]);
 
 		return $this->getOneResult();
+	}
+
+	public function getNotAcceptedRequestsForUser(User $user)
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select([
+			'user_user_relation.*', 'relations.name as relation_name', 
+			'users.login', 'users.profile']);
+		$this->queryBuilder->where([
+			'AND',
+			'accepted' => false,
+			'receiver_id' => $user->getId(),
+		]);
+		$this->queryBuilder->join([
+			'relations' => [
+				'type' => 'INNER',
+				'on' => 'user_user_relation.relation_id = relations.id',
+			],
+			'users' => [
+				'type' => 'INNER',
+				'on' => 'user_user_relation.sender_id = users.id',
+			],
+		]);
+
+		return $this->getManyResults();
 	}
 
 	public function getRelationIdByName(string $name): ?int

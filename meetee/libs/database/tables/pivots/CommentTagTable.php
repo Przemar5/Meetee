@@ -19,8 +19,12 @@ class CommentTagTable extends Pivot
 		$this->queryBuilder->reset();
 		$this->queryBuilder->select(['tags.*']);
 		$this->queryBuilder->in('tags');
-		$this->queryBuilder->innerJoin('comment_tag');
-		$this->queryBuilder->on(['comment_tag.tag_id = tags.id']);
+		$this->queryBuilder->join([
+			'comment_tag' => [
+				'type' => 'INNER',
+				'on' => 'comment_tag.tag_id = tags.id',
+			],
+		]);
 		$this->queryBuilder->where(['comment_tag.comment_id' => $id]);
 
 		$data = $this->database->findMany(

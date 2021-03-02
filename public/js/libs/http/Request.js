@@ -15,10 +15,9 @@ export default class Request {
 		this.errorResponse = errorResponse
 	}
 
-	get (route, data, success, error) {
+	get (route, success, error) {
 		fetch(route, {
-			method: 'GET',
-			body: data
+			method: 'GET'
 		}).then((response) => {
 			if (response.ok) {
 				return response.json()
