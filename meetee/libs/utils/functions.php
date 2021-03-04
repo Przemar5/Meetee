@@ -5,6 +5,8 @@ use Meetee\Libs\Http\Routing\Data\RouteFactory;
 use Meetee\App\Entities\User;
 use Meetee\App\Entities\Token;
 use Meetee\App\Entities\Factories\TokenFactory;
+use Meetee\Libs\Database\Tables\RelationTable;
+use Meetee\Libs\Database\Tables\Pivots\UserUserRelationTable;
 
 function dd($data) {
 	echo "<pre>";
@@ -16,7 +18,10 @@ function route(string $name, ?array $args = []): ?string
 {
 	$route = RouteFactory::getRouteByName($name);
 
-	return BASE_URI . ltrim($route->getPreparedUri($args), '/');
+	if ($route)
+		return BASE_URI . ltrim($route->getPreparedUri($args), '/');
+	else
+		return null;
 }
 
 function method(string $name): ?string
@@ -34,4 +39,32 @@ function user(): ?User
 function token(string $name): ?Token
 {
 	return TokenFactory::generate($name, user());
+}
+
+function idForRelation(string $relationName): ?int
+{
+	$table = new RelationTable();
+	$relation = $table->findOneBy(['name' => $relationName]);
+
+	return ($relation) ? $relation->getId() : null;
+}
+
+function relationRequestSend(User $sender, User $receiver, int $relationId): bool
+{
+	$table = new UserUserRelationTable();
+	
+	return !empty(
+		$table->findOneBy([
+			'sender_id' => $sender->getId(), 
+			'receiver_id' => $receiver->getId(), 
+			'relation_id' => $relationId,
+			'accepted' => false,
+		]));
+}
+
+function areInRelation(User $first, User $second, int $relationId): bool
+{
+	$table = new UserUserRelationTable();
+	
+	return $table->areInRelation($first, $second, $relationId);
 }

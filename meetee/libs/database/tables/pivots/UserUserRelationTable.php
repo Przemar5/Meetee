@@ -52,13 +52,11 @@ class UserUserRelationTable extends Pivot
 	public function requestForRelation(
 		User $first, 
 		User $second, 
-		string $relationName
+		int $relationId
 	): void
 	{
-		$relationId = $this->getRelationIdByName($relationName);
-
-		if ($this->areInRelation($first, $second, $relationName) || 
-			$this->haveNotAcceptedRelation($first, $second, $relationName))
+		if ($this->areInRelation($first, $second, $relationId) || 
+			$this->haveNotAcceptedRelation($first, $second, $relationId))
 			return;
 
 		$this->queryBuilder->reset();
@@ -73,10 +71,28 @@ class UserUserRelationTable extends Pivot
 		$this->sendQuery();
 	}
 
+	public function discardRelation(
+		User $first,
+		User $second,
+		int $relationId
+	): void
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->delete();
+		$this->queryBuilder->where([
+			'sender_id' => $first->getId(),
+			'receiver_id' => $second->getId(),
+			'relation_id' => $relationId
+		]);
+
+		$this->sendQuery();
+	}
+
 	public function areInRelation(
 		User $first, 
 		User $second, 
-		string $relationName
+		int $relationId
 	): bool
 	{
 		$this->queryBuilder->reset();
@@ -102,26 +118,45 @@ class UserUserRelationTable extends Pivot
 				],
 			],
 			'user_user_relation.accepted' => true,
-			'relations.name' => $relationName,
+			'relations.id' => $relationId,
 		]);
 
 		return !empty($this->getOneResult());
 	}
 
+	public function cancelRequestedRelation(
+		User $sender, 
+		User $receiver, 
+		int $relationId
+	): void
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->delete();
+		$this->queryBuilder->where([
+			'sender_id' => $sender->getId(),
+			'receiver_id' => $receiver->getId(),
+			'relation_id' => $relationId,
+			'accepted' => false,
+		]);
+
+		$this->sendQuery();
+	}
+
 	public function haveNotAcceptedRelation(
 		User $first, 
 		User $second, 
-		string $relationName
+		int $relationId
 	): bool
 	{
 		return !empty($this->getNotAcceptedRelation(
-			$first, $second, $relationName));
+			$first, $second, $relationId));
 	}
 
 	public function getNotAcceptedRelation(
 		User $first, 
 		User $second, 
-		string $relationName
+		int $relationId
 	)
 	{
 		$this->queryBuilder->reset();
@@ -147,7 +182,7 @@ class UserUserRelationTable extends Pivot
 				],
 			],
 			'user_user_relation.accepted' => false,
-			'relations.name' => $relationName,
+			'relations.id' => $relationId,
 		]);
 
 		return $this->getOneResult();
@@ -194,11 +229,9 @@ class UserUserRelationTable extends Pivot
 	public function cancelRelation(
 		User $first, 
 		User $second, 
-		string $relationName
+		int $relationId
 	): void
 	{
-		$relationId = $this->getRelationIdByName('FRIEND');
-
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
 		$this->queryBuilder->delete();
@@ -211,46 +244,20 @@ class UserUserRelationTable extends Pivot
 		$this->sendQuery();
 	}
 
-	public function acceptRelationIfHadBeenRequested(
-		User $first, 
-		User $second, 
-		string $relationName
+	public function acceptRelationRequestIfRequested(
+		User $sender, 
+		User $receiver, 
+		int $relationId
 	): void
 	{
-		$request = $this->getNotAcceptedRelation($first, $second, $relationName);
-
-		if (is_array($request) && $request['receiver_id'] == $first->getId())
-			$this->acceptRelationRequest($first, $second, $relationName);
-	}
-
-	public function acceptRelationRequest(
-		User $first, 
-		User $second, 
-		string $relationName
-	): void
-	{
-		$relationId = $this->getRelationIdByName($relationName);
-
 		$this->queryBuilder->reset();
 		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->update([
-			'accepted' => true,
-		]);
+		$this->queryBuilder->update(['accepted' => true]);
 		$this->queryBuilder->where([
-			'AND',
-			[
-				'OR',
-				[
-					'user_user_relation.sender_id' => $first->getId(),
-					'user_user_relation.receiver_id' => $second->getId(),
-				],
-				[
-					'user_user_relation.sender_id' => $second->getId(),
-					'user_user_relation.receiver_id' => $first->getId(),
-				],
-			],
-			'user_user_relation.accepted' => false,
-			'user_user_relation.relation_id' => $relationId,
+			'sender_id' => $sender->getId(),
+			'receiver_id' => $receiver->getId(),
+			'relation_id' => $relationId,
+			'accepted' => false,
 		]);
 
 		$this->sendQuery();

@@ -9,7 +9,7 @@
 		</div>
 		<div>
 			<a href="<?= route('groups_index_page'); ?>">Groups</a>
-			<button type="button" class="navbar__button" id="navbarRequestsBtn">
+			<button type="button" class="navbar__button" id="navbarRequestsBtn" data-href="<?= route('relations_queue_page'); ?>">
 				Requests
 			</button>
 		</div>

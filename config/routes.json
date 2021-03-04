@@ -196,24 +196,38 @@
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/profiles/(?<id>\\d+)/friend",
+		"pattern": "/relations/(?<userId>\\d+)/(?<relationId>\\d+)/request",
 		"method": "POST",
-		"name": "users_friend_process",
-		"class": "UserController.friend",
+		"name": "relations_request_process",
+		"class": "RelationController.request",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/profiles/(?<id>\\d+)/accept-friend",
+		"pattern": "/relations/(?<userId>\\d+)/(?<relationId>\\d+)/cancel-request",
 		"method": "POST",
-		"name": "users_accept_friend_process",
-		"class": "UserController.acceptFriend",
+		"name": "relations_request_cancel_process",
+		"class": "RelationController.cancelRequest",
 		"access": ["VERIFIED"]
 	},
 	{
-		"pattern": "/profiles/relations-to-accept",
+		"pattern": "/relations/(?<userId>\\d+)/(?<relationId>\\d+)/discard",
+		"method": "POST",
+		"name": "relations_discard_process",
+		"class": "RelationController.discard",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/relations/(?<userId>\\d+)/(?<relationId>\\d+)/accept",
+		"method": "POST",
+		"name": "relations_accept_process",
+		"class": "RelationController.accept",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/relations/to-accept",
 		"method": "GET",
-		"name": "users_relation_requests_page",
-		"class": "UserController.getUserRequests",
+		"name": "relations_queue_page",
+		"class": "RelationController.getRequests",
 		"access": ["VERIFIED"]
 	},
 	{

@@ -1,5 +1,6 @@
 <?php $this->startSection('head'); ?>
 <script type="module" src="<?= JS_DIR; ?>app/pages/comments/show.js"></script>
+<script type="module" src="<?= JS_DIR; ?>app/pages/profiles/show.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->startSection('body'); ?>
@@ -7,11 +8,21 @@
 Account
 
 <?php if ($this->isGranted('VERIFIED') && user() && user()->getId() != $user->getId()): ?>
-	<form action="<?= route('users_friend_process', ['id' => $user->getId()]); ?>" method="POST">
+	<form action="<?= route('relations_request_process', ['userId' => $user->getId(), 'relationId' => idForRelation('FRIEND')]); ?>" method="POST" class="friend-process-form friend-process-form--request <?= (areInRelation(user(), $user, idForRelation('FRIEND')) || 
+	relationRequestSend(user(), $user, idForRelation('FRIEND'))) ? 'display-none' : ''; ?>">
 		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
-		<button type="submit">
-			<?= (user()->hasFriend($user)) ? 'Unfriend' : 'Add friend'; ?>
-		</button>
+		<button type="submit">Add friend</button>
+	</form>
+
+	<form action="<?= route('relations_request_cancel_process', ['userId' => $user->getId(), 'relationId' => idForRelation('FRIEND')]); ?>" method="POST" class="friend-process-form friend-process-form--cancel-request <?= (!areInRelation(user(), $user, idForRelation('FRIEND')) && 
+	relationRequestSend(user(), $user, idForRelation('FRIEND'))) ? '' : 'display-none'; ?>">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<button type="submit">Cancel request</button>
+	</form>
+	
+	<form action="<?= route('relations_discard_process', ['userId' => $user->getId(), 'relationId' => idForRelation('FRIEND')]); ?>" method="POST" class="friend-process-form friend-process-form--discard <?= (areInRelation(user(), $user, idForRelation('FRIEND'))) ? '' : 'display-none'; ?>">
+		<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+		<button type="submit">Unfriend</button>
 	</form>
 <?php endif; ?>
 

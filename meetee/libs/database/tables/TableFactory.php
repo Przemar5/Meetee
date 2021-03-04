@@ -10,6 +10,7 @@ use Meetee\Libs\Database\Tables\CountryTable;
 use Meetee\Libs\Database\Tables\CommentTable;
 use Meetee\Libs\Database\Tables\RateTable;
 use Meetee\Libs\Database\Tables\TagTable;
+use Meetee\Libs\Database\Tables\RelationTable;
 
 class TableFactory
 {
@@ -23,6 +24,7 @@ class TableFactory
 			case 'comments': return new CommentTable();
 			case 'rates': return new RateTable();
 			case 'tags': return new TagTable();
+			case 'relations': return new RelationTable();
 		}
 	}
 }
