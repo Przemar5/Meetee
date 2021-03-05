@@ -1,71 +1,47 @@
 import Request from '../libs/http/Request.js'
-import RouteDispatcher from '../libs/http/RouteDispatcher.js'
 
-const navbarRequestsBtn = document.getElementById('navbarRequestsBtn') || null
+const navbarRequestsBtn = document.getElementById('navbarRequestsBtn')
+const requestsDropdown = document.querySelector('.navbar__relation-requests')
+const csrfToken = document.getElementById('generalCsrfToken')
+const formsAcceptRelation = requestsDropdown.querySelectorAll('.form-relation--accept')
+const formsDiscardRelation = requestsDropdown.querySelectorAll('.form-relation--discard')
+
+let requestsToggled = false
 
 navbarRequestsBtn.addEventListener('click', (e) => {
-  let request = new Request()
-  let route = RouteDispatcher.getRouteUri('relations_queue_page')
-  let method = RouteDispatcher.getRouteMethod('users_relation_requests_page')
-
-  // console.log(RouteDispatcher)
-
-  request.get(route, (data) => {
-    createRequestsDropdown(data)
-  }, console.log)
+  if (requestsToggled) requestsDropdown.classList.add('display-none')
+  else requestsDropdown.classList.remove('display-none')
+  requestsToggled = !requestsToggled
 })
 
-const createRequestsDropdown = (data) => {
-  let result = document.createElement('div')
-  result.classList.add('navbar__dropdown')
+formsAcceptRelation.forEach((form) => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let request = new Request()
+    let formData = new FormData(e.target)
+    let route = e.target.getAttribute('action')
 
-  for (let i in data) {
-    if (data[i] instanceof Function) continue
-    let profileRoute = RouteDispatcher.getRouteUri(
-      'profiles_show_page', {'id': data[i]['sender_id']})
-    let routeAccept = RouteDispatcher.getRouteUri(
-      'relations_accept_process', {
-        'userId': data[i]['sender_id'],
-        'relationId': data[i]['relation_id']
-      })
-    let routeDiscard = RouteDispatcher.getRouteUri(
-      'relations_discard_process', {
-        'userId': data[i]['sender_id'],
-        'relationId': data[i]['relation_id']
-      })
-
-    let element = 
-      '<div class="navbar__dropdown-option">' +
-        '<a href="' + profileRoute + '">' + 
-          data[i]['login'] +
-        '</a>' + 
-        ' wants to be your friend!' + 
-        '<form action="' + routeAccept + '" method="POST">' + 
-          '<input type="hidden" name="" value="">' + 
-          '<button type="submit">Accept</button>' + 
-        '</form>'
-        '<form action="' + routeDiscard + '" method="POST">' + 
-          '<input type="hidden" name="" value="">' + 
-          '<button type="submit">Discard</button>' + 
-        '</form>'
-      '</div>'
-    element = element.toHTMLElement()
-    let formAccept = element.querySelector(
-      '.navbar__dropdown-option-button--accept-friend')
-
-    btnAccept.addEventListener('click', (e) => {
-      let request = new Request()
-      let route = RouteDispatcher.getRouteUri('relations_accept_process', {
-        'userId': data[i]['sender_id'],
-        'relationId': data[i]['relation_id']
-      })
-
-      request.post(route, {}, (e) => {
-        console.log('ok')
-      })
+    request.post(route, formData, (data) => {
+      alert(data.message)
+      e.target.closest('.navbar__relation-request').remove()
+      if (!requestsDropdown.querySelector('.navbar__relation-request'))
+        requestsDropdown.innerHTML = '<p>No results found.</p>'
     })
-    result.append(element)
-    // console.log(result)
-  }
-  navbarRequestsBtn.after(result)
-}
+  })
+})
+
+formsDiscardRelation.forEach((form) => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let request = new Request()
+    let formData = new FormData(e.target)
+    let route = e.target.getAttribute('action')
+
+    request.post(route, formData, (data) => {
+      alert(data.message)
+      e.target.closest('.navbar__relation-request').remove()
+      if (!requestsDropdown.querySelector('.navbar__relation-request'))
+        requestsDropdown.innerHTML = '<p>No results found.</p>'
+    })
+  })
+})

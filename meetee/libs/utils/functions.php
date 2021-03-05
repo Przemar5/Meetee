@@ -68,3 +68,10 @@ function areInRelation(User $first, User $second, int $relationId): bool
 	
 	return $table->areInRelation($first, $second, $relationId);
 }
+
+function getRelationRequests(User $user): array
+{
+	$table = new UserUserRelationTable();
+	
+	return $table->getNotAcceptedRequestsForUser($user);
+}

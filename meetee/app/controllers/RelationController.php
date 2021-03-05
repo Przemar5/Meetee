@@ -162,7 +162,7 @@ class RelationController extends ControllerTemplate
 		$logged = AuthFacade::getUser();
 		$user = $table->find($userId);
 
-		$this->discardRelation($logged, $user, $relationId);
+		$this->discardRelation($user, $logged, $relationId);
 		$this->printJsonResponseAndDie(
 			sprintf('You have discarded relation with %s.', $user->login));
 	}
@@ -184,7 +184,7 @@ class RelationController extends ControllerTemplate
 			$this->dieIfUserIdInvalid($userId);
 			$this->dieIfRelationIdInvalid($relationId);
 			
-			$this->acceptFriendshipWithUserAndPrintResponse(
+			$this->acceptRelationWithUserAndPrintResponse(
 				(int) $relationId, (int) $userId);
 		}
 		catch (\Exception $e) {
@@ -203,7 +203,7 @@ class RelationController extends ControllerTemplate
 
 		$table = new UserUserRelationTable();
 		$table->acceptRelationRequestIfRequested($user, $current, $relationId);
-		$this->printAcceptedRelationResponse(
+		$this->printJsonResponseAndDie(
 			'Request has been accepted. You are friends now!');
 	}
 

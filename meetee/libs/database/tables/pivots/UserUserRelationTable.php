@@ -262,42 +262,4 @@ class UserUserRelationTable extends Pivot
 
 		$this->sendQuery();
 	}
-
-	public function removeRateForCommentByUser(
-		Comment $comment,
-		User $user
-	): void
-	{
-		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->delete();
-		$this->queryBuilder->where([
-			'comment_id' => $comment->getId(),
-			'user_id' => $user->getId(),
-		]);
-
-		$this->sendQuery();
-	}
-
-	public function addRateForCommentByUser(
-		Rate $rate,
-		Comment $comment,
-		User $user
-	): void
-	{
-		$data = [
-			'rate_id' => $rate->getId(),
-			'comment_id' => $comment->getId(),
-			'user_id' => $user->getId(),
-		];
-
-		$this->queryBuilder->reset();
-		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->insert($data);
-
-		$this->database->sendQuery(
-			$this->queryBuilder->getResult(),
-			$this->queryBuilder->getBindings()
-		);
-	}
 }
