@@ -252,6 +252,20 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/groups/(?<groupId>\\d+)/(?<userId>\\d+)/(?<roleId>\\d+)/request",
+		"method": "POST",
+		"name": "groups_request_process",
+		"class": "GroupController.request",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/groups/(?<groupId>\\d+)/(?<userId>\\d+)/(?<roleId>\\d+)/discard",
+		"method": "POST",
+		"name": "groups_discard_process",
+		"class": "GroupController.discard",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/chat",
 		"method": "GET",
 		"name": "chat_message",

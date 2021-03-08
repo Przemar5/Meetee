@@ -68,4 +68,16 @@ class GroupController extends ControllerTemplate
 		
 		return $table->find((int) $id);
 	}
+
+	public function request($groupId, $userId, $roleId): void
+	{
+		try {
+			//
+		}
+	}
+
+	public function discard($groupId, $userId, $roleId): void
+	{
+		dd($groupId);
+	}
 }

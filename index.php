@@ -42,6 +42,7 @@ define('VIEW_DIR', BASE_URI . 'templates/');
 
 Session::start('CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy');
 
+
 try {
 	$router = RouterFactory::createComplete();
 	$router->route();

@@ -4,6 +4,8 @@ namespace Meetee\App\Entities;
 
 use Meetee\App\Entities\Entity;
 use Meetee\App\Entities\Country;
+use Meetee\App\Entities\Group;
+use Meetee\App\Entities\GroupRole;
 use Meetee\App\Entities\Pivots\UserPost;
 use Meetee\Libs\Http\Routing\Data\Route;
 use Meetee\Libs\Security\AuthenticationFacade;
@@ -11,6 +13,8 @@ use Meetee\App\Entities\Traits\Timestamps;
 use Meetee\App\Entities\Traits\SoftDelete;
 use Meetee\App\Entities\Factories\RoleFactory;
 use Meetee\Libs\Utils\StringableDate;
+use Meetee\Libs\Database\Tables\Pivots\GroupUserRoleTable;
+use Meetee\Libs\Database\Tables\GroupRoleTable;
 
 class User extends Entity
 {
@@ -122,11 +126,6 @@ class User extends Entity
 		return in_array($role, $this->roles);
 	}
 
-	public function delete(): void
-	{
-		// $this->deleted = true;
-	}
-
 	public function getBirth(): \DateTime
 	{
 		return $this->birth;
@@ -152,5 +151,56 @@ class User extends Entity
 	public function hasToUpdatePivots(): bool
 	{
 		return $this->updatePivots;
+	}
+
+	public function isInGroup(Group $group): bool
+	{
+		$table = new GroupUserRoleTable();
+
+		return $table->isUserInGroup($this, $group);
+	}
+
+	public function hasRoleIdInGroup(int $roleId, Group $group): bool
+	{
+		$table = new GroupUserRoleTable();
+
+		return $table->userHasRoleIdInGroup($this, $roleId, $group);
+	}
+
+	public function hasRequestedRoleIdInGroup(int $roleId, Group $group): bool
+	{
+		$table = new GroupUserRoleTable();
+
+		return $table->userHasRequestedForRoleIdInGroup($this, $roleId, $group);
+	}
+
+	public function hasRoleInGroup($role, Group $group): bool
+	{
+		$roleId;
+		$table = new GroupRoleTable();
+
+		if (is_string($role))
+			$roleId = $table->findOneBy(['name' => $role]);
+		
+		else if (is_a($role, GroupRole::class))
+			$roleId = $table->findOneBy(['name' => $role->name]);
+		
+		else
+			return false;
+
+		return $this->hasRoleIdInGroup($roleId, $group);
+	}
+
+	public function hasRequestedRoleInGroup($role, Group $group): bool
+	{
+		$table = new GroupRoleTable();
+
+		if (is_string($role))
+			$role = $table->findOneBy(['name' => $role]);
+		
+		else if (!is_a($role, GroupRole::class))
+			return false;
+
+		return $this->hasRequestedRoleIdInGroup($role->getId(), $group);
 	}
 }

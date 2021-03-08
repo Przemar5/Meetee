@@ -48289,3 +48289,2204 @@ HEADERS:
 	Cookie: user_last_activity_time=1614905591; user_last_activity_time=1614905636; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=0jgktndiimd5ojp2m6phtdsbaj
 
 
+DATE:	2021.03.05 01:33:57
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Pragma: no-cache
+	Cache-Control: no-cache
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1614905636; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=9qs1ff1a7np8h2qp2p3jae2q9j
+
+
+DATE:	2021.03.05 01:56:07
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1614905877; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=cp3a827l083j287rsavqisodjd
+
+
+DATE:	2021.03.05 12:46:34
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+
+
+DATE:	2021.03.05 12:46:34
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=fgsesvd3f9v8gjsfl168k61b3p
+
+
+DATE:	2021.03.05 12:46:36
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=4i0b3f4mqj78ovs7o1js0r3c1m
+
+
+DATE:	2021.03.05 14:37:10
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=s5b4p3gv83rktq019mcmfili5p
+
+
+DATE:	2021.03.05 19:17:02
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+
+
+DATE:	2021.03.05 19:17:10
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=5qsfahnl52q93rhj394di7ga6l
+
+
+DATE:	2021.03.05 19:17:14
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: p2sxbakE6UJ1zmqV6sh4evBQC1z3M9AZH3utYJiOFKqFRcP23snD3rHGVAXhCoG7
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 141
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=o63nk0imnlrv82nkdm5jr3qs4i
+
+
+DATE:	2021.03.05 19:17:14
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1614969674; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=pg5ja84lpcpno4iuecjehmuecf
+
+
+DATE:	2021.03.06 00:40:47
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=bca7hc9i6qu788t3ocml7cqo1i
+
+
+DATE:	2021.03.06 00:40:47
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=45cbe7g9lgmfusri1bbi87si3a
+
+
+DATE:	2021.03.06 08:19:53
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=h86m1in23get60u3j7sfgvtglb
+
+
+DATE:	2021.03.06 13:21:59
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=tevra7mu6ijqnoe5nltno1bdei
+
+
+DATE:	2021.03.06 14:13:58
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=lfca667eaoiijjch8con7u0ham
+
+
+DATE:	2021.03.06 16:39:12
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=qu4qetvcjdtkh566f9gs2hv9ua
+
+
+DATE:	2021.03.06 18:38:06
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=o57mprgckt7p2ebupgs4eh8kuf
+
+
+DATE:	2021.03.06 18:43:35
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: DnqHo0FmMWM2oZxqH3bSaJJhRHV96L06EbCTxAgtARlN8FGPgISj6rCJQBY1Wb6L
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 141
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ifbdhgpeht9802efj3pjbj0ke3
+
+
+DATE:	2021.03.06 18:43:35
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615054055; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=5c2sq3flqq4dqc1s1ccuuo4qa3
+
+
+DATE:	2021.03.07 01:10:47
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=v53q9ha5ebdd4q8ejnhij254sr
+
+
+DATE:	2021.03.07 01:10:47
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=7galv1jie8965rjs2v8uoohujr
+
+
+DATE:	2021.03.07 17:12:57
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+
+
+DATE:	2021.03.07 19:06:26
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=63h5ctehv5oothmlljb453vqqj
+
+
+DATE:	2021.03.07 19:11:33
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: PGHZ3v4PMDkDeQDG2JWujPqqn7w1lNyTLEB1wvnNWQbiyKBBFDQ5J9j8JLRyIbVT
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 141
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=uuavjg3se5t2bclkgjtm0tv4qh
+
+
+DATE:	2021.03.07 19:11:34
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615142134; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=cep5chhatov137sda7sajlcem6
+
+
+DATE:	2021.03.07 21:08:17
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=0pbmhr522o34o7j1mreo9s6tdq
+
+
+DATE:	2021.03.07 21:08:17
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=2dj2f7ma3915qji27ene19crs2
+
+
+DATE:	2021.03.07 21:08:22
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: 1SvOyv6KbdP4tJm9XpxfG6kUjYp3us4GFTlqWCddIstFLETxB0dc7Nx8z8Rlsjaw
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 141
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=1vo5u0s3i5ldq8h3u32vhk3s47
+
+
+DATE:	2021.03.07 21:08:22
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615149142; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=3k8aeeombmr2jdb4f14mrvuet5
+
+
+DATE:	2021.03.07 21:15:10
+URI:	/groups
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/main
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615149142; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ia70lmvnu5md3m7nggmjb0jd1a
+
+
+DATE:	2021.03.07 21:16:00
+URI:	/groups
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/main
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615149550; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=6ct7kgtikfu0d7cf1p1ome9bge
+
+
+DATE:	2021.03.07 21:19:47
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615149600; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=gnhe9p5mira2751k5eu6er0v1b
+
+
+DATE:	2021.03.07 21:21:03
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615149827; user_last_activity_time=1615149600; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=pv20q414mrfun46a2ivc91mkur
+
+
+DATE:	2021.03.07 21:21:37
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615149903; user_last_activity_time=1615149600; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=aeqq5qb85rp2cte5nbaamaad9d
+
+
+DATE:	2021.03.07 21:21:45
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615149937; user_last_activity_time=1615149600; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=18l70rb7r858pr5csufuaeod75
+
+
+DATE:	2021.03.07 21:58:13
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=hhkkn4bq9cn4pvf8jrpk1tvu41
+
+
+DATE:	2021.03.07 21:58:16
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615152134; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=q86fm1f4ulrt7ur86dmvher55p
+
+
+DATE:	2021.03.07 21:58:20
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615152136; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=0m7161bhic5p2c2bmkrtdd1t1p
+
+
+DATE:	2021.03.07 21:58:21
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615152140; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=alsosr1f2hjfj7sivmjdp3b8rc
+
+
+DATE:	2021.03.07 21:58:22
+URI:	/profiles/9
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups/1
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=aibku3p278uqe6qcej6qt57ldg
+
+
+DATE:	2021.03.07 21:58:22
+URI:	/comments/select
+Method:	GET
+REMOTE USER:	::1
+Request:
+	max_id: 999999999
+	user_id: 9
+	amount: 3
+	on_profile: 1
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	X-Requested-With: XMLHttpRequest
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Content-Type: application/json
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ej8o832fuehl5kn53p66i7lbqo
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/81
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/80
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/82
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/83
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/85
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/84
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/86
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/87
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/88
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:23
+URI:	/ratings/c/89
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: */*
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Dest: empty
+	Referer: http://localhost/projects/Meetee/profiles/9
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ng3akni533p7lmhgunikin8ktd
+
+
+DATE:	2021.03.07 21:58:24
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615152141; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=opgokto403i0vjok12kbkskq4r
+
+
+DATE:	2021.03.08 00:30:25
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: none
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=dphel960m2kjpq7uampkg8rk33
+
+
+DATE:	2021.03.08 00:30:29
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: none
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=17tcffbrt1n0bd0an9ikho1ree
+
+
+DATE:	2021.03.08 00:30:31
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: none
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=8npqhjgdjl0h80qdk841o45jje
+
+
+DATE:	2021.03.08 00:31:15
+URI:	/login
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: none
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=vrmotlm3k15sorm6c3p9k1dcm6
+
+
+DATE:	2021.03.08 00:31:20
+URI:	/login
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_login_token: 9nbMdz2xz0WfLbrNwtJkJpN8wowDCamLAt5A1lN2LzquE7iYVM1ld4Z5wE2CvzOz
+	email: 1234567890localhost@gmail.com
+	password: Password1!
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 141
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=72hmv7e3akm30o5c7jb8a23jbd
+
+
+DATE:	2021.03.08 00:31:20
+URI:	/main
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Referer: http://localhost/projects/Meetee/login
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161320; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=fi9o73hp2s6opqks4n7cp6g7bj
+
+
+DATE:	2021.03.08 00:31:59
+URI:	/groups
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/main
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161320; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=vjv6fds53nfeehbu9unt1rt496
+
+
+DATE:	2021.03.08 00:32:01
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=hh9gpasehedv1nqv86t9br5as2
+
+
+DATE:	2021.03.08 00:33:37
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161361; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=45i3lg6a3l8gnchlp07eqf2t2r
+
+
+DATE:	2021.03.08 00:33:52
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161457; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=dcdqmgdu50dbbibi2toqht0508
+
+
+DATE:	2021.03.08 00:34:48
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161472; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=mi115upseutk5cscdet066ikuu
+
+
+DATE:	2021.03.08 00:34:56
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161528; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=jasf6gv0eu6n0d0vfji0b26i3j
+
+
+DATE:	2021.03.08 00:35:05
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161536; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=prn1geov3ach2ptl1qdi1k913l
+
+
+DATE:	2021.03.08 00:35:13
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161545; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=gdqvnbb6o62lajnkdhtsreu7da
+
+
+DATE:	2021.03.08 00:35:25
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161553; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=3bfvjmuqjlesi7t9cmq3929rss
+
+
+DATE:	2021.03.08 00:42:20
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161565; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=d83q0smtvq7c5cl2dia6n6fedc
+
+
+DATE:	2021.03.08 00:42:37
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161980; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=iomkic53dl63q0615jrodk5kgc
+
+
+DATE:	2021.03.08 00:42:50
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615161997; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=r6nnqcfii6hna21eevherj9qjb
+
+
+DATE:	2021.03.08 00:43:09
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162010; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=epn1blkauc2gfbns5qrht6oba1
+
+
+DATE:	2021.03.08 00:43:16
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162029; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=4j03bljt4c2ir8fp38jrr9fe95
+
+
+DATE:	2021.03.08 00:43:45
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162036; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=71ctg8u73go8bfm2onaovq6adk
+
+
+DATE:	2021.03.08 00:44:08
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162065; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=cj15ibna69q1v5o0mjqc1qsk0q
+
+
+DATE:	2021.03.08 00:44:22
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162088; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=uo750e5hqngp98e62ofelue698
+
+
+DATE:	2021.03.08 00:44:53
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162102; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=vjlvv8hiuisgaqlsutaue27256
+
+
+DATE:	2021.03.08 00:45:18
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162133; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=mpn4iko7aibqboph4lf3uv9908
+
+
+DATE:	2021.03.08 00:48:11
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162158; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=0mbe94nbo9n96s0flvohm9fqt6
+
+
+DATE:	2021.03.08 00:48:51
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162331; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=dha1jdk5fv401boa9ggv8hoq48
+
+
+DATE:	2021.03.08 00:51:07
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162371; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=23a84r3i5s7j9vlvr39l22ari7
+
+
+DATE:	2021.03.08 00:51:30
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162507; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=oetfmlnf5qm6hqd1bfjg9iovuu
+
+
+DATE:	2021.03.08 00:53:58
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162530; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=bh2vbio0eo0mm7dapin5r3g5h3
+
+
+DATE:	2021.03.08 00:54:10
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162678; user_last_activity_time=1615161359; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=52oa8bic7l549jpo966est263h
+
+
+DATE:	2021.03.08 01:00:58
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615162691; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=iifbkq3jnaaejijn9rpu4tklrn
+
+
+DATE:	2021.03.08 01:01:00
+URI:	/groups/1/9/1/request
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_token: odbXaAaCzekqy1pK7uMHlYcq56hZu1zVqYORyGTck7K1AAHG4M4Oo5wnq13K4JwL
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 75
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups/1
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163098; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=me6ok7rq0kuq8vut197f5f3om6
+
+
+DATE:	2021.03.08 01:01:04
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163098; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=ru086bdd6j13ktk7lqfnumj9dk
+
+
+DATE:	2021.03.08 01:02:04
+URI:	/groups
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/main
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163104; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=h4o8ti4nnas4tcnogncllnfkmb
+
+
+DATE:	2021.03.08 01:02:06
+URI:	/groups/1
+Method:	GET
+REMOTE USER:	::1
+Request:
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163104; user_last_activity_time=1615163164; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=gp0bpngg3j2j84cdmigsh32na9
+
+
+DATE:	2021.03.08 01:02:08
+URI:	/groups/1/9/1/request
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_token: rBhxjkkNdvjPSD7whNUOCSQIDQTzV3GDJBigtprmBGgHjy4BD6w2Rp13iuYigHyR
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 75
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups/1
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163100; user_last_activity_time=1615163166; user_last_activity_time=1615163164; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=6thas1rbth9i3scb2fvksh3h4p
+
+
+DATE:	2021.03.08 01:02:46
+URI:	/groups/1/9/1/request
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_token: rBhxjkkNdvjPSD7whNUOCSQIDQTzV3GDJBigtprmBGgHjy4BD6w2Rp13iuYigHyR
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 75
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups/1
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163168; user_last_activity_time=1615163166; user_last_activity_time=1615163164; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=fn53k7l9nma4g2t06u8chg8gnc
+
+
+DATE:	2021.03.08 01:03:35
+URI:	/groups/1/9/1/request
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_token: rBhxjkkNdvjPSD7whNUOCSQIDQTzV3GDJBigtprmBGgHjy4BD6w2Rp13iuYigHyR
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 75
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups/1
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163206; user_last_activity_time=1615163166; user_last_activity_time=1615163164; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=1nbvluhmeqg22t0d0btu28s3he
+
+
+DATE:	2021.03.08 01:04:24
+URI:	/groups/1/9/1/request
+Method:	POST
+REMOTE USER:	::1
+Request:
+	csrf_token: rBhxjkkNdvjPSD7whNUOCSQIDQTzV3GDJBigtprmBGgHjy4BD6w2Rp13iuYigHyR
+HEADERS:
+	Host: localhost
+	Connection: keep-alive
+	Content-Length: 75
+	Cache-Control: max-age=0
+	sec-ch-ua: "Google Chrome";v="89", "Chromium";v="89", ";Not A Brand";v="99"
+	sec-ch-ua-mobile: ?0
+	Upgrade-Insecure-Requests: 1
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36
+	Origin: http://localhost
+	Content-Type: application/x-www-form-urlencoded
+	Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+	Sec-Fetch-Site: same-origin
+	Sec-Fetch-Mode: navigate
+	Sec-Fetch-User: ?1
+	Sec-Fetch-Dest: document
+	Referer: http://localhost/projects/Meetee/groups/1
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-US,en;q=0.9,pl;q=0.8
+	Cookie: user_last_activity_time=1615163255; user_last_activity_time=1615163166; user_last_activity_time=1615163164; CtBst9tfZACCSxAWv1qvPFIvqBkN2eUy=do8cck4u4o2giltr6kguf635d0
+
+
