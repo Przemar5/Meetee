@@ -17,4 +17,11 @@ abstract class ControllerTemplate
 	{
 		$this->view->render($path, $args);
 	}
+
+	protected function trimPostedValues(): void
+	{
+		foreach ($_POST as $key => $value)
+			if (is_string($value))
+				$_POST[$key] = trim($value);
+	}
 }

@@ -206,4 +206,22 @@ class GroupUserRoleTable extends Pivot
 
 		$this->sendQuery();
 	}
+
+	public function makeUserGroupRequestForRoleId(
+		User $user,
+		Group $group,
+		int $roleId
+	): void
+	{
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->insert([
+			'user_id' => $user->getId(),
+			'group_id' => $group->getId(),
+			'role_id' => $roleId,
+			'accepted' => false,
+		]);
+
+		$this->sendQuery();
+	}
 }

@@ -25,6 +25,8 @@ class TableFactory
 			case 'rates': return new RateTable();
 			case 'tags': return new TagTable();
 			case 'relations': return new RelationTable();
+			case 'groups': return new RelationTable();
+			case 'group_roles': return new GroupRoleTable();
 		}
 	}
 }

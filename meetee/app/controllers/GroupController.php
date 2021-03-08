@@ -4,11 +4,17 @@ namespace Meetee\App\Controllers;
 
 use Meetee\App\Controllers\ControllerTemplate;
 use Meetee\App\Entities\Group;
+use Meetee\App\Entities\User;
 use Meetee\App\Entities\Utils\TokenFacade;
 use Meetee\App\Entities\Sorting\GroupCommonSort;
 use Meetee\Libs\Database\Tables\GroupTable;
+use Meetee\Libs\Database\Tables\UserTable;
+use Meetee\Libs\Database\Tables\Pivots\GroupUserRoleTable;
 use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\Libs\Security\AuthFacade;
+use Meetee\Libs\Security\Validators\Compound\Groups\GroupIdValidator;
+use Meetee\Libs\Security\Validators\Compound\Users\UserIdValidator;
+use Meetee\Libs\Security\Validators\Compound\GroupRoles\GroupRoleIdValidator;
 
 class GroupController extends ControllerTemplate
 {
@@ -72,12 +78,118 @@ class GroupController extends ControllerTemplate
 	public function request($groupId, $userId, $roleId): void
 	{
 		try {
-			//
+			$this->dieIfTokenInvalid(self::$tokenName);
+			$this->trimPostedValues();
+			$this->dieIfGroupIdIvalid($groupId);
+			$this->dieIfUserIdIvalid($userId);
+			$this->dieIfGroupRoleIdIvalid($roleId);
+
+			$this->makeRequestAndPrintResponse(
+				(int) $groupId, (int) $userId, (int) $roleId);
 		}
+		catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function dieIfTokenInvalid(string $name): void
+	{
+		$user = AuthFacade::getUser();
+
+		if (!TokenFacade::getTokenFromPostRequestIfValidByNameAndUser(
+			$name, $user)) {
+			die;
+		}
+	}
+
+	private function dieIfGroupIdIvalid($id): void
+	{
+		$this->dieIfValueNotNumericAndInvalid(
+			$id, new GroupIdValidator());
+	}
+
+	private function dieIfUserIdIvalid($id): void
+	{
+		$this->dieIfValueNotNumericAndInvalid(
+			$id, new UserIdValidator());
+	}
+
+	private function dieIfGroupRoleIdIvalid($id): void
+	{
+		$this->dieIfValueNotNumericAndInvalid(
+			$id, new GroupRoleIdValidator());
+	}
+
+	private function dieIfValueNotNumericAndInvalid($value, $validator): void
+	{
+		if (!preg_match('/^[1-9][0-9]*$/', $value) ||
+			!$validator->run((int) $value))
+			die;
+	}
+
+	private function makeRequestAndPrintResponse(
+		int $groupId, 
+		int $userId, 
+		int $roleId
+	): void
+	{
+		$table = new GroupUserRoleTable();
+		$user = $this->getUserById($userId);
+		$group = $this->getGroupById($groupId);
+
+		$table->makeUserGroupRequestForRoleId($user, $group, $roleId);
+		$this->printJsonResponseAndDie(
+			'You have requested for that. Wait until' . 
+			' your request will be approved.');
+	}
+
+	private function getUserById(int $id): ?User
+	{
+		$table = new UserTable();
+
+		return $table->find($id);
+	}
+
+	private function getGroupById(int $id): ?Group
+	{
+		$table = new GroupTable();
+
+		return $table->find($id);
+	}
+
+	private function printJsonResponseAndDie(string $message): void
+	{
+		die(json_encode(['message' => $message]));
 	}
 
 	public function discard($groupId, $userId, $roleId): void
 	{
-		dd($groupId);
+		try {
+			$this->dieIfTokenInvalid(self::$tokenName);
+			$this->trimPostedValues();
+			$this->dieIfGroupIdIvalid($groupId);
+			$this->dieIfUserIdIvalid($userId);
+			$this->dieIfGroupRoleIdIvalid($roleId);
+
+			$this->discardUserRoleFromGroupAndPrintResponse(
+				(int) $groupId, (int) $userId, (int) $roleId);
+		}
+		catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function discardUserRoleFromGroupAndPrintResponse(
+		int $groupId, 
+		int $userId, 
+		int $roleId
+	): void
+	{
+		$table = new GroupUserRoleTable();
+		$user = $this->getUserById($userId);
+		$group = $this->getGroupById($groupId);
+
+		$table->rejectUserInGroupOnRoleId($user, $group, $roleId);
+		$this->printJsonResponseAndDie('Everything done right.');
 	}
 }

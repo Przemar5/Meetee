@@ -83,7 +83,7 @@ class CommentController extends ControllerTemplate
 	public function create(): void
 	{
 		try {
-			$this->trimcommentValues();
+			$this->trimCommentValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieAndPrintErrorsIfFormDataInvalid();
 
@@ -238,7 +238,7 @@ class CommentController extends ControllerTemplate
 	public function delete($id): void
 	{
 		try {
-			$this->trimcommentValues();
+			$this->trimCommentValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieIfCommentIdInvalid($id);
 
