@@ -13,7 +13,7 @@
 		<?= $group->description; ?>
 	</p>
 
-	<div class="group__panel">
+	<div class="group-panel">
 		<?php $user = user(); ?>
 		<form action="<?= 
 			route('groups_request_process', [
@@ -21,8 +21,8 @@
 				'userId' => $user->getId(),
 				'roleId' => 1,
 			]); 
-		?>" method="POST" class="group__form group__form--join <?= 
-			($user->isInGroup($group)) ? 'display-none' : ''; 
+		?>" method="POST" class="group-panel__form group-panel__form--join <?= 
+			($user->isInGroup($group) || $user->hasRequestedRoleInGroup('FOLLOWER', $group)) ? 'display-none' : ''; 
 		?>">
 			<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 			<button type="submit" class="group__button">
@@ -36,7 +36,7 @@
 				'userId' => $user->getId(),
 				'roleId' => 1,
 			]); 
-		?>" method="POST" class="group__form group__form--unjoin <?= 
+		?>" method="POST" class="group-panel__form group-panel__form--unjoin <?= 
 			($user->isInGroup($group)) ? '' : 'display-none'; 
 		?>">
 			<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
@@ -51,7 +51,7 @@
 				'userId' => $user->getId(),
 				'roleId' => 1,
 			]); 
-		?>" method="POST" class="group__form group__form--cancel-request <?= 
+		?>" method="POST" class="group-panel__form group-panel__form--cancel-request <?= 
 			($user->hasRequestedRoleInGroup('FOLLOWER', $group)) ? '' : 'display-none'; 
 		?>">
 			<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">

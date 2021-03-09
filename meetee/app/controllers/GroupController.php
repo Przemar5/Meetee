@@ -192,4 +192,50 @@ class GroupController extends ControllerTemplate
 		$table->rejectUserInGroupOnRoleId($user, $group, $roleId);
 		$this->printJsonResponseAndDie('Everything done right.');
 	}
+
+	public function acceptRequest($groupId, $userId, $roleId): void
+	{
+		try {
+			$this->dieIfTokenInvalid(self::$tokenName);
+			$this->trimPostedValues();
+			$this->dieIfGroupIdIvalid($groupId);
+			$this->dieIfUserIdIvalid($userId);
+			$this->dieIfGroupRoleIdIvalid($roleId);
+			$this->dieIfLoggedUserHasNotPermissonInGroupToAccept((int) $groupId);
+
+			$this->acceptUserRoleInGroupAndPrintResponse(
+				(int) $groupId, (int) $userId, (int) $roleId);
+		}
+		catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function dieIfLoggedUserHasNotPermissonInGroupToAccept(
+		int $groupId
+	): void
+	{
+		$table = new GroupTable();
+		$user = AuthFacade::getLoggedUser();
+		$group = $table->find($groupId);
+
+		if (!$user->hasRole('ADMIN') && !$user->hasRole('OWNER') && 
+			!$user->hasRoleInGroup('ADMIN', $group) &&
+			!$user->hasRoleInGroup('CREATOR', $group))
+			die;
+	}
+
+	private function acceptUserRoleInGroupAndPrintResponse(
+		int $groupId, 
+		int $userId, 
+		int $roleId
+	): void
+	{
+		$table = new GroupUserRoleTable();
+		$user = $this->getUserById($userId);
+		$group = $this->getGroupById($groupId);
+		
+		$table->acceptUserInGroupOnRoleId($user, $group, $roleId);
+		$this->printJsonResponseAndDie('Request has been accepted.');
+	}
 }

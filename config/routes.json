@@ -266,6 +266,13 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/groups/(?<groupId>\\d+)/(?<userId>\\d+)/(?<roleId>\\d+)/accept",
+		"method": "POST",
+		"name": "groups_accept_process",
+		"class": "GroupController.acceptRequest",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/chat",
 		"method": "GET",
 		"name": "chat_message",
