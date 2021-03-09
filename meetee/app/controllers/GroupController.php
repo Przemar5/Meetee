@@ -201,7 +201,8 @@ class GroupController extends ControllerTemplate
 			$this->dieIfGroupIdIvalid($groupId);
 			$this->dieIfUserIdIvalid($userId);
 			$this->dieIfGroupRoleIdIvalid($roleId);
-			$this->dieIfLoggedUserHasNotPermissonInGroupToAccept((int) $groupId);
+			$this->dieIfLoggedUserHasNotPermissonInGroupToAcceptRole(
+				(int) $groupId, (int) $roleId);
 
 			$this->acceptUserRoleInGroupAndPrintResponse(
 				(int) $groupId, (int) $userId, (int) $roleId);
@@ -211,8 +212,9 @@ class GroupController extends ControllerTemplate
 		}
 	}
 
-	private function dieIfLoggedUserHasNotPermissonInGroupToAccept(
-		int $groupId
+	private function dieIfLoggedUserHasNotPermissonInGroupToAcceptRole(
+		int $groupId,
+		int $roleId
 	): void
 	{
 		$table = new GroupTable();
@@ -222,6 +224,9 @@ class GroupController extends ControllerTemplate
 		if (!$user->hasRole('ADMIN') && !$user->hasRole('OWNER') && 
 			!$user->hasRoleInGroup('ADMIN', $group) &&
 			!$user->hasRoleInGroup('CREATOR', $group))
+			die;
+
+		if ($roleId == 3 && !$user->hasRoleInGroup('CREATOR', $group))
 			die;
 	}
 
