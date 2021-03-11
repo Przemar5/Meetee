@@ -245,6 +245,13 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/groups/create",
+		"method": "POST",
+		"name": "groups_create_process",
+		"class": "GroupController.processCreate",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/groups/(?<id>\\d+)",
 		"method": "GET",
 		"name": "groups_show_page",

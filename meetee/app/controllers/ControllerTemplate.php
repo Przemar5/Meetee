@@ -3,6 +3,7 @@
 namespace Meetee\App\Controllers;
 
 use Meetee\Libs\View\ViewTemplate;
+use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
 
 abstract class ControllerTemplate
 {
@@ -23,5 +24,15 @@ abstract class ControllerTemplate
 		foreach ($_POST as $key => $value)
 			if (is_string($value))
 				$_POST[$key] = trim($value);
+	}
+
+	protected function redirect(
+		string $route,
+		?array $args = [], 
+		?array $headers = []
+	): void
+	{
+		$router = RouterFactory::createComplete();
+		$router->redirectTo($route, $args, $headers);
 	}
 }

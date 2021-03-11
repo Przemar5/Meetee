@@ -161,7 +161,7 @@ class CommentController extends ControllerTemplate
 	{
 		$this->dieIfcommentIdInvalid($commentId);
 
-		$validator = new commentBodyValidator();
+		$validator = new CommentBodyValidator();
 
 		if (!$validator->run(trim($_POST['content'] ?? null)))
 			die(json_encode(['error' => $validator->errorMsg]));

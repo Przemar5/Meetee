@@ -4,6 +4,9 @@
 
 <?php $this->startSection('body'); ?>
 
-<?php $this->include('groups/forms/create'); ?>
+<?php $this->include('groups/forms/create', [
+	'route' => route('groups_create_page'),
+	'token' => $token,
+]); ?>
 
 <?php $this->endSection('body'); ?>

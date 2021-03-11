@@ -14,6 +14,6 @@ class Group extends Entity
 
 	public string $name;
 	public string $description;
-	public bool $active;
-	public string $background;
+	public bool $active = true;
+	public string $background = 'groups/nophoto.jpg';
 }

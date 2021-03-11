@@ -15,6 +15,7 @@ use Meetee\Libs\Security\AuthFacade;
 use Meetee\Libs\Security\Validators\Compound\Groups\GroupIdValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserIdValidator;
 use Meetee\Libs\Security\Validators\Compound\GroupRoles\GroupRoleIdValidator;
+use Meetee\Libs\Security\Validators\Compound\Forms\GroupCreateFormValidator;
 
 class GroupController extends ControllerTemplate
 {
@@ -50,6 +51,7 @@ class GroupController extends ControllerTemplate
 		$this->render('groups/create', [
 			'user' => $user,
 			'token' => $token,
+			'errors' => $this->errors,
 		]);
 	}
 
@@ -242,5 +244,60 @@ class GroupController extends ControllerTemplate
 		
 		$table->acceptUserInGroupOnRoleId($user, $group, $roleId);
 		$this->printJsonResponseAndDie('Request has been accepted.');
+	}
+
+	public function processCreate()
+	{
+		try {
+			$this->dieIfTokenInvalid(self::$tokenName);
+			$this->trimPostedValues();
+			$this->returnToPageWithErrorsIfFormDataInvalid();
+
+			$this->createGroupAndRedirect();
+		}
+		catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function returnToPageWithErrorsIfFormDataInvalid(): void
+	{
+		$validator = new GroupCreateFormValidator();
+
+		if (!$validator->run($_POST)) {
+			$this->errors = $validator->getErrors();
+			$this->pageCreate();
+			die;
+		}
+	}
+
+	private function createGroupAndRedirect(): void
+	{
+		$group = $this->createGroupAndGet();
+		$this->giveLoggedUserCreaterRoleForGroupId($group);
+
+		$this->redirect('groups_show_page', [
+			'id' => $group->getId(),
+		]);
+	}
+
+	private function createGroupAndGet(): Group
+	{
+		$table = new GroupTable();
+		$group = new Group();
+		$group->name = $_POST['name'];
+		$group->description = $_POST['description'];
+
+		$table->saveComplete($group);
+
+		return $group;
+	}
+
+	private function giveLoggedUserCreaterRoleForGroupId(Group $group): void
+	{
+		$table = new GroupUserRoleTable();
+		$user = AuthFacade::getUser();
+
+		$table->giveUserMultipleRoleIdsForGroup($user, [1, 2, 3], $group);
 	}
 }

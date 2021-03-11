@@ -30,16 +30,14 @@ class GroupTable extends TableTemplate
 
 	protected function getEntityData(Entity $group): array
 	{
-		$this->entityIsOfClassOrThrowException($group, Group::class);
+		$this->throwExceptionIfInvalidClass($group, Group::class);
 
 		$data = [];
-		$data['id'] = $group->setId();
+		$data['id'] = $group->getId();
 		$data['name'] = $group->name;
 		$data['description'] = $group->description;
 		$data['active'] = $group->active;
 		$data['background'] = $group->background;
-		$data['created_at'] = $group->getCreatedAt();
-		$data['updated_at'] = $group->getUpdatedAt();
 		$data['deleted'] = $group->deleted;
 
 		return $data;
