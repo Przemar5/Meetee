@@ -86,10 +86,4 @@ class DeleteAccountController extends ControllerTemplate
 		$table->save($user);
 		AuthFacade::logout();
 	}
-
-	private function redirect(string $route): void
-	{
-		$router = RouterFactory::createComplete();
-		$router->redirectTo($route);
-	}
 }

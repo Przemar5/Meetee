@@ -87,10 +87,4 @@ class ResetPasswordController extends ControllerTemplate
 		$table = new UserTable();
 		$table->save($user);
 	}
-
-	private function redirect(string $route): void
-	{
-		$router = RouterFactory::createComplete();
-		$router->redirectTo($route);
-	}
 }

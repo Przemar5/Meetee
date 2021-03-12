@@ -1,5 +1,5 @@
 <?php $this->startSection('head'); ?>
-<script type="module" src="<?= JS_DIR; ?>app/pages/comments/show.js"></script>
+<script type="module" src="<?= JS_DIR; ?>app/pages/comments/on_profile.js"></script>
 <script type="module" src="<?= JS_DIR; ?>app/pages/profiles/show.js"></script>
 <?php $this->endSection(); ?>
 
@@ -96,8 +96,9 @@ Account
 ]); ?>
 
 <section class="container" id="commentSection">
-	<?php $this->include('comments/forms/create', [
+	<?php $this->include('comments/forms/save', [
 		'token' => $token,
+		'onProfile' => 1,
 	]); ?>
 
 	<div id="commentsBase">

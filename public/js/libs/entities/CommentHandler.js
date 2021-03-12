@@ -3,372 +3,372 @@ import Request from '../../libs/http/Request.js'
 import RouteDispatcher from '../../libs/http/RouteDispatcher.js'
 
 export default class CommentHandler {
-	constructor () {
-		this.lastCommentId = 99999999999
-		this.userId = /\d+$/.exec(window.location.href)
-		this.limit = 3
-		this.commentsContainer
-		this.commentTemplate
-		this.noCommentsMsg
-		this.settings
-	}
+  constructor () {
+    this.lastCommentId = 99999999999
+    this.userId = /\d+$/.exec(window.location.href)
+    this.limit = 3
+    this.commentsContainer
+    this.commentTemplate
+    this.noCommentsMsg
+    this.settings
+  }
 
-	loadComments (parent, template, settings = null) {
-		let ajax = new Ajax()
-		let route = RouteDispatcher.getRouteUri('comments_select_process')
-		settings = (settings) ? settings : this.settings
-		route += '?' + Object.keys(settings)
-			.map((k) => k + '=' + this.settings[k].toString())
-			.join('&')
-		
-		ajax.get(route, null, null)
-			.then(this.callback(parent, template))
-	}
+  loadComments (parent, template, settings = null) {
+    let ajax = new Ajax()
+    let route = RouteDispatcher.getRouteUri('comments_select_process')
+    settings = (settings) ? settings : this.settings
+    route += '?' + Object.keys(settings)
+      .map((k) => k + '=' + this.settings[k].toString())
+      .join('&')
+    
+    ajax.get(route, null, null)
+      .then(this.callback(parent, template))
+  }
 
-	callback = (parent, template) => (data) => {
-		data = JSON.parse(data)
-		
-		for (let i in data) {
-			if (data[i] instanceof Function) continue
-			let temp = this.prepareTemplate(template, data[i])
-			parent.appendChild(temp)
-			this.lastCommentId = data[i]['id']
-			this.settings['max_id'] = this.lastCommentId
-		}
+  callback = (parent, template) => (data) => {
+    data = JSON.parse(data)
+    
+    for (let i in data) {
+      if (data[i] instanceof Function) continue
+      let temp = this.prepareTemplate(template, data[i])
+      parent.appendChild(temp)
+      this.lastCommentId = data[i]['id']
+      this.settings['max_id'] = this.lastCommentId
+    }
 
-		if (data.length > 0) {
-			let noCommentsMsg = parent.querySelector('p.no-result-msg')
-			if (noCommentsMsg) parent.removeChild(noCommentsMsg)
-		}
-	}
+    if (data.length > 0) {
+      let noCommentsMsg = parent.querySelector('p.no-result-msg')
+      if (noCommentsMsg) parent.removeChild(noCommentsMsg)
+    }
+  }
 
-	initFormCreate (data) {
-		let parent = data['formContainer']
-		let commentForm = data['formTemplate']
-		let commentsContainer = data['commentContainer']
-		let commentTemplate = data['commentTemplate']
-		let form = commentForm.content.cloneNode(true)
-		let textarea = form.querySelector('textarea[name="content"]')
+  initFormCreate (data) {
+    let parent = data['formContainer']
+    let commentForm = data['formTemplate']
+    let commentsContainer = data['commentContainer']
+    let commentTemplate = data['commentTemplate']
+    let form = commentForm.content.cloneNode(true)
+    let textarea = form.querySelector('textarea[name="content"]')
 
-		parent.prepend(form)
-		form = parent.querySelector('form')
+    parent.prepend(form)
+    form = parent.querySelector('form')
 
-		textarea.addEventListener('keyup', this.validateNewPost)
-		textarea.addEventListener('keydown', this.validateNewPost)
+    textarea.addEventListener('keyup', this.validateNewPost)
+    textarea.addEventListener('keydown', this.validateNewPost)
 
-		form.addEventListener('submit', (e) => {
-			e.preventDefault()
-			let formData = new FormData(e.target)
-			let request = new Request()
-			let uri = e.target.getAttribute('action')
-			let addNewestComment = this.addComment(commentsContainer, commentTemplate, true)
-			
-			request.post(
-				uri, 
-				formData, 
-				(data) => {
-					form.querySelector('textarea').value = ''
-					addNewestComment(data)
-				}, 
-				() => null
-			)
-		})
-	}
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      let formData = new FormData(e.target)
+      let request = new Request()
+      let uri = e.target.getAttribute('action')
+      let addNewestComment = this.addComment(commentsContainer, commentTemplate, true)
+      
+      request.post(
+        uri, 
+        formData, 
+        (data) => {
+          form.querySelector('textarea').value = ''
+          addNewestComment(data)
+        }, 
+        () => null
+      )
+    })
+  }
 
-	validateNewPost = (e) => {
-		let value = e.target.value
-		let submitBtn = e.target.closest('form').querySelector('button[type="submit"]')
-		let errorMsgDiv = e.target.closest('form').querySelector('.error-msg')
+  validateNewPost = (e) => {
+    let value = e.target.value
+    let submitBtn = e.target.closest('form').querySelector('button[type="submit"]')
+    let errorMsgDiv = e.target.closest('form').querySelector('.error-msg')
 
-		try {
-			if (commentBodyValidator(value)) {
-				errorMsgDiv.innerText = ''
-				submitBtn.removeAttribute('disabled')
-			}
-		} catch (e) {
-			errorMsgDiv.innerText = e.message
-			submitBtn.setAttribute('disabled', true)
-		}
-	}
+    try {
+      if (commentBodyValidator(value)) {
+        errorMsgDiv.innerText = ''
+        submitBtn.removeAttribute('disabled')
+      }
+    } catch (e) {
+      errorMsgDiv.innerText = e.message
+      submitBtn.setAttribute('disabled', true)
+    }
+  }
 
-	addComment = (commentSection, commentTemplate, desc = false) => (data) => {
-		let comment = this.prepareTemplate(commentTemplate, data)
-		if (desc)
-			commentSection.prepend(comment)
-		else
-			commentSection.append(comment)
-	}
+  addComment = (commentSection, commentTemplate, desc = false) => (data) => {
+    let comment = this.prepareTemplate(commentTemplate, data)
+    if (desc)
+      commentSection.prepend(comment)
+    else
+      commentSection.append(comment)
+  }
 
-	prepareTemplate (template, data) {
-		let temp = template.content.cloneNode(true)
-		let modificationType = temp.querySelector('.comment__modification--type')
-		let modificationDate = temp.querySelector('.comment__modification--date')
-		let formEdit = temp.querySelector('.comment__form--edit')
-		let formDelete = temp.querySelector('.comment__form--delete')
-		let contentInput = temp.querySelector('.comment__content')
-		let errorSpan = temp.querySelector('.error-msg')
-		let contentView = temp.querySelector('.comment__content--view')
-		let btnSave = temp.querySelector('.comment__button--save')
-		let btnEdit = temp.querySelector('.comment__button--edit')
-		let btnDelete = temp.querySelector('.comment__button--delete')
-		let btnComment = temp.querySelector('.comment__button--comment')
-		let btnShowSubs = temp.querySelector('.comment__button--show-subs')
-		let parentIdInput = temp.querySelector('input[name="parent_id"]')
-		let topicIdInput = temp.querySelector('input[name="topic_id"]')
-		let groupIdInput = temp.querySelector('input[name="group_id"]')
-		let formSubcomment = temp.querySelector('.comment__form--comment')
-		let subcommentsContainer = temp.querySelector('.comment__subcomments')
-		let route
+  prepareTemplate (template, data) {
+    let temp = template.content.cloneNode(true)
+    let modificationType = temp.querySelector('.comment__modification--type')
+    let modificationDate = temp.querySelector('.comment__modification--date')
+    let formEdit = temp.querySelector('.comment__form--edit')
+    let formDelete = temp.querySelector('.comment__form--delete')
+    let contentInput = temp.querySelector('.comment__content')
+    let errorSpan = temp.querySelector('.error-msg')
+    let contentView = temp.querySelector('.comment__content--view')
+    let btnSave = temp.querySelector('.comment__button--save')
+    let btnEdit = temp.querySelector('.comment__button--edit')
+    let btnDelete = temp.querySelector('.comment__button--delete')
+    let btnComment = temp.querySelector('.comment__button--comment')
+    let btnShowSubs = temp.querySelector('.comment__button--show-subs')
+    let parentIdInput = temp.querySelector('input[name="parent_id"]')
+    let topicIdInput = temp.querySelector('input[name="topic_id"]')
+    let groupIdInput = temp.querySelector('input[name="group_id"]')
+    let formSubcomment = temp.querySelector('.comment__form--comment')
+    let subcommentsContainer = temp.querySelector('.comment__subcomments')
+    let route
 
-		try {
-			modificationType.innerText = (data['created_at'] < data['updated_at'])
-				? 'Updated at:' : 'Created at:'
-			modificationDate.innerText = data['updated_at']
-			modificationDate.setAttribute('datetime', data['updated_at'])
-			
-			route = RouteDispatcher.getRouteUri(
-				'comments_update_process', {'id': data['id']})
-			formEdit.setAttribute('action', route)
+    try {
+      modificationType.innerText = (data['created_at'] < data['updated_at'])
+        ? 'Updated at:' : 'Created at:'
+      modificationDate.innerText = data['updated_at']
+      modificationDate.setAttribute('datetime', data['updated_at'])
+      
+      route = RouteDispatcher.getRouteUri(
+        'comments_update_process', {'id': data['id']})
+      formEdit.setAttribute('action', route)
 
-			route = RouteDispatcher.getRouteUri(
-				'comments_delete_process', {'id': data['id']})
-			formDelete.setAttribute('action', route)
+      route = RouteDispatcher.getRouteUri(
+        'comments_delete_process', {'id': data['id']})
+      formDelete.setAttribute('action', route)
 
-			contentInput.innerText = data['content']
-			contentView.innerHTML = this.processContent(data['content'])
-			this.addContentInputEventListeners(contentInput)
-			this.addEditBtnEventListener(btnEdit)
+      contentInput.innerText = data['content']
+      contentView.innerHTML = this.processContent(data['content'])
+      this.addContentInputEventListeners(contentInput)
+      this.addEditBtnEventListener(btnEdit)
 
-			formEdit.addEventListener('submit', this.updateSubmitEvent)
-			formDelete.addEventListener('submit', this.deleteSubmitEvent)
-			formSubcomment.addEventListener('submit', this.subcommentSubmitEvent)
-			
-			this.addSubcommentInputEvents(formSubcomment)
-			btnComment.addEventListener('click', this.toggleFormComment)
+      formEdit.addEventListener('submit', this.updateSubmitEvent)
+      formDelete.addEventListener('submit', this.deleteSubmitEvent)
+      formSubcomment.addEventListener('submit', this.subcommentSubmitEvent)
+      
+      this.addSubcommentInputEvents(formSubcomment)
+      btnComment.addEventListener('click', this.toggleFormComment)
 
-			parentIdInput.setAttribute('value', data['id'])
-			topicIdInput.setAttribute('value', data['topic_id'])
-			groupIdInput.setAttribute('value', data['group_id'])
+      parentIdInput.setAttribute('value', data['id'])
+      topicIdInput.setAttribute('value', data['topic_id'])
+      groupIdInput.setAttribute('value', data['group_id'])
 
-			this.prepareRatingForm(temp, data['id'])
+      this.prepareRatingForm(temp, data['id'])
 
-			btnShowSubs.addEventListener('click', this.subcommentShowEvent)
+      btnShowSubs.addEventListener('click', this.subcommentShowEvent)
 
-			for (let i in data['comments']) {
-				if (data['comments'][i] instanceof Function) continue
-				let subcomment = this.prepareTemplate(template, data['comments'][i])
-				subcomment.querySelector('.comment').classList.add('display-none')
-				subcommentsContainer.appendChild(subcomment)
-			}
+      for (let i in data['comments']) {
+        if (data['comments'][i] instanceof Function) continue
+        let subcomment = this.prepareTemplate(template, data['comments'][i])
+        subcomment.querySelector('.comment').classList.add('display-none')
+        subcommentsContainer.appendChild(subcomment)
+      }
 
-		} catch (e) {
-			console.log(e)
-		}
+    } catch (e) {
+      console.log(e)
+    }
 
-		return temp
-	}
+    return temp
+  }
 
-	processContent (content) {
-		content = this.addLinksToUris(content)
-		return content
-	}
+  processContent (content) {
+    content = this.addLinksToUris(content)
+    return content
+  }
 
-	addLinksToUris (content) {
-		let replacer = (str) => '<a href="' + str + '">' + str + '</a>'
-		return content.replace(/(https?\:\/\/[\w\d\-\_\?\&\=\+\[\]\.\,\'\/]+)/gi, replacer('$1'))
-	}
+  addLinksToUris (content) {
+    let replacer = (str) => '<a href="' + str + '">' + str + '</a>'
+    return content.replace(/(https?\:\/\/[\w\d\-\_\?\&\=\+\[\]\.\,\'\/]+)/gi, replacer('$1'))
+  }
 
-	subcommentShowEvent = (e) => {
-		let subcomments = e.target
-			.closest('.comment')
-			.querySelectorAll('.comment__subcomments > .comment')
-		let length = subcomments.length
-		let toggled = 0
-		let limit = 3
+  subcommentShowEvent = (e) => {
+    let subcomments = e.target
+      .closest('.comment')
+      .querySelectorAll('.comment__subcomments > .comment')
+    let length = subcomments.length
+    let toggled = 0
+    let limit = 3
 
-		for (let i = length - 1; i >= 0; i--) {
-			if (toggled >= limit) break
-			if (!subcomments[i].classList.contains('display-none')) continue
-			subcomments[i].classList.remove('display-none')
-			toggled++
-		}
+    for (let i = length - 1; i >= 0; i--) {
+      if (toggled >= limit) break
+      if (!subcomments[i].classList.contains('display-none')) continue
+      subcomments[i].classList.remove('display-none')
+      toggled++
+    }
 
-		if (toggled < limit) e.target.classList.add('display-none')
-	}
+    if (toggled < limit) e.target.classList.add('display-none')
+  }
 
-	addSubcommentInputEvents (form) {
-		let textarea = form.querySelector('[name="content"]')
+  addSubcommentInputEvents (form) {
+    let textarea = form.querySelector('[name="content"]')
 
-		textarea.addEventListener('keyup', this.validateNewPost)
-		textarea.addEventListener('keydown', this.validateNewPost)
+    textarea.addEventListener('keyup', this.validateNewPost)
+    textarea.addEventListener('keydown', this.validateNewPost)
 
-		form.addEventListener('submit', (e) => {
-			e.preventDefault()
-			let formData = new FormData(e.target)
-			let request = new Request()
-			let uri = e.target.getAttribute('action')
-			let commentsContainer = e.target.closest('.comment').querySelector('.comment__subcomments')
-			let addNewestComment = this.addComment(commentsContainer, commentTemplate, false)
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      let formData = new FormData(e.target)
+      let request = new Request()
+      let uri = e.target.getAttribute('action')
+      let commentsContainer = e.target.closest('.comment').querySelector('.comment__subcomments')
+      let addNewestComment = this.addComment(commentsContainer, commentTemplate, false)
 
-			request.post(
-				uri, 
-				formData, 
-				(data) => {
-					form.querySelector('textarea').value = ''
-					addNewestComment(data)
-				}, 
-				() => null
-			)
-		})
-	}
+      request.post(
+        uri, 
+        formData, 
+        (data) => {
+          form.querySelector('textarea').value = ''
+          addNewestComment(data)
+        }, 
+        () => null
+      )
+    })
+  }
 
-	toggleFormComment = (e) => {
-		e.preventDefault()
-		let subcommentForm = e.target
-			.closest('.comment__commenting')
-			.querySelector('.comment__form--comment')
+  toggleFormComment = (e) => {
+    e.preventDefault()
+    let subcommentForm = e.target
+      .closest('.comment__commenting')
+      .querySelector('.comment__form--comment')
 
-		subcommentForm.classList.toggle('display-none')
-	}
+    subcommentForm.classList.toggle('display-none')
+  }
 
-	subcommentSubmitEvent = (e) => {
-		e.preventDefault()
-		let formData = new FormData(e.target)
-		let route = e.target.getAttribute('action')
-		let request = new Request()
-		let subcommentContainer = e.target.closest('.comment').querySelector('.comment__subcomments')
+  subcommentSubmitEvent = (e) => {
+    e.preventDefault()
+    let formData = new FormData(e.target)
+    let route = e.target.getAttribute('action')
+    let request = new Request()
+    let subcommentContainer = e.target.closest('.comment').querySelector('.comment__subcomments')
 
-		let callback = (container) => (data) => {
-			let comment = this.prepareTemplate(this.commentTemplate, data)
-			container.append(comment)
-			e.target.querySelector('textarea').value = ''
-		}
+    let callback = (container) => (data) => {
+      let comment = this.prepareTemplate(this.commentTemplate, data)
+      container.append(comment)
+      e.target.querySelector('textarea').value = ''
+    }
 
-		// request.post(route, formData, callback(subcommentContainer), callback)
-	}
+    // request.post(route, formData, callback(subcommentContainer), callback)
+  }
 
-	prepareRatingForm (template, commentId) {
-		const ratingsArea = template.querySelector('.ratings')
-		const forms = ratingsArea.querySelectorAll('form')
-		
-		forms.forEach((f) => {
-			let ratingId = f.querySelector('input[name="rating_id"]').value
-			let route = RouteDispatcher.getRouteUri('ratings_rate_process', {
-				'id': ratingId,
-				'commentId': commentId
-			})
-			f.setAttribute('action', route)
-			f.addEventListener('submit', this.rateEvent)
-		})
-		this.getCommentRatings(ratingsArea, commentId)
-	}
+  prepareRatingForm (template, commentId) {
+    const ratingsArea = template.querySelector('.ratings')
+    const forms = ratingsArea.querySelectorAll('form')
+    
+    forms.forEach((f) => {
+      let ratingId = f.querySelector('input[name="rating_id"]').value
+      let route = RouteDispatcher.getRouteUri('ratings_rate_process', {
+        'id': ratingId,
+        'commentId': commentId
+      })
+      f.setAttribute('action', route)
+      f.addEventListener('submit', this.rateEvent)
+    })
+    this.getCommentRatings(ratingsArea, commentId)
+  }
 
-	getCommentRatings (ratingsArea, commentId) {
-		let uri = RouteDispatcher.getRouteUri('ratings_get_process', {'commentId': commentId})
-		let request = new Request()
+  getCommentRatings (ratingsArea, commentId) {
+    let uri = RouteDispatcher.getRouteUri('ratings_get_process', {'commentId': commentId})
+    let request = new Request()
 
-		let callback = (data) => {
-			let rates = {}
+    let callback = (data) => {
+      let rates = {}
 
-			for (let i = 1; i < 8; i++)
-				rates[i+''] = {'count': 0, 'users': []}
+      for (let i = 1; i < 8; i++)
+        rates[i+''] = {'count': 0, 'users': []}
 
-			for (let i in data) {
-				if (data[i] instanceof Function) continue
-				let rateId = data[i]['rate_id'] + ''
-				rates[rateId].count++
-				rates[rateId].users.push(data[i]['user_id'])
-			}
+      for (let i in data) {
+        if (data[i] instanceof Function) continue
+        let rateId = data[i]['rate_id'] + ''
+        rates[rateId].count++
+        rates[rateId].users.push(data[i]['user_id'])
+      }
 
-			// Other actions
-		}
+      // Other actions
+    }
 
-		request.get(uri, callback, callback)
-	}
+    request.get(uri, callback, callback)
+  }
 
-	rateEvent = (e) => {
-		e.preventDefault()
-		let formData = new FormData(e.target)
-		let uri = e.target.getAttribute('action')
-		let request = new Request()
+  rateEvent = (e) => {
+    e.preventDefault()
+    let formData = new FormData(e.target)
+    let uri = e.target.getAttribute('action')
+    let request = new Request()
 
-		request.post(uri, formData, (data) => {console.log(data)}, () => { console.log(0) })
-	}
+    request.post(uri, formData, (data) => {console.log(data)}, () => { console.log(0) })
+  }
 
-	addContentInputEventListeners (contentInput) {
-		contentInput.addEventListener('keyup', this.inputKeyEvent)
-		contentInput.addEventListener('keydown', this.inputKeyEvent)
-	}
+  addContentInputEventListeners (contentInput) {
+    contentInput.addEventListener('keyup', this.inputKeyEvent)
+    contentInput.addEventListener('keydown', this.inputKeyEvent)
+  }
 
-	addEditBtnEventListener (btn) {
-		btn.addEventListener('click', (e) => this.toggleFormAndPlainText(e.target))
-	}
+  addEditBtnEventListener (btn) {
+    btn.addEventListener('click', (e) => this.toggleFormAndPlainText(e.target))
+  }
 
-	toggleFormAndPlainText = (item) => {
-		let container = item.closest('.comment')
-		container.querySelector('.toggable-form').classList.toggle('display-none')
-		container.querySelector('.toggable-text').classList.toggle('display-none')
-	}
+  toggleFormAndPlainText = (item) => {
+    let container = item.closest('.comment')
+    container.querySelector('.toggable-form').classList.toggle('display-none')
+    container.querySelector('.toggable-text').classList.toggle('display-none')
+  }
 
-	inputKeyEvent = (e) => {
-		let value = e.target.value.trim()
-		let form = e.target.closest('form')
-		let errorMsgDiv = form.querySelector('.error-msg')
-		let btnSubmit = form.querySelector('.comment__button--save')
+  inputKeyEvent = (e) => {
+    let value = e.target.value.trim()
+    let form = e.target.closest('form')
+    let errorMsgDiv = form.querySelector('.error-msg')
+    let btnSubmit = form.querySelector('.comment__button--save')
 
-		try {
-			if (commentBodyValidator(value)) {
-				errorMsgDiv.innerText = ''
-				btnSubmit.removeAttribute('disabled')
-			}
-		} catch (e) {
-			errorMsgDiv.innerText = e.message
-			btnSubmit.setAttribute('disabled', true)
-		}
-	}
+    try {
+      if (commentBodyValidator(value)) {
+        errorMsgDiv.innerText = ''
+        btnSubmit.removeAttribute('disabled')
+      }
+    } catch (e) {
+      errorMsgDiv.innerText = e.message
+      btnSubmit.setAttribute('disabled', true)
+    }
+  }
 
-	updateSubmitEvent = (e) => {
-		e.preventDefault()
-		let formData = new FormData(e.target)
-		let uri = e.target.getAttribute('action')
-		let request = new Request()
+  updateSubmitEvent = (e) => {
+    e.preventDefault()
+    let formData = new FormData(e.target)
+    let uri = e.target.getAttribute('action')
+    let request = new Request()
 
-		request.post(uri, formData, this.updateComment(e.target), () => null)
-	}
+    request.post(uri, formData, this.updateComment(e.target), () => null)
+  }
 
-	updateComment = (form) => (data) => {
-		let comment = form.closest('.comment')
-		let contentView = comment.querySelector('.comment__content--view')
-		let modificationType = comment.querySelector('.comment__modification--type')
-		let modificationDate = comment.querySelector('.comment__modification--date')
+  updateComment = (form) => (data) => {
+    let comment = form.closest('.comment')
+    let contentView = comment.querySelector('.comment__content--view')
+    let modificationType = comment.querySelector('.comment__modification--type')
+    let modificationDate = comment.querySelector('.comment__modification--date')
 
-		contentView.innerHTML = this.processContent(data.content)
-		modificationType.innerText = 'Updated at:'
-		modificationDate.setAttribute('datetime', data['updated_at'])
-		modificationDate.innerText = data['updated_at']
+    contentView.innerHTML = this.processContent(data.content)
+    modificationType.innerText = 'Updated at:'
+    modificationDate.setAttribute('datetime', data['updated_at'])
+    modificationDate.innerText = data['updated_at']
 
-		this.toggleFormAndPlainText(form)
-	}
+    this.toggleFormAndPlainText(form)
+  }
 
-	deleteSubmitEvent = (e) => {
-		e.preventDefault()
-		let confirmation = confirm(
-			'Are You sure You want to delete this comment? This action is irreversible.')
+  deleteSubmitEvent = (e) => {
+    e.preventDefault()
+    let confirmation = confirm(
+      'Are You sure You want to delete this comment? This action is irreversible.')
 
-		if (confirmation) {
-			let formData = new FormData(e.target)
-			let uri = e.target.getAttribute('action')
-			let request = new Request()
+    if (confirmation) {
+      let formData = new FormData(e.target)
+      let uri = e.target.getAttribute('action')
+      let request = new Request()
 
-			request.post(uri, formData, 
-				this.deleteComment(e.target), this.deleteComment(e.target))
-		}
-	}
+      request.post(uri, formData, 
+        this.deleteComment(e.target), this.deleteComment(e.target))
+    }
+  }
 
-	deleteComment = (form) => (data) => {
-		let comment = form.closest('.comment')
-		comment.parentElement.removeChild(comment)
-		let commentsCount = this.commentsContainer.childElementCount
-		if (commentsCount === 0) this.commentsContainer.appendChild(this.noCommentsMsg)
-	}
+  deleteComment = (form) => (data) => {
+    let comment = form.closest('.comment')
+    comment.parentElement.removeChild(comment)
+    let commentsCount = this.commentsContainer.childElementCount
+    if (commentsCount === 0) this.commentsContainer.appendChild(this.noCommentsMsg)
+  }
 }

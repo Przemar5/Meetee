@@ -89,10 +89,4 @@ class ResendRegistrationEmailController extends ControllerTemplate
 		Notification::addSuccess('Check Your mailbox for an activation email!');
 		$this->redirect('login_page');
 	}
-
-	private function redirect(string $route): void
-	{
-		$router = RouterFactory::createComplete();
-		$router->redirectTo($route);
-	}
 }

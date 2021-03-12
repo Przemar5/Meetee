@@ -113,13 +113,21 @@ abstract class TableTemplate
 
 	protected function prepareConditions(array $conditions, ?array $rest = []): array
 	{
-		array_unshift($conditions, 'AND');
+		if (!empty($conditions)) {
+			array_unshift($conditions, 'AND');
 
-		return [
-			'AND',
-			$conditions,
-			$rest
-		];
+			return [
+				'AND',
+				$conditions,
+				$rest,
+			];
+		}
+		else {
+			return [
+				'AND',
+				$rest,
+			];
+		}
 	}
 
 	abstract protected function fetchEntity($data): Entity;

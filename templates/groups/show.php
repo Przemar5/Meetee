@@ -1,4 +1,5 @@
 <?php $this->startSection('head'); ?>
+<script type="module" src="<?= JS_DIR; ?>app/pages/comments/in_group.js"></script>
 <script type="module" src="<?= JS_DIR; ?>app/pages/groups/show.js"></script>
 <?php $this->endSection(); ?>
 
@@ -89,5 +90,22 @@
 		</form>
 	</div>
 </div>
+
+<?php $this->include('comments/template', [
+	'token' => $token,
+]); ?>
+
+<section class="container" id="commentSection">
+	<?php $this->include('comments/forms/save', [
+		'token' => $token,
+		'groupId' => $group->getId(),
+	]); ?>
+
+	<div id="commentsBase">
+		<p class="no-result-msg">No posts found.</p>
+	</div>
+
+	<button id="loadComments">Load more comments</button>
+</section>
 
 <?php $this->endSection('body'); ?>

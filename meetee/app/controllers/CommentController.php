@@ -94,12 +94,6 @@ class CommentController extends ControllerTemplate
 		}
 	}
 
-	private function redirect(string $route): void
-	{
-		$router = RouterFactory::createComplete();
-		$router->redirectTo($route);
-	}
-
 	private function dieIfTokenInvalid(string $name): void
 	{
 		$user = AuthFacade::getUser();

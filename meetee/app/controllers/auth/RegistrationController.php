@@ -55,12 +55,6 @@ class RegistrationController extends ControllerTemplate
 		}
 	}
 
-	private function redirect(string $route): void
-	{
-		$router = RouterFactory::createComplete();
-		$router->redirectTo($route);
-	}
-
 	private function returnToPageIfTokenInvalid(string $name): void
 	{
 		if (!TokenFacade::popTokenIfValidByName($name)) {
