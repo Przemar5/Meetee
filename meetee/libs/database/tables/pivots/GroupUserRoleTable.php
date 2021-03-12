@@ -29,7 +29,7 @@ class GroupUserRoleTable extends Pivot
 	): bool
 	{
 		$roles = $this->getUserRolesInGroup($user, $group);
-		dd($roles);
+		
 		foreach ($roles as $role) {
 			if ($role['id'] == $roleId)
 				return true;
@@ -265,5 +265,35 @@ class GroupUserRoleTable extends Pivot
 		$this->queryBuilder->insertMultiple($insertions);
 
 		$this->sendQuery();
+	}
+
+	public function hasUserOneOfMultipleRoleIdsForGroup(
+		User $user,
+		array $roleIds,
+		Group $group
+	): bool
+	{
+		$conditions = [
+			'AND',
+			'user_id' => $user->getId(),
+			'group_id' => $group->getId(),
+			'accepted' => true,
+			[
+				'OR',
+			],
+		];
+
+		foreach ($roleIds as $roleId) {
+			$conditions[1][] = [
+				'role_id' => $roleId,
+			];
+		}
+
+		$this->queryBuilder->reset();
+		$this->queryBuilder->in($this->name);
+		$this->queryBuilder->select(['*']);
+		$this->queryBuilder->where($conditions);
+
+		return !empty($this->getManyResults());
 	}
 }

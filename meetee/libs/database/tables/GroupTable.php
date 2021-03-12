@@ -10,7 +10,7 @@ class GroupTable extends TableTemplate
 {
 	public function __construct()
 	{
-		parent::__construct('groups', Group::class, false);
+		parent::__construct('groups', Group::class, true);
 	}
 
 	protected function fetchEntity($data): Group

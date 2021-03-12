@@ -259,6 +259,27 @@
 		"access": ["VERIFIED"]
 	},
 	{
+		"pattern": "/groups/(?<id>\\d+)/update",
+		"method": "GET",
+		"name": "groups_update_page",
+		"class": "GroupController.pageUpdate",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/groups/(?<id>\\d+)/update",
+		"method": "POST",
+		"name": "groups_update_process",
+		"class": "GroupController.processUpdate",
+		"access": ["VERIFIED"]
+	},
+	{
+		"pattern": "/groups/(?<id>\\d+)/delete",
+		"method": "POST",
+		"name": "groups_delete_process",
+		"class": "GroupController.processDelete",
+		"access": ["VERIFIED"]
+	},
+	{
 		"pattern": "/groups/(?<groupId>\\d+)/(?<userId>\\d+)/(?<roleId>\\d+)/request",
 		"method": "POST",
 		"name": "groups_request_process",

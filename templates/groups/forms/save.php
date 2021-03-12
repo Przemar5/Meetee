@@ -1,5 +1,7 @@
 <form action="<?= $route; ?>" method="post">
-	<h3>Create group</h3>
+	<h3>
+		<?= $header; ?>
+	</h3>
 	<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
 	<label>
 		Name

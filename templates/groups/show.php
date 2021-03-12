@@ -5,6 +5,35 @@
 <?php $this->startSection('body'); ?>
 
 <div class="group">
+	<?php $user = user();
+		if ($user->hasRoleInGroup('ADMIN', $group) || $user->hasRoleInGroup('CREATOR', $group)): ?>
+		<div class="group-actions">
+
+			<form action="<?= 
+				route('groups_update_page', [
+					'id' => $group->getId(),
+				]); 
+			?>" method="POST" class="group-actions__form group-actions__form--update">
+				<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+				<button type="submit" class="group__button btn--warning">
+					Update
+				</button>
+			</form>
+
+			<form action="<?= 
+				route('groups_delete_process', [
+					'id' => $group->getId(),
+				]); 
+			?>" method="POST" class="group-actions__form group-actions__form--delete">
+				<input type="hidden" name="<?= $token->name; ?>" value="<?= $token->value; ?>">
+				<button type="submit" class="group__button btn--danger">
+					Delete
+				</button>
+			</form>
+
+		</div>
+	<?php endif; ?>
+
 	<h2 class="group__header">
 		<?= $group->name; ?>
 	</h2>
@@ -14,7 +43,6 @@
 	</p>
 
 	<div class="group-panel">
-		<?php $user = user(); ?>
 		<form action="<?= 
 			route('groups_request_process', [
 				'groupId' => $group->getId(),

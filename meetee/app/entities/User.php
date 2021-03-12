@@ -176,19 +176,15 @@ class User extends Entity
 
 	public function hasRoleInGroup($role, Group $group): bool
 	{
-		$roleId;
 		$table = new GroupRoleTable();
 
 		if (is_string($role))
-			$roleId = $table->findOneBy(['name' => $role]);
+			$role = $table->findOneBy(['name' => $role]);
 		
-		else if (is_a($role, GroupRole::class))
-			$roleId = $table->findOneBy(['name' => $role->name]);
-		
-		else
+		else if (!is_a($role, GroupRole::class))
 			return false;
 
-		return $this->hasRoleIdInGroup($roleId, $group);
+		return $this->hasRoleIdInGroup($role->getId(), $group);
 	}
 
 	public function hasRequestedRoleInGroup($role, Group $group): bool

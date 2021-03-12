@@ -16,6 +16,7 @@ use Meetee\Libs\Security\Validators\Compound\Groups\GroupIdValidator;
 use Meetee\Libs\Security\Validators\Compound\Users\UserIdValidator;
 use Meetee\Libs\Security\Validators\Compound\GroupRoles\GroupRoleIdValidator;
 use Meetee\Libs\Security\Validators\Compound\Forms\GroupCreateFormValidator;
+use Meetee\Libs\View\Utils\Notification;
 
 class GroupController extends ControllerTemplate
 {
@@ -57,6 +58,8 @@ class GroupController extends ControllerTemplate
 
 	public function pageShow($id): void
 	{
+		$this->dieIfGroupIdInvalid($id);
+
 		$user = AuthFacade::getUser();
 		$group = $this->getGroupIfIdValid($id);
 		$token = TokenFactory::generate(self::$tokenName, $user);
@@ -65,6 +68,15 @@ class GroupController extends ControllerTemplate
 			'group' => $group,
 			'token' => $token,
 		]);
+	}
+
+	private function dieIfGroupIdInvalid($id): void
+	{
+		$validator = new GroupIdValidator();
+
+		if (!preg_match('/^[1-9][0-9]*$/', $id) ||
+			!$validator->run((int) $id))
+			die;
 	}
 
 	private function getGroupIfIdValid($id): ?Group
@@ -275,6 +287,7 @@ class GroupController extends ControllerTemplate
 	{
 		$group = $this->createGroupAndGet();
 		$this->giveLoggedUserCreaterRoleForGroupId($group);
+		Notification::addSuccess('Your group has been created successfully!');
 
 		$this->redirect('groups_show_page', [
 			'id' => $group->getId(),
@@ -299,5 +312,95 @@ class GroupController extends ControllerTemplate
 		$user = AuthFacade::getUser();
 
 		$table->giveUserMultipleRoleIdsForGroup($user, [1, 2, 3], $group);
+	}
+
+	public function pageUpdate($id): void
+	{
+		$this->dieIfGroupIdInvalid($id);
+
+		$user = AuthFacade::getUser();
+		$group = $this->getGroupIfIdValid($id);
+		$token = TokenFactory::generate(self::$tokenName, $user);
+
+		$this->render('groups/update', [
+			'group' => $group,
+			'token' => $token,
+		]);
+	}
+
+	public function processUpdate($id)
+	{
+		try {
+			$this->dieIfTokenInvalid(self::$tokenName);
+			$this->dieIfGroupIdInvalid($id);
+			$this->dieIfNotCreatorOrAdminOfGroupId((int) $id);
+			$this->trimPostedValues();
+			$this->returnToPageWithErrorsIfFormDataInvalid();
+
+			$this->updateGroupAndRedirect((int) $id);
+		}
+		catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function dieIfNotCreatorOrAdminOfGroupId(int $id)
+	{
+		$table = new GroupTable();
+		$group = $table->find($id);
+		$user = AuthFacade::getLoggedUser();
+		$table = new GroupUserRoleTable();
+
+		if (!$table->hasUserOneOfMultipleRoleIdsForGroup($user, [2, 3], $group))
+			die;
+	}
+
+	private function updateGroupAndRedirect(int $id): void
+	{
+		$table = new GroupTable();
+		$group = $table->find($id);
+		$group->name = $_POST['name'];
+		$group->description = $_POST['description'];
+		
+		$table->save($group);
+		Notification::addSuccess('Your group has been updated successfully!');
+
+		$this->redirect('groups_show_page', [
+			'id' => $id,
+		]);
+	}
+
+	public function processDelete($id): void
+	{
+		try {
+			$this->dieIfTokenInvalid(self::$tokenName);
+			$this->dieIfGroupIdInvalid($id);
+			$this->dieIfNotCreatorOfGroupId((int) $id);
+
+			$this->deleteGroupAndRedirect((int) $id);
+		}
+		catch (Exception $e) {
+			die($e->getMessage());
+		}
+	}
+
+	private function dieIfNotCreatorOfGroupId(int $id): void
+	{
+		$table = new GroupTable();
+		$group = $table->find($id);
+		$user = AuthFacade::getLoggedUser();
+		$table = new GroupUserRoleTable();
+
+		if (!$table->hasUserOneOfMultipleRoleIdsForGroup($user, [3], $group))
+			die;
+	}
+
+	private function deleteGroupAndRedirect(int $id): void
+	{
+		$table = new GroupTable();
+		$table->delete($id);
+		Notification::addSuccess('Your group has been deleted successfully!');
+
+		$this->redirect('groups_index_page');
 	}
 }
