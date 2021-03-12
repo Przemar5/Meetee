@@ -199,4 +199,10 @@ class User extends Entity
 
 		return $this->hasRequestedRoleIdInGroup($role->getId(), $group);
 	}
+
+	public function canPostInGroup(Group $group): bool
+	{
+		return $this->hasRoleInGroup('FOLLOWER', $group) && 
+			!$this->hasRoleInGroup('BANNED', $group);
+	}
 }

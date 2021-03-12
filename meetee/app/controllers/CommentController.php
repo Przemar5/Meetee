@@ -9,6 +9,7 @@ use Meetee\App\Entities\Factories\TokenFactory;
 use Meetee\App\Entities\Factories\CommentFactory;
 use Meetee\App\Forms\CommentForm;
 use Meetee\Libs\Database\Tables\CommentTable;
+use Meetee\Libs\Database\Tables\GroupTable;
 use Meetee\Libs\Database\Tables\TagTable;
 use Meetee\Libs\Database\Tables\Pivots\CommentTagTable;
 use Meetee\Libs\Http\Routing\Routers\Factories\RouterFactory;
@@ -45,7 +46,8 @@ class CommentController extends ControllerTemplate
 			die;
 
 		return [
-			'user_id' => (int) trim($_GET['user_id']),
+			'user_id' => (isset($_GET['user_id'])) 
+				? (int) trim($_GET['user_id']) : null,
 			'id' => ['<=', (int) $maxId],
 			'parent_id' => (isset($_GET['parent_id'])) 
 				? (int) $_GET['parent_id'] : null,
@@ -76,6 +78,9 @@ class CommentController extends ControllerTemplate
 	): array
 	{
 		$table = new CommentTable();
+		
+		if (is_null($conditions['user_id']))
+			unset($conditions['user_id']);
 
 		return $table->findDataRecursive($conditions, $clauses);
 	}
@@ -86,6 +91,7 @@ class CommentController extends ControllerTemplate
 			$this->trimCommentValues();
 			$this->dieIfTokenInvalid(self::$tokenName);
 			$this->dieAndPrintErrorsIfFormDataInvalid();
+			$this->dieIfGroupNotNullAndUserHasNoPermission();
 
 			$this->createAndPrintJsonResponse();
 		}
@@ -110,6 +116,19 @@ class CommentController extends ControllerTemplate
 
 		if (!$form->validate())
 			die(json_encode($form->getErrors()));
+	}
+
+	private function dieIfGroupNotNullAndUserHasNoPermission(): void
+	{
+		if (!isset($_POST['group_id']))
+			return;
+
+		$table = new GroupTable();
+		$group = $table->find((int) $_POST['group_id']);
+		$user = AuthFacade::getUser();
+
+		if (!$user->canPostInGroup($group))
+			die;
 	}
 
 	private function trimCommentValues(): void

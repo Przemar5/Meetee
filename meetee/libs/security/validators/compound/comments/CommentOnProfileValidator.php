@@ -9,7 +9,6 @@ class CommentOnProfileValidator extends CompoundValidator
 {
 	public function __construct()
 	{
-		$validators[] = ValidatorFactory::createNotEmptyValidator();
 		$validators[] = ValidatorFactory::createStringValidator();
 		$validators[] = ValidatorFactory::createExactLengthValidator(1);
 		$validators[] = ValidatorFactory::createPatternValidator('/^(1|0)$/u');

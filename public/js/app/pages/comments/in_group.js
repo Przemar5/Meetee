@@ -16,12 +16,6 @@ commentHandler.settings = {
   'amount': 3,
   'group_id': /\d+$/.exec(window.location.href)
 }
-console.log({
-	'formContainer': commentSection, 
-	'formTemplate': commentFormTemplate, 
-	'commentContainer': commentsContainer, 
-	'commentTemplate': commentTemplate
-})
 commentHandler.initFormCreate({
 	'formContainer': commentSection, 
 	'formTemplate': commentFormTemplate, 
