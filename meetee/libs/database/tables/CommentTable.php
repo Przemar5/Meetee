@@ -118,7 +118,6 @@ class CommentTable extends TableTemplate
 		$this->queryBuilder->reset();
 		$this->queryBuilder->select(['*']);
 		$this->queryBuilder->in($this->name);
-		$this->queryBuilder->where($conditions);
 		$this->queryBuilder->orderDesc();
 		$this->queryBuilder->orderBy(['id']);
 		$this->queryBuilder->where(
@@ -142,6 +141,9 @@ class CommentTable extends TableTemplate
 		) 
 		SELECT * FROM cte";
 
+		// echo($query);
+		// dd($bindings);
+
 		return $this->prepareRecursiveCommentsRawData(
 			$this->database->findMany($query, $bindings));
 	}
@@ -152,7 +154,8 @@ class CommentTable extends TableTemplate
 		
 		for ($i = 0; $i < count($comments); $i++) {
 			if ($comments[$i]['parent_id'] === null)
-				array_push($reversed, $this->prependSubcomment($comments, $comments[$i]));
+				array_push($reversed, $this->prependSubcomment(
+					$comments, $comments[$i]));
 			else
 				break;
 		}
@@ -171,5 +174,21 @@ class CommentTable extends TableTemplate
 		}
 
 		return $parent;
+	}
+
+	public function selectWhereUserFriendsPosted(User $user): ?array
+	{
+		$conditions = [
+			'user_id' => array_map(fn($u) => $u->getId(), $user->getFriends()),
+		];
+
+		$result = $this->findDataRecursive($conditions);
+
+		// $q = 'WITH RECURSIVE cte (id, content, parent_id) AS ( SELECT c1.* FROM comments c1 JOIN (SELECT * FROM comments WHERE ((user_id IN (:b_0)) AND (deleted = FALSE)) ORDER BY id DESC) AS c2 ON c1.id = c2.id UNION ALL SELECT c3.* FROM comments c3 INNER JOIN cte ON c3.parent_id = cte.id ) SELECT * FROM cte';
+		// $r = $this->database->findMany($q, [':b_0' => 9]);
+		// dd($r);
+		dd($result);
+		dd($this->database->debug());
+		return [];
 	}
 }
